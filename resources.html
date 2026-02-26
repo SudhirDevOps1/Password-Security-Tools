@@ -1,0 +1,1019 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>304+ Security Resources — by SudhirDevOps1</title>
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <style>
+    :root {
+      --bg: #030712;
+      --card: rgba(255, 255, 255, .03);
+      --card-hover: rgba(255, 255, 255, .06);
+      --border: rgba(255, 255, 255, .06);
+      --indigo: #6366f1;
+      --indigo-light: #818cf8;
+      --green: #10b981;
+      --red: #ef4444;
+      --yellow: #f59e0b;
+      --cyan: #06b6d4;
+      --purple: #8b5cf6;
+      --text: #f3f4f6;
+      --muted: #9ca3af;
+      --dim: #6b7280;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+      min-height: 100vh;
+      background-image:
+        radial-gradient(circle at 0% 0%, rgba(99, 102, 241, .15) 0%, transparent 40%),
+        radial-gradient(circle at 100% 0%, rgba(6, 182, 212, .1) 0%, transparent 40%),
+        radial-gradient(circle at 50% 50%, rgba(139, 92, 246, .05) 0%, transparent 50%);
+      background-attachment: fixed;
+    }
+
+    .site-header {
+      background: rgba(3, 7, 18, .8);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      padding: 12px 20px;
+    }
+
+    .header-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .logo-icon {
+      font-size: 28px;
+    }
+
+    .logo-title {
+      font-size: 16px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      background: linear-gradient(to right, #fff, #9ca3af);
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .logo-sub {
+      font-size: 11px;
+      color: var(--dim);
+      font-weight: 500;
+    }
+
+    .breadcrumb {
+      font-size: 12px;
+      color: var(--muted);
+      margin-left: auto;
+      font-weight: 500;
+    }
+
+    .breadcrumb a {
+      color: var(--indigo-light);
+      text-decoration: none;
+      transition: color .2s;
+    }
+
+    .breadcrumb a:hover {
+      color: #fff;
+    }
+
+    .badge {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--green);
+      background: rgba(16, 185, 129, .1);
+      border: 1px solid rgba(16, 185, 129, .2);
+      padding: 4px 12px;
+      border-radius: 20px;
+    }
+
+    .pulse {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--green);
+      animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        opacity: 1;
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4);
+      }
+
+      50% {
+        opacity: .6;
+        transform: scale(1.2);
+        box-shadow: 0 0 0 4px rgba(16, 185, 129, 0);
+      }
+    }
+
+    .lang-toggle {
+      display: flex;
+      background: rgba(255, 255, 255, .05);
+      padding: 3px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      margin-left: 12px;
+    }
+
+    .lang-btn {
+      padding: 4px 12px;
+      border-radius: 8px;
+      border: none;
+      background: transparent;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all .2s;
+    }
+
+    .lang-btn.active {
+      background: var(--indigo);
+      color: #fff;
+      box-shadow: 0 4px 12px rgba(99, 102, 241, .25);
+    }
+
+    .search-wrap {
+      max-width: 800px;
+      margin: 40px auto 0;
+      padding: 0 20px;
+      position: relative;
+    }
+
+    .search-box {
+      width: 100%;
+      padding: 16px 20px 16px 48px;
+      background: rgba(255, 255, 255, .04);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      color: var(--text);
+      font-size: 15px;
+      outline: none;
+      transition: all .3s cubic-bezier(0.4, 0, 0.2, 1);
+      backdrop-filter: blur(8px);
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' fill='none' stroke='%239ca3af' stroke-width='2' viewBox='0 0 24 24'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cpath d='m21 21-4.35-4.35'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: 18px center;
+    }
+
+    .search-box:focus {
+      border-color: var(--indigo);
+      background: rgba(255, 255, 255, .06);
+      box-shadow: 0 0 0 4px rgba(99, 102, 241, .1);
+      transform: translateY(-1px);
+    }
+
+    .filters {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: center;
+      max-width: 1200px;
+      margin: 24px auto 0;
+      padding: 0 20px;
+    }
+
+    .filter-btn {
+      padding: 7px 16px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, .02);
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all .2s;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .filter-btn:hover {
+      background: rgba(255, 255, 255, .05);
+      border-color: var(--muted);
+      color: #fff;
+    }
+
+    .filter-btn.active {
+      background: var(--indigo);
+      border-color: var(--indigo);
+      color: #fff;
+      box-shadow: 0 4px 12px rgba(99, 102, 241, .2);
+    }
+
+    main {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+
+    .hero {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    .hero-title {
+      font-size: 42px;
+      font-weight: 900;
+      margin-bottom: 12px;
+      letter-spacing: -1.5px;
+      background: linear-gradient(to bottom, #fff 40%, rgba(255, 255, 255, .7));
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-sub {
+      font-size: 16px;
+      color: var(--muted);
+      max-width: 600px;
+      margin: 0 auto 32px;
+      line-height: 1.6;
+    }
+
+    .stat-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .stat-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 16px;
+      text-align: center;
+      backdrop-filter: blur(8px);
+    }
+
+    .stat-val {
+      display: block;
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--indigo-light);
+      margin-bottom: 4px;
+    }
+
+    .stat-lbl {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--dim);
+      font-weight: 700;
+    }
+
+    .grid2 {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+      gap: 20px;
+    }
+
+    .rc {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 24px;
+      text-decoration: none;
+      color: inherit;
+      transition: all .3s cubic-bezier(0.4, 0, 0.2, 1);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+      backdrop-filter: blur(4px);
+    }
+
+    .rc::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--border), transparent);
+    }
+
+    .rc:hover {
+      transform: translateY(-6px);
+      border-color: rgba(99, 102, 241, .4);
+      background: var(--card-hover);
+      box-shadow: 0 12px 30px -10px rgba(0, 0, 0, .5), 0 0 20px rgba(99, 102, 241, .05);
+    }
+
+    .rc-info {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    .rc-ic {
+      width: 48px;
+      height: 48px;
+      background: rgba(255, 255, 255, .03);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      flex-shrink: 0;
+      transition: all .3s;
+    }
+
+    .rc:hover .rc-ic {
+      border-color: var(--indigo);
+      background: rgba(99, 102, 241, .1);
+      transform: rotate(-5deg) scale(1.1);
+    }
+
+    .rc-nm {
+      font-size: 16px;
+      font-weight: 800;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .rc-url {
+      font-size: 12px;
+      color: var(--green);
+      font-family: inherit;
+      font-weight: 600;
+      margin: 2px 0 12px;
+      display: block;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      opacity: 0.9;
+    }
+
+    .rc-ds {
+      font-size: 14px;
+      color: var(--text);
+      line-height: 1.6;
+      margin-bottom: 20px;
+      font-weight: 400;
+      opacity: 0.9;
+    }
+
+    .rc-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: auto;
+      margin-bottom: 12px;
+    }
+
+    .trust-indicator {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 10px;
+      font-weight: 800;
+      color: var(--green);
+      margin-top: 4px;
+    }
+
+    .trust-dot {
+      width: 6px;
+      height: 6px;
+      background: var(--green);
+      border-radius: 50%;
+      box-shadow: 0 0 8px var(--green);
+    }
+
+    .rc-badge {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--indigo-light);
+      background: rgba(99, 102, 241, .1);
+      padding: 2px 8px;
+      border-radius: 6px;
+      text-transform: uppercase;
+      border: 1px solid rgba(99, 102, 241, .1);
+    }
+
+    .rc-ds {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    .rc-wh {
+      padding: 12px 16px;
+      background: rgba(0, 0, 0, .2);
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      font-size: 11px;
+      color: var(--dim);
+      margin-top: auto;
+      transition: all .3s;
+    }
+
+    .rc:hover .rc-wh {
+      border-color: rgba(99, 102, 241, .2);
+      color: var(--muted);
+    }
+
+    .rc-wh b {
+      color: var(--indigo-light);
+      margin-right: 4px;
+    }
+
+    .rc-wh span {
+      display: none;
+    }
+
+    body:not(.lang-en) .rc-wh .hi {
+      display: inline;
+    }
+
+    body.lang-en .rc-wh .en {
+      display: inline;
+    }
+
+    .badge-hot {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: linear-gradient(to right, #f43f5e, #fb7185);
+      color: #fff;
+      font-size: 9px;
+      font-weight: 900;
+      padding: 2px 8px;
+      border-radius: 10px;
+      text-transform: uppercase;
+    }
+
+    .tips-section {
+      margin-top: 80px;
+      background: rgba(255, 255, 255, .02);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 40px;
+      backdrop-filter: blur(8px);
+    }
+
+    .tip-card {
+      background: rgba(255, 255, 255, .02);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 16px;
+      margin-bottom: 12px;
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      transition: all .2s;
+    }
+
+    .tip-card:hover {
+      background: rgba(255, 255, 255, .04);
+      border-color: var(--muted);
+    }
+
+    .tip-num {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--indigo);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 800;
+      flex-shrink: 0;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    .site-footer {
+      text-align: center;
+      padding: 40px 20px;
+      border-top: 1px solid var(--border);
+      color: var(--dim);
+      font-size: 11px;
+      margin-top: 40px;
+    }
+
+    .back-top {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 40px;
+      height: 40px;
+      background: var(--indigo);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      color: #fff;
+      cursor: pointer;
+      border: none;
+      opacity: 0;
+      transition: .3s;
+    }
+
+    .back-top.visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+  </style>
+</head>
+
+<body class="lang-en">
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="index.html" class="logo">
+        <div class="logo-icon">🔐</div>
+        <div>
+          <div class="logo-title">Password Tools</div>
+          <div class="logo-sub">by SudhirDevOps1</div>
+        </div>
+      </a>
+      <div class="breadcrumb">
+        <a href="index.html" data-i18n="navHome">🏠 Home</a> › <span data-i18n="navResources">🛡️ Resources</span>
+      </div>
+      <div class="badge"><span class="pulse"></span><span id="totalCountDisplay">304+</span> <span
+          data-i18n="badgeTools">Tools</span></div>
+      <div class="lang-toggle">
+        <button class="lang-btn active" id="btn-en" onclick="setLang('en')">EN</button>
+        <button class="lang-btn" id="btn-hi" onclick="setLang('hi')">हिन्दी</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="search-wrap">
+    <input type="text" class="search-box" id="searchInput" data-i18n-placeholder="searchPlaceholder"
+      placeholder="Search security tools, VPNs, password managers..." oninput="doSearch()">
+    <div id="resultsCount" style="font-size:12px; color:var(--indigo-light); margin-top:8px;"></div>
+  </div>
+
+  <div class="filters" id="filterContainer">
+    <button class="filter-btn active" onclick="filterCat('all', this)">All (304+)</button>
+    <!-- Powered by JS -->
+  </div>
+
+  <main id="mainContent">
+    <div class="hero fade-up">
+      <div class="hero-icon">🛡️</div>
+      <h1 class="hero-title"><span id="totalCountHero">304+</span> <span data-i18n="heroTitle">Security Resources</span>
+      </h1>
+      <p class="hero-sub" data-i18n="heroSub">
+        A curated list of verified, free, and open-source security tools for everyone.
+        Explore unique resources to protect your digital identity.
+      </p>
+
+      <div class="stat-row">
+        <div class="stat-card">
+          <div class="stat-val" id="stat-total">304+</div>
+          <div class="stat-lbl" data-i18n="statVerified">Verified Tools</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-val">100%</div>
+          <div class="stat-lbl" data-i18n="statFree">Free / OSS</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-val">24/7</div>
+          <div class="stat-lbl" data-i18n="statPrivacy">Privacy First</div>
+        </div>
+      </div>
+    </div>
+
+    <div id="resourceContainer">
+      <!-- Tools injected here by JS -->
+      <div style="text-align:center; padding:50px; color:var(--dim)">Loading resources...</div>
+    </div>
+
+    <!-- Extra sections injected here by JS -->
+    <div id="extraContent">
+      <section class="tips-section" id="rules">
+        <h2 class="cat-hdr"><span class="cat-badge" style="background:rgba(16,185,129,.1);color:var(--green)">📜</span>
+          <span data-i18n="rulesTitle">Top 12 Password Security Rules</span>
+        </h2>
+        <div class="tip-card">
+          <div class="tip-num" style="background:var(--indigo)">1</div> <strong data-i18n="rule1Title">Different
+            Password for Every Site:</strong> <span data-i18n="rule1Desc">Never reuse passwords across different
+            accounts.</span>
+        </div>
+        <div class="tip-card">
+          <div class="tip-num" style="background:var(--indigo)">2</div> <strong data-i18n="rule2Title">Minimum 12
+            Characters:</strong> <span data-i18n="rule2Desc">Longer passwords are exponentially harder to crack.</span>
+        </div>
+        <div class="tip-card">
+          <div class="tip-num" style="background:var(--indigo)">3</div> <strong data-i18n="rule3Title">Mix Character
+            Types:</strong> <span data-i18n="rule3Desc">Use uppercase, lowercase, numbers, and symbols.</span>
+        </div>
+        <div class="tip-card">
+          <div class="tip-num" style="background:var(--indigo)">4</div> <strong data-i18n="rule4Title">Enable
+            2FA:</strong> <span data-i18n="rule4Desc">Two-Factor Authentication is your second line of defense.</span>
+        </div>
+        <div class="tip-card">
+          <div class="tip-num" style="background:var(--indigo)">5</div> <strong data-i18n="rule5Title">Use a Password
+            Manager:</strong> <span data-i18n="rule5Desc">Don't try to remember them all; use a trusted vault.</span>
+        </div>
+        <div class="tip-card">
+          <div class="tip-num" style="background:var(--indigo)">6</div> <strong data-i18n="rule6Title">Avoid Personal
+            Info:</strong> <span data-i18n="rule6Desc">Don't use birthdays, pet names, or phone numbers.</span>
+        </div>
+        <div class="tip-card">
+          <div class="tip-num" style="background:var(--indigo)">7</div> <strong data-i18n="rule7Title">Update Important
+            Passwords:</strong> <span data-i18n="rule7Desc">Change your bank and email passwords every 6 months.</span>
+        </div>
+        <div class="tip-card">
+          <div class="tip-num" style="background:var(--indigo)">8</div> <strong data-i18n="rule8Title">Check for
+            Breaches:</strong> <span data-i18n="rule8Desc">Use HaveIBeenPwned to check if your data was leaked.</span>
+        </div>
+        <div class="tip-card">
+          <div class="tip-num" style="background:var(--indigo)">9</div> <strong data-i18n="rule9Title">Don't Share
+            Passwords:</strong> <span data-i18n="rule9Desc">Never give your password to anyone, even "support".</span>
+        </div>
+        <div class="tip-card">
+          <div class="tip-num" style="background:var(--indigo)">10</div> <strong data-i18n="rule10Title">Beware of
+            Phishing:</strong> <span data-i18n="rule10Desc">Always check the URL before entering your password.</span>
+        </div>
+        <div class="tip-card">
+          <div class="tip-num" style="background:var(--indigo)">11</div> <strong data-i18n="rule11Title">Secure Your
+            Recovery Email:</strong> <span data-i18n="rule11Desc">Your recovery email is the keys to your
+            kingdom.</span>
+        </div>
+        <div class="tip-card">
+          <div class="tip-num" style="background:var(--indigo)">12</div> <strong data-i18n="rule12Title">Logout on
+            Public Devices:</strong> <span data-i18n="rule12Desc">Always sign out and clear history on shared
+            computers.</span>
+        </div>
+      </section>
+
+      <section class="tips-section" id="attacks">
+        <h2 class="cat-hdr"><span class="cat-badge" style="background:rgba(244,63,94,.1);color:var(--red)">🛡️</span>
+          <span data-i18n="attacksTitle">Common Password Attacks — Explained</span>
+        </h2>
+        <div class="tip-card"><strong data-i18n="atk1">Brute Force:</strong> <span data-i18n="atk1Desc">Attacker tries
+            every possible combination of characters until they find the right one.</span></div>
+        <div class="tip-card"><strong data-i18n="atk2">Dictionary Attack:</strong> <span data-i18n="atk2Desc">Using a
+            list of common words and previously leaked passwords to guess yours.</span></div>
+        <div class="tip-card"><strong data-i18n="atk3">Phishing:</strong> <span data-i18n="atk3Desc">Fake websites that
+            look like the real ones to trick you into entering your credentials.</span></div>
+        <div class="tip-card"><strong data-i18n="atk4">Keylogging:</strong> <span data-i18n="atk4Desc">Malware that
+            records every keystroke you type on your keyboard.</span></div>
+        <div class="tip-card"><strong data-i18n="atk5">Credential Stuffing:</strong> <span data-i18n="atk5Desc">Using
+            passwords leaked from one site to try and login to your other accounts.</span></div>
+      </section>
+    </div>
+
+    <!-- Final Summary Card -->
+    <div
+      style="text-align:center;margin-top:40px;padding:28px;background:linear-gradient(135deg,rgba(99,102,241,.1),rgba(16,185,129,.06));border-radius:20px;border:1px solid rgba(99,102,241,.2)">
+      <div style="font-size:32px;margin-bottom:10px">🎯</div>
+      <div style="font-size:16px;font-weight:900;margin-bottom:8px"><span data-i18n="totalTools">Total Tools</span>:
+        <span id="finalCountSummary">304+</span>
+      </div>
+      <div style="font-size:12px;color:var(--muted);max-width:560px;margin:0 auto;line-height:1.6"
+        data-i18n="summaryText">
+        All links are verified and official. Data-driven by <strong
+          style="color:var(--indigo-light)">tools.json</strong>.
+      </div>
+      <div style="font-size:11px;color:var(--dim);margin-top:14px">
+        <span data-i18n="curatedBy">Curated by</span> <strong style="color:#818cf8">SudhirDevOps1</strong> — <span
+          data-i18n="staySafe">Stay safe online!</span> 🛡️
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer" id="siteFooter">
+    🔒 304+ <span data-i18n="footerText">Trusted Security Resources | Curated by <strong>SudhirDevOps1</strong> | Hindi
+      + English Supported</span>
+  </footer>
+
+  <button class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+  <script src="tools.js"></script>
+  <script>
+    // allTools is now globally defined in tools.js
+    const i18n = {
+      en: {
+        navHome: '🏠 Home', navResources: '🛡️ Resources', badgeTools: 'Tools',
+        searchPlaceholder: 'Search security tools, VPNs, password managers...',
+        heroTitle: 'Security Resources',
+        heroSub: 'A curated list of verified, free, and open-source security tools for everyone. Explore unique resources to protect your digital identity.',
+        statVerified: 'Verified Tools', statFree: 'Free / OSS', statPrivacy: 'Privacy First',
+        rulesTitle: 'Top 12 Password Security Rules',
+        rule1Title: 'Different Password for Every Site:', rule1Desc: 'Never reuse passwords across different accounts.',
+        rule2Title: 'Minimum 12 Characters:', rule2Desc: 'Longer passwords are exponentially harder to crack.',
+        rule3Title: 'Mix Character Types:', rule3Desc: 'Use uppercase, lowercase, numbers, and symbols.',
+        rule4Title: 'Enable 2FA:', rule4Desc: 'Two-Factor Authentication is your second line of defense.',
+        rule5Title: 'Use a Password Manager:', rule5Desc: 'Don\'t try to remember them all; use a trusted vault.',
+        rule6Title: 'Avoid Personal Info:', rule6Desc: 'Don\'t use birthdays, pet names, or phone numbers.',
+        rule7Title: 'Update Important Passwords:', rule7Desc: 'Change your bank and email passwords every 6 months.',
+        rule8Title: 'Check for Breaches:', rule8Desc: 'Use HaveIBeenPwned to check if your data was leaked.',
+        rule9Title: 'Don\'t Share Passwords:', rule9Desc: 'Never give your password to anyone, even "support".',
+        rule10Title: 'Beware of Phishing:', rule10Desc: 'Always check the URL before entering your password.',
+        rule11Title: 'Secure Your Recovery Email:', rule11Desc: 'Your recovery email is the keys to your kingdom.',
+        rule12Title: 'Logout on Public Devices:', rule12Desc: 'Always sign out and clear history on shared computers.',
+        attacksTitle: 'Common Password Attacks — Explained',
+        atk1: 'Brute Force:', atk1Desc: 'Attacker tries every possible combination of characters until they find the right one.',
+        atk2: 'Dictionary Attack:', atk2Desc: 'Using a list of common words and previously leaked passwords to guess yours.',
+        atk3: 'Phishing:', atk3Desc: 'Fake websites that look like the real ones to trick you into entering your credentials.',
+        atk4: 'Keylogging:', atk4Desc: 'Malware that records every keystroke you type on your keyboard.',
+        atk5: 'Credential Stuffing:', atk5Desc: 'Using passwords leaked from one site to try and login to your other accounts.',
+        totalTools: 'Total Tools',
+        summaryText: 'All links are verified and official. Data-driven by tools.json.',
+        curatedBy: 'Curated by', staySafe: 'Stay safe online!',
+        footerText: 'Trusted Security Resources | Curated by SudhirDevOps1 | Hindi + English Supported',
+        foundMatches: 'Found {count} matches',
+        showingResources: 'Showing {count} resources',
+        whyLabel: 'Why?',
+        verifiedLabel: 'Verified',
+        highTrust: 'HIGH TRUST',
+        noResults: 'No resources found matching your search.',
+        allText: 'All (300+)',
+        catPwd: 'Password Managers', catBreach: 'Breach Checkers', cat2fa: '2FA Tools',
+        catVpn: 'Privacy & VPN', catAv: 'Anti-Malware', catWeb: 'Web Security',
+        catFp: 'Fingerprinting', catEnc: 'Encryption', catEdu: 'Education',
+        catDns: 'DNS Security', catOsint: 'OSINT Tools', catPentest: 'Pentesting',
+        catEmail: 'Secure Email', catNet: 'Network Tools', catHids: 'IDS/Monitoring',
+        catApp: 'App Security', catIr: 'Forensics/IR', catSiem: 'SIEM/Logs',
+        catIntel: 'Threat Intel', catRe: 'Reverse Eng', catMisc: 'Misc Tools'
+      },
+      hi: {
+        navHome: '🏠 होम', navResources: '🛡️ रिसोर्सेज', badgeTools: 'टूल्स',
+        searchPlaceholder: 'सुरक्षा टूल्स, VPN, पासवर्ड मैनेजर खोजें...',
+        heroTitle: 'सुरक्षा संसाधन',
+        heroSub: 'सभी के लिए सत्यापित, मुफ्त और ओपन-सोर्स सुरक्षा उपकरणों की एक क्यूरेटेड सूची। अपनी डिजिटल पहचान की रक्षा के लिए अद्वितीय संसाधनों का अन्वेषण करें।',
+        statVerified: 'सत्यापित टूल्स', statFree: 'मुफ्त / OSS', statPrivacy: 'प्राइवेसी फर्स्ट',
+        rulesTitle: 'टॉप 12 पासवर्ड सुरक्षा नियम',
+        rule1Title: 'हर साइट के लिए अलग पासवर्ड:', rule1Desc: 'विभिन्न खातों में पासवर्ड कभी भी दोबारा उपयोग न करें।',
+        rule2Title: 'न्यूनतम 12 कैरेक्टर:', rule2Desc: 'लंबे पासवर्ड को क्रैक करना काफी कठिन होता है।',
+        rule3Title: 'कैरेक्टर प्रकार मिलाएं:', rule3Desc: 'बड़े अक्षर, छोटे अक्षर, संख्याएं और प्रतीकों का प्रयोग करें।',
+        rule4Title: '2FA सक्षम करें:', rule4Desc: 'टू-फैक्टर ऑथेंटिकेशन आपकी सुरक्षा की दूसरी पंक्ति है।',
+        rule5Title: 'पासवर्ड मैनेजर का प्रयोग करें:', rule5Desc: 'सबको याद रखने की कोशिश न करें; एक भरोसेमंद वॉल्ट का उपयोग करें।',
+        rule6Title: 'पर्सनल जानकारी से बचें:', rule6Desc: 'जन्मदिन, पालतू जानवरों के नाम या फोन नंबर का उपयोग न करें।',
+        rule7Title: 'महत्वपूर्ण पासवर्ड अपडेट करें:', rule7Desc: 'हर 6 महीने में अपना बैंक और ईमेल पासवर्ड बदलें।',
+        rule8Title: 'डेटा ब्रीच चेक करें:', rule8Desc: 'आपका डेटा लीक हुआ है या नहीं, यह जांचने के लिए HaveIBeenPwned का उपयोग करें।',
+        rule9Title: 'पासवर्ड साझा न करें:', rule9Desc: 'अपना पासवर्ड कभी किसी को न दें, यहाँ तक कि "सपोर्ट" को भी नहीं।',
+        rule10Title: 'फ़िशिंग से सावधान रहें:', rule10Desc: 'पासवर्ड डालने से पहले हमेशा URL चेक करें।',
+        rule11Title: 'रिकवरी ईमेल सुरक्षित करें:', rule11Desc: 'आपका रिकवरी ईमेल आपके डिजिटल साम्राज्य की चाबी है।',
+        rule12Title: 'पब्लिक डिवाइस पर लॉगआउट करें:', rule12Desc: 'साझा कंप्यूटरों पर हमेशा साइन आउट करें और हिस्ट्री क्लियर करें।',
+        attacksTitle: 'सामान्य पासवर्ड हमले — व्याख्या',
+        atk1: 'ब्रूट फ़ोर्स:', atk1Desc: 'हमलावर तब तक वर्णों के हर संभव संयोजन की कोशिश करता है जब तक कि उसे सही पासवर्ड न मिल जाए।',
+        atk2: 'डिक्शनरी अटैक:', atk2Desc: 'आपके पासवर्ड का अनुमान लगाने के लिए सामान्य शब्दों और पहले से लीक हुए पासवर्ड की सूची का उपयोग करना।',
+        atk3: 'फ़िशिंग:', atk3Desc: 'नकली वेबसाइटें जो आपको क्रेडेंशियल दर्ज करने के लिए धोखा देने के लिए असली जैसी दिखती हैं।',
+        atk4: 'की-लॉगिंग:', atk4Desc: 'मैलवेयर जो आपके कीबोर्ड पर आपके द्वारा टाइप किए गए हर कीस्ट्रोक को रिकॉर्ड करता है।',
+        atk5: 'क्रेडेंशियल स्टफिंग:', atk5Desc: 'एक साइट से लीक हुए पासवर्ड का उपयोग करके आपके अन्य खातों में लॉगिन करने का प्रयास करना।',
+        totalTools: 'कुल टूल्स',
+        totalMatches: '{count} मिलान मिले',
+        summaryText: 'सभी लिंक सत्यापित और आधिकारिक हैं। tools.json द्वारा संचालित।',
+        curatedBy: 'द्वारा क्यूरेटेड', staySafe: 'ऑनलाइन सुरक्षित रहें!',
+        footerText: 'भरोसेमंद सुरक्षा संसाधन | SudhirDevOps1 द्वारा क्यूरेटेड | हिंदी + अंग्रेजी समर्थित',
+        foundMatches: '{count} मिलान मिले',
+        showingResources: '{count} संसाधन दिख रहे हैं',
+        whyLabel: 'क्यों?',
+        verifiedLabel: 'सत्यापित',
+        highTrust: 'उच्च विश्वास',
+        noResults: 'आपकी खोज से मेल खाने वाला कोई संसाधन नहीं मिला।',
+        allText: 'सभी (300+)',
+        catPwd: 'पासवर्ड मैनेजर', catBreach: 'ब्रीच चेकर्स', cat2fa: '2FA टूल्स',
+        catVpn: 'प्राइवेसी और VPN', catAv: 'एंटी-मैलवेयर', catWeb: 'वेब सुरक्षा',
+        catFp: 'फिंगरप्रिंटिंग', catEnc: 'एन्क्रिप्शन', catEdu: 'शिक्षा',
+        catDns: 'DNS सुरक्षा', catOsint: 'OSINT टूल्स', catPentest: 'पेनटेस्टिंग',
+        catEmail: 'सुरक्षित ईमेल', catNet: 'नेटवर्क टूल्स', catHids: 'IDS/मॉनिटरिंग',
+        catApp: 'ऐप सुरक्षा', catIr: 'फ़ोरेंसिक/IR', catSiem: 'SIEM/लॉग्स',
+        catIntel: 'थ्रेट इंटेल', catRe: 'रिवर्स इंजीनियरिंग', catMisc: 'विविध टूल्स'
+      }
+    };
+
+    let currentLang = localStorage.getItem('appLang') || 'hi';
+
+    function T(key) {
+      return (i18n[currentLang] && i18n[currentLang][key]) || (i18n['en'][key]) || key;
+    }
+
+    function applyLanguage() {
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        el.textContent = T(key);
+      });
+      document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+        el.placeholder = T(el.getAttribute('data-i18n-placeholder'));
+      });
+      document.body.className = 'lang-' + currentLang;
+      document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+      const activeBtn = document.getElementById('btn-' + currentLang);
+      if (activeBtn) activeBtn.classList.add('active');
+
+      // Update dynamic parts
+      renderCategories();
+      updateCounts();
+      renderTools('all');
+    }
+
+    function updateCounts(count) {
+      const displayCount = count !== undefined ? count : allTools.length;
+      const fmtClass = displayCount + (displayCount < allTools.length ? '' : '+');
+      const elements = {
+        'totalCountHero': fmtClass,
+        'finalCountSummary': fmtClass,
+        'totalCountDisplay': fmtClass,
+        'stat-total': fmtClass
+      };
+      for (const [id, val] of Object.entries(elements)) {
+        const el = document.getElementById(id);
+        if (el) el.innerText = val;
+      }
+      const resultsCountEl = document.getElementById('resultsCount');
+      if (resultsCountEl) {
+        const term = searchInput ? searchInput.value : '';
+        const key = term ? 'foundMatches' : 'showingResources';
+        resultsCountEl.innerText = T(key).replace('{count}', displayCount);
+      }
+    }
+
+    function setLang(lang) {
+      currentLang = lang;
+      localStorage.setItem('appLang', currentLang);
+      applyLanguage();
+    }
+
+    const catMap = {
+      'pwd': { name: T('catPwd'), icon: '🔑', color: 'rgba(99,102,241,.3)', text: '#818cf8' },
+      'breach': { name: T('catBreach'), icon: '🔍', color: 'rgba(244,63,94,.3)', text: '#fb7185' },
+      '2fa': { name: T('cat2fa'), icon: '🗝️', color: 'rgba(16,185,129,.3)', text: '#34d399' },
+      'vpn': { name: T('catVpn'), icon: '🛡️', color: 'rgba(168,85,247,.3)', text: '#c084fc' },
+      'av': { name: T('catAv'), icon: '🦠', color: 'rgba(239,68,68,.3)', text: '#f87171' },
+      'web': { name: T('catWeb'), icon: '🕸️', color: 'rgba(34,211,238,.3)', text: '#22d3ee' },
+      'fp': { name: T('catFp'), icon: '🕵️', color: 'rgba(245,158,11,.3)', text: '#fbbf24' },
+      'enc': { name: T('catEnc'), icon: '🔐', color: 'rgba(99,102,241,.3)', text: '#818cf8' },
+      'edu': { name: T('catEdu'), icon: '🎓', color: 'rgba(234,179,8,.3)', text: '#facc15' },
+      'dns': { name: T('catDns'), icon: '🌐', color: 'rgba(16,185,129,.3)', text: '#34d399' },
+      'osint': { name: T('catOsint'), icon: '🕵️', color: 'rgba(34,211,238,.3)', text: '#22d3ee' },
+      'pentest': { name: T('catPentest'), icon: '🧪', color: 'rgba(168,85,247,.3)', text: '#c084fc' },
+      'email': { name: T('catEmail'), icon: '📧', color: 'rgba(14,165,233,.3)', text: '#38bdf8' },
+      'net': { name: T('catNet'), icon: '📡', color: 'rgba(99,102,241,.3)', text: '#818cf8' },
+      'hids': { name: T('catHids'), icon: '🧱', color: 'rgba(244,63,94,.3)', text: '#fb7185' },
+      'app': { name: T('catApp'), icon: '🕵️', color: 'rgba(16,185,129,.3)', text: '#34d399' },
+      'ir': { name: T('catIr'), icon: '🚀', color: 'rgba(34,211,238,.3)', text: '#22d3ee' },
+      'siem': { name: T('catSiem'), icon: '📊', color: 'rgba(234,179,8,.3)', text: '#facc15' },
+      'intel': { name: T('catIntel'), icon: '🐝', color: 'rgba(14,165,233,.3)', text: '#38bdf8' },
+      're': { name: T('catRe'), icon: '🐉', color: 'rgba(168,85,247,.3)', text: '#c084fc' },
+      'misc': { name: T('catMisc'), icon: '🚀', color: 'rgba(16,185,129,.3)', text: '#34d399' }
+    };
+
+    const searchInput = document.getElementById('searchInput');
+    const resourceContainer = document.getElementById('resourceContainer');
+    const filterContainer = document.getElementById('filterContainer');
+
+    function renderCategories() {
+      filterContainer.innerHTML = `<button class="filter-btn active" onclick="filterCat('all', this)">${T('allText')}</button>`;
+      const cats = [...new Set(allTools.map(t => t.cat))];
+      cats.forEach(c => {
+        if (catMap[c]) {
+          const btn = document.createElement('button');
+          btn.className = 'filter-btn';
+          btn.innerHTML = `${catMap[c].icon} ${catMap[c].name}`;
+          btn.onclick = (e) => filterCat(c, btn);
+          filterContainer.appendChild(btn);
+        }
+      });
+    }
+
+    function filterCat(cat, btn) {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      renderTools(cat);
+      if (searchInput) searchInput.value = '';
+    }
+
+    function doSearch() {
+      const term = searchInput.value.toLowerCase();
+      const filtered = allTools.filter(t =>
+        t.name.toLowerCase().includes(term) ||
+        t.desc.toLowerCase().includes(term) ||
+        (t.tag && t.tag.toLowerCase().includes(term))
+      );
+      renderTools('all', filtered);
+    }
+
+    function renderTools(filter = 'all', data = null) {
+      resourceContainer.innerHTML = '';
+      resourceContainer.className = 'grid2';
+
+      const filtered = data || (filter === 'all' ? allTools : allTools.filter(t => t.cat === filter));
+
+      if (filtered.length === 0) {
+        resourceContainer.innerHTML = `<div style="text-align:center; padding:50px; color:var(--dim)">${T('noResults')}</div>`;
+        updateCounts(0);
+        return;
+      }
+
+      filtered.forEach(tool => {
+        const cat = catMap[tool.cat] || { name: 'Other', icon: '🛠️', color: 'rgba(255,255,255,.1)', text: '#fff' };
+
+        // Parse badges from tag string
+        const badgesHtml = tool.tag ? tool.tag.split('·').map(part =>
+          `<span class="rc-badge">${part.trim()}</span>`
+        ).join('') : '';
+
+        // Advanced Security Detection
+        const isAdvanced = /e2e|encrypt|audit|source|zero-access|verified|secure/i.test(tool.desc + tool.name + tool.tag);
+        const trustHtml = isAdvanced ? `<div class="trust-indicator"><span class="trust-dot"></span> ${T('highTrust')}</div>` : '';
+
+        const card = document.createElement('a');
+        card.href = tool.url;
+        card.target = '_blank';
+        card.className = 'rc';
+        card.innerHTML = `
+          ${isAdvanced ? `<span class="badge-hot">${T('verifiedLabel')}</span>` : ''}
+          <div class="rc-info">
+            <div class="rc-ic" style="color:${cat.text}">${tool.icon || cat.icon}</div>
+            <div style="min-width: 0; flex: 1;">
+              <div class="rc-nm">${tool.name} ${trustHtml}</div>
+              <div class="rc-url">${tool.url ? tool.url.replace(/^https?:\/\//, '').split('/')[0] : 'Direct Link'}</div>
+            </div>
+          </div>
+          <p class="rc-ds">${currentLang === 'hi' ? (tool.desc_hi || tool.desc) : tool.desc}</p>
+          <div class="rc-badges">${badgesHtml}</div>
+          <div class="rc-wh">
+            <b>${T('whyLabel')}</b>
+            <span class="en">${tool.why.en}</span>
+            <span class="hi">${tool.why.hi}</span>
+          </div>
+        `;
+        resourceContainer.appendChild(card);
+      });
+      updateCounts(filtered.length);
+    }
+
+
+    function initTools() {
+      if (typeof allTools !== 'undefined' && Array.isArray(allTools)) {
+        renderCategories();
+        applyLanguage(); // Initial render and language apply
+      } else {
+        console.error('allTools is not defined. Please ensure tools.js is loaded correctly.');
+        resourceContainer.innerHTML = `
+          <div style="text-align:center; padding:50px; color:var(--dim)">
+            <div style="font-size: 3rem; margin-bottom: 20px;">⚠️</div>
+            <h3 style="font-size: 1.5rem; margin-bottom: 10px;">Failed to load tools.js</h3>
+            <p>Please ensure tools.js is in the same directory and is a valid JavaScript file.</p>
+          </div>
+        `;
+      }
+    }
+    initTools();
+
+    window.addEventListener('scroll', () => {
+      const btn = document.getElementById('backTop');
+      if (btn) {
+        if (window.scrollY > 300) btn.classList.add('visible');
+        else btn.classList.remove('visible');
+      }
+    });
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Text Encryptor — by SudhirDevOps1</title>
+    <link rel="stylesheet" href="shared.css">
+    <style>
+        .mode-toggle {
+            display: flex;
+            background: rgba(255, 255, 255, .05);
+            border-radius: 12px;
+            padding: 4px;
+            margin-bottom: 20px;
+            gap: 4px;
+        }
+
+        .mode-btn {
+            flex: 1;
+            padding: 10px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 13px;
+            font-family: 'Inter', sans-serif;
+            transition: all .25s;
+            color: #94a3b8;
+            background: none;
+        }
+
+        .mode-btn.active {
+            background: linear-gradient(135deg, #6366f1, #a855f7);
+            color: #fff;
+            box-shadow: 0 0 20px rgba(99, 102, 241, .4);
+        }
+
+        textarea.inp {
+            min-height: 120px;
+            resize: vertical;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="site-header">
+        <div class="inner">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">🔐</div>
+                <div>
+                    <div class="logo-title">Password Tools</div>
+                    <div class="logo-sub">by SudhirDevOps1</div>
+                </div>
+            </a>
+            <div class="breadcrumb">
+                <a href="index.html" data-i18n="navHome">🏠 Home</a> › <span data-i18n="navEncrypt">🔐 Encrypt
+                    Text</span>
+            </div>
+            <div class="lang-toggle">
+                <button class="lang-btn" id="btn-en" onclick="setLang('en')">EN</button>
+                <button class="lang-btn" id="btn-hi" onclick="setLang('hi')">हिन्दी</button>
+            </div>
+            <div class="badge-secure"><span class="pulse"></span><span data-i18n="badgeSecure">AES-256 Offline</span>
+            </div>
+        </div>
+    </header>
+    <main>
+        <a href="index.html" class="back-link" data-i18n="backHome">← Back to Tools</a>
+
+        <div class="card fade-up" style="margin-bottom:20px">
+            <div class="section-title" data-i18n="toolTitle">🔐 Text Encrypt / Decrypt</div>
+            <div class="section-sub" data-i18n="toolSub">Encrypt any text with AES-256-GCM — military-grade encryption,
+                100% local</div>
+
+            <div class="mode-toggle">
+                <button class="mode-btn active" id="encBtn" onclick="setMode('enc')" data-i18n="btnModeEnc">🔒
+                    Encrypt</button>
+                <button class="mode-btn" id="decBtn" onclick="setMode('dec')" data-i18n="btnModeDec">🔓 Decrypt</button>
+            </div>
+
+            <div class="input-group">
+                <label class="input-label" id="inputLabel" data-i18n="labelPlain">📝 Plain Text to Encrypt</label>
+                <textarea id="textInput" class="inp" data-i18n-placeholder="placeholderText"
+                    placeholder="Enter text to encrypt…"></textarea>
+            </div>
+            <div class="input-group">
+                <label class="input-label" data-i18n="labelKey">🔑 Secret Key / Password</label>
+                <div style="position:relative">
+                    <input type="password" id="keyInput" class="inp" data-i18n-placeholder="placeholderKey"
+                        placeholder="Strong secret key…" style="padding-right:50px">
+                    <button onclick="toggleVis()" id="visBtn"
+                        style="position:absolute;right:12px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;font-size:18px;color:#94a3b8">👁️</button>
+                </div>
+            </div>
+
+            <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:20px">
+                <button class="btn btn-primary" onclick="process()" id="processBtn" data-i18n="btnProcess">🔒
+                    Encrypt</button>
+                <button class="btn btn-outline" onclick="clearAll()" data-i18n="btnClear">✕ Clear All</button>
+            </div>
+
+            <div class="input-group" id="outputGroup" style="display:none">
+                <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
+                    <label class="input-label" id="outputLabel" style="margin-bottom:0">🔒 Encrypted Output</label>
+                    <div style="display:flex;gap:6px">
+                        <button class="copy-btn" onclick="copyOutput()" data-i18n="btnCopy">📋 Copy</button>
+                        <button class="copy-btn" onclick="downloadOutput()" data-i18n="btnDownload">⬇️ Download</button>
+                    </div>
+                </div>
+                <div id="outputBox" class="result-box success"
+                    style="font-size:12px;word-break:break-all;max-height:200px;overflow-y:auto"></div>
+            </div>
+
+            <div id="errorBox" class="result-box error" style="display:none"></div>
+        </div>
+
+        <!-- How it works -->
+        <div class="card fade-up">
+            <div style="font-size:15px;font-weight:700;margin-bottom:14px" data-i18n="detailsTitle">🔬 Encryption
+                Details</div>
+            <div class="grid-2">
+                <div style="background:rgba(255,255,255,.04);border-radius:12px;padding:14px">
+                    <div style="font-size:22px;margin-bottom:6px">🔐</div>
+                    <div style="font-size:13px;font-weight:700;margin-bottom:4px">AES-256-GCM</div>
+                    <div style="font-size:12px;color:#64748b" data-i18n="detAES">Military-grade symmetric encryption.
+                        Same key encrypts and decrypts.</div>
+                </div>
+                <div style="background:rgba(255,255,255,.04);border-radius:12px;padding:14px">
+                    <div style="font-size:22px;margin-bottom:6px">🧂</div>
+                    <div style="font-size:13px;font-weight:700;margin-bottom:4px" data-i18n="detPBKDF2">PBKDF2 Key
+                        Derivation</div>
+                    <div style="font-size:12px;color:#64748b" data-i18n="detPBKDF2Desc">Your password is stretched with
+                        100,000 iterations + random salt for maximum security.</div>
+                </div>
+                <div style="background:rgba(255,255,255,.04);border-radius:12px;padding:14px">
+                    <div style="font-size:22px;margin-bottom:6px">🎲</div>
+                    <div style="font-size:13px;font-weight:700;margin-bottom:4px" data-i18n="detNonce">Random IV (Nonce)
+                    </div>
+                    <div style="font-size:12px;color:#64748b" data-i18n="detNonceDesc">A random initialization vector is
+                        generated for each encryption — same text encrypted twice gives different results.</div>
+                </div>
+                <div style="background:rgba(255,255,255,.04);border-radius:12px;padding:14px">
+                    <div style="font-size:22px;margin-bottom:6px">🖥️</div>
+                    <div style="font-size:13px;font-weight:700;margin-bottom:4px" data-i18n="detLocal">100% Local</div>
+                    <div style="font-size:12px;color:#64748b" data-i18n="detLocalDesc">Uses Web Crypto API. No server,
+                        no internet needed. Nothing leaves your browser.</div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer class="site-footer" data-i18n="footerText">🔒 AES-256-GCM Encryption — All local, nothing sent | by <strong
+            style="color:#818cf8">SudhirDevOps1</strong></footer>
+    <div id="toast-container"></div>
+    <script>
+        const i18n = {
+            en: {
+                navHome: '🏠 Home', navEncrypt: '🔐 Encrypt Text', badgeSecure: 'AES-256 Offline',
+                backHome: '← Back to Tools', toolTitle: '🔐 Text Encrypt / Decrypt',
+                toolSub: 'Encrypt any text with AES-256-GCM — military-grade encryption, 100% local',
+                btnModeEnc: '🔒 Encrypt', btnModeDec: '🔓 Decrypt',
+                labelPlain: '📝 Plain Text to Encrypt', labelEnc: '🔒 Encrypted Text to Decrypt',
+                placeholderText: 'Enter text to encrypt…', placeholderTextDec: 'Paste encrypted text here…',
+                labelKey: '🔑 Secret Key / Password', placeholderKey: 'Strong secret key…',
+                btnProcess: '🔒 Encrypt', btnProcessDec: '🔓 Decrypt',
+                btnClear: '✕ Clear All', labelOutput: '🔒 Encrypted Output',
+                labelOutputB64: '🔒 Encrypted Output (Base64)', labelOutputDec: '📝 Decrypted Output',
+                btnCopy: '📋 Copy', btnDownload: '⬇️ Download',
+                detailsTitle: '🔬 Encryption Details', detAES: 'Military-grade symmetric encryption. Same key encrypts and decrypts.',
+                detPBKDF2: 'PBKDF2 Key Derivation', detPBKDF2Desc: 'Your password is stretched with 100,000 iterations + random salt for maximum security.',
+                detNonce: 'Random IV (Nonce)', detNonceDesc: 'A random initialization vector is generated for each encryption — same text encrypted twice gives different results.',
+                detLocal: '100% Local', detLocalDesc: 'Uses Web Crypto API. No server, no internet needed. Nothing leaves your browser.',
+                footerText: '🔒 AES-256-GCM Encryption — All local, nothing sent | by SudhirDevOps1',
+                toastEnterText: 'Enter text first', toastEnterKey: 'Enter a secret key',
+                toastEncSuccess: '✅ Encrypted successfully!', toastDecSuccess: '✅ Decrypted successfully!',
+                toastCopied: '✅ Copied!', errDec: '❌ Decryption failed — wrong key or invalid ciphertext',
+                errEnc: '❌ Encryption failed: '
+            },
+            hi: {
+                navHome: '🏠 होम', navEncrypt: '🔐 टेक्स्ट एन्क्रिप्ट करें', badgeSecure: 'AES-256 ऑफलाइन',
+                backHome: '← टूल्स पर वापस जाएं', toolTitle: '🔐 टेक्स्ट एन्क्रिप्ट / डिक्रिप्ट',
+                toolSub: 'AES-256-GCM के साथ किसी भी टेक्स्ट को एन्क्रिप्ट करें — सैन्य-ग्रेड एन्क्रिप्शन, 100% स्थानीय',
+                btnModeEnc: '🔒 एन्क्रिप्ट', btnModeDec: '🔓 डिक्रिप्ट',
+                labelPlain: '📝 एन्क्रिप्ट करने के लिए सादा टेक्स्ट', labelEnc: '🔒 डिक्रिप्ट करने के लिए एन्क्रिप्टेड टेक्स्ट',
+                placeholderText: 'एन्क्रिप्ट करने के लिए टेक्स्ट दर्ज करें…', placeholderTextDec: 'एन्क्रिप्टेड टेक्स्ट यहाँ पेस्ट करें…',
+                labelKey: '🔑 सीक्रेट की / पासवर्ड', placeholderKey: 'मजबूत सीक्रेट की…',
+                btnProcess: '🔒 एन्क्रिप्ट', btnProcessDec: '🔓 डिक्रिप्ट',
+                btnClear: '✕ सभी साफ़ करें', labelOutput: '🔒 एन्क्रिप्टेड आउटपुट',
+                labelOutputB64: '🔒 एन्क्रिप्टेड आउटपुट (Base64)', labelOutputDec: '📝 डिक्रिप्टेड आउटपुट',
+                btnCopy: '📋 कॉपी करें', btnDownload: '⬇️ डाउनलोड करें',
+                detailsTitle: '🔬 एन्क्रिप्शन विवरण', detAES: 'सैन्य-ग्रेड सममित एन्क्रिप्शन। एक ही की (key) एन्क्रिप्ट और डिक्रिप्ट करती है।',
+                detPBKDF2: 'PBKDF2 की डेरिवेश', detPBKDF2Desc: 'आपके पासवर्ड को अधिकतम सुरक्षा के लिए 1,00,000 इटरेशन + रैंडम साल्ट के साथ खींचा जाता है।',
+                detNonce: 'रैंडम IV (Nonce)', detNonceDesc: 'प्रत्येक एन्क्रिप्शन के लिए एक रैंडम इनिशियलाइज़ेशन वेक्टर जेनरेट किया जाता है — एक ही टेक्स्ट को दो बार एन्क्रिप्ट करने पर अलग परिणाम मिलते हैं।',
+                detLocal: '100% स्थानीय', detLocalDesc: 'Web Crypto API का उपयोग करता है। कोई सर्वर नहीं, कोई इंटरनेट आवश्यक नहीं। आपके ब्राउज़र से कुछ भी बाहर नहीं जाता है।',
+                footerText: '🔒 AES-256-GCM एन्क्रिप्शन — सभी स्थानीय, कुछ भी नहीं भेजा गया | SudhirDevOps1 द्वारा',
+                toastEnterText: 'पहले टेक्स्ट दर्ज करें', toastEnterKey: 'एक सीक्रेट की दर्ज करें',
+                toastEncSuccess: '✅ सफलतापूर्वक एन्क्रिप्ट किया गया!', toastDecSuccess: '✅ सफलतापूर्वक डिक्रिप्ट किया गया!',
+                toastCopied: '✅ कॉपी किया गया!', errDec: '❌ डिक्रिप्शन विफल — गलत की या अमान्य सिफरटेक्स्ट',
+                errEnc: '❌ एन्क्रिप्शन विफल: '
+            }
+        };
+
+        let currentLang = localStorage.getItem('appLang') || 'en';
+
+        function T(key) {
+            return (i18n[currentLang] && i18n[currentLang][key]) || (i18n['en'][key]) || key;
+        }
+
+        function applyLanguage() {
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                el.innerHTML = T(key);
+            });
+            document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+                el.placeholder = T(el.getAttribute('data-i18n-placeholder'));
+            });
+            document.body.className = 'lang-' + currentLang;
+            document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+            const activeBtn = document.getElementById('btn-' + currentLang);
+            if (activeBtn) activeBtn.classList.add('active');
+
+            // Re-label dynamic parts
+            const inpLab = document.getElementById('inputLabel');
+            const outLab = document.getElementById('outputLabel');
+            const procBtn = document.getElementById('processBtn');
+            const txtInp = document.getElementById('textInput');
+
+            if (mode === 'enc') {
+                inpLab.textContent = T('labelPlain');
+                procBtn.textContent = T('btnProcess');
+                txtInp.placeholder = T('placeholderText');
+                if (outLab.textContent.includes('Base64')) outLab.textContent = T('labelOutputB64');
+                else outLab.textContent = T('labelOutput');
+            } else {
+                inpLab.textContent = T('labelEnc');
+                procBtn.textContent = T('btnProcessDec');
+                txtInp.placeholder = T('placeholderTextDec');
+                outLab.textContent = T('labelOutputDec');
+            }
+        }
+
+        function setLang(lang) {
+            currentLang = lang;
+            localStorage.setItem('appLang', currentLang);
+            applyLanguage();
+        }
+
+        let mode = 'enc';
+        function setMode(m) {
+            mode = m;
+            document.getElementById('encBtn').className = 'mode-btn' + (m === 'enc' ? ' active' : '');
+            document.getElementById('decBtn').className = 'mode-btn' + (m === 'dec' ? ' active' : '');
+            applyLanguage();
+            clearAll();
+        }
+
+        async function deriveKey(password, salt) {
+            const enc = new TextEncoder();
+            const keyMaterial = await crypto.subtle.importKey('raw', enc.encode(password), { name: 'PBKDF2' }, false, ['deriveKey']);
+            return crypto.subtle.deriveKey({ name: 'PBKDF2', salt, iterations: 100000, hash: 'SHA-256' }, keyMaterial, { name: 'AES-GCM', length: 256 }, false, ['encrypt', 'decrypt']);
+        }
+
+        async function process() {
+            const text = document.getElementById('textInput').value.trim();
+            const key = document.getElementById('keyInput').value;
+            const outGroup = document.getElementById('outputGroup');
+            const outBox = document.getElementById('outputBox');
+            const errBox = document.getElementById('errorBox');
+            errBox.style.display = 'none';
+            outGroup.style.display = 'none';
+            if (!text) { showToast(T('toastEnterText'), 'error'); return; }
+            if (!key) { showToast(T('toastEnterKey'), 'error'); return; }
+            try {
+                if (mode === 'enc') {
+                    const salt = crypto.getRandomValues(new Uint8Array(16));
+                    const iv = crypto.getRandomValues(new Uint8Array(12));
+                    const k = await deriveKey(key, salt);
+                    const enc = new TextEncoder();
+                    const encrypted = await crypto.subtle.encrypt({ name: 'AES-GCM', iv }, k, enc.encode(text));
+                    const combined = new Uint8Array([...salt, ...iv, ...new Uint8Array(encrypted)]);
+                    const b64 = btoa(String.fromCharCode(...combined));
+                    outBox.textContent = b64;
+                    document.getElementById('outputLabel').textContent = T('labelOutputB64');
+                } else {
+                    const bytes = Uint8Array.from(atob(text), c => c.charCodeAt(0));
+                    const salt = bytes.slice(0, 16);
+                    const iv = bytes.slice(16, 28);
+                    const data = bytes.slice(28);
+                    const k = await deriveKey(key, salt);
+                    const decrypted = await crypto.subtle.decrypt({ name: 'AES-GCM', iv }, k, data);
+                    outBox.textContent = new TextDecoder().decode(decrypted);
+                    document.getElementById('outputLabel').textContent = T('labelOutputDec');
+                }
+                outGroup.style.display = 'block';
+                showToast(mode === 'enc' ? T('toastEncSuccess') : T('toastDecSuccess'), 'success');
+            } catch (e) {
+                errBox.style.display = 'block';
+                errBox.textContent = (mode === 'dec' ? T('errDec') : T('errEnc') + e.message);
+            }
+        }
+        function copyOutput() {
+            navigator.clipboard.writeText(document.getElementById('outputBox').textContent).then(() => showToast(T('toastCopied'), 'success'));
+        }
+        function downloadOutput() {
+            const text = document.getElementById('outputBox').textContent;
+            const blob = new Blob([text], { type: 'text/plain' });
+            const a = document.createElement('a'); a.href = URL.createObjectURL(blob);
+            a.download = mode === 'enc' ? 'encrypted.txt' : 'decrypted.txt'; a.click();
+        }
+        function clearAll() {
+            document.getElementById('textInput').value = '';
+            document.getElementById('keyInput').value = '';
+            document.getElementById('outputGroup').style.display = 'none';
+            document.getElementById('errorBox').style.display = 'none';
+        }
+        function toggleVis() {
+            const inp = document.getElementById('keyInput');
+            const btn = document.getElementById('visBtn');
+            inp.type = inp.type === 'password' ? 'text' : 'password';
+            btn.textContent = inp.type === 'password' ? '👁️' : '🙈';
+        }
+        function showToast(msg, type = 'success') {
+            const c = document.getElementById('toast-container');
+            const t = document.createElement('div');
+            t.className = `toast ${type}`; t.textContent = msg; c.appendChild(t);
+            setTimeout(() => { t.style.opacity = '0'; t.style.transition = 'all .3s'; setTimeout(() => t.remove(), 300); }, 2800);
+        }
+
+        applyLanguage();
+    </script>
+</body>
+
+</html>

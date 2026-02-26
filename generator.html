@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Password Generator — by SudhirDevOps1</title>
+    <link rel="stylesheet" href="shared.css">
+    <style>
+        .pw-display {
+            font-family: 'Courier New', monospace;
+            font-size: 20px;
+            font-weight: 700;
+            word-break: break-all;
+            letter-spacing: 2px;
+            padding: 20px;
+            background: rgba(255, 255, 255, .05);
+            border: 1px solid rgba(255, 255, 255, .12);
+            border-radius: 14px;
+            min-height: 70px;
+            color: #f1f5f9;
+            position: relative;
+            transition: all .3s;
+        }
+
+        .pw-display:hover {
+            border-color: #6366f1;
+        }
+
+        .char-upper {
+            color: #818cf8
+        }
+
+        .char-lower {
+            color: #34d399
+        }
+
+        .char-num {
+            color: #fbbf24
+        }
+
+        .char-sym {
+            color: #f472b6
+        }
+
+        .strength-label {
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .option-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, .06);
+        }
+
+        .option-row:last-child {
+            border-bottom: none;
+        }
+
+        .gen-actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .history-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 8px 12px;
+            background: rgba(255, 255, 255, .04);
+            border-radius: 8px;
+            font-family: monospace;
+            font-size: 13px;
+            gap: 8px;
+        }
+
+        .entropy-bar {
+            height: 4px;
+            border-radius: 2px;
+            transition: width .5s, background .5s;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="site-header">
+        <div class="inner">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">🔐</div>
+                <div>
+                    <div class="logo-title">Password Tools</div>
+                    <div class="logo-sub">by SudhirDevOps1</div>
+                </div>
+            </a>
+            <div class="breadcrumb">
+                <a href="index.html" data-i18n="navHome">🏠 Home</a> › <span data-i18n="navGenerator">🔑 Password
+                    Generator</span>
+            </div>
+            <div class="lang-toggle">
+                <button class="lang-btn" id="btn-en" onclick="setLang('en')">EN</button>
+                <button class="lang-btn" id="btn-hi" onclick="setLang('hi')">हिन्दी</button>
+            </div>
+            <div class="badge-secure"><span class="pulse"></span><span data-i18n="badgeSecure">Offline & Secure</span>
+            </div>
+        </div>
+    </header>
+    <main>
+        <a href="index.html" class="back-link" data-i18n="backHome">← Back to Tools</a>
+
+        <div class="card fade-up" style="margin-bottom:20px">
+            <div class="section-title" data-i18n="toolTitle">🔑 Password Generator</div>
+            <div class="section-sub" data-i18n="toolSub">Generate strong, secure, random passwords — 100% offline</div>
+
+            <!-- Generated Password Display -->
+            <div id="pwDisplay" class="pw-display" onclick="copyPassword()" data-i18n-title="clickCopy"
+                title="Click to copy" style="cursor:pointer;margin-bottom:16px;">
+                <span id="pwText" data-i18n="clickGen">Click Generate ↓</span>
+            </div>
+
+            <!-- Strength & Entropy -->
+            <div style="margin-bottom:18px">
+                <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
+                    <span id="strengthLabel" class="strength-label" style="color:#94a3b8">—</span>
+                    <span id="entropyLabel" style="font-size:12px;color:#64748b"></span>
+                </div>
+                <div class="strength-bar">
+                    <div id="strengthFill" class="strength-fill" style="width:0%;background:#374151"></div>
+                </div>
+            </div>
+
+            <!-- Options -->
+            <div class="card card-sm" style="margin-bottom:16px">
+                <div class="option-row">
+                    <span style="font-size:14px;font-weight:600"><span data-i18n="optLength">Length:</span> <span
+                            id="lenDisplay" style="color:#818cf8">16</span></span>
+                    <input type="range" id="lenSlider" class="range-slider" min="4" max="128" value="16"
+                        style="width:55%" oninput="onSlider()">
+                </div>
+                <div class="option-row">
+                    <label class="toggle-wrap"><input type="checkbox" id="inclUpper" checked onchange="generate()">
+                        <div class="toggle-track"></div><span style="font-size:13px"><span
+                                data-i18n="optUpper">Uppercase (A-Z)</span> <span class="char-upper">ABC</span></span>
+                    </label>
+                </div>
+                <div class="option-row">
+                    <label class="toggle-wrap"><input type="checkbox" id="inclLower" checked onchange="generate()">
+                        <div class="toggle-track"></div><span style="font-size:13px"><span
+                                data-i18n="optLower">Lowercase (a-z)</span> <span class="char-lower">abc</span></span>
+                    </label>
+                </div>
+                <div class="option-row">
+                    <label class="toggle-wrap"><input type="checkbox" id="inclNum" checked onchange="generate()">
+                        <div class="toggle-track"></div><span style="font-size:13px"><span data-i18n="optNum">Numbers
+                                (0-9)</span> <span class="char-num">123</span></span>
+                    </label>
+                </div>
+                <div class="option-row">
+                    <label class="toggle-wrap"><input type="checkbox" id="inclSym" onchange="generate()">
+                        <div class="toggle-track"></div><span style="font-size:13px"><span data-i18n="optSym">Symbols
+                                (!@#$)</span> <span class="char-sym">!@#</span></span>
+                    </label>
+                </div>
+                <div class="option-row">
+                    <label class="toggle-wrap"><input type="checkbox" id="noAmb" onchange="generate()">
+                        <div class="toggle-track"></div><span style="font-size:13px" data-i18n="optAmb">Exclude
+                            Ambiguous (0,O,l,1,I)</span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="gen-actions">
+                <button class="btn btn-primary" onclick="generate()" data-i18n="btnGen">⚡ Generate</button>
+                <button class="btn btn-outline" onclick="copyPassword()" data-i18n="btnCopy">📋 Copy</button>
+                <button class="btn btn-outline" onclick="generate10()" data-i18n="btnGen10">🔟 Generate 10</button>
+                <button class="btn btn-success" onclick="generate(); generate()" data-i18n="btnRegen">🔀
+                    Regenerate</button>
+            </div>
+        </div>
+
+        <!-- Bulk Generate -->
+        <div id="bulkSection" class="card fade-up" style="display:none;margin-bottom:20px">
+            <div style="font-size:14px;font-weight:700;margin-bottom:12px" data-i18n="bulkTitle">10 Random Passwords
+            </div>
+            <div id="bulkList" style="display:flex;flex-direction:column;gap:8px"></div>
+            <button class="btn btn-outline btn-sm" style="margin-top:12px" onclick="copyAllBulk()"
+                data-i18n="btnCopyAll">📋 Copy All</button>
+        </div>
+
+        <!-- History -->
+        <div class="card fade-up">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
+                <div style="font-size:14px;font-weight:700" data-i18n="histTitle">📜 History (last 10)</div>
+                <button class="btn btn-outline btn-sm" onclick="clearHistory()" data-i18n="btnHistoryClear">🗑
+                    Clear</button>
+            </div>
+            <div id="historyList" style="display:flex;flex-direction:column;gap:6px">
+                <div style="color:#475569;font-size:13px" data-i18n="histEmpty">Generate passwords to see history…</div>
+            </div>
+        </div>
+    </main>
+    <footer class="site-footer" data-i18n="footerText">🔒 100% Offline — No data leaves your device | by <strong
+            style="color:#818cf8">SudhirDevOps1</strong></footer>
+    <div id="toast-container"></div>
+    <script>
+        const UPPER = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        const LOWER = 'abcdefghijklmnopqrstuvwxyz';
+        const NUMS = '0123456789';
+        const SYMS = '!@#$%^&*()_+-=[]{}|;:,.<>?';
+        const AMB = '0Ol1I';
+
+        const i18n = {
+            en: {
+                navHome: '🏠 Home', navGenerator: '🔑 Password Generator', badgeSecure: 'Offline & Secure',
+                backHome: '← Back to Tools', toolTitle: '🔑 Password Generator',
+                toolSub: 'Generate strong, secure, random passwords — 100% offline',
+                clickCopy: 'Click to copy', clickGen: 'Click Generate ↓',
+                optLength: 'Length:', optUpper: 'Uppercase (A-Z)', optLower: 'Lowercase (a-z)', optNum: 'Numbers (0-9)', optSym: 'Symbols (!@#$)', optAmb: 'Exclude Ambiguous (0,O,l,1,I)',
+                btnGen: '⚡ Generate', btnCopy: '📋 Copy', btnGen10: '🔟 Generate 10', btnRegen: '🔀 Regenerate',
+                bulkTitle: '10 Random Passwords', btnCopyAll: '📋 Copy All',
+                histTitle: '📜 History (last 10)', btnHistoryClear: '🗑 Clear', histEmpty: 'Generate passwords to see history…',
+                footerText: '🔒 100% Offline — No data leaves your device | by SudhirDevOps1',
+                toastSelectType: '⚠️ Select at least one character type',
+                toastAllMsg: '✅ All copied!', toastClearHist: 'History cleared',
+                toastGenFirst: 'Generate a password first', toastCopied: '✅ Copied to clipboard!',
+                entropy: 'Entropy: ~{bits} bits',
+                sVeryWeak: 'Very Weak', sWeak: 'Weak', sFair: 'Fair', sStrong: 'Strong', sVeryStrong: 'Very Strong 💪'
+            },
+            hi: {
+                navHome: '🏠 होम', navGenerator: '🔑 पासवर्ड जनरेटर', badgeSecure: 'ऑफलाइन और सुरक्षित',
+                backHome: '← टूल्स पर वापस जाएं', toolTitle: '🔑 पासवर्ड जनरेटर',
+                toolSub: 'मजबूत, सुरक्षित, रैंडम पासवर्ड बनाएं — 100% ऑफलाइन',
+                clickCopy: 'कॉपी करने के लिए क्लिक करें', clickGen: 'जनरेट पर क्लिक करें ↓',
+                optLength: 'लंबाई:', optUpper: 'बड़े अक्षर (A-Z)', optLower: 'छोटे अक्षर (a-z)', optNum: 'संख्याएं (0-9)', optSym: 'प्रतीक (!@#$)', optAmb: 'अस्पष्ट कैरेक्टर निकालें (0,O,l,1,I)',
+                btnGen: '⚡ जनरेट करें', btnCopy: '📋 कॉपी करें', btnGen10: '🔟 10 जनरेट करें', btnRegen: '🔀 फिर से बनाएं',
+                bulkTitle: '10 रैंडम पासवर्ड', btnCopyAll: '📋 सभी कॉपी करें',
+                histTitle: '📜 इतिहास (अंतिम 10)', btnHistoryClear: '🗑 साफ करें', histEmpty: 'इतिहास देखने के लिए पासवर्ड बनाएं…',
+                footerText: '🔒 100% ऑफलाइन — कोई डेटा आपके डिवाइस से बाहर नहीं जाता है | SudhirDevOps1 द्वारा',
+                toastSelectType: '⚠️ कम से कम एक कैरेक्टर प्रकार चुनें',
+                toastAllMsg: '✅ सभी कॉपी किए गए!', toastClearHist: 'इतिहास साफ किया गया',
+                toastGenFirst: 'पहले पासवर्ड जनरेट करें', toastCopied: '✅ क्लिपबोर्ड पर कॉपी किया गया!',
+                entropy: 'एंट्रॉपी: ~{bits} बिट्स',
+                sVeryWeak: 'बहुत कमजोर', sWeak: 'कमजोर', sFair: 'ठीक है', sStrong: 'मजबूत', sVeryStrong: 'बहुत मजबूत 💪'
+            }
+        };
+
+        let currentLang = localStorage.getItem('appLang') || 'en';
+        let history = JSON.parse(localStorage.getItem('pwHistory') || '[]');
+
+        function T(key) {
+            return (i18n[currentLang] && i18n[currentLang][key]) || (i18n['en'][key]) || key;
+        }
+
+        function applyLanguage() {
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                el.textContent = T(key);
+            });
+            document.querySelectorAll('[data-i18n-title]').forEach(el => {
+                el.title = T(el.getAttribute('data-i18n-title'));
+            });
+            document.body.className = 'lang-' + currentLang;
+            document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+            const activeBtn = document.getElementById('btn-' + currentLang);
+            if (activeBtn) activeBtn.classList.add('active');
+
+            renderHistory();
+        }
+
+        function setLang(lang) {
+            currentLang = lang;
+            localStorage.setItem('appLang', currentLang);
+            applyLanguage();
+            generate();
+        }
+
+        function onSlider() {
+            document.getElementById('lenDisplay').textContent = document.getElementById('lenSlider').value;
+            generate();
+        }
+
+        function buildCharset() {
+            let c = '';
+            const noAmb = document.getElementById('noAmb').checked;
+            const filter = noAmb ? (ch => !AMB.includes(ch)) : (() => true);
+            if (document.getElementById('inclUpper').checked) c += [...UPPER].filter(filter).join('');
+            if (document.getElementById('inclLower').checked) c += [...LOWER].filter(filter).join('');
+            if (document.getElementById('inclNum').checked) c += [...NUMS].filter(filter).join('');
+            if (document.getElementById('inclSym').checked) c += SYMS;
+            return c;
+        }
+
+        function randomChar(charset) {
+            const arr = new Uint32Array(1);
+            crypto.getRandomValues(arr);
+            return charset[arr[0] % charset.length];
+        }
+
+        function generateOne() {
+            const len = parseInt(document.getElementById('lenSlider').value);
+            const charset = buildCharset();
+            if (!charset) {
+                showToast(T('toastSelectType'), 'error');
+                return '';
+            }
+            let pw = '';
+            for (let i = 0; i < len; i++) pw += randomChar(charset);
+            return pw;
+        }
+
+        function colorize(pw) {
+            return [...pw].map(c => {
+                if (UPPER.includes(c)) return `<span class="char-upper">${c}</span>`;
+                if (LOWER.includes(c)) return `<span class="char-lower">${c}</span>`;
+                if (NUMS.includes(c)) return `<span class="char-num">${c}</span>`;
+                return `<span class="char-sym">${c}</span>`;
+            }).join('');
+        }
+
+        function calcEntropy(pw) {
+            const charset = buildCharset();
+            return Math.round(pw.length * Math.log2(charset.length || 1));
+        }
+
+        function getStrength(entropy) {
+            if (entropy < 28) return { label: T('sVeryWeak'), color: '#ef4444', pct: 10 };
+            if (entropy < 35) return { label: T('sWeak'), color: '#f97316', pct: 25 };
+            if (entropy < 60) return { label: T('sFair'), color: '#eab308', pct: 50 };
+            if (entropy < 80) return { label: T('sStrong'), color: '#22c55e', pct: 75 };
+            return { label: T('sVeryStrong'), color: '#10b981', pct: 100 };
+        }
+
+        function generate() {
+            const pw = generateOne();
+            if (!pw) return;
+            const textEl = document.getElementById('pwText');
+            textEl.innerHTML = colorize(pw);
+            textEl.dataset.raw = pw;
+
+            const entropy = calcEntropy(pw);
+            const s = getStrength(entropy);
+
+            document.getElementById('strengthLabel').textContent = s.label;
+            document.getElementById('strengthLabel').style.color = s.color;
+            document.getElementById('strengthFill').style.width = s.pct + '%';
+            document.getElementById('strengthFill').style.background = s.color;
+            document.getElementById('entropyLabel').textContent = T('entropy').replace('{bits}', entropy);
+
+            addHistory(pw);
+        }
+
+        function generate10() {
+            const items = [];
+            for (let i = 0; i < 10; i++) {
+                const pw = generateOne();
+                if (pw) items.push(pw);
+            }
+            if (!items.length) return;
+
+            document.getElementById('bulkList').innerHTML = items.map((pw, i) => `
+                <div class="history-item">
+                    <span style="color:#64748b;min-width:18px">${i + 1}.</span>
+                    <span style="flex:1;font-size:12px;word-break:break-all">${colorize(pw)}</span>
+                    <button class="copy-btn" onclick="copyText(this.parentElement.children[1].textContent)">📋</button>
+                </div>
+            `).join('');
+            document.getElementById('bulkSection').style.display = 'block';
+        }
+
+        function copyAllBulk() {
+            const items = [...document.querySelectorAll('#bulkList .history-item')].map(el => el.querySelector('span:nth-child(2)').textContent);
+            navigator.clipboard.writeText(items.join('\n')).then(() => showToast(T('toastAllMsg'), 'success'));
+        }
+
+        function addHistory(pw) {
+            if (!pw) return;
+            if (history[0] === pw) return;
+            history.unshift(pw);
+            if (history.length > 10) history = history.slice(0, 10);
+            localStorage.setItem('pwHistory', JSON.stringify(history));
+            renderHistory();
+        }
+
+        function renderHistory() {
+            const el = document.getElementById('historyList');
+            if (!history.length) {
+                el.innerHTML = `<div style="color:#475569;font-size:13px" data-i18n="histEmpty">${T('histEmpty')}</div>`;
+                return;
+            }
+            el.innerHTML = history.map((pw, i) => `
+                <div class="history-item">
+                    <span style="color:#64748b;min-width:18px">${i + 1}.</span>
+                    <span style="flex:1;font-family:monospace;font-size:12px;word-break:break-all">${pw}</span>
+                    <button class="copy-btn" onclick="copyText('${pw}')">📋</button>
+                </div>
+            `).join('');
+        }
+
+        function clearHistory() {
+            history = [];
+            localStorage.removeItem('pwHistory');
+            renderHistory();
+            showToast(T('toastClearHist'), 'info');
+        }
+
+        function copyPassword() {
+            const el = document.getElementById('pwText');
+            const raw = el.dataset.raw || el.textContent;
+            if (!raw || raw === T('clickGen')) {
+                showToast(T('toastGenFirst'), 'error');
+                return;
+            }
+            copyText(raw);
+        }
+
+        function copyText(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                showToast(T('toastCopied'), 'success');
+            }).catch(() => {
+                const ta = document.createElement('textarea');
+                ta.value = text;
+                document.body.appendChild(ta);
+                ta.select();
+                document.execCommand('copy');
+                ta.remove();
+                showToast(T('toastCopied'), 'success');
+            });
+        }
+
+        function showToast(msg, type = 'success') {
+            const c = document.getElementById('toast-container');
+            const t = document.createElement('div');
+            t.className = `toast ${type}`;
+            t.textContent = msg;
+            c.appendChild(t);
+            setTimeout(() => {
+                t.style.opacity = '0';
+                t.style.transform = 'translateX(30px)';
+                t.style.transition = 'all .3s';
+                setTimeout(() => t.remove(), 300);
+            }, 2800);
+        }
+
+        applyLanguage();
+    </script>
+</body>
+
+</html>

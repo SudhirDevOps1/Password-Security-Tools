@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Password Stats — by SudhirDevOps1</title>
+    <link rel="stylesheet" href="shared.css">
+    <style>
+        .drop-zone {
+            border: 2px dashed rgba(255, 255, 255, .2);
+            border-radius: 16px;
+            padding: 48px 24px;
+            text-align: center;
+            cursor: pointer;
+            transition: all .3s;
+        }
+
+        .drop-zone:hover,
+        .drop-zone.over {
+            border-color: #06b6d4;
+            background: rgba(6, 182, 212, .06);
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, .04);
+            border: 1px solid rgba(255, 255, 255, .08);
+            border-radius: 14px;
+            padding: 18px;
+            text-align: center;
+        }
+
+        .big-num {
+            font-size: 36px;
+            font-weight: 900;
+        }
+
+        .bar-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 8px;
+        }
+
+        .bar-track {
+            flex: 1;
+            height: 8px;
+            background: #1f2937;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .bar-fill {
+            height: 100%;
+            border-radius: 4px;
+            transition: width .6s;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="site-header">
+        <div class="inner">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">🔐</div>
+                <div>
+                    <div class="logo-title">Password Tools</div>
+                    <div class="logo-sub">by SudhirDevOps1</div>
+                </div>
+            </a>
+            <div class="breadcrumb">
+                <a href="index.html" data-i18n="navHome">🏠 Home</a> › <span data-i18n="navStats">📊 Password
+                    Stats</span>
+            </div>
+            <div class="lang-toggle">
+                <button class="lang-btn" id="btn-en" onclick="setLang('en')">EN</button>
+                <button class="lang-btn" id="btn-hi" onclick="setLang('hi')">हिन्दी</button>
+            </div>
+            <div class="badge-secure"><span class="pulse"></span><span data-i18n="badgeSecure">Offline & Secure</span>
+            </div>
+        </div>
+    </header>
+    <main>
+        <a href="index.html" class="back-link" data-i18n="backHome">← Back to Tools</a>
+
+        <div class="card fade-up" style="margin-bottom:20px">
+            <div class="section-title" data-i18n="toolTitle">📊 Password Statistics & Analysis</div>
+            <div class="section-sub" data-i18n="toolSub">Deep analysis of your password vault — strength distribution,
+                patterns, and more</div>
+            <div class="drop-zone" id="dropZone" onclick="document.getElementById('csvInput').click()">
+                <div style="font-size:48px;margin-bottom:12px">📂</div>
+                <div style="font-size:16px;font-weight:700;margin-bottom:6px" data-i18n="dropTitle">Drop CSV or Click to
+                    Upload</div>
+                <div style="font-size:13px;color:#64748b" data-i18n="dropDesc">Upload your browser/password manager CSV
+                    export</div>
+                <input type="file" id="csvInput" accept=".csv,.txt" style="display:none">
+            </div>
+        </div>
+
+        <div id="statsSection" style="display:none">
+            <!-- Overview Grid -->
+            <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px" id="overviewGrid">
+            </div>
+
+            <!-- Strength Distribution -->
+            <div class="card fade-up" style="margin-bottom:20px">
+                <div style="font-weight:700;font-size:15px;margin-bottom:16px" data-i18n="strengthTitle">💪 Strength
+                    Distribution</div>
+                <div id="strengthBars"></div>
+            </div>
+
+            <!-- Length Distribution -->
+            <div class="card fade-up" style="margin-bottom:20px">
+                <div style="font-weight:700;font-size:15px;margin-bottom:16px" data-i18n="lengthTitle">📏 Length
+                    Breakdown</div>
+                <div id="lengthBars"></div>
+            </div>
+
+            <!-- Weak Passwords -->
+            <div class="card fade-up" style="margin-bottom:20px" id="weakCard">
+                <div
+                    style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:8px">
+                    <div style="font-weight:700;font-size:15px;color:#fb7185" data-i18n="weakTitle">⚠️ Weak / Short
+                        Passwords</div>
+                    <span class="chip chip-red" id="weakCount"></span>
+                </div>
+                <div class="tbl-wrap">
+                    <table class="tbl">
+                        <thead>
+                            <tr>
+                                <th data-i18n="thNum">#</th>
+                                <th data-i18n="thName">Name / URL</th>
+                                <th data-i18n="thUser">Username</th>
+                                <th data-i18n="thIssue">Issue</th>
+                            </tr>
+                        </thead>
+                        <tbody id="weakList"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Download Report -->
+            <div style="display:flex;gap:10px;flex-wrap:wrap">
+                <button class="btn btn-primary" onclick="downloadReport('txt')" data-i18n="btnDownload">📝 Download TXT
+                    Report</button>
+                <button class="btn btn-outline" onclick="clearData()" data-i18n="btnClear">✕ Clear</button>
+            </div>
+        </div>
+    </main>
+    <footer class="site-footer" data-i18n="footerText">🔒 100% Offline — No data leaves your device | by <strong
+            style="color:#818cf8">SudhirDevOps1</strong></footer>
+    <div id="toast-container"></div>
+    <script>
+        const i18n = {
+            en: {
+                navHome: '🏠 Home', navStats: '📊 Password Stats', badgeSecure: 'Offline & Secure',
+                backHome: '← Back to Tools', toolTitle: '📊 Password Statistics & Analysis',
+                toolSub: 'Deep analysis of your password vault — strength distribution, patterns, and more',
+                dropTitle: 'Drop CSV or Click to Upload', dropDesc: 'Upload your browser/password manager CSV export',
+                strengthTitle: '💪 Strength Distribution', lengthTitle: '📏 Length Breakdown',
+                weakTitle: '⚠️ Weak / Short Passwords', btnDownload: '📝 Download TXT Report', btnClear: '✕ Clear',
+                thNum: '#', thName: 'Name / URL', thUser: 'Username', thIssue: 'Issue',
+                footerText: '🔒 100% Offline — No data leaves your device | by SudhirDevOps1',
+                statTotal: 'Total Passwords', statAvgLen: 'Avg Length', statAvgScore: 'Avg Score',
+                statReused: 'Reused Passwords', toastNoData: 'No data', toastNoPW: 'No passwords found',
+                toastDone: '✅ Analysis complete: {n} passwords', toastReport: '✅ Report downloaded',
+                strengthVW: 'Very Weak (0-24)', strengthW: 'Weak (25-49)', strengthF: 'Fair (50-69)', strengthS: 'Strong (70-100)',
+                lenS: '< 8 chars', lenM: '8-11 chars', lenL: '12-15 chars', lenXL: '16-19 chars', lenXXL: '20+ chars',
+                chipVW: 'Very Weak', chipW: 'Weak', chipFound: '{n} found'
+            },
+            hi: {
+                navHome: '🏠 होम', navStats: '📊 पासवर्ड आंकड़े', badgeSecure: 'ऑफलाइन और सुरक्षित',
+                backHome: '← टूल्स पर वापस जाएं', toolTitle: '📊 पासवर्ड आंकड़े और विश्लेषण',
+                toolSub: 'आपके पासवर्ड वॉल्ट का गहरा विश्लेषण — ताकत वितरण, पैटर्न, और अधिक',
+                dropTitle: 'CSV छोड़ें या अपलोड करने के लिए क्लिक करें', dropDesc: 'अपने ब्राउज़र/पासवर्ड मैनेजर CSV निर्यात को अपलोड करें',
+                strengthTitle: '💪 ताकत वितरण', lengthTitle: '📏 लंबाई विवरण',
+                weakTitle: '⚠️ कमजोर / छोटे पासवर्ड', btnDownload: '📝 TXT रिपोर्ट डाउनलोड करें', btnClear: '✕ साफ़ करें',
+                thNum: '#', thName: 'नाम / URL', thUser: 'यूजरनेम', thIssue: 'समस्या',
+                footerText: '🔒 100% ऑफलाइन — आपके डिवाइस से कोई डेटा बाहर नहीं जाता है | SudhirDevOps1 द्वारा',
+                statTotal: 'कुल पासवर्ड', statAvgLen: 'औसत लंबाई', statAvgScore: 'औसत स्कोर',
+                statReused: 'पुन: उपयोग किए गए', toastNoData: 'कोई डेटा नहीं', toastNoPW: 'कोई पासवर्ड नहीं मिला',
+                toastDone: '✅ विश्लेषण पूरा: {n} पासवर्ड', toastReport: '✅ रिपोर्ट डाउनलोड की गई',
+                strengthVW: 'बहुत कमजोर (0-24)', strengthW: 'कमजोर (25-49)', strengthF: 'ठीक (50-69)', strengthS: 'मजबूत (70-100)',
+                lenS: '< 8 वर्ण', lenM: '8-11 वर्ण', lenL: '12-15 वर्ण', lenXL: '16-19 वर्ण', lenXXL: '20+ वर्ण',
+                chipVW: 'बहुत कमजोर', chipW: 'कमजोर', chipFound: '{n} मिले'
+            }
+        };
+
+        let currentLang = localStorage.getItem('appLang') || 'en';
+
+        function T(key) {
+            return (i18n[currentLang] && i18n[currentLang][key]) || (i18n['en'][key]) || key;
+        }
+
+        function applyLanguage() {
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                el.innerHTML = T(key);
+            });
+            document.body.className = 'lang-' + currentLang;
+            document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+            const activeBtn = document.getElementById('btn-' + currentLang);
+            if (activeBtn) activeBtn.classList.add('active');
+
+            if (allData.length) renderStats();
+        }
+
+        function setLang(lang) {
+            currentLang = lang;
+            localStorage.setItem('appLang', currentLang);
+            applyLanguage();
+        }
+
+        let allData = [];
+        const dz = document.getElementById('dropZone');
+        dz.addEventListener('dragover', e => { e.preventDefault(); dz.classList.add('over'); });
+        dz.addEventListener('dragleave', () => dz.classList.remove('over'));
+        dz.addEventListener('drop', e => { e.preventDefault(); dz.classList.remove('over'); const f = e.dataTransfer.files[0]; if (f) loadFile(f); });
+        document.getElementById('csvInput').addEventListener('change', e => { if (e.target.files[0]) loadFile(e.target.files[0]); });
+        function loadFile(f) { const r = new FileReader(); r.onload = e => { parse(e.target.result); }; r.readAsText(f, 'UTF-8'); }
+        function parseCSVLine(l) { const r = []; let c = ''; let q = false; for (let i = 0; i < l.length; i++) { const ch = l[i]; if (ch === '"') { if (q && l[i + 1] === '"') { c += '"'; i++; } else q = !q; } else if (ch === ',' && !q) { r.push(c); c = ''; } else c += ch; } r.push(c); return r; }
+
+        function getPW(row) { for (const k of Object.keys(row)) { if (/pass|pwd|secret/i.test(k)) return row[k] || ''; } return ''; }
+        function getField(row, ...keys) { for (const k of keys) { for (const rk of Object.keys(row)) { if (rk.toLowerCase().includes(k)) return row[rk] || ''; } } return ''; }
+
+        function scorePassword(pw) {
+            if (!pw) return 0;
+            let s = 0;
+            if (pw.length >= 8) s += 10; if (pw.length >= 12) s += 15; if (pw.length >= 16) s += 10;
+            if (/[A-Z]/.test(pw)) s += 10; if (/[a-z]/.test(pw)) s += 10;
+            if (/[0-9]/.test(pw)) s += 10; if (/[^a-zA-Z0-9]/.test(pw)) s += 15;
+            if (!/(.)\1\1/.test(pw)) s += 5;
+            if (!/(password|123|qwerty|admin)/i.test(pw)) s += 10;
+            return Math.min(100, s);
+        }
+
+        function parse(text) {
+            const lines = text.replace(/\r\n/g, '\n').replace(/\r/g, '\n').split('\n').filter(l => l.trim());
+            if (lines.length < 2) { showToast(T('toastNoData'), 'error'); return; }
+            const headers = parseCSVLine(lines[0]);
+            allData = [];
+            for (let i = 1; i < lines.length; i++) {
+                const vals = parseCSVLine(lines[i]);
+                if (vals.some(v => v.trim())) {
+                    const row = {}; headers.forEach((h, idx) => { row[h] = vals[idx] || ''; });
+                    const pw = getPW(row);
+                    if (pw) allData.push({
+                        name: getField(row, 'name', 'title', 'website') || getField(row, 'url', 'origin', 'hostname') || 'Unknown',
+                        url: getField(row, 'url', 'origin', 'hostname', 'website'),
+                        user: getField(row, 'username', 'login', 'user', 'email', 'id'),
+                        pass: pw, score: scorePassword(pw)
+                    });
+                }
+            }
+            renderStats();
+        }
+
+        function renderStats() {
+            if (!allData.length) { showToast(T('toastNoPW'), 'error'); return; }
+            document.getElementById('statsSection').style.display = 'block';
+            const total = allData.length;
+            const pwLens = allData.map(e => e.pass.length);
+            const avgLen = (pwLens.reduce((a, b) => a + b, 0) / total).toFixed(1);
+            const scores = allData.map(e => e.score);
+            const avgScore = (scores.reduce((a, b) => a + b, 0) / total).toFixed(0);
+            const veryWeak = allData.filter(e => e.score < 25).length;
+            const weak = allData.filter(e => e.score >= 25 && e.score < 50).length;
+            const fair = allData.filter(e => e.score >= 50 && e.score < 70).length;
+            const strong = allData.filter(e => e.score >= 70).length;
+            // Duplicates
+            const passCounts = {}; allData.forEach(e => { passCounts[e.pass] = (passCounts[e.pass] || 0) + 1; });
+            const dupCount = Object.values(passCounts).filter(c => c > 1).reduce((s, c) => s + c, 0);
+
+            document.getElementById('overviewGrid').innerHTML = [
+                { num: total, label: T('statTotal'), color: '#818cf8' },
+                { num: avgLen, label: T('statAvgLen'), color: '#34d399' },
+                { num: avgScore + '%', label: T('statAvgScore'), color: '#fbbf24' },
+                { num: dupCount, label: T('statReused'), color: '#fb7185' },
+            ].map(s => `<div class="stat-card"><div class="big-num" style="color:${s.color}">${s.num}</div><div style="font-size:12px;color:#64748b;margin-top:4px">${s.label}</div></div>`).join('');
+
+            // Strength bars
+            const strs = [
+                { label: T('strengthVW'), count: veryWeak, color: '#ef4444' },
+                { label: T('strengthW'), count: weak, color: '#f97316' },
+                { label: T('strengthF'), count: fair, color: '#eab308' },
+                { label: T('strengthS'), count: strong, color: '#10b981' },
+            ];
+            document.getElementById('strengthBars').innerHTML = strs.map(s => `
+    <div class="bar-row">
+      <span style="min-width:120px;font-size:12px;color:#94a3b8">${s.label}</span>
+      <div class="bar-track"><div class="bar-fill" style="width:${total ? Math.round(s.count / total * 100) : 0}%;background:${s.color}"></div></div>
+      <span style="min-width:40px;text-align:right;font-size:13px;font-weight:700;color:${s.color}">${s.count}</span>
+    </div>`).join('');
+
+            // Length distribution
+            const lenBuckets = [
+                { label: T('lenS'), filter: p => p.length < 8, color: '#ef4444' },
+                { label: T('lenM'), filter: p => p.length >= 8 && p.length < 12, color: '#f97316' },
+                { label: T('lenL'), filter: p => p.length >= 12 && p.length < 16, color: '#eab308' },
+                { label: T('lenXL'), filter: p => p.length >= 16 && p.length < 20, color: '#22c55e' },
+                { label: T('lenXXL'), filter: p => p.length >= 20, color: '#10b981' },
+            ];
+            document.getElementById('lengthBars').innerHTML = lenBuckets.map(b => {
+                const cnt = allData.filter(e => b.filter(e.pass)).length;
+                return `<div class="bar-row">
+      <span style="min-width:80px;font-size:12px;color:#94a3b8">${b.label}</span>
+      <div class="bar-track"><div class="bar-fill" style="width:${total ? Math.round(cnt / total * 100) : 0}%;background:${b.color}"></div></div>
+      <span style="min-width:40px;text-align:right;font-size:13px;font-weight:700;color:${b.color}">${cnt}</span>
+    </div>`;
+            }).join('');
+
+            // Weak passwords list
+            const weakEntries = allData.filter(e => e.score < 50).slice(0, 20);
+            document.getElementById('weakCount').textContent = T('chipFound').replace('{n}', allData.filter(e => e.score < 50).length);
+            document.getElementById('weakList').innerHTML = weakEntries.map((e, i) => `
+    <tr>
+      <td style="color:#475569">${i + 1}</td>
+      <td>${escH(e.name)}</td>
+      <td style="color:#94a3b8">${escH(e.user)}</td>
+      <td><span class="chip ${e.score < 25 ? 'chip-red' : 'chip-amber'}">${e.score < 25 ? T('chipVW') : T('chipW')} (${e.score}%)</span></td>
+    </tr>`).join('');
+
+            showToast(T('toastDone').replace('{n}', total), 'success');
+        }
+
+        function downloadReport(type) {
+            const lines = [];
+            lines.push('PASSWORD VAULT ANALYSIS');
+            lines.push('by SudhirDevOps1');
+            lines.push('='.repeat(50));
+            lines.push(`Date: ${new Date().toLocaleString()}`);
+            lines.push(`Total: ${allData.length} passwords`);
+            lines.push('');
+            lines.push('WEAK PASSWORDS (requiring attention):');
+            allData.filter(e => e.score < 50).forEach((e, i) => {
+                lines.push(`${i + 1}. ${e.name} | ${e.user} | Score: ${e.score}%`);
+            });
+            const blob = new Blob([lines.join('\n')], { type: 'text/plain' });
+            const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'password_analysis.txt'; a.click();
+            showToast(T('toastReport'), 'success');
+        }
+        function clearData() { allData = []; document.getElementById('statsSection').style.display = 'none'; document.getElementById('csvInput').value = ''; }
+        function escH(s) { const d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
+        function showToast(msg, type = 'success') { const c = document.getElementById('toast-container'); const t = document.createElement('div'); t.className = `toast ${type}`; t.textContent = msg; c.appendChild(t); setTimeout(() => { t.style.opacity = '0'; t.style.transition = 'all .3s'; setTimeout(() => t.remove(), 300); }, 2800); }
+
+        applyLanguage();
+    </script>
+</body>
+
+</html>

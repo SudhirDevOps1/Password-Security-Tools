@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>CSV Viewer — by SudhirDevOps1</title>
+    <link rel="stylesheet" href="shared.css">
+    <style>
+        .drop-zone {
+            border: 2px dashed rgba(255, 255, 255, .2);
+            border-radius: 16px;
+            padding: 48px 24px;
+            text-align: center;
+            cursor: pointer;
+            transition: all .3s;
+        }
+
+        .drop-zone:hover,
+        .drop-zone.over {
+            border-color: #6366f1;
+            background: rgba(99, 102, 241, .08);
+        }
+
+        .col-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 3px 10px;
+            border-radius: 999px;
+            font-size: 11px;
+            font-weight: 600;
+            background: rgba(99, 102, 241, .2);
+            color: #818cf8;
+            margin: 2px;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="site-header">
+        <div class="inner">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">🔐</div>
+                <div>
+                    <div class="logo-title">Password Tools</div>
+                    <div class="logo-sub">by SudhirDevOps1</div>
+                </div>
+            </a>
+            <div class="breadcrumb">
+                <a href="index.html" data-i18n="navHome">🏠 Home</a> › <span data-i18n="navCSV">📋 CSV Viewer</span>
+            </div>
+            <div class="lang-toggle">
+                <button class="lang-btn" id="btn-en" onclick="setLang('en')">EN</button>
+                <button class="lang-btn" id="btn-hi" onclick="setLang('hi')">हिन्दी</button>
+            </div>
+            <div class="badge-secure"><span class="pulse"></span><span data-i18n="badgeSecure">Offline & Secure</span>
+            </div>
+        </div>
+    </header>
+    <main>
+        <a href="index.html" class="back-link" data-i18n="backHome">← Back to Tools</a>
+
+        <div class="card fade-up" style="margin-bottom:20px">
+            <div class="section-title" data-i18n="toolTitle">📋 CSV Password Viewer</div>
+            <div class="section-sub" data-i18n="toolSub">View your browser-exported CSV file directly — nothing is
+                uploaded, all local</div>
+
+            <div class="drop-zone" id="dropZone" onclick="document.getElementById('csvInput').click()">
+                <div style="font-size:48px;margin-bottom:12px">📂</div>
+                <div style="font-size:16px;font-weight:700;margin-bottom:6px" data-i18n="dropTitle">Drop CSV File or
+                    Click to Upload</div>
+                <div style="font-size:13px;color:#64748b" data-i18n="dropDesc">Supports Chrome, Edge, Firefox, Safari,
+                    Brave, DuckDuckGo, KeePass, Bitwarden & more</div>
+                <input type="file" id="csvInput" accept=".csv,.txt" style="display:none">
+            </div>
+        </div>
+
+        <div id="mainSection" style="display:none">
+            <!-- File Info -->
+            <div class="card fade-up"
+                style="margin-bottom:16px;background:rgba(16,185,129,.06);border-color:rgba(16,185,129,.2)">
+                <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px">
+                    <div style="display:flex;align-items:center;gap:12px">
+                        <span style="font-size:28px">✅</span>
+                        <div>
+                            <div id="fileName" style="font-weight:700;color:#34d399"></div>
+                            <div id="fileStats" style="font-size:12px;color:#64748b;margin-top:2px"></div>
+                        </div>
+                    </div>
+                    <button class="btn btn-outline btn-sm" onclick="clearFile()" data-i18n="btnClear">✕ Clear</button>
+                </div>
+            </div>
+
+            <!-- Controls -->
+            <div class="card fade-up" style="margin-bottom:16px">
+                <div style="display:grid;grid-template-columns:1fr 1fr auto;gap:12px;align-items:end;flex-wrap:wrap">
+                    <div><label class="input-label" data-i18n="labelSearch">🔍 Search</label><input type="text"
+                            id="searchInput" class="inp" data-i18n-placeholder="placeholderSearch"
+                            placeholder="Search any field…" oninput="filterTable()"></div>
+                    <div><label class="input-label" data-i18n="labelView">👁️ Passwords</label>
+                        <select id="maskMode" class="inp" onchange="renderTable()">
+                            <option value="show" data-i18n="optShow">🔓 Show All</option>
+                            <option value="mask" data-i18n="optMask">🔒 Masked (••••)</option>
+                            <option value="partial" data-i18n="optPartial">🔑 Partial (ab••)</option>
+                        </select>
+                    </div>
+                    <button class="btn btn-outline btn-sm" onclick="toggleAll()" id="visToggle"
+                        data-i18n="btnHideAll">🙈 Hide All</button>
+                </div>
+            </div>
+
+            <!-- Table -->
+            <div class="card fade-up" style="margin-bottom:16px">
+                <div
+                    style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:8px">
+                    <div style="font-weight:700">📊 <span id="rowLabel">0 entries</span></div>
+                    <div style="display:flex;gap:8px;flex-wrap:wrap">
+                        <button class="btn btn-success btn-sm" onclick="exportFiltered('json')" data-i18n="btnJSON">📦
+                            JSON</button>
+                        <button class="btn btn-outline btn-sm" onclick="exportFiltered('txt')" data-i18n="btnTXT">📝
+                            TXT</button>
+                    </div>
+                </div>
+                <div class="tbl-wrap">
+                    <table class="tbl">
+                        <thead>
+                            <tr id="tableHead"></tr>
+                        </thead>
+                        <tbody id="tableBody"></tbody>
+                    </table>
+                </div>
+                <div
+                    style="display:flex;align-items:center;justify-content:space-between;margin-top:12px;font-size:13px;color:#64748b">
+                    <span id="pageInfo"></span>
+                    <div style="display:flex;gap:8px">
+                        <button class="btn btn-outline btn-sm" onclick="prevPage()" id="prevBtn" data-i18n="btnPrev">←
+                            Prev</button>
+                        <button class="btn btn-outline btn-sm" onclick="nextPage()" id="nextBtn"
+                            data-i18n="btnNext">Next →</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer class="site-footer" data-i18n="footerText">🔒 100% Offline — No data leaves your device | by <strong
+            style="color:#818cf8">SudhirDevOps1</strong></footer>
+    <div id="toast-container"></div>
+    <script>
+        const i18n = {
+            en: {
+                navHome: '🏠 Home', navCSV: '📋 CSV Viewer', badgeSecure: 'Offline & Secure',
+                backHome: '← Back to Tools', toolTitle: '📋 CSV Password Viewer',
+                toolSub: 'View your browser-exported CSV file directly — nothing is uploaded, all local',
+                dropTitle: 'Drop CSV File or Click to Upload',
+                dropDesc: 'Supports Chrome, Edge, Firefox, Safari, Brave, DuckDuckGo, KeePass, Bitwarden & more',
+                btnClear: '✕ Clear', labelSearch: '🔍 Search', placeholderSearch: 'Search any field…',
+                labelView: '👁️ Passwords', optShow: '🔓 Show All', optMask: '🔒 Masked (••••)',
+                optPartial: '🔑 Partial (ab••)', btnHideAll: '🙈 Hide All', btnShowAll: '👁️ Show All',
+                btnJSON: '📦 JSON', btnTXT: '📝 TXT', btnPrev: '← Prev', btnNext: 'Next →',
+                footerText: '🔒 100% Offline — No data leaves your device | by SudhirDevOps1',
+                toastNoData: 'No data found in CSV', toastLoaded: '✅ {n} entries loaded',
+                toastExported: '✅ Exported!', entries: '{n} entries', noResults: 'No results',
+                pageInfo: 'Page {c} of {t}', stats: '{n} entries · {s} KB · {c} columns'
+            },
+            hi: {
+                navHome: '🏠 होम', navCSV: '📋 CSV व्यूअर', badgeSecure: 'ऑफलाइन और सुरक्षित',
+                backHome: '← टूल्स पर वापस जाएं', toolTitle: '📋 CSV पासवर्ड व्यूअर',
+                toolSub: 'अपनी ब्राउज़र-निर्यातित CSV फ़ाइल सीधे देखें — कुछ भी अपलोड नहीं किया गया है, सब स्थानीय है',
+                dropTitle: 'CSV फ़ाइल छोड़ें या अपलोड करने के लिए क्लिक करें',
+                dropDesc: 'Chrome, Edge, Firefox, Safari, Brave, DuckDuckGo, KeePass, Bitwarden और अन्य को सपोर्ट करता है',
+                btnClear: '✕ साफ़ करें', labelSearch: '🔍 खोजें', placeholderSearch: 'किसी भी फ़ील्ड में खोजें…',
+                labelView: '👁️ पासवर्ड', optShow: '🔓 सभी दिखाएं', optMask: '🔒 मास्क किया हुआ (••••)',
+                optPartial: '🔑 आंशिक (ab••)', btnHideAll: '🙈 सभी छिपाएं', btnShowAll: '👁️ सभी दिखाएं',
+                btnJSON: '📦 JSON', btnTXT: '📝 TXT', btnPrev: '← पिछला', btnNext: 'अगला →',
+                footerText: '🔒 100% ऑफलाइन — आपके डिवाइस से कोई डेटा बाहर नहीं जाता है | SudhirDevOps1 द्वारा',
+                toastNoData: 'CSV में कोई डेटा नहीं मिला', toastLoaded: '✅ {n} प्रविष्टियां लोड की गईं',
+                toastExported: '✅ निर्यात किया गया!', entries: '{n} प्रविष्टियां', noResults: 'कोई परिणाम नहीं',
+                pageInfo: 'पृष्ठ {c} का {t}', stats: '{n} प्रविष्टियां · {s} KB · {c} कॉलम'
+            }
+        };
+
+        let currentLang = localStorage.getItem('appLang') || 'en';
+
+        function T(key) {
+            return (i18n[currentLang] && i18n[currentLang][key]) || (i18n['en'][key]) || key;
+        }
+
+        function applyLanguage() {
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                el.innerHTML = T(key);
+            });
+            document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+                el.placeholder = T(el.getAttribute('data-i18n-placeholder'));
+            });
+            document.body.className = 'lang-' + currentLang;
+            document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+            const activeBtn = document.getElementById('btn-' + currentLang);
+            if (activeBtn) activeBtn.classList.add('active');
+
+            if (allData.length) {
+                const total = filtered.length;
+                const totalPages = Math.max(1, Math.ceil(total / PAGE));
+                document.getElementById('rowLabel').textContent = T('entries').replace('{n}', total);
+                document.getElementById('pageInfo').textContent = T('pageInfo').replace('{c}', currentPage).replace('{t}', totalPages);
+                const visBtn = document.getElementById('visToggle');
+                const mode = document.getElementById('maskMode').value;
+                visBtn.textContent = mode === 'show' ? T('btnHideAll') : T('btnShowAll');
+            }
+        }
+
+        function setLang(lang) {
+            currentLang = lang;
+            localStorage.setItem('appLang', currentLang);
+            applyLanguage();
+            if (allData.length) renderTable();
+        }
+
+        let allData = [], headers = [], filtered = [], currentPage = 1;
+        const PAGE = 50;
+        const dz = document.getElementById('dropZone');
+        dz.addEventListener('dragover', e => { e.preventDefault(); dz.classList.add('over'); });
+        dz.addEventListener('dragleave', () => dz.classList.remove('over'));
+        dz.addEventListener('drop', e => { e.preventDefault(); dz.classList.remove('over'); const f = e.dataTransfer.files[0]; if (f) loadFile(f); });
+        document.getElementById('csvInput').addEventListener('change', e => { if (e.target.files[0]) loadFile(e.target.files[0]); });
+
+        function loadFile(file) {
+            const r = new FileReader();
+            r.onload = e => {
+                try { parseCSV(e.target.result, file); } catch (err) { showToast('Error: ' + err.message, 'error'); }
+            }; r.readAsText(file, 'UTF-8');
+        }
+        function parseCSV(text, file) {
+            const lines = text.replace(/\r\n/g, '\n').replace(/\r/g, '\n').split('\n').filter(l => l.trim());
+            if (lines.length < 2) { showToast(T('toastNoData'), 'error'); return; }
+            headers = parseCSVLine(lines[0]);
+            allData = [];
+            for (let i = 1; i < lines.length; i++) {
+                const vals = parseCSVLine(lines[i]);
+                if (vals.some(v => v.trim())) {
+                    const row = {}; headers.forEach((h, idx) => { row[h] = vals[idx] || ''; });
+                    allData.push(row);
+                }
+            }
+            filtered = [...allData];
+            document.getElementById('mainSection').style.display = 'block';
+            document.getElementById('fileName').textContent = file.name;
+            document.getElementById('fileStats').textContent = T('stats')
+                .replace('{n}', allData.length)
+                .replace('{s}', (file.size / 1024).toFixed(1))
+                .replace('{c}', headers.length);
+            renderHead(); renderTable();
+            showToast(T('toastLoaded').replace('{n}', allData.length), 'success');
+        }
+        function parseCSVLine(line) {
+            const r = []; let cur = ''; let inQ = false;
+            for (let i = 0; i < line.length; i++) {
+                const c = line[i];
+                if (c === '"') { if (inQ && line[i + 1] === '"') { cur += '"'; i++; } else inQ = !inQ; }
+                else if (c === ',' && !inQ) { r.push(cur); cur = ''; }
+                else cur += c;
+            } r.push(cur); return r;
+        }
+        const PWD_COLS = ['password', 'pass', 'login_password', 'pwd', 'secret'];
+        function isPwdCol(h) { return PWD_COLS.some(p => h.toLowerCase().includes(p)); }
+        function maskPass(v, mode) {
+            if (mode === 'mask') return '••••••••';
+            if (mode === 'partial') return v.length > 2 ? v.substring(0, 2) + '••••••' : '••••••';
+            return v;
+        }
+        function renderHead() {
+            document.getElementById('tableHead').innerHTML =
+                `<th>#</th>` + headers.map(h => `<th>${escH(h)}</th>`).join('');
+        }
+        function renderTable() {
+            const mode = document.getElementById('maskMode').value;
+            const total = filtered.length;
+            const totalPages = Math.max(1, Math.ceil(total / PAGE));
+            if (currentPage > totalPages) currentPage = totalPages;
+            const start = (currentPage - 1) * PAGE;
+            const page = filtered.slice(start, start + PAGE);
+            document.getElementById('rowLabel').textContent = T('entries').replace('{n}', total);
+            document.getElementById('pageInfo').textContent = T('pageInfo').replace('{c}', currentPage).replace('{t}', totalPages);
+            document.getElementById('prevBtn').disabled = currentPage <= 1;
+            document.getElementById('nextBtn').disabled = currentPage >= totalPages;
+            const tbody = document.getElementById('tableBody');
+            if (!page.length) { tbody.innerHTML = `<tr><td colspan="${headers.length + 1}" style="text-align:center;padding:24px;color:#475569">${T('noResults')}</td></tr>`; return; }
+            tbody.innerHTML = page.map((row, i) => `<tr><td style="color:#475569">${start + i + 1}</td>${headers.map(h => {
+                let v = row[h] || '';
+                if (isPwdCol(h) && mode !== 'show') v = maskPass(v, mode);
+                return `<td style="max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;${isPwdCol(h) ? 'font-family:monospace;color:#fbbf24' : ''}">${escH(v) || '<span style="color:#374151">—</span>'}</td>`;
+            }).join('')}</tr>`).join('');
+        }
+        function filterTable() {
+            const q = document.getElementById('searchInput').value.toLowerCase();
+            filtered = q ? allData.filter(r => Object.values(r).some(v => v.toLowerCase().includes(q))) : [...allData];
+            currentPage = 1; renderTable();
+        }
+        function prevPage() { if (currentPage > 1) { currentPage--; renderTable(); } }
+        function nextPage() {
+            const total = Math.max(1, Math.ceil(filtered.length / PAGE));
+            if (currentPage < total) { currentPage++; renderTable(); }
+        }
+        function toggleAll() {
+            const sel = document.getElementById('maskMode');
+            sel.value = sel.value === 'show' ? 'mask' : 'show';
+            document.getElementById('visToggle').textContent = sel.value === 'show' ? T('btnHideAll') : T('btnShowAll');
+            renderTable();
+        }
+        function exportFiltered(type) {
+            const mode = document.getElementById('maskMode').value;
+            if (type === 'json') {
+                const out = filtered.map(r => {
+                    const n = {}; headers.forEach(h => { n[h] = (isPwdCol(h) && mode !== 'show') ? maskPass(r[h], mode) : r[h]; }); return n;
+                });
+                dl(JSON.stringify({ total: filtered.length, data: out }, null, 2), 'passwords_export.json', 'application/json');
+            } else {
+                let txt = `PASSWORD EXPORT — ${filtered.length} entries\nby SudhirDevOps1\n${'─'.repeat(60)}\n\n`;
+                filtered.forEach((r, i) => {
+                    txt += `[${i + 1}]\n`;
+                    headers.forEach(h => {
+                        const v = (isPwdCol(h) && mode !== 'show') ? maskPass(r[h], mode) : r[h];
+                        txt += `  ${h}: ${v || '—'}\n`;
+                    }); txt += '\n';
+                });
+                dl(txt, 'passwords_export.txt', 'text/plain');
+            }
+            showToast(T('toastExported'), 'success');
+        }
+        function dl(content, name, type) {
+            const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([content], { type })); a.download = name; a.click();
+        }
+        function clearFile() {
+            allData = []; headers = []; filtered = [];
+            document.getElementById('mainSection').style.display = 'none';
+            document.getElementById('csvInput').value = '';
+        }
+        function escH(s) { const d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
+        function showToast(msg, type = 'success') {
+            const c = document.getElementById('toast-container'); const t = document.createElement('div');
+            t.className = `toast ${type}`; t.textContent = msg; c.appendChild(t);
+            setTimeout(() => { t.style.opacity = '0'; t.style.transition = 'all .3s'; setTimeout(() => t.remove(), 300); }, 2800);
+        }
+
+        applyLanguage();
+    </script>
+</body>
+
+</html>

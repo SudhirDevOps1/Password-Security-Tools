@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Password Checker — by SudhirDevOps1</title>
+    <link rel="stylesheet" href="shared.css">
+    <style>
+        .big-score {
+            font-size: 52px;
+            font-weight: 900;
+            line-height: 1;
+        }
+
+        .criteria-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 13px;
+            transition: all .2s;
+        }
+
+        .criteria-item.pass {
+            background: rgba(16, 185, 129, .1);
+            border-left: 3px solid #10b981;
+        }
+
+        .criteria-item.fail {
+            background: rgba(244, 63, 94, .08);
+            border-left: 3px solid #f43f5e;
+        }
+
+        .pattern-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 4px 10px;
+            border-radius: 999px;
+            font-size: 11px;
+            font-weight: 700;
+            margin: 3px;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="site-header">
+        <div class="inner">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">🔐</div>
+                <div>
+                    <div class="logo-title">Password Tools</div>
+                    <div class="logo-sub">by SudhirDevOps1</div>
+                </div>
+            </a>
+            <div class="breadcrumb">
+                <a href="index.html" data-i18n="navHome">🏠 Home</a> › <span data-i18n="navChecker">🛡️ Password
+                    Checker</span>
+            </div>
+            <div class="lang-toggle">
+                <button class="lang-btn" id="btn-en" onclick="setLang('en')">EN</button>
+                <button class="lang-btn" id="btn-hi" onclick="setLang('hi')">हिन्दी</button>
+            </div>
+            <div class="badge-secure"><span class="pulse"></span><span data-i18n="badgeSecure">Offline & Secure</span>
+            </div>
+        </div>
+    </header>
+    <main>
+        <a href="index.html" class="back-link" data-i18n="backHome">← Back to Tools</a>
+
+        <div class="card fade-up" style="margin-bottom:20px">
+            <div class="section-title" data-i18n="toolTitle">🛡️ Password Strength Checker</div>
+            <div class="section-sub" data-i18n="toolSub">Analyze how strong your password is — all analysis is local,
+                nothing is sent anywhere</div>
+
+            <div class="input-group">
+                <label class="input-label" data-i18n="labelEnter">Enter Password</label>
+                <div style="position:relative">
+                    <input type="password" id="pwInput" class="inp" data-i18n-placeholder="placeholderType"
+                        placeholder="Type your password here…" oninput="analyze()" autofocus style="padding-right:50px">
+                    <button onclick="toggleVis()" id="visBtn"
+                        style="position:absolute;right:12px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;font-size:18px;color:#94a3b8">👁️</button>
+                </div>
+            </div>
+
+            <!-- Score Display -->
+            <div style="display:grid;grid-template-columns:auto 1fr;gap:24px;align-items:center;margin-bottom:20px">
+                <div style="text-align:center">
+                    <div id="scoreNum" class="big-score" style="color:#374151">—</div>
+                    <div style="font-size:11px;color:#64748b;margin-top:2px">/ 100</div>
+                </div>
+                <div>
+                    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+                        <span id="strengthLabel" style="font-size:18px;font-weight:800;color:#94a3b8"
+                            data-i18n="typePassword">Type a password</span>
+                        <span id="timeToCrack" style="font-size:12px;color:#64748b"></span>
+                    </div>
+                    <div class="strength-bar" style="height:10px;margin-bottom:10px">
+                        <div id="strengthFill" class="strength-fill" style="width:0%"></div>
+                    </div>
+                    <div style="display:flex;gap:8px;flex-wrap:wrap" id="patternTags"></div>
+                </div>
+            </div>
+
+            <!-- Entropy & Length Info -->
+            <div class="grid-3" style="margin-bottom:20px">
+                <div style="background:rgba(255,255,255,.04);border-radius:12px;padding:14px;text-align:center">
+                    <div style="font-size:22px;font-weight:800;color:#818cf8" id="lenCount">0</div>
+                    <div style="font-size:11px;color:#64748b;margin-top:2px" data-i18n="lblLength">Length</div>
+                </div>
+                <div style="background:rgba(255,255,255,.04);border-radius:12px;padding:14px;text-align:center">
+                    <div style="font-size:22px;font-weight:800;color:#34d399" id="entropyCount">0</div>
+                    <div style="font-size:11px;color:#64748b;margin-top:2px" data-i18n="lblEntropy">Entropy (bits)</div>
+                </div>
+                <div style="background:rgba(255,255,255,.04);border-radius:12px;padding:14px;text-align:center">
+                    <div style="font-size:22px;font-weight:800;color:#fbbf24" id="charsetSize">0</div>
+                    <div style="font-size:11px;color:#64748b;margin-top:2px" data-i18n="lblCharset">Charset Size</div>
+                </div>
+            </div>
+
+            <!-- Criteria Checklist -->
+            <div style="font-size:13px;font-weight:700;color:#94a3b8;margin-bottom:10px;text-transform:uppercase;letter-spacing:.05em"
+                data-i18n="secCriteria">
+                Security Criteria</div>
+            <div style="display:flex;flex-direction:column;gap:6px" id="criteriaList">
+                <!-- filled by JS -->
+            </div>
+        </div>
+
+        <!-- Suggestions -->
+        <div class="card fade-up" id="suggestCard" style="display:none">
+            <div style="font-size:15px;font-weight:700;margin-bottom:12px" data-i18n="suggTitle">💡 Suggestions to
+                Improve</div>
+            <ul id="suggestList" style="display:flex;flex-direction:column;gap:8px;padding-left:0;list-style:none"></ul>
+        </div>
+    </main>
+    <footer class="site-footer" data-i18n="footerText">🔒 100% Offline — No data leaves your device | by <strong
+            style="color:#818cf8">SudhirDevOps1</strong></footer>
+    <div id="toast-container"></div>
+    <script>
+        const i18n = {
+            en: {
+                navHome: '🏠 Home', navChecker: '🛡️ Password Checker', badgeSecure: 'Offline & Secure',
+                backHome: '← Back to Tools', toolTitle: '🛡️ Password Strength Checker',
+                toolSub: 'Analyze how strong your password is — all analysis is local, nothing is sent anywhere',
+                labelEnter: 'Enter Password', placeholderType: 'Type your password here…',
+                typePassword: 'Type a password', timeCrack: '⏱ Crack time:',
+                lblLength: 'Length', lblEntropy: 'Entropy (bits)', lblCharset: 'Charset Size',
+                secCriteria: 'Security Criteria', suggTitle: '💡 Suggestions to Improve',
+                footerText: '🔒 100% Offline — No data leaves your device | by SudhirDevOps1',
+                critLen8: 'At least 8 characters', critLen12: 'At least 12 characters (recommended)', critLen16: '16+ characters (strong)',
+                critUpper: 'Contains uppercase letters (A-Z)', critLower: 'Contains lowercase letters (a-z)',
+                critNum: 'Contains numbers (0-9)', critSym: 'Contains special symbols (!@#$…)',
+                critNoRepeat: 'No 3+ repeated characters (aaa)', critNoSeq: 'No common sequences (abc, 123)',
+                sVeryWeak: 'Very Weak 😱', sWeak: 'Weak 😟', sFair: 'Fair 😐', sStrong: 'Strong 😊', sVeryStrong: 'Very Strong 💪',
+                chipUpper: 'Uppercase', chipLower: 'Lowercase', chipNum: 'Numbers', chipSym: 'Symbols', chipCommon: '⚠️ Common',
+                suggLen12: 'Make password at least 12 characters long', suggUpper: 'Add uppercase letters (A-Z)',
+                suggLower: 'Add lowercase letters (a-z)', suggNum: 'Add numbers (0-9)', suggSym: 'Add special symbols like !@#$%^&*',
+                suggCommon: 'Avoid common words like "password", "123456"', suggRepeat: 'Avoid repeating characters (e.g. aaa)',
+                instantly: 'instantly', seconds: '{n} seconds', minutes: '{n} minutes', hours: '{n} hours', days: '{n} days', years: '{n} years', centuries: 'centuries+'
+            },
+            hi: {
+                navHome: '🏠 होम', navChecker: '🛡️ पासवर्ड चेकर', badgeSecure: 'ऑफलाइन और सुरक्षित',
+                backHome: '← टूल्स पर वापस जाएं', toolTitle: '🛡️ पासवर्ड मजबूती चेकर',
+                toolSub: 'आपका पासवर्ड कितना मजबूत है इसका विश्लेषण करें — सभी विश्लेषण स्थानीय हैं, कुछ भी कहीं नहीं भेजा जाता है',
+                labelEnter: 'पासवर्ड दर्ज करें', placeholderType: 'अपना पासवर्ड यहाँ टाइप करें…',
+                typePassword: 'पासवर्ड टाइप करें', timeCrack: '⏱ क्रैक समय:',
+                lblLength: 'लंबाई', lblEntropy: 'एंट्रॉपी (बिट्स)', lblCharset: 'कैरेक्टर सेट',
+                secCriteria: 'सुरक्षा मानदंड', suggTitle: '💡 सुधार के सुझाव',
+                footerText: '🔒 100% ऑफलाइन — कोई डेटा आपके डिवाइस से बाहर नहीं जाता है | SudhirDevOps1 द्वारा',
+                critLen8: 'कम से कम 8 कैरेक्टर', critLen12: 'कम से कम 12 कैरेक्टर (अनुशंसित)', critLen16: '16+ कैरेक्टर (मजबूत)',
+                critUpper: 'बड़े अक्षर (A-Z) शामिल हैं', critLower: 'छोटे अक्षर (a-z) शामिल हैं',
+                critNum: 'संख्याएं (0-9) शामिल हैं', critSym: 'विशेष प्रतीक (!@#$…) शामिल हैं',
+                critNoRepeat: '3 बार दोहराए गए कैरेक्टर नहीं (aaa)', critNoSeq: 'कोई सामान्य अनुक्रम नहीं (abc, 123)',
+                sVeryWeak: 'बहुत कमजोर 😱', sWeak: 'कमजोर 😟', sFair: 'ठीक है 😐', sStrong: 'मजबूत 😊', sVeryStrong: 'बहुत मजबूत 💪',
+                chipUpper: 'बड़े अक्षर', chipLower: 'छोटे अक्षर', chipNum: 'संख्याएं', chipSym: 'प्रतीक', chipCommon: '⚠️ सामान्य',
+                suggLen12: 'पासवर्ड कम से कम 12 कैरेक्टर लंबा बनाएं', suggUpper: 'बड़े अक्षर (A-Z) जोड़ें',
+                suggLower: 'छोटे अक्षर (a-z) जोड़ें', suggNum: 'संख्याएं (0-9) जोड़ें', suggSym: 'विशेष प्रतीक जैसे !@#$%^&* जोड़ें',
+                suggCommon: '"password", "123456" जैसे सामान्य शब्दों से बचें', suggRepeat: 'दोहराए जाने वाले कैरेक्टर से बचें (जैसे aaa)',
+                instantly: 'तुरंत', seconds: '{n} सेकंड', minutes: '{n} मिनट', hours: '{n} घंटे', days: '{n} दिन', years: '{n} साल', centuries: 'सदियाँ+'
+            }
+        };
+
+        let currentLang = localStorage.getItem('appLang') || 'en';
+
+        function T(key) {
+            return (i18n[currentLang] && i18n[currentLang][key]) || (i18n['en'][key]) || key;
+        }
+
+        function applyLanguage() {
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                el.textContent = T(key);
+            });
+            document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+                el.placeholder = T(el.getAttribute('data-i18n-placeholder'));
+            });
+            document.body.className = 'lang-' + currentLang;
+            document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+            const activeBtn = document.getElementById('btn-' + currentLang);
+            if (activeBtn) activeBtn.classList.add('active');
+
+            analyze();
+        }
+
+        function setLang(lang) {
+            currentLang = lang;
+            localStorage.setItem('appLang', currentLang);
+            applyLanguage();
+        }
+
+        const CRITERIA = [
+            { id: 'len8', label: 'critLen8', test: p => p.length >= 8 },
+            { id: 'len12', label: 'critLen12', test: p => p.length >= 12 },
+            { id: 'len16', label: 'critLen16', test: p => p.length >= 16 },
+            { id: 'upper', label: 'critUpper', test: p => /[A-Z]/.test(p) },
+            { id: 'lower', label: 'critLower', test: p => /[a-z]/.test(p) },
+            { id: 'num', label: 'critNum', test: p => /[0-9]/.test(p) },
+            { id: 'sym', label: 'critSym', test: p => /[^a-zA-Z0-9]/.test(p) },
+            { id: 'noRepeat', label: 'critNoRepeat', test: p => !/(.)\1\1/.test(p) },
+            { id: 'noSeq', label: 'critNoSeq', test: p => !/(abc|bcd|cde|def|efg|123|234|345|456|qwerty|password|pass|1234|admin)/i.test(p) },
+        ];
+        const COMMON = ['password', '123456', 'qwerty', 'abc123', 'letmein', 'iloveyou', 'admin', 'welcome', 'monkey', 'dragon'];
+
+        function analyze() {
+            const p = document.getElementById('pwInput').value;
+            document.getElementById('lenCount').textContent = p.length;
+            // Charset
+            let cs = 0;
+            if (/[a-z]/.test(p)) cs += 26;
+            if (/[A-Z]/.test(p)) cs += 26;
+            if (/[0-9]/.test(p)) cs += 10;
+            if (/[^a-zA-Z0-9]/.test(p)) cs += 32;
+            document.getElementById('charsetSize').textContent = cs;
+            const entropy = cs > 0 ? Math.round(p.length * Math.log2(cs)) : 0;
+            document.getElementById('entropyCount').textContent = entropy;
+
+            // Score
+            let score = 0;
+            if (p.length >= 8) score += 10;
+            if (p.length >= 12) score += 10;
+            if (p.length >= 16) score += 10;
+            if (p.length >= 20) score += 5;
+            if (/[A-Z]/.test(p)) score += 10;
+            if (/[a-z]/.test(p)) score += 10;
+            if (/[0-9]/.test(p)) score += 10;
+            if (/[^a-zA-Z0-9]/.test(p)) score += 15;
+            if (!/(.)\1\1/.test(p)) score += 5;
+            if (!/(abc|bcd|123|234|qwerty|password)/i.test(p)) score += 10;
+            const isCommon = COMMON.some(c => p.toLowerCase().includes(c));
+            if (!isCommon) score += 5;
+            if (entropy > 60) score += Math.min(10, entropy - 60);
+            score = Math.min(100, score);
+
+            const scoreEl = document.getElementById('scoreNum');
+            const fillEl = document.getElementById('strengthFill');
+            scoreEl.textContent = p ? score : '—';
+
+            let label, color;
+            if (!p) { label = T('typePassword'); color = '#94a3b8'; }
+            else if (score < 25) { label = T('sVeryWeak'); color = '#ef4444'; }
+            else if (score < 45) { label = T('sWeak'); color = '#f97316'; }
+            else if (score < 60) { label = T('sFair'); color = '#eab308'; }
+            else if (score < 80) { label = T('sStrong'); color = '#22c55e'; }
+            else { label = T('sVeryStrong'); color = '#10b981'; }
+
+            document.getElementById('strengthLabel').textContent = label;
+            document.getElementById('strengthLabel').style.color = color;
+            scoreEl.style.color = color;
+            fillEl.style.width = p ? (score + '%') : '0%';
+            fillEl.style.background = color;
+
+            // Time to crack
+            const combos = Math.pow(cs, p.length);
+            const guessesPerSec = 1e12;
+            const secs = combos / guessesPerSec;
+            let timeStr = '';
+            if (!p) timeStr = '';
+            else if (secs < 1) timeStr = T('instantly');
+            else if (secs < 60) timeStr = T('seconds').replace('{n}', Math.round(secs));
+            else if (secs < 3600) timeStr = T('minutes').replace('{n}', Math.round(secs / 60));
+            else if (secs < 86400) timeStr = T('hours').replace('{n}', Math.round(secs / 3600));
+            else if (secs < 31536000) timeStr = T('days').replace('{n}', Math.round(secs / 86400));
+            else if (secs < 3153600000) timeStr = T('years').replace('{n}', Math.round(secs / 31536000));
+            else timeStr = T('centuries');
+            document.getElementById('timeToCrack').textContent = p ? (T('timeCrack') + ' ' + timeStr) : '';
+
+            // Pattern tags
+            const tags = [];
+            if (/[A-Z]/.test(p)) tags.push({ t: T('chipUpper'), c: 'chip-indigo' });
+            if (/[a-z]/.test(p)) tags.push({ t: T('chipLower'), c: 'chip-emerald' });
+            if (/[0-9]/.test(p)) tags.push({ t: T('chipNum'), c: 'chip-amber' });
+            if (/[^a-zA-Z0-9]/.test(p)) tags.push({ t: T('chipSym'), c: 'chip-red' });
+            if (isCommon) tags.push({ t: T('chipCommon'), c: 'chip-red' });
+            document.getElementById('patternTags').innerHTML = tags.map(t => `<span class="chip ${t.c}">${t.t}</span>`).join('');
+
+            // Criteria
+            document.getElementById('criteriaList').innerHTML = CRITERIA.map(c => {
+                const pass = p && c.test(p);
+                return `<div class="criteria-item ${pass ? 'pass' : 'fail'}">
+                    <span>${pass ? '✅' : '❌'}</span>
+                    <span>${T(c.label)}</span>
+                </div>`;
+            }).join('');
+
+            // Suggestions
+            const suggs = [];
+            if (p.length < 12) suggs.push(T('suggLen12'));
+            if (!/[A-Z]/.test(p)) suggs.push(T('suggUpper'));
+            if (!/[a-z]/.test(p)) suggs.push(T('suggLower'));
+            if (!/[0-9]/.test(p)) suggs.push(T('suggNum'));
+            if (!/[^a-zA-Z0-9]/.test(p)) suggs.push(T('suggSym'));
+            if (isCommon) suggs.push(T('suggCommon'));
+            if (/(.)\1\1/.test(p)) suggs.push(T('suggRepeat'));
+
+            const sc = document.getElementById('suggestCard');
+            const sl = document.getElementById('suggestList');
+            if (suggs.length && p) {
+                sc.style.display = 'block';
+                sl.innerHTML = suggs.map(s => `<li style="display:flex;align-items:center;gap:8px;padding:8px;background:rgba(245,158,11,.08);border-radius:8px;border-left:3px solid #f59e0b;font-size:13px">💡 ${s}</li>`).join('');
+            } else {
+                sc.style.display = 'none';
+            }
+        }
+        function toggleVis() {
+            const inp = document.getElementById('pwInput');
+            const btn = document.getElementById('visBtn');
+            inp.type = inp.type === 'password' ? 'text' : 'password';
+            btn.textContent = inp.type === 'password' ? '👁️' : '🙈';
+        }
+
+        applyLanguage();
+    </script>
+</body>
+
+</html>

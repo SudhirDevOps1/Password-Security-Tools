@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>2FA TOTP Generator — by SudhirDevOps1</title>
+    <link rel="stylesheet" href="shared.css">
+    <style>
+        .totp-code {
+            font-size: 48px;
+            font-weight: 900;
+            letter-spacing: 8px;
+            font-family: 'Courier New', monospace;
+            color: #34d399;
+            text-align: center;
+            padding: 24px 0 16px;
+        }
+
+        .timer-arc {
+            stroke-dasharray: 157;
+            stroke-linecap: round;
+            transition: stroke-dashoffset .9s linear;
+        }
+
+        .account-card {
+            background: rgba(255, 255, 255, .04);
+            border: 1px solid rgba(255, 255, 255, .08);
+            border-radius: 12px;
+            padding: 14px;
+            cursor: pointer;
+            transition: all .2s;
+        }
+
+        .account-card.active {
+            border-color: #6366f1;
+            background: rgba(99, 102, 241, .08);
+        }
+
+        .account-card:hover {
+            border-color: rgba(255, 255, 255, .14);
+        }
+    </style>
+</head>
+
+<body>
+    <header class="site-header">
+        <div class="inner">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">🔐</div>
+                <div>
+                    <div class="logo-title">Password Tools</div>
+                    <div class="logo-sub">by SudhirDevOps1</div>
+                </div>
+            </a>
+            <div class="breadcrumb">
+                <a href="index.html" data-i18n="navHome">🏠 Home</a> › <span data-i18n="nav2FA">🗝️ 2FA Generator</span>
+            </div>
+            <div class="lang-toggle">
+                <button class="lang-btn" id="btn-en" onclick="setLang('en')">EN</button>
+                <button class="lang-btn" id="btn-hi" onclick="setLang('hi')">हिन्दी</button>
+            </div>
+            <div class="badge-secure"><span class="pulse"></span><span data-i18n="badgeSecure">Offline TOTP</span></div>
+        </div>
+    </header>
+    <main>
+        <a href="index.html" class="back-link" data-i18n="backHome">← Back to Tools</a>
+
+        <div class="card fade-up" style="margin-bottom:20px">
+            <div class="section-title" data-i18n="toolTitle">🗝️ 2FA TOTP Code Generator</div>
+            <div class="section-sub" data-i18n="toolSub">Generate time-based one-time passwords (TOTP / RFC 6238) — like
+                Google Authenticator, offline</div>
+
+            <!-- Add Account -->
+            <div
+                style="display:grid;grid-template-columns:1fr 1fr auto;gap:10px;align-items:end;margin-bottom:16px;flex-wrap:wrap">
+                <div><label class="input-label" data-i18n="labelAccName">Account Name</label><input type="text"
+                        id="accName" class="inp" data-i18n-placeholder="placeholderName"
+                        placeholder="e.g. GitHub, Gmail…"></div>
+                <div><label class="input-label" data-i18n="labelSecretKey">Secret Key (Base32)</label><input type="text"
+                        id="secretKey" class="inp" data-i18n-placeholder="placeholderSecret"
+                        placeholder="JBSWY3DPEHPK3PXP"></div>
+                <button class="btn btn-primary" style="white-space:nowrap" onclick="addAccount()" data-i18n="btnAdd">+
+                    Add</button>
+            </div>
+            <div style="font-size:12px;color:#64748b;margin-bottom:16px" data-i18n="hintSecret">💡 Find the secret key
+                in your site's 2FA setup page (usually shown as text alongside QR code)</div>
+
+            <!-- Demo account hint -->
+            <button class="btn btn-outline btn-sm" onclick="addDemo()" data-i18n="btnDemo">🧪 Add Demo Account</button>
+        </div>
+
+        <!-- Active TOTP Display -->
+        <div id="totpDisplay" class="card fade-up" style="display:none;margin-bottom:20px;text-align:center">
+            <div style="font-size:13px;color:#94a3b8;margin-bottom:4px" id="activeAccName">—</div>
+            <div class="totp-code" id="totpCode">——————</div>
+            <div style="display:flex;align-items:center;justify-content:center;gap:16px;margin-bottom:12px">
+                <svg width="50" height="50" style="transform:rotate(-90deg)">
+                    <circle cx="25" cy="25" r="22" fill="none" stroke="rgba(255,255,255,.08)" stroke-width="4" />
+                    <circle id="timerArc" cx="25" cy="25" r="22" fill="none" stroke="#6366f1" stroke-width="4"
+                        class="timer-arc" style="stroke-dashoffset:0" />
+                </svg>
+                <div>
+                    <div style="font-size:24px;font-weight:800;color:#818cf8" id="countdown">30</div>
+                    <div style="font-size:11px;color:#64748b" data-i18n="lblSeconds">seconds</div>
+                </div>
+            </div>
+            <button class="btn btn-outline btn-sm" onclick="copyCode()" data-i18n="btnCopyCode">📋 Copy Code</button>
+        </div>
+
+        <!-- Accounts List -->
+        <div class="card fade-up" id="accountsCard" style="display:none">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
+                <div style="font-weight:700" data-i18n="lblSavedAcc">📱 Saved Accounts (this session only)</div>
+                <button class="btn btn-outline btn-sm" onclick="clearAccounts()" data-i18n="btnClear">🗑 Clear
+                    All</button>
+            </div>
+            <div id="accountList" style="display:flex;flex-direction:column;gap:8px"></div>
+        </div>
+
+        <!-- What is 2FA -->
+        <div class="card fade-up" style="margin-top:20px">
+            <div style="font-size:15px;font-weight:700;margin-bottom:14px" data-i18n="whatTitle">🛡️ What is 2FA / TOTP?
+            </div>
+            <div style="font-size:13px;color:#94a3b8;line-height:1.7" data-i18n="whatDesc">
+                Two-Factor Authentication (2FA) adds a second layer of security. After your password, you enter a
+                6-digit code that changes every 30 seconds.<br><br>
+                <strong style="color:#e2e8f0">TOTP</strong> = Time-based One-Time Password (RFC 6238). It's the standard
+                behind Google Authenticator, Authy, Microsoft Authenticator, etc.<br><br>
+                Even if someone steals your password, they can't login without this time-sensitive code.
+            </div>
+            <div style="margin-top:14px">
+                <div style="font-size:13px;font-weight:700;margin-bottom:8px" data-i18n="lblRecApps">Recommended 2FA
+                    Apps:</div>
+                <div style="display:flex;flex-wrap:wrap;gap:8px">
+                    <a href="https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2"
+                        target="_blank" class="chip chip-emerald">Google Authenticator</a>
+                    <a href="https://authy.com" target="_blank" class="chip chip-indigo">Authy</a>
+                    <a href="https://www.microsoft.com/en-us/security/mobile-authenticator-app" target="_blank"
+                        class="chip chip-indigo">Microsoft Authenticator</a>
+                    <a href="https://aegis-authenticator.com" target="_blank" class="chip chip-amber">Aegis (Open
+                        Source)</a>
+                    <a href="https://raivo-otp.com" target="_blank" class="chip chip-emerald">Raivo (iOS)</a>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer class="site-footer" data-i18n="footerText">🔒 TOTP is calculated locally — secrets never leave your browser
+        | by <strong style="color:#818cf8">SudhirDevOps1</strong></footer>
+    <div id="toast-container"></div>
+    <script>
+        const i18n = {
+            en: {
+                navHome: '🏠 Home', nav2FA: '🗝️ 2FA Generator', badgeSecure: 'Offline TOTP',
+                backHome: '← Back to Tools', toolTitle: '🗝️ 2FA TOTP Code Generator',
+                toolSub: 'Generate time-based one-time passwords (TOTP / RFC 6238) — like Google Authenticator, offline',
+                labelAccName: 'Account Name', labelSecretKey: 'Secret Key (Base32)',
+                placeholderName: 'e.g. GitHub, Gmail…', placeholderSecret: 'JBSWY3DPEHPK3PXP',
+                btnAdd: '+ Add', hintSecret: '💡 Find the secret key in your site\'s 2FA setup page (usually shown as text alongside QR code)',
+                btnDemo: '🧪 Add Demo Account', lblSeconds: 'seconds', btnCopyCode: '📋 Copy Code',
+                lblSavedAcc: '📱 Saved Accounts (this session only)', btnClear: '🗑 Clear All',
+                whatTitle: '🛡️ What is 2FA / TOTP?',
+                whatDesc: 'Two-Factor Authentication (2FA) adds a second layer of security. After your password, you enter a 6-digit code that changes every 30 seconds.<br><br><strong style="color:#e2e8f0">TOTP</strong> = Time-based One-Time Password (RFC 6238). It\'s the standard behind Google Authenticator, Authy, Microsoft Authenticator, etc.<br><br>Even if someone steals your password, they can\'t login without this time-sensitive code.',
+                lblRecApps: 'Recommended 2FA Apps:',
+                footerText: '🔒 TOTP is calculated locally — secrets never leave your browser | by SudhirDevOps1',
+                toastEnterBoth: 'Enter both name and secret key', toastAccAdded: '✅ Account added',
+                toastInvalidKey: 'Invalid Base32 secret key', toastDemoAdded: 'Demo account added',
+                toastCopied: '✅ Code copied!', toastAccCopied: '✅ {code} copied!'
+            },
+            hi: {
+                navHome: '🏠 होम', nav2FA: '🗝️ 2FA जनरेटर', badgeSecure: 'ऑफलाइन TOTP',
+                backHome: '← टूल्स पर वापस जाएं', toolTitle: '🗝️ 2FA TOTP कोड जनरेटर',
+                toolSub: 'समय-आधारित वन-टाइम पासवर्ड (TOTP / RFC 6238) जेनरेट करें — Google Authenticator की तरह, ऑफलाइन',
+                labelAccName: 'खाते का नाम', labelSecretKey: 'सीक्रेट की (Base32)',
+                placeholderName: 'जैसे GitHub, Gmail…', placeholderSecret: 'JBSWY3DPEHPK3PXP',
+                btnAdd: '+ जोड़ें', hintSecret: '💡 अपनी साइट के 2FA सेटअप पेज में सक्रियता कुंजी खोजें (आमतौर पर QR कोड के साथ दिखाई जाती है)',
+                btnDemo: '🧪 डेमो खाता जोड़ें', lblSeconds: 'सेकंड', btnCopyCode: '📋 कोड कॉपी करें',
+                lblSavedAcc: '📱 सहेजे गए खाते (केवल इस सत्र के लिए)', btnClear: '🗑 सभी साफ़ करें',
+                whatTitle: '🛡️ 2FA / TOTP क्या है?',
+                whatDesc: 'टू-फैक्टर ऑथेंटिकेशन (2FA) सुरक्षा की एक दूसरी परत जोड़ता है। आपके पासवर्ड के बाद, आप एक 6-अंकों का कोड दर्ज करते हैं जो हर 30 सेकंड में बदलता है।<br><br><strong style="color:#e2e8f0">TOTP</strong> = टाइम-आधारित वन-टाइम पासवर्ड (RFC 6238)। यह Google Authenticator, Authy, Microsoft Authenticator आदि के पीछे का मानक है।<br><br>भले ही कोई आपका पासवर्ड चुरा ले, वे इस समय-संवेदनशील कोड के बिना लॉगिन नहीं कर सकते।',
+                lblRecApps: 'अनुशंसित 2FA ऐप्स:',
+                footerText: '🔒 TOTP की गणना स्थानीय रूप से की जाती है — सीक्रेट कभी आपके ब्राउज़र से बाहर नहीं जाते | SudhirDevOps1 द्वारा',
+                toastEnterBoth: 'नाम और सीक्रेट की दोनों दर्ज करें', toastAccAdded: '✅ खाता जोड़ा गया',
+                toastInvalidKey: 'अमान्य Base32 सीक्रेट की', toastDemoAdded: 'डेमो खाता जोड़ा गया',
+                toastCopied: '✅ कोड कॉपी किया गया!', toastAccCopied: '✅ {code} कॉपी किया गया!'
+            }
+        };
+
+        let currentLang = localStorage.getItem('appLang') || 'en';
+
+        function T(key) {
+            return (i18n[currentLang] && i18n[currentLang][key]) || (i18n['en'][key]) || key;
+        }
+
+        function applyLanguage() {
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                el.innerHTML = T(key);
+            });
+            document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+                el.placeholder = T(el.getAttribute('data-i18n-placeholder'));
+            });
+            document.body.className = 'lang-' + currentLang;
+            document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+            const activeBtn = document.getElementById('btn-' + currentLang);
+            if (activeBtn) activeBtn.classList.add('active');
+        }
+
+        function setLang(lang) {
+            currentLang = lang;
+            localStorage.setItem('appLang', currentLang);
+            applyLanguage();
+        }
+
+        // Simple TOTP implementation (RFC 6238)
+        const accounts = [];
+        let activeIdx = -1;
+        let timerInterval = null;
+
+        function base32Decode(s) {
+            const a = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ234567';
+            s = s.replace(/=+$/, '').toUpperCase();
+            let bits = 0, val = 0; const out = [];
+            for (const c of s) { const idx = a.indexOf(c); if (idx < 0) continue; val = (val << 5) | idx; bits += 5; if (bits >= 8) { out.push((val >>> (bits - 8)) & 255); bits -= 8; } }
+            return new Uint8Array(out);
+        }
+        async function hmacSHA1(key, msg) {
+            const k = await crypto.subtle.importKey('raw', key, { name: 'HMAC', hash: 'SHA-1' }, false, ['sign']);
+            return new Uint8Array(await crypto.subtle.sign('HMAC', k, msg));
+        }
+        function intToBytes(n) {
+            const b = new Uint8Array(8); for (let i = 7; i >= 0; i--) { b[i] = n & 0xff; n = Math.floor(n / 256); } return b;
+        }
+        async function getTotp(secret, period = 30) {
+            const key = base32Decode(secret);
+            const t = Math.floor(Date.now() / 1000 / period);
+            const hash = await hmacSHA1(key, intToBytes(t));
+            const offset = hash[hash.length - 1] & 0xf;
+            const code = ((hash[offset] & 0x7f) << 24) | ((hash[offset + 1] & 0xff) << 16) | ((hash[offset + 2] & 0xff) << 8) | (hash[offset + 3] & 0xff);
+            return String(code % 1000000).padStart(6, '0');
+        }
+        async function addAccount() {
+            const name = document.getElementById('accName').value.trim();
+            const secret = document.getElementById('secretKey').value.trim().replace(/\s/g, '');
+            if (!name || !secret) { showToast(T('toastEnterBoth'), 'error'); return; }
+            try {
+                base32Decode(secret);
+                accounts.push({ name, secret });
+                document.getElementById('accName').value = '';
+                document.getElementById('secretKey').value = '';
+                setActive(accounts.length - 1);
+                renderAccounts();
+                showToast(T('toastAccAdded'), 'success');
+            } catch (e) { showToast(T('toastInvalidKey'), 'error'); }
+        }
+        function addDemo() {
+            accounts.push({ name: 'Demo Account (GitHub)', secret: 'JBSWY3DPEHPK3PXP' });
+            setActive(accounts.length - 1); renderAccounts();
+            showToast(T('toastDemoAdded'), 'info');
+        }
+        function setActive(idx) {
+            activeIdx = idx;
+            document.getElementById('totpDisplay').style.display = 'block';
+            document.getElementById('activeAccName').textContent = accounts[idx].name;
+            updateCode();
+            if (timerInterval) clearInterval(timerInterval);
+            timerInterval = setInterval(updateCode, 1000);
+            renderAccounts();
+        }
+        async function updateCode() {
+            if (activeIdx < 0) return;
+            const acc = accounts[activeIdx];
+            try {
+                const code = await getTotp(acc.secret);
+                const codeEl = document.getElementById('totpCode');
+                codeEl.textContent = code.substring(0, 3) + ' ' + code.substring(3);
+                const rem = 30 - (Math.floor(Date.now() / 1000) % 30);
+                document.getElementById('countdown').textContent = rem;
+                const arc = document.getElementById('timerArc');
+                const frac = rem / 30;
+                arc.style.strokeDashoffset = 157 * (1 - frac);
+                arc.style.stroke = rem <= 10 ? '#ef4444' : rem <= 20 ? '#f59e0b' : '#6366f1';
+            } catch (e) {
+                document.getElementById('totpCode').textContent = 'ERROR';
+            }
+        }
+        function renderAccounts() {
+            if (!accounts.length) { document.getElementById('accountsCard').style.display = 'none'; return; }
+            document.getElementById('accountsCard').style.display = 'block';
+            document.getElementById('accountList').innerHTML = accounts.map((a, i) => `
+    <div class="account-card ${i === activeIdx ? 'active' : ''}" onclick="setActive(${i})">
+      <div style="display:flex;align-items:center;justify-content:space-between">
+        <div><div style="font-weight:700;font-size:14px">${escH(a.name)}</div><div style="font-size:11px;color:#64748b;font-family:monospace;margin-top:2px">${a.secret.substring(0, 8)}…</div></div>
+        <div style="display:flex;gap:6px">
+          <button class="copy-btn" onclick="event.stopPropagation();copyAccountCode(${i})">📋</button>
+          <button class="copy-btn" onclick="event.stopPropagation();removeAcc(${i})">🗑</button>
+        </div>
+      </div>
+    </div>`).join('');
+        }
+        async function copyAccountCode(idx) {
+            const code = await getTotp(accounts[idx].secret);
+            navigator.clipboard.writeText(code).then(() => showToast(T('toastAccCopied').replace('{code}', code), 'success'));
+        }
+        function removeAcc(idx) { accounts.splice(idx, 1); if (activeIdx === idx) { activeIdx = -1; document.getElementById('totpDisplay').style.display = 'none'; } else if (activeIdx > idx) activeIdx--; renderAccounts(); }
+        function clearAccounts() { accounts.length = 0; activeIdx = -1; document.getElementById('totpDisplay').style.display = 'none'; document.getElementById('accountsCard').style.display = 'none'; }
+        function copyCode() {
+            const code = document.getElementById('totpCode').textContent.replace(' ', '');
+            navigator.clipboard.writeText(code).then(() => showToast(T('toastCopied'), 'success'));
+        }
+        function escH(s) { const d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
+        function showToast(msg, type = 'success') {
+            const c = document.getElementById('toast-container'); const t = document.createElement('div');
+            t.className = `toast ${type}`; t.textContent = msg; c.appendChild(t);
+            setTimeout(() => { t.style.opacity = '0'; t.style.transition = 'all .3s'; setTimeout(() => t.remove(), 300); }, 2800);
+        }
+
+        applyLanguage();
+    </script>
+</body>
+
+</html>

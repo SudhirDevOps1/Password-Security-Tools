@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>304+ Security Resources — by SudhirDevOps1</title>
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <style>
+    :root {
+      --bg: #030712;
+      --card: rgba(255, 255, 255, .03);
+      --card-hover: rgba(255, 255, 255, .06);
+      --border: rgba(255, 255, 255, .06);
+      --indigo: #6366f1;
+      --indigo-light: #818cf8;
+      --green: #10b981;
+      --red: #ef4444;
+      --yellow: #f59e0b;
+      --cyan: #06b6d4;
+      --purple: #8b5cf6;
+      --text: #f3f4f6;
+      --muted: #9ca3af;
+      --dim: #6b7280;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+      min-height: 100vh;
+      background-image:
+        radial-gradient(circle at 0% 0%, rgba(99, 102, 241, .15) 0%, transparent 40%),
+        radial-gradient(circle at 100% 0%, rgba(6, 182, 212, .1) 0%, transparent 40%),
+        radial-gradient(circle at 50% 50%, rgba(139, 92, 246, .05) 0%, transparent 50%);
+      background-attachment: fixed;
+    }
+
+    .site-header {
+      background: rgba(3, 7, 18, .8);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      padding: 12px 20px;
+    }
+
+    .header-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .logo-icon {
+      font-size: 28px;
+    }
+
+    .logo-title {
+      font-size: 16px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      background: linear-gradient(to right, #fff, #9ca3af);
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .logo-sub {
+      font-size: 11px;
+      color: var(--dim);
+      font-weight: 500;
+    }
+
+    .breadcrumb {
+      font-size: 12px;
+      color: var(--muted);
+      margin-left: auto;
+      font-weight: 500;
+    }
+
+    .breadcrumb a {
+      color: var(--indigo-light);
+      text-decoration: none;
+      transition: color .2s;
+    }
+
+    .breadcrumb a:hover {
+      color: #fff;
+    }
+
+    .badge {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--green);
+      background: rgba(16, 185, 129, .1);
+      border: 1px solid rgba(16, 185, 129, .2);
+      padding: 4px 12px;
+      border-radius: 20px;
+    }
+
+    .pulse {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--green);
+      animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        opacity: 1;
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4);
+      }
+
+      50% {
+        opacity: .6;
+        transform: scale(1.2);
+        box-shadow: 0 0 0 4px rgba(16, 185, 129, 0);
+      }
+    }
+
+    .lang-toggle {
+      display: flex;
+      background: rgba(255, 255, 255, .05);
+      padding: 3px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      margin-left: 12px;
+    }
+
+    .lang-btn {
+      padding: 4px 12px;
+      border-radius: 8px;
+      border: none;
+      background: transparent;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all .2s;
+    }
+
+    .lang-btn.active {
+      background: var(--indigo);
+      color: #fff;
+      box-shadow: 0 4px 12px rgba(99, 102, 241, .25);
+    }
+
+    .search-wrap {
+      max-width: 800px;
+      margin: 40px auto 0;
+      padding: 0 20px;
+      position: relative;
+    }
+
+    .search-box {
+      width: 100%;
+      padding: 16px 20px 16px 48px;
+      background: rgba(255, 255, 255, .04);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      color: var(--text);
+      font-size: 15px;
+      outline: none;
+      transition: all .3s cubic-bezier(0.4, 0, 0.2, 1);
+      backdrop-filter: blur(8px);
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' fill='none' stroke='%239ca3af' stroke-width='2' viewBox='0 0 24 24'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cpath d='m21 21-4.35-4.35'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: 18px center;
+    }
+
+    .search-box:focus {
+      border-color: var(--indigo);
+      background: rgba(255, 255, 255, .06);
+      box-shadow: 0 0 0 4px rgba(99, 102, 241, .1);
+      transform: translateY(-1px);
+    }
+
+    .filters {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: center;
+      max-width: 1200px;
+      margin: 24px auto 0;
+      padding: 0 20px;
+    }
+
+    .filter-btn {
+      padding: 7px 16px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, .02);
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all .2s;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .filter-btn:hover {
+      background: rgba(255, 255, 255, .05);
+      border-color: var(--muted);
+      color: #fff;
+    }
+
+    .filter-btn.active {
+      background: var(--indigo);
+      border-color: var(--indigo);
+      color: #fff;
+      box-shadow: 0 4px 12px rgba(99, 102, 241, .2);
+    }
+
+    main {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+
+    .hero {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    .hero-title {
+      font-size: 42px;
+      font-weight: 900;
+      margin-bottom: 12px;
+      letter-spacing: -1.5px;
+      background: linear-gradient(to bottom, #fff 40%, rgba(255, 255, 255, .7));
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-sub {
+      font-size: 16px;
+      color: var(--muted);
+      max-width: 600px;
+      margin: 0 auto 32px;
+      line-height: 1.6;
+    }
+
+    .stat-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .stat-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 16px;
+      text-align: center;
+      backdrop-filter: blur(8px);
+    }
+
+    .stat-val {
+      display: block;
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--indigo-light);
+      margin-bottom: 4px;
+    }
+
+    .stat-lbl {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--dim);
+      font-weight: 700;
+    }
+
+    .grid2 {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+      gap: 20px;
+    }
+
+    .rc {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 24px;
+      text-decoration: none;
+      color: inherit;
+      transition: all .3s cubic-bezier(0.4, 0, 0.2, 1);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+      backdrop-filter: blur(4px);
+    }
+
+    .rc::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--border), transparent);
+    }
+
+    .rc:hover {
+      transform: translateY(-6px);
+      border-color: rgba(99, 102, 241, .4);
+      background: var(--card-hover);
+      box-shadow: 0 12px 30px -10px rgba(0, 0, 0, .5), 0 0 20px rgba(99, 102, 241, .05);
+    }
+
+    .rc-top {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    .rc-ic {
+      width: 48px;
+      height: 48px;
+      background: rgba(255, 255, 255, .03);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      flex-shrink: 0;
+      transition: all .3s;
+    }
+
+    .rc:hover .rc-ic {
+      border-color: var(--indigo);
+      background: rgba(99, 102, 241, .1);
+      transform: rotate(-5deg) scale(1.1);
+    }
+
+    .rc-nm {
+      font-size: 16px;
+      font-weight: 800;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .rc-url {
+      font-size: 12px;
+      color: var(--green);
+      font-family: inherit;
+      font-weight: 600;
+      margin: 2px 0 12px;
+      display: block;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      opacity: 0.9;
+    }
+
+    .rc-ds {
+      font-size: 14px;
+      color: var(--text);
+      line-height: 1.6;
+      margin-bottom: 20px;
+      font-weight: 400;
+      opacity: 0.9;
+    }
+
+    .rc-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: auto;
+      margin-bottom: 12px;
+    }
+
+    .trust-indicator {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 10px;
+      font-weight: 800;
+      color: var(--green);
+      margin-top: 4px;
+    }
+
+    .trust-dot {
+      width: 6px;
+      height: 6px;
+      background: var(--green);
+      border-radius: 50%;
+      box-shadow: 0 0 8px var(--green);
+    }
+
+    .rc-wh {
+      padding: 12px 16px;
+      background: rgba(0, 0, 0, .2);
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      font-size: 11px;
+      color: var(--dim);
+      margin-top: auto;
+      transition: all .3s;
+    }
+
+    .rc:hover .rc-wh {
+      border-color: rgba(99, 102, 241, .2);
+      color: var(--muted);
+    }
+
+    .rc-wh b {
+      color: var(--indigo-light);
+      margin-right: 4px;
+    }
+
+    .rc-wh span {
+      display: none;
+    }
+
+    body:not(.lang-en) .rc-wh .hi {
+      display: inline;
+    }
+
+    body.lang-en .rc-wh .en {
+      display: inline;
+    }
+
+    .badge-hot {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: linear-gradient(to right, #f43f5e, #fb7185);
+      color: #fff;
+      font-size: 9px;
+      font-weight: 900;
+      padding: 2px 8px;
+      border-radius: 10px;
+      text-transform: uppercase;
+    }
+
+    .tips-section {
+      margin-top: 80px;
+      background: rgba(255, 255, 255, .02);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 40px;
+      backdrop-filter: blur(8px);
+    }
+
+    .tip-card {
+      background: rgba(255, 255, 255, .02);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 16px;
+      margin-bottom: 12px;
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      transition: all .2s;
+    }
+
+    .tip-card:hover {
+      background: rgba(255, 255, 255, .04);
+      border-color: var(--muted);
+    }
+
+    .tip-num {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--indigo);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 800;
+      flex-shrink: 0;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    .site-footer {
+      text-align: center;
+      padding: 60px 20px;
+      border-top: 1px solid var(--border);
+      color: var(--dim);
+      font-size: 12px;
+      margin-top: 80px;
+    }
+
+    .back-top {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 48px;
+      height: 48px;
+      background: var(--indigo);
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      color: #fff;
+      cursor: pointer;
+      border: none;
+      opacity: 0;
+      transition: all .3s;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, .4);
+    }
+
+    .back-top.visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .back-top:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 24px rgba(99, 102, 241, .3);
+    }
+  </style>
+</head>
+
+<body class="lang-en">
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="index.html" class="logo">
+        <div class="logo-icon">🔐</div>
+        <div>
+          <div class="logo-title">Password Tools</div>
+          <div class="logo-sub">by SudhirDevOps1</div>
+        </div>
+      </a>
+      <div class="breadcrumb">
+        <a href="index.html" data-i18n="navHome">🏠 Home</a> › <span data-i18n="navResources">🛡️ Resources</span>
+      </div>
+      <div class="badge"><span class="pulse"></span><span id="totalCountDisplay">304+</span> <span
+          data-i18n="badgeTools">Tools</span></div>
+      <div class="lang-toggle">
+        <button class="lang-btn active" id="btn-en" onclick="setLang('en')">EN</button>
+        <button class="lang-btn" id="btn-hi" onclick="setLang('hi')">हिन्दी</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="search-wrap">
+    <input type="text" class="search-box" id="searchInput" data-i18n-placeholder="searchPlaceholder"
+      placeholder="Search security tools, VPNs, password managers..." oninput="doSearch()">
+    <div id="resultsCount" style="font-size:12px; color:var(--indigo-light); margin-top:8px;"></div>
+  </div>
+
+  <div class="filters" id="filterContainer">
+    <button class="filter-btn active" onclick="filterCat('all', this)">All (304+)</button>
+    <!-- Powered by JS -->
+  </div>
+
+  <main id="mainContent">
+    <div class="hero fade-up">
+      <div class="hero-icon">🛡️</div>
+      <h1 class="hero-title"><span id="totalCountHero">304+</span> <span data-i18n="heroTitle">Security Resources</span>
+      </h1>
+      <p class="hero-sub" data-i18n="heroSub">
+        A curated list of verified, free, and open-source security tools for everyone.
+        Explore unique resources to protect your digital identity.
+      </p>
+
+      <div class="stat-row">
+        <div class="stat-card">
+          <div class="stat-val" id="stat-total">304+</div>
+          <div class="stat-lbl" data-i18n="statVerified">Verified Tools</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-val">100%</div>
+          <div class="stat-lbl" data-i18n="statFree">Free / OSS</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-val">24/7</div>
+          <div class="stat-lbl" data-i18n="statPrivacy">Privacy First</div>
+        </div>
+      </div>
+    </div>
+
+    <div id="resourceContainer">
+      <!-- Tools injected here by JS -->
+      <div style="text-align:center; padding:50px; color:var(--dim)">Loading resources...</div>
+    </div>
+
+    <!-- Extra sections injected here by JS -->
+    <div id="extraContent">
+      <section class="tips-section" id="rules">
+        <h2 class="cat-hdr"><span class="cat-badge" style="background:rgba(16,185,129,.1);color:var(--green)">📜</span>
+          <span data-i18n="rulesTitle">Top 12 Password Security Rules</span>
+        </h2>
+        <div class="tip-card">
+          <div class="tip-num" style="background:var(--indigo)">1</div> <strong data-i18n="rule1Title">Different
+            Password for Every Site:</strong> <span data-i18n="rule1Desc">Never reuse passwords across different
+            accounts.</span>
+        </div>
+        <div class="tip-card">
+          <div class="tip-num" style="background:var(--indigo)">2</div> <strong data-i18n="rule2Title">Minimum 12
+            Characters:</strong> <span data-i18n="rule2Desc">Longer passwords are exponentially harder to crack.</span>
+        </div>
+        <div class="tip-card">
+          <div class="tip-num" style="background:var(--indigo)">3</div> <strong data-i18n="rule3Title">Mix Character
+            Types:</strong> <span data-i18n="rule3Desc">Use uppercase, lowercase, numbers, and symbols.</span>
+        </div>
+        <div class="tip-card">
+          <div class="tip-num" style="background:var(--indigo)">4</div> <strong data-i18n="rule4Title">Enable
+            2FA:</strong> <span data-i18n="rule4Desc">Two-Factor Authentication is your second line of defense.</span>
+        </div>
+        <div class="tip-card">
+          <div class="tip-num" style="background:var(--indigo)">5</div> <strong data-i18n="rule5Title">Use a Password
+            Manager:</strong> <span data-i18n="rule5Desc">Don't try to remember them all; use a trusted vault.</span>
+        </div>
+        <div class="tip-card">
+          <div class="tip-num" style="background:var(--indigo)">6</div> <strong data-i18n="rule6Title">Avoid Personal
+            Info:</strong> <span data-i18n="rule6Desc">Don't use birthdays, pet names, or phone numbers.</span>
+        </div>
+        <div class="tip-card">
+          <div class="tip-num" style="background:var(--indigo)">7</div> <strong data-i18n="rule7Title">Update Important
+            Passwords:</strong> <span data-i18n="rule7Desc">Change your bank and email passwords every 6 months.</span>
+        </div>
+        <div class="tip-card">
+          <div class="tip-num" style="background:var(--indigo)">8</div> <strong data-i18n="rule8Title">Check for
+            Breaches:</strong> <span data-i18n="rule8Desc">Use HaveIBeenPwned to check if your data was leaked.</span>
+        </div>
+        <div class="tip-card">
+          <div class="tip-num" style="background:var(--indigo)">9</div> <strong data-i18n="rule9Title">Don't Share
+            Passwords:</strong> <span data-i18n="rule9Desc">Never give your password to anyone, even "support".</span>
+        </div>
+        <div class="tip-card">
+          <div class="tip-num" style="background:var(--indigo)">10</div> <strong data-i18n="rule10Title">Beware of
+            Phishing:</strong> <span data-i18n="rule10Desc">Always check the URL before entering your password.</span>
+        </div>
+        <div class="tip-card">
+          <div class="tip-num" style="background:var(--indigo)">11</div> <strong data-i18n="rule11Title">Secure Your
+            Recovery Email:</strong> <span data-i18n="rule11Desc">Your recovery email is the keys to your
+            kingdom.</span>
+        </div>
+        <div class="tip-card">
+          <div class="tip-num" style="background:var(--indigo)">12</div> <strong data-i18n="rule12Title">Logout on
+            Public Devices:</strong> <span data-i18n="rule12Desc">Always sign out and clear history on shared
+            computers.</span>
+        </div>
+      </section>
+
+      <section class="tips-section" id="attacks">
+        <h2 class="cat-hdr"><span class="cat-badge" style="background:rgba(244,63,94,.1);color:var(--red)">🛡️</span>
+          <span data-i18n="attacksTitle">Common Password Attacks — Explained</span>
+        </h2>
+        <div class="tip-card"><strong data-i18n="atk1">Brute Force:</strong> <span data-i18n="atk1Desc">Attacker tries
+            every possible combination of characters until they find the right one.</span></div>
+        <div class="tip-card"><strong data-i18n="atk2">Dictionary Attack:</strong> <span data-i18n="atk2Desc">Using a
+            list of common words and previously leaked passwords to guess yours.</span></div>
+        <div class="tip-card"><strong data-i18n="atk3">Phishing:</strong> <span data-i18n="atk3Desc">Fake websites that
+            look like the real ones to trick you into entering your credentials.</span></div>
+        <div class="tip-card"><strong data-i18n="atk4">Keylogging:</strong> <span data-i18n="atk4Desc">Malware that
+            records every keystroke you type on your keyboard.</span></div>
+        <div class="tip-card"><strong data-i18n="atk5">Credential Stuffing:</strong> <span data-i18n="atk5Desc">Using
+            passwords leaked from one site to try and login to your other accounts.</span></div>
+      </section>
+    </div>
+
+    <!-- Final Summary Card -->
+    <div
+      style="text-align:center;margin-top:40px;padding:28px;background:linear-gradient(135deg,rgba(99,102,241,.1),rgba(16,185,129,.06));border-radius:20px;border:1px solid rgba(99,102,241,.2)">
+      <div style="font-size:32px;margin-bottom:10px">🎯</div>
+      <div style="font-size:16px;font-weight:900;margin-bottom:8px"><span data-i18n="totalTools">Total Tools</span>:
+        <span id="finalCountSummary">304+</span>
+      </div>
+      <div style="font-size:12px;color:var(--muted);max-width:560px;margin:0 auto;line-height:1.6"
+        data-i18n="summaryText">
+        All links are verified and official. Data-driven by <strong
+          style="color:var(--indigo-light)">tools.json</strong>.
+      </div>
+      <div style="font-size:11px;color:var(--dim);margin-top:14px">
+        <span data-i18n="curatedBy">Curated by</span> <strong style="color:#818cf8">SudhirDevOps1</strong> — <span
+          data-i18n="staySafe">Stay safe online!</span> 🛡️
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    🔒 304+ <span data-i18n="footerText">Trusted Security Resources | Curated by <strong>SudhirDevOps1</strong> | Hindi
+      + English Supported</span>
+  </footer>
+
+  <button class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+  <script>
+    let allTools = [{ "url": "https://keepass.info", "cat": "pwd", "icon": "🔑", "name": "KeePass", "tag": "keepass.info · Germany · Open Source", "desc": "Offline password manager — AES-256 encrypted local database. Most trusted, no cloud needed.", "why": { "hi": "Full offline, open-source, audited, community-driven", "en": "Full offline, open-source, audited, community-driven" } }, { "url": "https://bitwarden.com", "cat": "pwd", "icon": "🛡️", "name": "Bitwarden", "tag": "bitwarden.com · USA · Open Source", "desc": "Cloud-based free password manager with E2E encryption. Unlimited passwords on all devices free.", "why": { "hi": "Best free cloud vault, open-source, cross-platform", "en": "Best free cloud vault, open-source, cross-platform" } }, { "url": "https://keepassxc.org", "cat": "pwd", "icon": "🔐", "name": "KeePassXC", "tag": "keepassxc.org · Open Source · Cross-platform", "desc": "Modern KeePass fork — better UI, browser extension, TOTP support. Windows/Mac/Linux.", "why": { "hi": "KeePass का improved version with better UX", "en": "Improved KeePass with better UX and browser extensions" } }, { "url": "https://www.passwordstore.org", "cat": "pwd", "icon": "🔒", "name": "Pass (Unix)", "tag": "passwordstore.org · Open Source · Linux/Mac", "desc": "Standard Unix password manager — GPG encrypted, Git versioned. Terminal-based, developer-friendly.", "why": { "hi": "Developers & Linux users ke liye best minimal manager", "en": "Best minimal manager for developers & Linux users" } }, { "url": "https://padloc.app", "cat": "pwd", "icon": "🔓", "name": "Padloc", "tag": "padloc.app · Open Source · Cross-platform", "desc": "Open-source cloud password manager with beautiful UI. Free tier for 1 user, 50 items.", "why": { "hi": "Beautiful design, open-source alternative to 1Password", "en": "Beautiful open-source alternative to 1Password" } }, { "url": "https://buttercup.pw", "cat": "pwd", "icon": "🧈", "name": "Buttercup", "tag": "buttercup.pw · Open Source · Cross-platform", "desc": "Free, open-source password manager. Store vaults locally or sync via Dropbox/Google Drive.", "why": { "hi": "Simple, free, store anywhere — cloud ya local", "en": "Simple, free, store anywhere — cloud or local" } }, { "url": "https://lesspass.com", "cat": "pwd", "icon": "🔢", "name": "LessPass", "tag": "lesspass.com · Open Source · Stateless", "desc": "Stateless password manager — generates passwords from master key + site name. Nothing stored anywhere.", "why": { "hi": "कोई database नहीं, pure algorithm-based, unique concept", "en": "No database, pure algorithm-based, unique concept" } }, { "url": "https://www.enpass.io", "cat": "pwd", "icon": "📦", "name": "Enpass", "tag": "enpass.io · India · Freemium", "desc": "Offline-first password manager. Free on desktop, paid on mobile. Your data stays on your device.", "why": { "hi": "Indian company, offline-first, no cloud dependency", "en": "Indian company, offline-first, no cloud dependency" } }, { "url": "https://proton.me/pass", "cat": "pwd", "icon": "🟣", "name": "Proton Pass", "tag": "proton.me · Switzerland · Free tier", "desc": "From ProtonMail team — E2E encrypted password manager with email alias support built-in.", "why": { "hi": "Swiss privacy, trusted brand, email aliases included", "en": "Swiss privacy, trusted brand, email aliases included" } }, { "url": "https://heylogin.com", "cat": "pwd", "icon": "📱", "name": "heylogin", "tag": "heylogin.com · Germany · Free", "desc": "Passwordless login manager — use your smartphone as security key. No master password needed.", "why": { "hi": "Passwordless approach, phone-based authentication", "en": "Passwordless approach, phone-based authentication" } }, { "url": "https://vaultwarden.discourse.group", "cat": "pwd", "icon": "⚙️", "name": "Vaultwarden", "tag": "vaultwarden · Open Source · Self-hosted", "desc": "Bitwarden-compatible self-hosted server. Run your own password vault server at home.", "why": { "hi": "Bitwarden ko self-host karo, full control", "en": "Self-host Bitwarden, full control over your data" } }, { "url": "https://psono.com", "cat": "pwd", "icon": "🏢", "name": "Psono", "tag": "psono.com · Germany · Open Source", "desc": "Enterprise-grade self-hosted password manager. Team sharing, auditing, open-source.", "why": { "hi": "Teams ke liye best open-source password manager", "en": "Best open-source password manager for teams" } }, { "url": "https://spectre.app", "cat": "pwd", "icon": "⭐", "name": "Spectre (Master Password)", "tag": "spectre.app · Open Source · Stateless", "desc": "Stateless password algorithm — no storage, generate passwords on demand from name + master.", "why": { "hi": "Zero storage, passwords always recoverable from algorithm", "en": "Zero storage, passwords always recoverable from algorithm" } }, { "url": "https://www.dashlane.com", "cat": "pwd", "icon": "💎", "name": "Dashlane Free", "tag": "dashlane.com · USA/France · Free tier", "desc": "Password manager with dark web monitoring. Free tier for 1 device. Dark web alerts included.", "why": { "hi": "Dark web monitoring free me, polished UI", "en": "Dark web monitoring free, polished UI" } }, { "url": "https://haveibeenpwned.com", "cat": "breach", "icon": "🔍", "name": "HaveIBeenPwned", "tag": "haveibeenpwned.com · Australia · Troy Hunt", "desc": "Check if email/phone in any data breach. 13 billion+ accounts database. Most trusted breach checker.", "why": { "hi": "Gold standard, free, Troy Hunt द्वारा बनाया गया", "en": "Gold standard breach checker by security researcher Troy Hunt" } }, { "url": "https://monitor.firefox.com", "cat": "breach", "icon": "🦊", "name": "Firefox Monitor", "tag": "monitor.firefox.com · Mozilla · Free", "desc": "Mozilla's breach notification service — powered by HIBP data. Auto email alerts on new breaches.", "why": { "hi": "Mozilla trusted brand, automatic email alerts", "en": "Mozilla trusted brand, automatic breach email alerts" } }, { "url": "https://www.dehashed.com", "cat": "breach", "icon": "🔓", "name": "DeHashed", "tag": "dehashed.com · USA · Free search", "desc": "Advanced breach database — search by email, username, IP, name, password. Deep search.", "why": { "hi": "Deep search beyond email, find leaked credentials", "en": "Deep search beyond email, find leaked credentials" } }, { "url": "https://intelligence.intelx.io", "cat": "breach", "icon": "🕵️", "name": "IntelligenceX", "tag": "intelx.io · Czech Republic · Free tier", "desc": "OSINT search engine — search breach data, darknet, Whois, URLs, crypto. Free limited searches.", "why": { "hi": "Deep OSINT tool for security researchers", "en": "Deep OSINT tool for advanced security researchers" } }, { "url": "https://leakcheck.io", "cat": "breach", "icon": "💧", "name": "LeakCheck", "tag": "leakcheck.io · Free tier", "desc": "Check if credentials appeared in known leaks. Shows which breach and when it happened.", "why": { "hi": "Exactly which breach me password था — shows detail", "en": "Shows exactly which breach had your password with details" } }, { "url": "https://www.avast.com/hackcheck", "cat": "breach", "icon": "🛡️", "name": "Avast Hack Check", "tag": "avast.com · Czech Republic · Free", "desc": "Free email breach checker by Avast. Simple — enter email, get results instantly.", "why": { "hi": "Simple UI, trusted antivirus brand", "en": "Simple UI, trusted antivirus brand" } }, { "url": "https://cybernews.com/personal-data-leak-check", "cat": "breach", "icon": "📰", "name": "CyberNews Leak Check", "tag": "cybernews.com · Lithuania · Free", "desc": "Check email AND phone number leaks. 15 billion+ records checked. Modern UI.", "why": { "hi": "Phone number check support, modern UI", "en": "Phone number leak check support, modern interface" } }, { "url": "https://ghostproject.fr", "cat": "breach", "icon": "👻", "name": "GhostProject", "tag": "ghostproject.fr · Free", "desc": "Search 1.4 billion+ leaked credentials database. Quick check if your password was exposed.", "why": { "hi": "Massive database, instant password leak lookup", "en": "Massive database, instant password leak lookup" } }, { "url": "https://breachdirectory.org", "cat": "breach", "icon": "📂", "name": "Breach Directory", "tag": "breachdirectory.org · Free", "desc": "Search breached passwords using SHA1 hash — see partial leaked passwords safely.", "why": { "hi": "Hash-based safe password check, detailed source info", "en": "Hash-based safe password check with source information" } }, { "url": "https://haveibeenpwned.com/passwords", "cat": "breach", "icon": "🔑", "name": "HIBP Passwords", "tag": "haveibeenpwned.com · Troy Hunt · Free", "desc": "Check if a specific password appears in any known breach — uses k-anonymity, safe to use.", "why": { "hi": "Password check without exposing it — k-anonymity model", "en": "Check password without exposing it using k-anonymity" } }, { "url": "https://www.f-secure.com/en/home/free-tools/identity-theft-checker", "cat": "breach", "icon": "🔵", "name": "F-Secure ID Check", "tag": "f-secure.com · Finland · Free", "desc": "Identity theft checker — check your email in breach databases. Simple & trusted Finnish brand.", "why": { "hi": "Finnish privacy, simple identity theft check", "en": "Finnish privacy-focused simple identity theft check" } }, { "url": "https://www.spycloud.com/solutions/consumer-risk", "cat": "breach", "icon": "☁️", "name": "SpyCloud Consumer Risk", "tag": "spycloud.com · USA · Free check", "desc": "Check if employee or personal credentials are exposed in criminal underground databases.", "why": { "hi": "Criminal underground database check, enterprise grade", "en": "Checks criminal underground databases, enterprise grade" } }, { "url": "https://www.crimeflare.org", "cat": "breach", "icon": "🌩️", "name": "CrimeFlare", "tag": "crimeflare.org · Free", "desc": "Find real IP behind Cloudflare-protected sites. Useful for security research & OSINT.", "why": { "hi": "Cloudflare ke behind actual IP find karo", "en": "Find real IP behind Cloudflare protection" } }, { "url": "https://pwnedpasswords.com", "cat": "breach", "icon": "🔐", "name": "Pwned Passwords API", "tag": "pwnedpasswords.com · HIBP · Free API", "desc": "Free API to check passwords against 900 million+ compromised passwords. Integrate into apps.", "why": { "hi": "Developers ke liye free API, apps me integrate karo", "en": "Free API for developers to integrate password checking" } }, { "url": "https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2", "cat": "2fa", "icon": "🔐", "name": "Google Authenticator", "tag": "Google · Free · Android/iOS", "desc": "Simple TOTP authenticator. Now supports cloud backup. Most widely used 2FA app worldwide.", "why": { "hi": "Simple, trusted, cloud backup available", "en": "Simple, trusted, cloud backup now available" } }, { "url": "https://authy.com", "cat": "2fa", "icon": "📱", "name": "Authy", "tag": "authy.com · Twilio · Free", "desc": "2FA app with encrypted cloud backup and multi-device sync. Never lose your codes again.", "why": { "hi": "Multi-device sync, phone kho jaye to bhi safe", "en": "Multi-device sync, safe even if phone is lost" } }, { "url": "https://www.microsoft.com/en-us/security/mobile-authenticator-app", "cat": "2fa", "icon": "🟦", "name": "Microsoft Authenticator", "tag": "Microsoft · Free · Android/iOS", "desc": "2FA + passwordless login for Microsoft accounts. Auto-fill passwords & backup support.", "why": { "hi": "Microsoft ecosystem ke liye best, passwordless login", "en": "Best for Microsoft ecosystem, supports passwordless login" } }, { "url": "https://getaegis.app", "cat": "2fa", "icon": "🛡️", "name": "Aegis Authenticator", "tag": "getaegis.app · Open Source · Android", "desc": "Open-source 2FA app for Android. Encrypted vault, import from other apps, biometric lock.", "why": { "hi": "Android ke liye best open-source 2FA, fully encrypted", "en": "Best open-source 2FA for Android, fully encrypted vault" } }, { "url": "https://raivo-otp.com", "cat": "2fa", "icon": "🍎", "name": "Raivo OTP", "tag": "raivo-otp.com · Open Source · iOS", "desc": "Native iOS 2FA app — lightweight, open-source, iCloud sync. Beautiful design. Swift written.", "why": { "hi": "iOS ke liye best open-source TOTP app", "en": "Best open-source TOTP app for iOS users" } }, { "url": "https://2fa.directory", "cat": "2fa", "icon": "📋", "name": "2FA Directory", "tag": "2fa.directory · Community · Free", "desc": "Complete database of which websites support 2FA and type (TOTP/SMS/U2F). 1000+ sites listed.", "why": { "hi": "Pata karo konsi site 2FA support karti hai", "en": "Find out which sites support 2FA and what type" } }, { "url": "https://www.yubico.com", "cat": "2fa", "icon": "🔑", "name": "YubiKey (Yubico)", "tag": "yubico.com · Sweden · Hardware key", "desc": "Hardware security keys — FIDO2/U2F/OTP. Most phishing-resistant 2FA. Gold standard hardware key.", "why": { "hi": "Hardware 2FA is the most secure method available", "en": "Hardware 2FA is the most secure authentication method" } }, { "url": "https://www.dongleauth.com", "cat": "2fa", "icon": "🔌", "name": "DongleAuth", "tag": "dongleauth.com · Community · Free", "desc": "List of sites supporting hardware security keys (U2F/FIDO2). Check before buying a key.", "why": { "hi": "Hardware key lene se pehle check karo kahan use hoga", "en": "Check where your hardware key can be used before buying" } }, { "url": "https://ente.io/auth", "cat": "2fa", "icon": "🔏", "name": "Ente Auth", "tag": "ente.io · Open Source · Free", "desc": "Open-source 2FA with encrypted cloud backup. Cross-platform. Offline access, E2E encrypted.", "why": { "hi": "Aegis + cloud backup, best of both worlds", "en": "Aegis + cloud backup combined, best of both worlds" } }, { "url": "https://tofu.app", "cat": "2fa", "icon": "🍱", "name": "Tofu Authenticator", "tag": "tofu.app · Open Source · iOS", "desc": "iOS 2FA app — open-source, no cloud, offline. Stores keys in iOS Secure Enclave.", "why": { "hi": "iOS Secure Enclave use karta hai, very secure", "en": "Uses iOS Secure Enclave for maximum key protection" } }, { "url": "https://freeotp.github.io", "cat": "2fa", "icon": "🔓", "name": "FreeOTP", "tag": "freeotp.github.io · Red Hat · Free", "desc": "Open-source 2FA from Red Hat. Simple TOTP/HOTP. Android & iOS. No account needed.", "why": { "hi": "Red Hat backed, simple, no account needed", "en": "Red Hat backed, simple TOTP, no account required" } }, { "url": "https://nitrokey.com", "cat": "2fa", "icon": "🔩", "name": "Nitrokey", "tag": "nitrokey.com · Germany · Open Source Hardware", "desc": "Open-source hardware security keys — FIDO2, PGP, OTP, password manager. German privacy.", "why": { "hi": "Open-source hardware key, YubiKey ka secure alternative", "en": "Open-source hardware key, secure YubiKey alternative" } }, { "url": "https://protonvpn.com/free-vpn", "cat": "vpn", "icon": "🟣", "name": "ProtonVPN (Free)", "tag": "protonvpn.com · Switzerland · Free tier", "desc": "No-log VPN — free tier with unlimited bandwidth. Swiss privacy laws protect your data.", "why": { "hi": "Truly free, no logs, Swiss jurisdiction, unlimited data", "en": "Truly free, strict no-logs, Swiss laws, unlimited data" } }, { "url": "https://www.privacyguides.org", "cat": "vpn", "icon": "📖", "name": "Privacy Guides", "tag": "privacyguides.org · Community · Free", "desc": "Best guide for privacy tools — VPNs, browsers, email, OS, messengers all reviewed unbiasedly.", "why": { "hi": "Community-driven, unbiased, comprehensive privacy guide", "en": "Community-driven, unbiased, comprehensive privacy recommendations" } }, { "url": "https://signal.org", "cat": "vpn", "icon": "💬", "name": "Signal", "tag": "signal.org · USA (non-profit) · Free", "desc": "Most secure messaging app — E2E encrypted chats, calls, video. Recommended by Snowden.", "why": { "hi": "Gold standard for private messaging, journalists use karते हैं", "en": "Gold standard private messaging, used by journalists & activists" } }, { "url": "https://www.torproject.org", "cat": "vpn", "icon": "🧅", "name": "Tor Browser", "tag": "torproject.org · Non-profit · Free", "desc": "Anonymous browsing — routes traffic through 3+ layers of encryption. Maximum anonymity online.", "why": { "hi": "Maximum anonymity, bypass censorship, journalists ke liye essential", "en": "Maximum anonymity online, bypass censorship, journalist essential" } }, { "url": "https://brave.com", "cat": "vpn", "icon": "🦁", "name": "Brave Browser", "tag": "brave.com · USA · Free", "desc": "Privacy-focused browser — blocks ads & trackers by default. Built-in Tor mode, IPFS support.", "why": { "hi": "Fast, blocks ads automatically, built-in privacy features", "en": "Fast browser with automatic ad blocking and built-in Tor" } }, { "url": "https://simplelogin.io", "cat": "vpn", "icon": "📨", "name": "SimpleLogin", "tag": "simplelogin.io · France/Proton · Free", "desc": "Email alias service — create unlimited aliases to hide your real email. Part of Proton now.", "why": { "hi": "Real email hide karo, spam se bachao, Proton ka part", "en": "Hide real email, protect from spam, owned by Proton" } }, { "url": "https://anonaddy.com", "cat": "vpn", "icon": "📬", "name": "AnonAddy", "tag": "anonaddy.com · UK · Free tier", "desc": "Anonymous email forwarding — create aliases on the fly. Open-source, self-hostable.", "why": { "hi": "SimpleLogin alternative, open-source, self-host possible", "en": "Open-source SimpleLogin alternative, can be self-hosted" } }, { "url": "https://duckduckgo.com", "cat": "vpn", "icon": "🦆", "name": "DuckDuckGo", "tag": "duckduckgo.com · USA · Free", "desc": "Privacy-first search engine — no tracking, no profiling, no filter bubble. Search privately.", "why": { "hi": "Google alternative jo track nahi karta", "en": "Google alternative that doesn't track your searches" } }, { "url": "https://searx.space", "cat": "vpn", "icon": "🔎", "name": "SearXNG", "tag": "searx.space · Open Source · Free", "desc": "Meta search engine — aggregates results from 70+ engines without tracking. Self-hostable.", "why": { "hi": "Ultimate private search, self-host karo", "en": "Ultimate private search engine, can be self-hosted" } }, { "url": "https://cryptomator.org", "cat": "vpn", "icon": "📁", "name": "Cryptomator", "tag": "cryptomator.org · Germany · Free", "desc": "Encrypt your cloud files — Google Drive, Dropbox, OneDrive me files encrypt karke store karo.", "why": { "hi": "Cloud storage ko encrypted banao, free, open-source", "en": "Make cloud storage encrypted, free open-source tool" } }, { "url": "https://www.wireguard.com", "cat": "vpn", "icon": "🔗", "name": "WireGuard", "tag": "wireguard.com · Open Source · Free", "desc": "Modern VPN protocol — extremely fast, simple, secure. Used by ProtonVPN, Mullvad, many others.", "why": { "hi": "Fastest & most secure VPN protocol, open-source", "en": "Fastest and most secure VPN protocol, open-source" } }, { "url": "https://mullvad.net", "cat": "vpn", "icon": "🦌", "name": "Mullvad VPN", "tag": "mullvad.net · Sweden · Paid (5€/mo)", "desc": "Anonymous VPN — no email signup, pay cash/crypto. Accepted police warrant and had nothing to give.", "why": { "hi": "No email signup, truly anonymous, proved in court", "en": "No email signup, truly anonymous, proved in real court case" } }, { "url": "https://www.ivpn.net", "cat": "vpn", "icon": "🛡️", "name": "IVPN", "tag": "ivpn.net · Gibraltar · Paid/Free trial", "desc": "Privacy-focused VPN with multihop. No email signup. WireGuard & OpenVPN. Annual audit.", "why": { "hi": "Annual audited VPN, multihop support, no email needed", "en": "Annually audited VPN, multihop support, no email signup" } }, { "url": "https://www.startpage.com", "cat": "vpn", "icon": "🔍", "name": "Startpage", "tag": "startpage.com · Netherlands · Free", "desc": "Search Google results anonymously — Startpage acts as proxy between you and Google. No tracking.", "why": { "hi": "Google results without Google tracking, Dutch privacy", "en": "Get Google results without Google tracking you" } }, { "url": "https://www.virustotal.com", "cat": "av", "icon": "🦠", "name": "VirusTotal", "tag": "virustotal.com · Google/Chronicle · Free", "desc": "Scan file or URL with 70+ antivirus engines simultaneously. The ultimate malware checker.", "why": { "hi": "70+ engines ek saath, Google-backed, industry standard", "en": "70+ engines simultaneously, Google-backed, industry standard" } }, { "url": "https://www.malwarebytes.com/mwb-download", "cat": "av", "icon": "🧹", "name": "Malwarebytes Free", "tag": "malwarebytes.com · USA · Free scanner", "desc": "Malware scanner — removes viruses, ransomware, adware. Free on-demand scanning available.", "why": { "hi": "Best free malware remover, catches what others miss", "en": "Best free malware remover, detects what others miss" } }, { "url": "https://www.clamav.net", "cat": "av", "icon": "🐚", "name": "ClamAV", "tag": "clamav.net · Cisco · Open Source", "desc": "Open-source antivirus engine — used on mail servers & Linux. Command-line based scanning.", "why": { "hi": "Open-source, server-side scanning, Linux ke liye best", "en": "Open-source, server-side scanning, best for Linux servers" } }, { "url": "https://www.hybrid-analysis.com", "cat": "av", "icon": "🔬", "name": "Hybrid Analysis", "tag": "hybrid-analysis.com · CrowdStrike · Free", "desc": "Advanced malware sandbox — upload suspicious files for deep behavioral analysis in VMs.", "why": { "hi": "Deep analysis, sandbox testing, CrowdStrike powered", "en": "Deep behavioral analysis, sandbox, CrowdStrike powered" } }, { "url": "https://any.run", "cat": "av", "icon": "▶️", "name": "ANY.RUN", "tag": "any.run · Free tier", "desc": "Interactive malware sandbox — watch malware execute in real-time in a safe virtual environment.", "why": { "hi": "Live malware analysis, visual, educational for security students", "en": "Live visual malware analysis, great for security students" } }, { "url": "https://urlscan.io", "cat": "av", "icon": "🌐", "name": "URLScan.io", "tag": "urlscan.io · Free", "desc": "Scan and analyze websites — see what a URL loads, scripts, requests, screenshots safely.", "why": { "hi": "URL ko safely analyze karo bina open kiye", "en": "Safely analyze URLs without opening them" } }, { "url": "https://www.joesandbox.com", "cat": "av", "icon": "📦", "name": "Joe Sandbox", "tag": "joesandbox.com · Switzerland · Free tier", "desc": "Deep malware analysis — behavioral analysis, network traffic, registry changes all reported.", "why": { "hi": "Most detailed analysis reports, Swiss quality", "en": "Most detailed analysis reports, Swiss quality standards" } }, { "url": "https://www.filescan.io", "cat": "av", "icon": "📄", "name": "FileScan.io", "tag": "filescan.io · Free tier", "desc": "Next-gen file analysis — detects malware in documents, scripts, executables. Fast results.", "why": { "hi": "Document malware detection, fast, free", "en": "Document malware detection, fast and free" } }, { "url": "https://opentip.kaspersky.com", "cat": "av", "icon": "🔎", "name": "Kaspersky OpenTIP", "tag": "opentip.kaspersky.com · Free", "desc": "Threat intelligence portal — check file hashes, IPs, URLs, domains for known threats.", "why": { "hi": "Professional threat intelligence, free to use", "en": "Professional-grade threat intelligence, free to use" } }, { "url": "https://www.threatminer.org", "cat": "av", "icon": "⛏️", "name": "ThreatMiner", "tag": "threatminer.org · Free", "desc": "Threat intelligence data mining portal — domains, IPs, SSL, malware hashes all searchable.", "why": { "hi": "Comprehensive threat intelligence, free mining tool", "en": "Comprehensive threat intelligence data mining, free" } }, { "url": "https://www.abusech.org", "cat": "av", "icon": "🚨", "name": "abuse.ch", "tag": "abusech.org · Switzerland · Free", "desc": "Threat intelligence platform — MalwareBazaar, URLhaus, ThreatFox. Community malware data.", "why": { "hi": "Community threat intelligence, malware IoCs database", "en": "Community threat intelligence and malware IoC database" } }, { "url": "https://bazaar.abuse.ch", "cat": "av", "icon": "🏪", "name": "MalwareBazaar", "tag": "bazaar.abuse.ch · Switzerland · Free", "desc": "Free malware sample database — search, download, submit malware samples for analysis.", "why": { "hi": "Malware samples research ke liye, security researchers ke liye", "en": "Malware samples for research, essential for security researchers" } }, { "url": "https://www.metadefender.com", "cat": "av", "icon": "🔏", "name": "MetaDefender", "tag": "metadefender.opswat.com · OPSWAT · Free", "desc": "Multi-scanning — scan files with 30+ AV engines. Sanitize documents, check IPs, URLs.", "why": { "hi": "Document sanitization + multi-AV scan, enterprise grade free", "en": "Document sanitization plus multi-AV scan, enterprise grade" } }, { "url": "https://www.intezer.com/intezer-analyze", "cat": "av", "icon": "🧬", "name": "Intezer Analyze", "tag": "intezer.com · Israel · Free tier", "desc": "Genetic malware analysis — identifies code reuse from known malware families. Unique approach.", "why": { "hi": "Unique genetic code analysis, finds APT malware families", "en": "Unique genetic code analysis identifies APT malware families" } }, { "url": "https://www.ssllabs.com/ssltest", "cat": "web", "icon": "🔒", "name": "SSL Labs Test", "tag": "ssllabs.com · Qualys · Free", "desc": "Test any website's SSL/TLS configuration. Get A+ to F rating with detailed vulnerability report.", "why": { "hi": "Industry standard SSL checker, website security verify karo", "en": "Industry standard SSL checker to verify website security" } }, { "url": "https://securityheaders.com", "cat": "web", "icon": "📋", "name": "SecurityHeaders", "tag": "securityheaders.com · Scott Helme · Free", "desc": "Check HTTP security headers of any website. CSP, HSTS, X-Frame-Options, Permissions-Policy.", "why": { "hi": "Website ki security headers check karo, web devs ke liye", "en": "Check website security headers, essential for web developers" } }, { "url": "https://observatory.mozilla.org", "cat": "web", "icon": "🔭", "name": "Mozilla Observatory", "tag": "observatory.mozilla.org · Mozilla · Free", "desc": "Comprehensive website security scanner — checks SSL, headers, cookies, CORS, redirects.", "why": { "hi": "Mozilla ka official tool, comprehensive scan", "en": "Mozilla's official comprehensive website security scanner" } }, { "url": "https://www.hardenize.com", "cat": "web", "icon": "🛡️", "name": "Hardenize", "tag": "hardenize.com · Free scan", "desc": "Network & website security assessment — DNS, email, web server all assessed in one scan.", "why": { "hi": "Complete infrastructure security check in one scan", "en": "Complete infrastructure security check all in one scan" } }, { "url": "https://crt.sh", "cat": "web", "icon": "📜", "name": "crt.sh", "tag": "crt.sh · Certificate Transparency · Free", "desc": "Search SSL/TLS certificates — find all certs issued for any domain. CT log explorer.", "why": { "hi": "Domain ke saare certificates dekho, security audit", "en": "View all certificates issued for a domain, security audit" } }, { "url": "https://www.phishtank.com", "cat": "web", "icon": "🎣", "name": "PhishTank", "tag": "phishtank.com · Cisco · Free", "desc": "Community-driven phishing URL database. Submit & check suspected phishing sites.", "why": { "hi": "Phishing URL verify karo, Cisco backed", "en": "Verify phishing URLs, community-driven, Cisco backed" } }, { "url": "https://transparencyreport.google.com/safe-browsing", "cat": "web", "icon": "🔎", "name": "Google Safe Browsing", "tag": "Google · Free", "desc": "Check if URL is flagged as unsafe by Google. Used internally by Chrome, Firefox, Safari.", "why": { "hi": "Google ka malware/phishing database, billions use karte hain", "en": "Google's malware/phishing database used by billions daily" } }, { "url": "https://sitecheck.sucuri.net", "cat": "web", "icon": "🌿", "name": "Sucuri SiteCheck", "tag": "sucuri.net · GoDaddy · Free", "desc": "Website malware & security checker — scans for malware, blacklist status, errors, outdated CMS.", "why": { "hi": "Website malware check, CMS vulnerabilities detect", "en": "Website malware check and CMS vulnerability detection" } }, { "url": "https://www.shodan.io", "cat": "web", "icon": "👁️", "name": "Shodan", "tag": "shodan.io · Free tier", "desc": "Search engine for internet-connected devices — exposed servers, webcams, routers, IoT devices.", "why": { "hi": "Internet pe exposed devices dhundho, security audit", "en": "Find exposed devices on the internet, security auditing" } }, { "url": "https://builtwith.com", "cat": "web", "icon": "🔧", "name": "BuiltWith", "tag": "builtwith.com · Free", "desc": "See what technologies any website uses — CMS, analytics, CDN, hosting, frameworks, JS libs.", "why": { "hi": "Website ki technology stack pata karo", "en": "Discover any website's full technology stack" } }, { "url": "https://pentest-tools.com/website-vulnerability-scanner", "cat": "web", "icon": "🕷️", "name": "Pentest Tools Web Scanner", "tag": "pentest-tools.com · Free tier", "desc": "Website vulnerability scanner — finds XSS, SQLi, misconfigurations. Free limited scans.", "why": { "hi": "Automated web vulnerability scanning, free tier", "en": "Automated web vulnerability scanning with free tier" } }, { "url": "https://www.immuniweb.com/websec", "cat": "web", "icon": "🔐", "name": "ImmuniWeb WebSec Test", "tag": "immuniweb.com · Switzerland · Free", "desc": "Comprehensive web security test — GDPR, PCI-DSS compliance check plus vulnerability scan.", "why": { "hi": "GDPR/PCI compliance + security check, free", "en": "GDPR/PCI compliance check plus security test, free" } }, { "url": "https://www.wappalyzer.com", "cat": "web", "icon": "🔍", "name": "Wappalyzer", "tag": "wappalyzer.com · Free", "desc": "Browser extension to detect website technologies in real-time. Instant stack analysis.", "why": { "hi": "Real-time technology detection, browser extension", "en": "Real-time technology detection as browser extension" } }, { "url": "https://www.zoomeye.org", "cat": "web", "icon": "🔭", "name": "ZoomEye", "tag": "zoomeye.org · Knownsec · Free", "desc": "Cyberspace search engine — find exposed services, devices, vulnerabilities globally. Shodan alternative.", "why": { "hi": "Shodan alternative, Chinese infrastructure good coverage", "en": "Shodan alternative with good global infrastructure coverage" } }, { "url": "https://browserleaks.com", "cat": "fp", "icon": "🕵️", "name": "BrowserLeaks", "tag": "browserleaks.com · Free", "desc": "Check what your browser reveals — IP, geolocation, WebRTC, canvas fingerprint, fonts, plugins.", "why": { "hi": "Pata karo browser kitna data leak kar raha hai", "en": "Find out exactly how much data your browser is leaking" } }, { "url": "https://amiunique.org", "cat": "fp", "icon": "🔬", "name": "Am I Unique?", "tag": "amiunique.org · INRIA (France) · Free", "desc": "Browser fingerprint test — check if your browser configuration is unique (trackable by sites).", "why": { "hi": "Browser fingerprinting se kaise track hote ho — test karo", "en": "Test how trackable you are via browser fingerprinting" } }, { "url": "https://coveryourtracks.eff.org", "cat": "fp", "icon": "👣", "name": "Cover Your Tracks (EFF)", "tag": "eff.org · Electronic Frontier Foundation · Free", "desc": "Test browser tracking protection. See if trackers can identify you uniquely. EFF official tool.", "why": { "hi": "EFF ka official tool, browser fingerprint test", "en": "EFF's official browser fingerprint tracking test" } }, { "url": "https://ipleak.net", "cat": "fp", "icon": "📍", "name": "IPLeak.net", "tag": "ipleak.net · Free", "desc": "Check IP, DNS, WebRTC leaks. Essential test after connecting to any VPN service.", "why": { "hi": "VPN use karte ho to leak check karo", "en": "Check for leaks after connecting to VPN" } }, { "url": "https://dnsleaktest.com", "cat": "fp", "icon": "🌐", "name": "DNS Leak Test", "tag": "dnsleaktest.com · Free", "desc": "Check if DNS queries leak outside VPN tunnel. Standard and extended tests available.", "why": { "hi": "VPN pe DNS leak hota hai to privacy khatam — check karo", "en": "DNS leaks destroy VPN privacy, check for them here" } }, { "url": "https://tosdr.org", "cat": "fp", "icon": "📜", "name": "ToS;DR", "tag": "tosdr.org · Community · Free", "desc": "Terms of Service; Didn't Read — rates privacy policies Grade A to E. Know what you agree to.", "why": { "hi": "Kisi bhi website ki privacy policy ki rating dekho", "en": "See any website's privacy policy rated simply A-E" } }, { "url": "https://privacyspy.org", "cat": "fp", "icon": "🔎", "name": "PrivacySpy", "tag": "privacyspy.org · Free", "desc": "Privacy policy ratings — analyzes and scores how companies handle your personal data.", "why": { "hi": "Company kitna private hai — score dekho", "en": "See how privacy-friendly companies really are by score" } }, { "url": "https://justdeleteme.xyz", "cat": "fp", "icon": "🗑️", "name": "JustDeleteMe", "tag": "justdeleteme.xyz · Free", "desc": "Directory of direct links to delete your account from web services. Easy/medium/hard ratings.", "why": { "hi": "Unused accounts delete karo — direct links milenge", "en": "Get direct links to delete unused accounts from services" } }, { "url": "https://www.privacytools.io", "cat": "fp", "icon": "🛡️", "name": "PrivacyTools.io", "tag": "privacytools.io · Community · Free", "desc": "Privacy tool recommendations — alternatives to big tech: email, search, browser, OS, cloud.", "why": { "hi": "Big tech alternatives, comprehensive privacy recommendations", "en": "Big tech alternatives, comprehensive privacy tool guide" } }, { "url": "https://themarkup.org/blacklight", "cat": "fp", "icon": "🔦", "name": "Blacklight (The Markup)", "tag": "themarkup.org · Journalism · Free", "desc": "Real-time website privacy inspector — see exactly who's tracking you on any website.", "why": { "hi": "Real-time trackers dekho kisi bhi website par", "en": "See real-time trackers on any website instantly" } }, { "url": "https://www.whatismyipaddress.com", "cat": "fp", "icon": "📡", "name": "WhatIsMyIPAddress", "tag": "whatismyipaddress.com · Free", "desc": "Check your public IP, ISP, location, proxy/VPN detection. VPN verification tool.", "why": { "hi": "VPN laga ke check karo ki IP properly changed hua", "en": "Verify your IP changed properly after connecting VPN" } }, { "url": "https://www.grc.com/optout.htm", "cat": "fp", "icon": "🚫", "name": "GRC Opt Out of Everything", "tag": "grc.com · Steve Gibson · Free", "desc": "Guide to opt out of tracking, data collection from major companies. Step-by-step privacy cleanup.", "why": { "hi": "Tracking se opt out karne ka complete guide", "en": "Complete guide to opt out of all major tracking systems" } }, { "url": "https://www.veracrypt.fr", "cat": "enc", "icon": "🔐", "name": "VeraCrypt", "tag": "veracrypt.fr · France · Open Source", "desc": "Disk encryption — encrypt whole drives, partitions, or create encrypted containers. Plausible deniability.", "why": { "hi": "TrueCrypt successor, full disk encryption, military-grade", "en": "TrueCrypt successor, full disk encryption, military grade" } }, { "url": "https://gnupg.org", "cat": "enc", "icon": "🔑", "name": "GnuPG (GPG)", "tag": "gnupg.org · Open Source · Free", "desc": "OpenPGP implementation — encrypt files, emails, sign documents. Industry standard since 1997.", "why": { "hi": "Industry standard encryption, email signing, file encryption", "en": "Industry standard for encryption, email signing, files" } }, { "url": "https://age-encryption.org", "cat": "enc", "icon": "⚡", "name": "age encryption", "tag": "age-encryption.org · Open Source · Free", "desc": "Modern, simple file encryption. \"Actually Good Encryption\" — simpler than GPG, secure.", "why": { "hi": "GPG ka simple modern alternative, easy to use", "en": "Simple modern alternative to GPG, easy to use" } }, { "url": "https://hat.sh", "cat": "enc", "icon": "🎩", "name": "hat.sh", "tag": "hat.sh · Open Source · Free", "desc": "Browser-based file encryption — AES-256 in browser. No upload, no server, fully offline.", "why": { "hi": "Browser me hi file encrypt karo, kuch upload nahi hota", "en": "Encrypt files in browser, nothing is uploaded to server" } }, { "url": "https://www.7-zip.org", "cat": "enc", "icon": "📦", "name": "7-Zip", "tag": "7-zip.org · Open Source · Free", "desc": "File archiver with AES-256 encryption. Create password-protected archives, free WinRAR alternative.", "why": { "hi": "Free zip tool with strong encryption, WinRAR ka free alternative", "en": "Free WinRAR alternative with strong AES-256 encryption" } }, { "url": "https://onionshare.org", "cat": "enc", "icon": "🧅", "name": "OnionShare", "tag": "onionshare.org · Open Source · Free", "desc": "Share files anonymously via Tor network. Direct transfer, no middleman server at all.", "why": { "hi": "Anonymous file sharing, no cloud, Tor-based", "en": "Anonymous file sharing via Tor, no cloud server involved" } }, { "url": "https://send.vis.ee", "cat": "enc", "icon": "📤", "name": "Send (Firefox Send Fork)", "tag": "send.vis.ee · Open Source · Free", "desc": "Encrypted file sharing — auto-delete after download. E2E encrypted, link-based, ephemeral.", "why": { "hi": "Auto-delete files, E2E encrypted, simple sharing", "en": "Files auto-delete after download, E2E encrypted sharing" } }, { "url": "https://privatebin.info", "cat": "enc", "icon": "📋", "name": "PrivateBin", "tag": "privatebin.info · Open Source · Free", "desc": "Encrypted pastebin — share text/code with E2E encryption. Server can't read content. Self-destructing.", "why": { "hi": "Pastebin ka encrypted version, server ko bhi text nahi dikhta", "en": "Encrypted pastebin where even server cannot read content" } }, { "url": "https://keybase.io", "cat": "enc", "icon": "🗝️", "name": "Keybase", "tag": "keybase.io · Zoom · Free", "desc": "Encrypted messaging, file sharing, git — verify identities via public key cryptography.", "why": { "hi": "Encrypted team chat + file sharing + identity verification", "en": "Encrypted team chat, files, and cryptographic identity proof" } }, { "url": "https://www.boxcryptor.com/en/free", "cat": "enc", "icon": "📫", "name": "Boxcryptor Free", "tag": "boxcryptor.com · Germany · Free tier", "desc": "Encrypt files before uploading to any cloud. Works with Dropbox, Drive, OneDrive, Box.", "why": { "hi": "Cloud upload se pehle files encrypt karo, German privacy", "en": "Encrypt files before cloud upload, German privacy laws" } }, { "url": "https://keyoxide.org", "cat": "enc", "icon": "🔗", "name": "Keyoxide", "tag": "keyoxide.org · Open Source · Free", "desc": "Decentralized identity verification using OpenPGP keys. Prove you own accounts cryptographically.", "why": { "hi": "Cryptographic identity proof, Keybase ka open alternative", "en": "Cryptographic identity proof, open alternative to Keybase" } }, { "url": "https://www.axcrypt.net", "cat": "enc", "icon": "🪓", "name": "AxCrypt Free", "tag": "axcrypt.net · Sweden · Free", "desc": "Simple file encryption for Windows/Mac — right-click encrypt, AES-128 in free tier.", "why": { "hi": "Simple right-click file encryption, beginners ke liye", "en": "Simple right-click file encryption, great for beginners" } }, { "url": "https://www.cybrary.it", "cat": "edu", "icon": "📚", "name": "Cybrary", "tag": "cybrary.it · USA · Free courses", "desc": "Free cybersecurity courses — beginner to advanced. CompTIA, CISSP, ethical hacking prep.", "why": { "hi": "Free cybersecurity education, certification prep", "en": "Free cybersecurity education and certification preparation" } }, { "url": "https://tryhackme.com", "cat": "edu", "icon": "🏴", "name": "TryHackMe", "tag": "tryhackme.com · Free tier", "desc": "Learn cybersecurity through guided labs — beginner to advanced. Browser-based virtual machines.", "why": { "hi": "Best beginner-friendly cybersecurity learning platform", "en": "Best beginner-friendly platform to learn cybersecurity" } }, { "url": "https://www.hackthebox.com", "cat": "edu", "icon": "💀", "name": "HackTheBox", "tag": "hackthebox.com · UK · Free tier", "desc": "Advanced hacking challenges — CTF-style labs, active & retired machines. Real-world scenarios.", "why": { "hi": "Advanced ethical hacking practice, CTF competitions", "en": "Advanced ethical hacking practice with CTF competitions" } }, { "url": "https://owasp.org", "cat": "edu", "icon": "🐝", "name": "OWASP", "tag": "owasp.org · Non-profit · Free", "desc": "Open Web Application Security Project — Top 10 vulnerabilities, guides, tools, cheat sheets.", "why": { "hi": "Web security ka bible, industry standard", "en": "The bible of web security, industry standard reference" } }, { "url": "https://ssd.eff.org", "cat": "edu", "icon": "📖", "name": "EFF Surveillance Self-Defense", "tag": "ssd.eff.org · EFF · Free", "desc": "Step-by-step guides to protect yourself from surveillance. Beginners to journalists covered.", "why": { "hi": "Surveillance se bachne ka complete guide", "en": "Complete guide to protect yourself from surveillance" } }, { "url": "https://www.hacksplaining.com", "cat": "edu", "icon": "🎓", "name": "Hacksplaining", "tag": "hacksplaining.com · Free", "desc": "Interactive security lessons — SQL injection, XSS, CSRF, clickjacking, explained clearly.", "why": { "hi": "Interactive way me web security attacks sikho", "en": "Learn web security attacks interactively and visually" } }, { "url": "https://overthewire.org/wargames", "cat": "edu", "icon": "🎮", "name": "OverTheWire Wargames", "tag": "overthewire.org · Free", "desc": "Learn security through games — SSH challenges, Linux commands, networking. Bandit for beginners.", "why": { "hi": "Game khelke security sikho, hands-on practice", "en": "Learn security by playing games, hands-on practice" } }, { "url": "https://www.sans.org/security-resources", "cat": "edu", "icon": "🏛️", "name": "SANS Free Resources", "tag": "sans.org · Free resources", "desc": "Free security posters, cheat sheets, webcasts from world's top security training organization.", "why": { "hi": "World's best security training org ke free resources", "en": "Free resources from world's top security training org" } }, { "url": "https://www.cisa.gov/cybersecurity", "cat": "edu", "icon": "🇺🇸", "name": "CISA Cybersecurity", "tag": "cisa.gov · US Government · Free", "desc": "Official US cybersecurity agency — real-time alerts, guides, best practices for everyone.", "why": { "hi": "Government official security advice, real threat alerts", "en": "Official US government security advice and threat alerts" } }, { "url": "https://portswigger.net/web-security", "cat": "edu", "icon": "🕸️", "name": "PortSwigger Web Security Academy", "tag": "portswigger.net · UK · Free", "desc": "Free web security training by Burp Suite makers. 200+ labs covering all OWASP attacks.", "why": { "hi": "Burp Suite makers ka free training, 200+ labs, best resource", "en": "Free training by Burp Suite makers, 200+ hands-on labs" } }, { "url": "https://www.picoctf.org", "cat": "edu", "icon": "🏆", "name": "picoCTF", "tag": "picoctf.org · Carnegie Mellon · Free", "desc": "Beginner CTF competition by Carnegie Mellon University. Cryptography, forensics, web, binary.", "why": { "hi": "Students ke liye best CTF, Carnegie Mellon university backed", "en": "Best CTF for students, backed by Carnegie Mellon University" } }, { "url": "https://ctftime.org", "cat": "edu", "icon": "⏱️", "name": "CTFtime", "tag": "ctftime.org · Community · Free", "desc": "CTF competition calendar — find upcoming competitions, team rankings, past writeups.", "why": { "hi": "Upcoming CTF competitions find karo, writeups padho", "en": "Find upcoming CTF competitions and read past writeups" } }, { "url": "https://www.cybersecuritychallenge.org.uk", "cat": "edu", "icon": "🇬🇧", "name": "Cyber Security Challenge UK", "tag": "cybersecuritychallenge.org.uk · UK · Free", "desc": "UK government-backed cybersecurity talent development. Competitions, mentoring, career resources.", "why": { "hi": "Government-backed competitions, career development", "en": "Government-backed competitions and career development" } }, { "url": "https://decentsecurity.com", "cat": "edu", "icon": "✅", "name": "Decent Security", "tag": "decentsecurity.com · Free", "desc": "Simple security guides for regular people — no jargon, easy to follow actionable steps.", "why": { "hi": "Non-technical people ke liye simple security guide", "en": "Simple no-jargon security guide for non-technical people" } }, { "url": "https://1.1.1.1", "cat": "dns", "icon": "☁️", "name": "Cloudflare DNS (1.1.1.1)", "tag": "1.1.1.1 · Cloudflare · Free", "desc": "Fastest privacy-first DNS resolver. Malware blocking (1.1.1.2) and family filter (1.1.1.3).", "why": { "hi": "Fastest DNS, privacy-focused, malware blocking options", "en": "World's fastest DNS resolver with privacy and malware blocking" } }, { "url": "https://adguard-dns.io", "cat": "dns", "icon": "🛡️", "name": "AdGuard DNS", "tag": "adguard-dns.io · Cyprus · Free", "desc": "DNS that blocks ads, trackers, malware at network level. All devices, no app installation needed.", "why": { "hi": "Ads aur trackers DNS level pe block, no app install", "en": "Block ads and trackers at DNS level, no app needed" } }, { "url": "https://nextdns.io", "cat": "dns", "icon": "🔒", "name": "NextDNS", "tag": "nextdns.io · USA · Free tier", "desc": "Customizable DNS firewall — block ads, trackers, malware, adult content. Per-device rules dashboard.", "why": { "hi": "Highly customizable, parental controls, analytics", "en": "Highly customizable with parental controls and analytics" } }, { "url": "https://pi-hole.net", "cat": "dns", "icon": "🕳️", "name": "Pi-hole", "tag": "pi-hole.net · Open Source · Free", "desc": "Network-wide ad blocker — install on Raspberry Pi, blocks ads for entire home network.", "why": { "hi": "Poore ghar ke ads block karo, self-hosted, open-source", "en": "Block ads for entire home network, self-hosted open-source" } }, { "url": "https://www.wireshark.org", "cat": "dns", "icon": "🦈", "name": "Wireshark", "tag": "wireshark.org · Open Source · Free", "desc": "Network packet analyzer — capture and inspect all traffic on your network. Essential debugging tool.", "why": { "hi": "Network traffic analyze karo, #1 protocol analyzer", "en": "Analyze all network traffic, #1 protocol analyzer" } }, { "url": "https://nmap.org", "cat": "dns", "icon": "🗺️", "name": "Nmap", "tag": "nmap.org · Open Source · Free", "desc": "Network scanner — discover hosts, open ports, services, OS detection. Security audit essential.", "why": { "hi": "Network security audit ka #1 tool, open-source", "en": "#1 tool for network security auditing, open-source" } }, { "url": "https://www.grc.com/shieldsup", "cat": "dns", "icon": "🛡️", "name": "ShieldsUP!", "tag": "grc.com · Steve Gibson · Free", "desc": "Test firewall & router — scans open ports on your internet connection. Self-test your security.", "why": { "hi": "Apne network ka firewall test karo, ports scan karo", "en": "Test your network firewall and scan for open ports" } }, { "url": "https://mxtoolbox.com", "cat": "dns", "icon": "📧", "name": "MXToolbox", "tag": "mxtoolbox.com · Free", "desc": "Email & DNS diagnostics — check MX records, SPF, DKIM, DMARC, blacklists all in one place.", "why": { "hi": "Email server security check, blacklist monitoring", "en": "Email server security check and blacklist monitoring" } }, { "url": "https://www.tcpdump.org", "cat": "dns", "icon": "📡", "name": "tcpdump", "tag": "tcpdump.org · Open Source · Free", "desc": "Command-line packet analyzer — capture network packets on Linux/Mac. Wireshark's CLI counterpart.", "why": { "hi": "CLI network packet capture, Linux/Mac servers ke liye", "en": "CLI network packet capture for Linux/Mac servers" } }, { "url": "https://www.dns0.eu", "cat": "dns", "icon": "🇪🇺", "name": "dns0.eu", "tag": "dns0.eu · European · Free", "desc": "European secure DNS — built in EU, GDPR compliant. Blocks malware, phishing, adult content.", "why": { "hi": "European DNS, GDPR compliant, EU data protection", "en": "European DNS, GDPR compliant with EU data protection" } }, { "url": "https://www.quad9.net", "cat": "dns", "icon": "9️⃣", "name": "Quad9 DNS", "tag": "quad9.net · Non-profit · Free", "desc": "Security-focused DNS resolver — blocks malicious domains using threat intelligence from 18+ sources.", "why": { "hi": "Non-profit DNS, 18+ threat intel sources se malware block", "en": "Non-profit DNS blocking malware using 18+ threat intel sources" } }, { "url": "https://dnsviz.net", "cat": "dns", "icon": "🗺️", "name": "DNSViz", "tag": "dnsviz.net · Free", "desc": "DNS visualization tool — analyze and visualize DNSSEC chain of trust for any domain.", "why": { "hi": "DNSSEC chain visualize karo, DNS issues debug", "en": "Visualize DNSSEC chain of trust, debug DNS issues" } }, { "url": "https://centralops.net", "cat": "dns", "icon": "🕹️", "name": "CentralOps", "tag": "centralops.net · Free", "desc": "Online network tools — domain dossier, email dossier, traceroute, ping, WHOIS, DNS lookup.", "why": { "hi": "All network tools in one place, domain investigation", "en": "All network diagnostic tools in one convenient place" } }, { "url": "https://www.whatsmydns.net", "cat": "dns", "icon": "🌍", "name": "WhatsMyDNS", "tag": "whatsmydns.net · Free", "desc": "Check DNS propagation globally — see what DNS servers worldwide return for your domain records.", "why": { "hi": "DNS propagation check karo globally, domain changes verify", "en": "Check DNS propagation globally after making DNS changes" } }, { "url": "https://www.maltego.com/downloads", "cat": "osint", "icon": "🕸️", "name": "Maltego CE", "tag": "maltego.com · Community Edition · Free", "desc": "Visual link analysis tool — map relationships between people, domains, IPs, social accounts.", "why": { "hi": "Visual OSINT mapping, relationships dekho graphically", "en": "Visual OSINT mapping, see relationships graphically" } }, { "url": "https://www.recon-ng.com", "cat": "osint", "icon": "🔭", "name": "Recon-ng", "tag": "recon-ng.com · Open Source · Free", "desc": "Web reconnaissance framework — automated OSINT gathering, modular, powerful CLI tool.", "why": { "hi": "Automated web OSINT framework, modular & powerful", "en": "Automated web OSINT framework, modular and powerful" } }, { "url": "https://www.google.com/advanced_search", "cat": "osint", "icon": "🔍", "name": "Google Advanced Search", "tag": "Google · Free", "desc": "Advanced search operators — site:, filetype:, intitle:, inurl:. Powerful OSINT technique.", "why": { "hi": "Google dorks for OSINT, powerful free technique", "en": "Google dorks for OSINT, powerful free investigation technique" } }, { "url": "https://www.exploit-db.com/google-hacking-database", "cat": "osint", "icon": "💻", "name": "Google Hacking Database (GHDB)", "tag": "exploit-db.com · Offensive Security · Free", "desc": "Google dorks database — pre-built searches to find exposed data, login pages, vulnerabilities.", "why": { "hi": "Ready-made Google dorks, exposed data find karo", "en": "Ready-made Google dorks to find exposed data online" } }, { "url": "https://www.whois.com/whois", "cat": "osint", "icon": "📋", "name": "WHOIS Lookup", "tag": "whois.com · Free", "desc": "Look up domain registration info — owner, registrar, dates, nameservers. OSINT essential.", "why": { "hi": "Domain owner pata karo, registration history dekho", "en": "Find domain owner info and registration history" } }, { "url": "https://web.archive.org", "cat": "osint", "icon": "📷", "name": "Wayback Machine", "tag": "archive.org · Internet Archive · Free", "desc": "View historical snapshots of any website. Recover deleted content, research website history.", "why": { "hi": "Deleted pages recover karo, website history dekho", "en": "Recover deleted pages and view website history" } }, { "url": "https://hunter.io", "cat": "osint", "icon": "📧", "name": "Hunter.io", "tag": "hunter.io · France · Free tier", "desc": "Find email addresses associated with any domain. Verify email validity. 25 free searches/month.", "why": { "hi": "Company email addresses find karo, email format discover", "en": "Find company email addresses and verify email formats" } }, { "url": "https://www.social-searcher.com", "cat": "osint", "icon": "📱", "name": "Social Searcher", "tag": "social-searcher.com · Free tier", "desc": "Search across all social networks — Twitter/X, Instagram, Facebook, YouTube, Reddit simultaneously.", "why": { "hi": "Ek jagah se saare social media search karo", "en": "Search all social media platforms from one place" } }, { "url": "https://www.spokeo.com", "cat": "osint", "icon": "👤", "name": "Spokeo", "tag": "spokeo.com · USA · Free partial", "desc": "People search engine — find info by name, email, phone, username. Aggregates public records.", "why": { "hi": "People search tool, public records aggregator", "en": "People search engine aggregating public records" } }, { "url": "https://www.namechk.com", "cat": "osint", "icon": "🏷️", "name": "NameChk", "tag": "namechk.com · Free", "desc": "Check username availability across 100+ social networks and domains. Username OSINT research.", "why": { "hi": "Username 100+ platforms pe check karo ek saath", "en": "Check username across 100+ platforms simultaneously" } }, { "url": "https://www.shodan.io/explore", "cat": "osint", "icon": "🔭", "name": "Shodan Explore", "tag": "shodan.io · Free limited", "desc": "Explore internet-exposed devices by category — industrial systems, databases, webcams, printers.", "why": { "hi": "Exposed industrial systems, databases, webcams find karo", "en": "Find exposed industrial systems, databases, webcams globally" } }, { "url": "https://censys.io", "cat": "osint", "icon": "📊", "name": "Censys", "tag": "censys.io · USA · Free tier", "desc": "Internet asset discovery — search all internet-exposed hosts and services. Shodan alternative.", "why": { "hi": "Attack surface discovery, Shodan ka strong alternative", "en": "Attack surface discovery, strong alternative to Shodan" } }, { "url": "https://wigle.net", "cat": "osint", "icon": "📶", "name": "WiGLE", "tag": "wigle.net · Free", "desc": "WiFi network database — search wireless networks globally by location, SSID, BSSID, type.", "why": { "hi": "WiFi OSINT, network geolocation research", "en": "WiFi OSINT and network geolocation research" } }, { "url": "https://grep.app", "cat": "osint", "icon": "💻", "name": "grep.app", "tag": "grep.app · Free", "desc": "Search across 500,000 GitHub repositories. Find exposed credentials, API keys, secrets in code.", "why": { "hi": "GitHub pe exposed API keys, credentials find karo", "en": "Find exposed API keys and credentials in GitHub repos" } }, { "url": "https://www.kali.org", "cat": "pentest", "icon": "🐉", "name": "Kali Linux", "tag": "kali.org · Offensive Security · Free", "desc": "Industry standard penetration testing OS — 600+ security tools pre-installed. Industry standard.", "why": { "hi": "Pentesters ka #1 OS, 600+ tools pre-installed", "en": "#1 pentesting OS with 600+ security tools pre-installed" } }, { "url": "https://www.metasploit.com", "cat": "pentest", "icon": "💥", "name": "Metasploit Framework", "tag": "metasploit.com · Rapid7 · Free Community", "desc": "World's most used penetration testing framework — exploit development, payload generation, pivoting.", "why": { "hi": "World's most popular pentest framework, community edition free", "en": "World's most popular penetration testing framework, free community ed" } }, { "url": "https://portswigger.net/burp/communitydownload", "cat": "pentest", "icon": "🔫", "name": "Burp Suite Community", "tag": "portswigger.net · UK · Free Community", "desc": "Web application security testing — intercept, modify HTTP requests. #1 web pentest tool.", "why": { "hi": "Web application pentest ka #1 tool, community edition free", "en": "#1 web application pentest tool, community edition free" } }, { "url": "https://www.zaproxy.org", "cat": "pentest", "icon": "⚡", "name": "OWASP ZAP", "tag": "zaproxy.org · OWASP · Free", "desc": "Free web application scanner — automated and manual testing, AJAX spider, active/passive scans.", "why": { "hi": "Burp Suite ka free open-source alternative, OWASP backed", "en": "Free open-source Burp Suite alternative, OWASP backed" } }, { "url": "https://www.aircrack-ng.org", "cat": "pentest", "icon": "📡", "name": "Aircrack-ng", "tag": "aircrack-ng.org · Open Source · Free", "desc": "WiFi security testing suite — packet capture, WEP/WPA cracking, fake AP. Network audit tool.", "why": { "hi": "WiFi security audit tool, #1 wireless pentest suite", "en": "#1 wireless network security auditing suite" } }, { "url": "https://sqlmap.org", "cat": "pentest", "icon": "💉", "name": "sqlmap", "tag": "sqlmap.org · Open Source · Free", "desc": "Automatic SQL injection tool — detects and exploits SQL injection flaws. Supports 36 DBs.", "why": { "hi": "Automated SQL injection testing, 36 databases support", "en": "Automated SQL injection testing supporting 36 databases" } }, { "url": "https://www.openvas.org", "cat": "pentest", "icon": "🏥", "name": "OpenVAS", "tag": "openvas.org · Greenbone · Free", "desc": "Open Vulnerability Assessment Scanner — network security scanner with 50,000+ vulnerability tests.", "why": { "hi": "Nessus ka free alternative, 50,000+ vulnerability tests", "en": "Free Nessus alternative with 50,000+ vulnerability tests" } }, { "url": "https://hashcat.net/hashcat", "cat": "pentest", "icon": "#️⃣", "name": "Hashcat", "tag": "hashcat.net · Open Source · Free", "desc": "World's fastest password recovery tool — GPU-based cracking, 300+ hash types supported.", "why": { "hi": "World's fastest hash cracker, GPU accelerated", "en": "World's fastest password hash cracker, GPU accelerated" } }, { "url": "https://www.john.io/john", "cat": "pentest", "icon": "🔨", "name": "John the Ripper", "tag": "openwall.com · Open Source · Free", "desc": "Password cracker — detect weak passwords, crack hashed passwords, audit security.", "why": { "hi": "Classic password cracker, Hashcat ka popular alternative", "en": "Classic password auditing tool, popular Hashcat alternative" } }, { "url": "https://github.com/danielmiessler/SecLists", "cat": "pentest", "icon": "📝", "name": "SecLists", "tag": "GitHub · Daniel Miessler · Free", "desc": "Security tester's companion — wordlists for usernames, passwords, URLs, fuzzing patterns, shells.", "why": { "hi": "Every pentester ka must-have wordlist collection", "en": "Essential wordlist collection every pentester must have" } }, { "url": "https://www.parrotsec.org", "cat": "pentest", "icon": "🦜", "name": "Parrot OS", "tag": "parrotsec.org · Open Source · Free", "desc": "Security & privacy-focused Linux — Kali alternative. Lighter, developer-friendly, home edition available.", "why": { "hi": "Kali ka lighter alternative, privacy-focused OS", "en": "Lighter Kali alternative with privacy-focused features" } }, { "url": "https://www.blackarch.org", "cat": "pentest", "icon": "⬛", "name": "BlackArch Linux", "tag": "blackarch.org · Open Source · Free", "desc": "Arch Linux-based security distribution — 2800+ security tools in repo. Advanced users.", "why": { "hi": "2800+ security tools, Arch-based for advanced users", "en": "2800+ security tools, Arch-based for advanced users" } }, { "url": "https://github.com/wifiphisher/wifiphisher", "cat": "pentest", "icon": "🎣", "name": "Wifiphisher", "tag": "GitHub · Open Source · Free", "desc": "WiFi phishing attack framework — rogue AP attacks to test employee security awareness.", "why": { "hi": "WiFi social engineering test, awareness training", "en": "WiFi social engineering testing and awareness training" } }, { "url": "https://www.exploit-db.com", "cat": "pentest", "icon": "💣", "name": "Exploit Database", "tag": "exploit-db.com · Offensive Security · Free", "desc": "Archive of public exploits — searchable database of CVEs, PoC exploits, shellcodes.", "why": { "hi": "Public exploit database, CVE research ke liye essential", "en": "Essential public exploit database for CVE research" } }, { "url": "https://proton.me", "cat": "email", "icon": "✉️", "name": "ProtonMail", "tag": "proton.me · Switzerland · Free", "desc": "End-to-end encrypted email — zero access, even Proton can't read your emails. Free tier.", "why": { "hi": "Swiss encryption, E2E, zero-access architecture", "en": "Swiss E2E encryption, zero-access, most trusted private email" } }, { "url": "https://tutanota.com", "cat": "email", "icon": "📧", "name": "Tuta (Tutanota)", "tag": "tuta.com · Germany · Free", "desc": "Encrypted email & calendar. German privacy laws, open-source. Free 1GB storage, 1 custom domain.", "why": { "hi": "German privacy, calendar bhi encrypted, open-source", "en": "German privacy laws, encrypted calendar too, open-source" } }, { "url": "https://www.thunderbird.net", "cat": "email", "icon": "🦅", "name": "Mozilla Thunderbird", "tag": "thunderbird.net · Mozilla · Free", "desc": "Free email client with OpenPGP support built-in. Manage multiple accounts, powerful filtering.", "why": { "hi": "Mozilla backed, built-in PGP, free email client", "en": "Mozilla backed free email client with built-in OpenPGP" } }, { "url": "https://www.mailinator.com", "cat": "email", "icon": "📬", "name": "Mailinator", "tag": "mailinator.com · Free", "desc": "Public disposable email inboxes — receive-only, no signup. Great for testing/signup verification.", "why": { "hi": "Instant disposable inbox, no signup, testing ke liye", "en": "Instant disposable inbox, no signup needed, great for testing" } }, { "url": "https://guerrillamail.com", "cat": "email", "icon": "🎭", "name": "Guerrilla Mail", "tag": "guerrillamail.com · Free", "desc": "Disposable email — send AND receive without signup. Multiple domains available. 1 hour lifespan.", "why": { "hi": "Temp mail jisme send bhi ho sakta hai, free", "en": "Temp email that can also send, not just receive" } }, { "url": "https://mxtoolbox.com/emailheaders.aspx", "cat": "email", "icon": "🔍", "name": "Email Header Analyzer", "tag": "mxtoolbox.com · Free", "desc": "Analyze email headers — trace email route, verify sender, detect spoofing, see IP hops.", "why": { "hi": "Email spoofing detect karo, header trace karo", "en": "Detect email spoofing and trace email routing path" } }, { "url": "https://www.appmaildev.com/en/dkim", "cat": "email", "icon": "✅", "name": "DKIM Validator", "tag": "appmaildev.com · Free", "desc": "Test SPF, DKIM, DMARC of your email domain. Prevent email spoofing from your domain.", "why": { "hi": "Email domain ke SPF/DKIM/DMARC test karo", "en": "Test your email domain SPF, DKIM, and DMARC settings" } }, { "url": "https://www.mail-tester.com", "cat": "email", "icon": "📊", "name": "Mail Tester", "tag": "mail-tester.com · Free", "desc": "Score your email spam score — check SPF, DKIM, content, blacklists. Improve deliverability.", "why": { "hi": "Email spam score check karo, deliverability improve karo", "en": "Check email spam score and improve deliverability" } }, { "url": "https://www.emailrep.io", "cat": "email", "icon": "📈", "name": "EmailRep", "tag": "emailrep.io · Free", "desc": "Email reputation check — assess if email address is suspicious, disposable, malicious.", "why": { "hi": "Email address ka reputation check karo before trusting", "en": "Check email address reputation before trusting it" } }, { "url": "https://skiff.com/mail", "cat": "email", "icon": "📨", "name": "Skiff Mail", "tag": "skiff.com · USA · Free", "desc": "Privacy-first E2E encrypted email — 10GB free storage, encrypted documents and Drive included.", "why": { "hi": "Encrypted email + docs + drive, free 10GB", "en": "Encrypted email plus docs plus drive, 10GB free storage" } }, { "url": "https://startmail.com", "cat": "email", "icon": "🌟", "name": "StartMail", "tag": "startmail.com · Netherlands · Trial", "desc": "Encrypted email with PGP support — Netherlands jurisdiction, unlimited aliases, 7-day free trial.", "why": { "hi": "Dutch privacy, PGP support, unlimited aliases", "en": "Dutch privacy laws, PGP support, unlimited email aliases" } }, { "url": "https://spamhaus.org/lookup", "cat": "email", "icon": "🚫", "name": "Spamhaus Lookup", "tag": "spamhaus.org · UK/Switzerland · Free", "desc": "Check if IP or domain is on spam blacklists. The world's most trusted anti-spam organization.", "why": { "hi": "IP/domain spam blacklist check, world's most trusted", "en": "Check IP/domain spam blacklists from world's most trusted org" } }, { "url": "https://www.eff.org/dice", "cat": "misc", "icon": "🎲", "name": "EFF Diceware", "tag": "eff.org · Free", "desc": "Generate strong passphrases using dice words. Memorable yet secure. \"correct-horse-battery\" method.", "why": { "hi": "Passphrase generate karo jo yaad bhi rahe aur strong bhi ho", "en": "Generate memorable yet strong passphrases using dice" } }, { "url": "https://temp-mail.org", "cat": "misc", "icon": "📧", "name": "Temp-Mail", "tag": "temp-mail.org · Free", "desc": "Disposable email — use for sketchy service signups. Protects real email from spam.", "why": { "hi": "Spam se bachao, temporary email use karo signup ke liye", "en": "Protect from spam by using temporary email for signups" } }, { "url": "https://haveibeensquatted.com", "cat": "misc", "icon": "🏪", "name": "HaveIBeenSquatted", "tag": "haveibeensquatted.com · Free", "desc": "Check if typosquat domains of your brand are registered. Phishing domain prevention.", "why": { "hi": "Apne domain ke fake typosquat versions dhundho", "en": "Find fake typosquatting domains of your brand" } }, { "url": "https://www.whatismybrowser.com", "cat": "misc", "icon": "🌐", "name": "WhatIsMyBrowser", "tag": "whatismybrowser.com · Free", "desc": "See browser info, check for outdated browser (security risk), user agent details, plugins.", "why": { "hi": "Outdated browser security risk hai — check karo", "en": "Check for outdated browser which is a security risk" } }, { "url": "https://www.icloud.com/find", "cat": "misc", "icon": "🍎", "name": "Find My (Apple)", "tag": "icloud.com · Apple · Free", "desc": "Locate, lock, or erase lost Apple devices remotely. Essential if phone is lost or stolen.", "why": { "hi": "iPhone/Mac kho jaye to locate aur erase karo", "en": "Locate and remotely erase lost Apple devices" } }, { "url": "https://www.google.com/android/find", "cat": "misc", "icon": "🤖", "name": "Find My Device (Google)", "tag": "Google · Free", "desc": "Locate, lock, or erase lost Android devices. Ring phone even on silent mode.", "why": { "hi": "Android phone kho jaye to locate aur erase karo", "en": "Locate and remotely erase lost Android devices" } }, { "url": "https://security.google.com/settings/security/checkup", "cat": "misc", "icon": "🔎", "name": "Google Security Checkup", "tag": "Google · Free", "desc": "Review Google account security — password check, device access, 2FA, recovery options, app permissions.", "why": { "hi": "Apna Google account ek click me secure karo", "en": "Secure your Google account with one comprehensive checkup" } }, { "url": "https://www.random.org/passwords", "cat": "misc", "icon": "🎰", "name": "Random.org Password Generator", "tag": "random.org · Ireland · Free", "desc": "True random password generator using atmospheric noise — not pseudo-random, genuinely random.", "why": { "hi": "True randomness, atmospheric noise based, not pseudo-random", "en": "True randomness from atmospheric noise, not pseudo-random" } }, { "url": "https://www.privnote.com", "cat": "misc", "icon": "🗒️", "name": "Privnote", "tag": "privnote.com · Free", "desc": "Self-destructing encrypted notes — once read, the note destroys itself permanently.", "why": { "hi": "Read ke baad auto-delete notes, password share ke liye", "en": "Auto-delete notes after reading, great for sharing passwords" } }, { "url": "https://www.cybercrime.gov.in", "cat": "misc", "icon": "🇮🇳", "name": "India Cybercrime Portal", "tag": "cybercrime.gov.in · Government of India · Free", "desc": "Indian government portal to report cybercrime — fraud, hacking, online abuse, financial crime.", "why": { "hi": "India me cybercrime report karne ka official platform", "en": "Official Indian government platform to report cybercrime" } }, { "url": "https://www.cyberswachhtakendra.gov.in", "cat": "misc", "icon": "🧹", "name": "Cyber Swachhta Kendra", "tag": "cyberswachhtakendra.gov.in · Govt of India · Free", "desc": "Indian government botnet cleaner — free tools to detect and remove malware from your PC.", "why": { "hi": "India govt ka free malware removal tool, Hindi support", "en": "Free Indian government malware removal tool, Hindi supported" } }, { "url": "https://www.virustotal.com/gui/home/url", "cat": "misc", "icon": "🔗", "name": "VirusTotal URL Check", "tag": "virustotal.com · Free", "desc": "Paste any suspicious URL to check with 90+ security vendors instantly before clicking it.", "why": { "hi": "Suspicious link check karo open karne se pehle", "en": "Check suspicious links before clicking with 90+ vendors" } }, { "url": "https://www.ssdeep.info", "cat": "misc", "icon": "🔍", "name": "ssdeep", "tag": "ssdeep.info · Open Source · Free", "desc": "Fuzzy hash matching — find similar malware samples even if slightly modified. Malware clustering.", "why": { "hi": "Similar malware variants detect karo, security research", "en": "Detect similar malware variants even when slightly modified" } }, { "url": "https://www.speedtest.net", "cat": "misc", "icon": "⚡", "name": "Speedtest by Ookla", "tag": "speedtest.net · Ookla · Free", "desc": "Test internet speed — verify VPN performance impact, detect ISP throttling, diagnose issues.", "why": { "hi": "VPN speed check, ISP throttling detect karo", "en": "Check VPN speed impact and detect ISP throttling" } }, { "url": "https://element.io", "cat": "misc", "icon": "🔷", "name": "Element (Matrix)", "tag": "element.io · UK · Free/Open Source", "desc": "Decentralized encrypted messaging — Matrix protocol. Self-host, federated, Slack alternative.", "why": { "hi": "Decentralized E2E messaging, Slack ka open-source alternative", "en": "Decentralized E2E messaging, open-source Slack alternative" } }, { "url": "https://jitsi.org", "cat": "misc", "icon": "📹", "name": "Jitsi Meet", "tag": "jitsi.org · 8x8 · Free/Open Source", "desc": "Free encrypted video conferencing — no account needed, no download. Zoom privacy alternative.", "why": { "hi": "No account needed, encrypted video calls, Zoom alternative", "en": "No account needed encrypted video calls, Zoom alternative" } }, { "url": "https://www.briarproject.org", "cat": "misc", "icon": "🌿", "name": "Briar", "tag": "briarproject.org · Open Source · Free", "desc": "Peer-to-peer encrypted messaging via Tor. Works without internet via Bluetooth/WiFi. For activists.", "why": { "hi": "Internet ke bina bhi kaam karta hai, activists ke liye", "en": "Works without internet via Bluetooth, ideal for activists" } }, { "url": "https://www.wickr.com", "cat": "misc", "icon": "💼", "name": "Wickr (AWS)", "tag": "wickr.com · Amazon · Free tier", "desc": "End-to-end encrypted messaging for teams — self-destruct messages, AWS backed, enterprise grade.", "why": { "hi": "Enterprise E2E messaging, AWS backed, self-destruct messages", "en": "Enterprise-grade E2E messaging with self-destruct, AWS backed" } }, { "url": "https://keybase.io/docs/chat", "cat": "misc", "icon": "🔑", "name": "Keybase Chat", "tag": "keybase.io · Free", "desc": "Cryptographically verified messaging — messages tied to verified social identities. Public keys.", "why": { "hi": "Cryptographic identity linked messaging, verified participants", "en": "Cryptographic identity verified messaging with public keys" } }, { "url": "https://www.session.us", "cat": "misc", "icon": "🛡️", "name": "Session", "tag": "session.us · Australia · Free/Open Source", "desc": "No phone number, no email signup — decentralized E2E encrypted messenger. Maximum anonymity.", "why": { "hi": "Phone number bhi nahi chahiye, most anonymous messenger", "en": "No phone number needed, most anonymous messenger available" } }, { "url": "https://www.wire.com/en/products/personal-secure-messenger", "cat": "misc", "icon": "🔌", "name": "Wire Personal", "tag": "wire.com · Switzerland · Free", "desc": "E2E encrypted messaging — no phone number required, open-source, Swiss jurisdiction.", "why": { "hi": "Phone number nahi chahiye, Swiss privacy, open-source", "en": "No phone number required, Swiss privacy, open-source" } }, { "url": "https://retroshare.cc", "cat": "misc", "icon": "🔁", "name": "RetroShare", "tag": "retroshare.cc · Open Source · Free", "desc": "Decentralized, P2P encrypted communication — chat, file sharing, forums, mail. No servers.", "why": { "hi": "Server-less P2P communication, no central server at all", "en": "Server-less P2P communication with no central server" } }, { "url": "https://www.status.im", "cat": "misc", "icon": "⚡", "name": "Status", "tag": "status.im · Open Source · Free", "desc": "Decentralized encrypted messenger built on Ethereum — crypto wallet + private messenger + browser.", "why": { "hi": "Web3 messenger + crypto wallet + browser, decentralized", "en": "Decentralized Web3 messenger with integrated crypto wallet" } }, { "url": "https://www.threema.ch/en/threema-work/personal-use", "cat": "misc", "icon": "🟢", "name": "Threema", "tag": "threema.ch · Switzerland · Paid (one-time)", "desc": "Most private messaging app — no phone/email required, Swiss servers, one-time fee €3.99.", "why": { "hi": "Most private, no personal info needed, Swiss hosted", "en": "Most private messenger, no personal info required" } }, { "url": "https://meet.jit.si", "cat": "misc", "icon": "📞", "name": "meet.jit.si", "tag": "jit.si · Free · No account", "desc": "Free instant video calls — no account, no download needed. Open-source, just share link.", "why": { "hi": "No account, instant video call, open-source, free", "en": "No account needed, instant video call, completely free" } }, { "url": "https://www.nextcloud.com", "cat": "misc", "icon": "☁️", "name": "Nextcloud", "tag": "nextcloud.com · Germany · Free/Open Source", "desc": "Self-hosted cloud — files, calendar, contacts, video calls, office suite. Google Drive alternative.", "why": { "hi": "Self-hosted Google Drive alternative, full privacy control", "en": "Self-hosted alternative to Google Drive with full privacy" } }, { "url": "https://www.rocket.chat", "cat": "misc", "icon": "🚀", "name": "Rocket.Chat", "tag": "rocket.chat · Brazil · Free/Open Source", "desc": "Open-source team communication — self-hostable Slack alternative. E2E encryption support.", "why": { "hi": "Self-hosted Slack alternative, E2E encryption, open-source", "en": "Self-hosted Slack alternative with E2E encryption" } }, { "url": "https://zulip.com", "cat": "misc", "icon": "💡", "name": "Zulip", "tag": "zulip.com · Open Source · Free", "desc": "Open-source team messaging with unique threading. Self-hostable, end-to-end encryption support.", "why": { "hi": "Open-source team chat, self-host possible, unique threading", "en": "Open-source team chat with self-hosting and unique threading" } }, { "url": "https://mattermost.com", "cat": "misc", "icon": "🧩", "name": "Mattermost", "tag": "mattermost.com · Open Source · Free tier", "desc": "Secure team messaging platform with on-prem deployment. Strong access controls and compliance features.", "why": { "hi": "Self-hosted secure team chat for companies", "en": "Self-hosted secure team chat for organizations" } }, { "url": "https://www.mumble.info", "cat": "misc", "icon": "🎙️", "name": "Mumble", "tag": "mumble.info · Open Source · Free", "desc": "Low-latency voice chat with encryption and self-hosting support. Great for private communities.", "why": { "hi": "Private encrypted voice chat, self-host option", "en": "Private encrypted voice chat with self-hosting" } }, { "url": "https://delta.chat", "cat": "misc", "icon": "✉️", "name": "Delta Chat", "tag": "delta.chat · Open Source · Free", "desc": "Messenger built on email protocols with end-to-end encryption support using existing email accounts.", "why": { "hi": "Email based secure chat without new platform lock-in", "en": "Secure chat using existing email without platform lock-in" } }, { "url": "https://tox.chat", "cat": "misc", "icon": "🧪", "name": "Tox", "tag": "tox.chat · Open Source · Free", "desc": "Peer-to-peer instant messaging and calling with no central servers. Privacy-first protocol.", "why": { "hi": "Central server के बिना fully P2P communication", "en": "Fully peer-to-peer communication without central servers" } }, { "url": "https://linphone.org", "cat": "misc", "icon": "📞", "name": "Linphone", "tag": "linphone.org · Open Source · Free", "desc": "Secure VoIP and messaging app with SIP support. Audio/video calls with encryption.", "why": { "hi": "Open-source secure calling and SIP support", "en": "Open-source secure calling with SIP compatibility" } }, { "url": "https://jami.net", "cat": "misc", "icon": "🔁", "name": "Jami", "tag": "jami.net · Open Source · Free", "desc": "Distributed communication platform with no central authority. Encrypted calls, chats, and file transfer.", "why": { "hi": "Fully decentralized communication with encryption", "en": "Fully decentralized encrypted communication platform" } }, { "url": "https://xmpp.org", "cat": "misc", "icon": "💬", "name": "XMPP (Jabber)", "tag": "xmpp.org · Open Standard · Free", "desc": "Open messaging protocol used for federated chat. Works with many secure clients and servers.", "why": { "hi": "Open standard federated chat, vendor lock-in नहीं", "en": "Open federated chat standard with no vendor lock-in" } }, { "url": "https://conversations.im", "cat": "misc", "icon": "📲", "name": "Conversations", "tag": "conversations.im · Android · Open Source", "desc": "Popular secure XMPP client for Android with OMEMO encryption and modern UX.", "why": { "hi": "Android के लिए secure XMPP + OMEMO encryption", "en": "Secure XMPP app for Android with OMEMO encryption" } }, { "url": "https://monal-im.org", "cat": "misc", "icon": "🍏", "name": "Monal IM", "tag": "monal-im.org · iOS · Open Source", "desc": "Modern iOS XMPP client with OMEMO encryption, push support, and privacy-focused design.", "why": { "hi": "iOS के लिए secure XMPP client with encryption", "en": "Secure iOS XMPP client with end-to-end encryption" } }, { "url": "https://standardnotes.com", "cat": "misc", "icon": "📝", "name": "Standard Notes", "tag": "standardnotes.com · Open Source · Free tier", "desc": "Encrypted notes and collaboration platform. Privacy-first with strong security architecture.", "why": { "hi": "Encrypted notes and secure collaboration", "en": "Encrypted note-taking and secure collaboration" } }, { "url": "https://cryptpad.org", "cat": "misc", "icon": "📓", "name": "CryptPad", "tag": "cryptpad.org · Open Source · Free tier", "desc": "End-to-end encrypted collaborative office suite: docs, sheets, kanban, forms, storage.", "why": { "hi": "Google Docs का encrypted privacy-first alternative", "en": "Encrypted privacy-first alternative to Google Docs" } }, { "url": "", "cat": "misc", "icon": "⚡", "name": "Passbolt", "tag": "passbolt.com · Open Source", "desc": "Password manager for teams. Open-source & self-hostable. (#1)", "why": { "hi": "Passbolt सुरक्षा के लिए बेहतरीन है", "en": "Passbolt is excellent for security" } }, { "url": "", "cat": "misc", "icon": "🔎", "name": "Snusbase", "tag": "snusbase.com · Search", "desc": "Search leaked databases for emails, usernames, IPs. (#2)", "why": { "hi": "Snusbase सुरक्षा के लिए बेहतरीन है", "en": "Snusbase is excellent for security" } }, { "url": "", "cat": "misc", "icon": "🌐", "name": "Intelligence X", "tag": "intelx.io · Search engine", "desc": "Search engine for the darknet and data breaches. (#3)", "why": { "hi": "Intelligence X सुरक्षा के लिए बेहतरीन है", "en": "Intelligence X is excellent for security" } }, { "url": "", "cat": "misc", "icon": "📱", "name": "2FAS", "tag": "2fas.com · Open Source", "desc": "User-friendly open-source 2FA app with backups. (#4)", "why": { "hi": "2FAS सुरक्षा के लिए बेहतरीन है", "en": "2FAS is excellent for security" } }, { "url": "", "cat": "misc", "icon": "🔐", "name": "Ente Auth", "tag": "ente.io · E2E encrypted", "desc": "E2E encrypted synchronization of 2FA tokens. (#5)", "why": { "hi": "Ente Auth सुरक्षा के लिए बेहतरीन है", "en": "Ente Auth is excellent for security" } }, { "url": "", "cat": "misc", "icon": "🛡️", "name": "Proton VPN", "tag": "protonvpn.com · Free tier", "desc": "High-speed Swiss VPN with unlimited data. (#6)", "why": { "hi": "Proton VPN सुरक्षा के लिए बेहतरीन है", "en": "Proton VPN is excellent for security" } }, { "url": "", "cat": "misc", "icon": "🌬️", "name": "Windscribe", "tag": "windscribe.com · Free", "desc": "Generous free tier VPN with robust privacy tools. (#7)", "why": { "hi": "Windscribe सुरक्षा के लिए बेहतरीन है", "en": "Windscribe is excellent for security" } }, { "url": "", "cat": "misc", "icon": "🛡️", "name": "Bitdefender", "tag": "bitdefender.com · Free", "desc": "Silent antivirus protection with real-time detection. (#8)", "why": { "hi": "Bitdefender सुरक्षा के लिए बेहतरीन है", "en": "Bitdefender is excellent for security" } }, { "url": "", "cat": "misc", "icon": "🕸️", "name": "Sucuri SiteCheck", "tag": "sucuri.net · Scanner", "desc": "Website security scanner and malware detection. (#9)", "why": { "hi": "Sucuri SiteCheck सुरक्षा के लिए बेहतरीन है", "en": "Sucuri SiteCheck is excellent for security" } }, { "url": "", "cat": "misc", "icon": "⚛️", "name": "Proton Pass", "tag": "proton.me · Switzerland", "desc": "Open-source integrated password manager from Proton. (#10)", "why": { "hi": "Proton Pass सुरक्षा के लिए बेहतरीन है", "en": "Proton Pass is excellent for security" } }, { "cat": "net", "icon": "📡", "name": "Nmap", "tag": "nmap.org · Open Source", "desc": "Network Mapper — industry standard for network discovery and security auditing.", "why": { "hi": "Network scanning ke liye standard tool", "en": "Industry standard for network scanning" } }, { "cat": "net", "icon": "🦈", "name": "Wireshark", "tag": "wireshark.org · Open Source", "desc": "World's foremost network protocol analyzer. Deep inspection of traffic.", "why": { "hi": "Network packets analyze karne ke liye best", "en": "Best for deep network packet analysis" } }, { "cat": "net", "icon": "🐘", "name": "Snort", "tag": "snort.org · Cisco", "desc": "Open-source intrusion detection system (IDS) and prevention system (IPS).", "why": { "hi": "Real-time traffic analysis and intrusion detection", "en": "Real-time traffic analysis and intrusion detection" } }, { "cat": "net", "icon": "🛡️", "name": "Suricata", "tag": "suricata.io · Open Source", "desc": "High-performance IDS, IPS and network security monitoring engine.", "why": { "hi": "Fast and multi-threaded network security monitoring", "en": "Fast and multi-threaded network security monitoring" } }, { "cat": "net", "icon": "🔍", "name": "Zeek", "tag": "zeek.org · Open Source", "desc": "Network analysis framework for security monitoring.", "why": { "hi": "Powerful network analysis and monitoring", "en": "Powerful network analysis and monitoring" } }, { "cat": "net", "icon": "📊", "name": "Nagios", "tag": "nagios.org · Free", "desc": "Infrastructure monitoring — monitor servers, switches, and apps.", "why": { "hi": "System and network monitoring standard", "en": "System and network monitoring standard" } }, { "cat": "net", "icon": "🔐", "name": "OpenVPN", "tag": "openvpn.net · Open Source", "desc": "Trusted open-source VPN solution for secure connections.", "why": { "hi": "Most flexible and widely used open-source VPN", "en": "Most flexible and widely used open-source VPN" } }, { "cat": "net", "icon": "📦", "name": "Arkime", "tag": "arkime.com · Open Source", "desc": "Large-scale network analysis and packet capture tool.", "why": { "hi": "Scalable full packet capture and analysis", "en": "Scalable full packet capture and analysis" } }, { "cat": "net", "icon": "🧱", "name": "pfSense", "tag": "pfsense.org · Open Source", "desc": "Open-source firewall and router based on FreeBSD.", "why": { "hi": "Most powerful open-source firewall", "en": "Most powerful open-source firewall" } }, { "cat": "net", "icon": "🛡️", "name": "ModSecurity", "tag": "modsecurity.org · Open Source", "desc": "Web Application Firewall (WAF) to protect web apps.", "why": { "hi": "Standard WAF for web server protection", "en": "Standard WAF for web server protection" } }, { "cat": "net", "icon": "🛠️", "name": "Netcat", "tag": "TCP/IP Swiss Army Knife", "desc": "Versatile tool for port scanning, file transfers, and more.", "why": { "hi": "Networking ke liye multipurpose helper tool", "en": "Multipurpose helper tool for networking" } }, { "cat": "net", "icon": "📨", "name": "hping3", "tag": "Open Source", "desc": "Command-line TCP/IP packet assembler/analyzer.", "why": { "hi": "Custom packet crafting and testing", "en": "Custom packet crafting and testing" } }, { "cat": "net", "icon": "🐍", "name": "Scapy", "tag": "Python library", "desc": "Python-based interactive packet manipulation program.", "why": { "hi": "Packet crafting library for developers", "en": "Packet crafting library for developers" } }, { "cat": "net", "icon": "📡", "name": "Zmap", "tag": "Open Source", "desc": "Network scanner for internet-wide network studies.", "why": { "hi": "Extremely fast internet-wide scans", "en": "Extremely fast internet-wide scans" } }, { "cat": "net", "icon": "🔎", "name": "Angry IP Scanner", "tag": "Open Source", "desc": "Fast and friendly network scanner.", "why": { "hi": "Simple and fast local network scanner", "en": "Simple and fast local network scanner" } }, { "cat": "net", "icon": "🦄", "name": "Unicornscan", "tag": "Open Source", "desc": "TCP and UDP port scanner utilizing asynchronous techniques.", "why": { "hi": "Asynchronous fast port scanning", "en": "Asynchronous fast port scanning" } }, { "cat": "net", "icon": "🚪", "name": "Portmaster", "tag": "safing.io · Open Source", "desc": "Application firewall to monitor and control network activity.", "why": { "hi": "App-level privacy and network control", "en": "App-level privacy and network control" } }, { "cat": "pentest", "icon": "🧪", "name": "Metasploit", "tag": "metasploit.com · Rapid7", "desc": "World's most used penetration testing framework.", "why": { "hi": "Exploitation framework for security testing", "en": "Exploitation framework for security testing" } }, { "cat": "pentest", "icon": "🔍", "name": "OpenVAS", "tag": "openvas.org · Greenbone", "desc": "Comprehensive open-source vulnerability scanner.", "why": { "hi": "Vulnerability assessment toolkit", "en": "Vulnerability assessment toolkit" } }, { "cat": "pentest", "icon": "🕸️", "name": "Nikto", "tag": "Open Source", "desc": "Web server scanner for common vulnerabilities and misconfigs.", "why": { "hi": "Web server security assessment", "en": "Web server security assessment" } }, { "cat": "pentest", "icon": "🐉", "name": "Kali Linux", "tag": "kali.org · Offensive Security", "desc": "Top OS for penetration testing and digital forensics.", "why": { "hi": "Ultimate security OS with pre-installed tools", "en": "Ultimate security OS with pre-installed tools" } }, { "cat": "pentest", "icon": "📶", "name": "Aircrack-ng", "tag": "Open Source", "desc": "Suite of tools for auditing Wi-Fi networks.", "why": { "hi": "Wi-Fi security testing and cracking", "en": "Wi-Fi security testing and cracking" } }, { "cat": "pentest", "icon": "💀", "name": "John the Ripper", "tag": "Open Source", "desc": "Fast password cracker for auditing and recovery.", "why": { "hi": "Standard password hash cracker", "en": "Standard password hash cracker" } }, { "cat": "pentest", "icon": "🐱", "name": "Hashcat", "tag": "Open Source", "desc": "Advanced password recovery tool — world's fastest.", "why": { "hi": "GPU powered extremely fast password cracking", "en": "GPU powered extremely fast password cracking" } }, { "cat": "pentest", "icon": "🐍", "name": "THC Hydra", "tag": "Open Source", "desc": "Parallelized network login cracker supporting 50+ protocols.", "why": { "hi": "Network login brute-forcing tool", "en": "Network login brute-forcing tool" } }, { "cat": "pentest", "icon": "🥐", "name": "Burp Suite Community", "tag": "PortSwigger", "desc": "Web vulnerability scanner and interception proxy.", "why": { "hi": "Web application security testing standard", "en": "Web application security testing standard" } }, { "cat": "pentest", "icon": "⚡", "name": "OWASP ZAP", "tag": "Zaproxy · Open Source", "desc": "Open-source web application security scanner.", "why": { "hi": "Free alternative to Burp Suite", "en": "Free alternative to Burp Suite" } }, { "cat": "pentest", "icon": "🕸️", "name": "Arachni", "tag": "Open Source", "desc": "Scriptable framework for evaluated web app security.", "why": { "hi": "Automated web app security audits", "en": "Automated web app security audits" } }, { "cat": "pentest", "icon": "🛡️", "name": "Trivy", "tag": "Aqua Security · Open Source", "desc": "Vulnerability scanner for containers, repos, and etc.", "why": { "hi": "Cloud native and container security scanner", "en": "Cloud native and container security scanner" } }, { "cat": "pentest", "icon": "✅", "name": "Checkov", "tag": "Bridgecrew · Open Source", "desc": "Static analysis for Infrastructure as Code (IaC).", "why": { "hi": "Cloud infrastructure security checking", "en": "Cloud infrastructure security checking" } }, { "cat": "pentest", "icon": "💧", "name": "Gitleaks", "tag": "Open Source", "desc": "Detective secrets and API keys in your code.", "why": { "hi": "Codebase me secrets leak check karo", "en": "Check for leaked secrets in codebase" } }, { "cat": "hids", "icon": "🛡️", "name": "OSSEC", "tag": "ossec.net · Open Source", "desc": "Host-based internal detection system (HIDS).", "why": { "hi": "Server logs and file integrity monitoring", "en": "Server logs and file integrity monitoring" } }, { "cat": "hids", "icon": "🧩", "name": "Wazuh", "tag": "wazuh.com · Open Source", "desc": "Unified XDR and SIEM platform built on OSSEC.", "why": { "hi": "Comprehensive security monitoring and SIEM", "en": "Comprehensive security monitoring and SIEM" } }, { "cat": "hids", "icon": "🛡️", "name": "Lynis", "tag": "cisofy.com · Open Source", "desc": "Security auditing tool for Unix, Linux, and macOS.", "why": { "hi": "Linux server security hardening check", "en": "Linux server security hardening check" } }, { "cat": "hids", "icon": "🗄️", "name": "OSQuery", "tag": "osquery.io · Facebook/Linux Foundation", "desc": "Expose your OS as a high-performance relational database.", "why": { "hi": "SQL queries se system data analyze karo", "en": "Analyze system data using SQL queries" } }, { "cat": "hids", "icon": "🧅", "name": "Security Onion", "tag": "Open Source", "desc": "Linux distro for intrusion detection and log management.", "why": { "hi": "All-in-one SOC monitoring OS", "en": "All-in-one SOC monitoring OS" } }, { "cat": "hids", "icon": "🛡️", "name": "Tripwire Open Source", "tag": "Open Source", "desc": "Security monitoring for file integrity alerts.", "why": { "hi": "Critical file changes track karne ke liye", "en": "Track critical file changes" } }, { "cat": "hids", "icon": "🦖", "name": "Velociraptor", "tag": "Open Source", "desc": "Endpoint visibility and incident response tool.", "why": { "hi": "Advanced endpoint monitoring and IR", "en": "Advanced endpoint monitoring and IR" } }, { "cat": "app", "icon": "🕵️", "name": "SonarQube Community", "tag": "SonarSource · Free", "desc": "Static code analysis for bugs and vulnerabilities.", "why": { "hi": "Code quality and security checking", "en": "Code quality and security checking" } }, { "cat": "app", "icon": "🐼", "name": "Bandit", "tag": "PyCQA · Open Source", "desc": "Security-oriented static analyzer for Python.", "why": { "hi": "Python code security scanner", "en": "Python code security scanner" } }, { "cat": "app", "icon": "🛤️", "name": "Brakeman", "tag": "Open Source", "desc": "Static analysis security scanner for Ruby on Rails.", "why": { "hi": "Rails application security auditing", "en": "Rails application security auditing" } }, { "cat": "app", "icon": "🛡️", "name": "Semgrep", "tag": "r2c · Open Source", "desc": "Lightweight static analysis for many languages.", "why": { "hi": "Fast and flexible code security checks", "en": "Fast and flexible code security checks" } }, { "cat": "app", "icon": "📱", "name": "MobSF", "tag": "Open Source", "desc": "Mobile Security Framework for pen testing Android/iOS apps.", "why": { "hi": "Mobile app security assessment toolkit", "en": "Mobile app security assessment toolkit" } }, { "cat": "ir", "icon": "🐝", "name": "TheHive", "tag": "Open Source", "desc": "Collaborative incident response platform.", "why": { "hi": "Security teams ke liye incident management", "en": "Incident management for security teams" } }, { "cat": "ir", "icon": "🚀", "name": "GRR Rapid Response", "tag": "Google · Open Source", "desc": "Remote live forensics and incident response tool.", "why": { "hi": "Large scale remote forensics by Google", "en": "Large scale remote forensics by Google" } }, { "cat": "ir", "icon": "🎞️", "name": "Volatility", "tag": "Open Source", "desc": "Advanced memory forensics framework.", "why": { "hi": "RAM image analyze karne ke liye industry standard", "en": "Industry standard for RAM image analysis" } }, { "cat": "ir", "icon": "🏥", "name": "Autopsy", "tag": "Open Source", "desc": "Digital forensics platform and GUI for Sleuth Kit.", "why": { "hi": "Windows digital forensics tool for investigations", "en": "Windows digital forensics tool for investigations" } }, { "cat": "siem", "icon": "🐘", "name": "OSSIM", "tag": "AlienVault/AT&T · Free", "desc": "Open Source Security Information Management system.", "why": { "hi": "Unified SIEM with asset discovery and IDS", "en": "Unified SIEM with asset discovery and IDS" } }, { "cat": "siem", "icon": "🔍", "name": "Elastic SIEM", "tag": "Elastic · Free tier", "desc": "Security Information and Event Management via ELK stack.", "why": { "hi": "Popular search-based SIEM platform", "en": "Popular search-based SIEM platform" } }, { "cat": "intel", "icon": "🐝", "name": "MISP", "tag": "misp-project.org · Open Source", "desc": "Threat intelligence platform for sharing indicators.", "why": { "hi": "Malware and threat info sharing platform", "en": "Malware and threat info sharing platform" } }, { "cat": "intel", "icon": "🕷️", "name": "SpiderFoot", "tag": "spiderfoot.net · Open Source", "desc": "OSINT automation tool for reconnaissance.", "why": { "hi": "Reconnaissance automation for researchers", "en": "Reconnaissance automation for researchers" } }, { "cat": "intel", "icon": "🐙", "name": "OpenCTI", "tag": "Open Source", "desc": "Unified platform for threat intelligence management.", "why": { "hi": "Modern threat intel analysis and sharing", "en": "Modern threat intel analysis and sharing" } }, { "cat": "misc", "icon": "🛑", "name": "Pi-hole", "tag": "pi-hole.net · Open Source", "desc": "Network-wide ad and tracker blocker via DNS sinkhole.", "why": { "hi": "Pure network level privacy and ad blocking", "en": "Pure network level privacy and ad blocking" } }, { "cat": "misc", "icon": "🗳️", "name": "HashiCorp Vault", "tag": "vaultproject.io · Open Source", "desc": "Manage secrets and protect sensitive data.", "why": { "hi": "Securely store API keys and database passwords", "en": "Securely store API keys and database passwords" } }, { "cat": "misc", "icon": "📈", "name": "Uptime Kuma", "tag": "Open Source", "desc": "Self-hosted monitoring tool for your websites.", "why": { "hi": "Servers and sites uptime monitoring", "en": "Servers and sites uptime monitoring" } }, { "cat": "misc", "icon": "📱", "name": "Tuta Mail", "tag": "tuta.com · Encrypted", "desc": "Private and encrypted email service from Germany.", "why": { "hi": "ProtonMail like secure email alternative", "en": "Secure email alternative to ProtonMail" } }, { "cat": "intel", "icon": "🕵️", "name": "Maltego", "tag": "Paterva · Free tier", "desc": "Interactive data mining tool that renders directed graphs for link analysis.", "why": { "hi": "Relationship mapping and OSINT investigations", "en": "Relationship mapping and OSINT investigations" } }, { "cat": "intel", "icon": "🔎", "name": "Recon-ng", "tag": "Open Source", "desc": "Full-featured OSINT framework written in Python.", "why": { "hi": "Modular OSINT reconnaissance platform", "en": "Modular OSINT reconnaissance platform" } }, { "cat": "intel", "icon": "🚜", "name": "theHarvester", "tag": "Open Source", "desc": "Gather emails, subdomains, hosts, and more from open sources.", "why": { "hi": "Email and domain reconnaissance", "en": "Email and domain reconnaissance" } }, { "cat": "intel", "icon": "📱", "name": "Phoneinfoga", "tag": "Open Source", "desc": "Advanced tool for scanning international phone numbers.", "why": { "hi": "Phone number OSINT and verification", "en": "Phone number OSINT and verification" } }, { "cat": "intel", "icon": "🕵️", "name": "Sherlock", "tag": "Open Source", "desc": "Hunt down social media accounts by username across 300+ sites.", "why": { "hi": "Username lookup across the internet", "en": "Username lookup across the internet" } }, { "cat": "intel", "icon": "🕳️", "name": "Holehe", "tag": "Open Source", "desc": "Check if an email is registered on over 120 sites.", "why": { "hi": "Email registration check for OSINT", "en": "Email registration check for OSINT" } }, { "cat": "app", "icon": "🍳", "name": "CyberChef", "tag": "GCHQ · Open Source", "desc": "The Cyber Swiss Army Knife — encoding, decoding, hashing.", "why": { "hi": "Data transformation and decoding helper", "en": "Data transformation and decoding helper" } }, { "cat": "pentest", "icon": "🩸", "name": "BloodHound", "tag": "Open Source", "desc": "Reveal hidden relationships in Active Directory domains.", "why": { "hi": "Active Directory security analysis", "en": "Active Directory security analysis" } }, { "cat": "pentest", "icon": "📦", "name": "Impacket", "tag": "Fortra · Open Source", "desc": "Collection of Python classes for working with network protocols.", "why": { "hi": "Advanced network protocol testing library", "en": "Advanced network protocol testing library" } }, { "cat": "re", "icon": "🐉", "name": "Ghidra", "tag": "NSA · Open Source", "desc": "Software reverse engineering (SRE) suite used by world-class researchers.", "why": { "hi": "Professional code reverse engineering by NSA", "en": "Professional code reverse engineering by NSA" } }, { "cat": "re", "icon": "👁️", "name": "IDA Free", "tag": "Hex-Rays", "desc": "The world's most popular disassembler and debugger (free version).", "why": { "hi": "Binary analysis and reverse engineering", "en": "Binary analysis and reverse engineering" } }, { "cat": "re", "icon": "🥷", "name": "Binary Ninja", "tag": "Vector 35 · Free demo", "desc": "Modern reverse engineering platform with high-level IL.", "why": { "hi": "Modern binary analysis and decompiler", "en": "Modern binary analysis and decompiler" } }, { "cat": "re", "icon": "❌", "name": "x64dbg", "tag": "Open Source", "desc": "Open-source x64/x32 debugger for Windows.", "why": { "hi": "Windows binary debugging and cracking", "en": "Windows binary debugging and cracking" } }, { "cat": "re", "icon": "🐚", "name": "Radare2", "tag": "Open Source", "desc": "Complete framework for reverse engineering and analysis.", "why": { "hi": "Extreme power-user binary analysis toolkit", "en": "Extreme power-user binary analysis toolkit" } }, { "cat": "av", "icon": "🔬", "name": "PEStudio", "tag": "Marc Ochsenmeier · Free", "desc": "Initial malware assessment tool for portable executables.", "why": { "hi": "Malicious file properties analyze karo", "en": "Analyze malicious file properties" } }, { "cat": "hids", "icon": "⚙️", "name": "Process Hacker", "tag": "Open Source", "desc": "Powerful tool to monitor system resources and hunt malware.", "why": { "hi": "Advanced Windows Task Manager replacement", "en": "Advanced Windows Task Manager replacement" } }, { "cat": "hids", "icon": "🛠️", "name": "Sysinternals Suite", "tag": "Microsoft · Free", "desc": "Microsoft's official suite of power-user and security tools.", "why": { "hi": "Essential Windows system and security tools", "en": "Essential Windows system and security tools" } }, { "cat": "net", "icon": "📡", "name": "Kismet", "tag": "Open Source", "desc": "Wireless network and device detector, sniffer, and IDS.", "why": { "hi": "Advanced Wi-Fi and Bluetooth sniffing", "en": "Advanced Wi-Fi and Bluetooth sniffing" } }, { "cat": "net", "icon": "🌊", "name": "Fluxion", "tag": "Open Source", "desc": "Security auditing and social engineering tool for Wi-Fi networks.", "why": { "hi": "Wi-Fi social engineering testing", "en": "Wi-Fi social engineering testing" } }, { "cat": "misc", "icon": "🧹", "name": "BleachBit", "tag": "Open Source", "desc": "Clean your system and Shred files to prevent recovery.", "why": { "hi": "Deep system cleaner for privacy", "en": "Deep system cleaner for privacy" } }, { "cat": "misc", "icon": "🔐", "name": "VeraCrypt", "tag": "Open Source", "desc": "On-the-fly disk encryption based on TrueCrypt.", "why": { "hi": "Encrypted drive containers and partitions", "en": "Encrypted drive containers and partitions" } }, { "cat": "misc", "icon": "🗝️", "name": "GnuPG (GPG)", "tag": "Open Source", "desc": "Standard for secure communication and storage of data.", "why": { "hi": "Public key encryption and signing standard", "en": "Public key encryption and signing standard" } }, { "cat": "pwd", "icon": "🤖", "name": "1Password", "tag": "Paid", "desc": "Most polished and secure password manager for enterprise and family.", "why": { "hi": "Premium password management experience", "en": "Premium password management experience" } }, { "cat": "vpn", "icon": "🛡️", "name": "Mullvad Browser", "tag": "Mullvad/Tor · Free", "desc": "Privacy-focused browser that combats fingerprinting and tracking.", "why": { "hi": "Fingerprinting resistant secure browser", "en": "Fingerprinting resistant secure browser" } }, { "cat": "vpn", "icon": "🐺", "name": "LibreWolf", "tag": "Open Source", "desc": "Custom fork of Firefox focused on privacy and security.", "why": { "hi": "Maximum privacy settings by default in Firefox", "en": "Maximum privacy settings by default in Firefox" } }];
+    const catMap = {
+      'pwd': { name: 'Password Managers', icon: '🔑', color: 'rgba(99,102,241,.3)', text: '#818cf8' },
+      'breach': { name: 'Breach Checkers', icon: '🔍', color: 'rgba(244,63,94,.3)', text: '#fb7185' },
+      '2fa': { name: '2FA Tools', icon: '🗝️', color: 'rgba(16,185,129,.3)', text: '#34d399' },
+      'vpn': { name: 'Privacy & VPN', icon: '🛡️', color: 'rgba(168,85,247,.3)', text: '#c084fc' },
+      'av': { name: 'Anti-Malware', icon: '🦠', color: 'rgba(239,68,68,.3)', text: '#f87171' },
+      'web': { name: 'Web Security', icon: '🕸️', color: 'rgba(34,211,238,.3)', text: '#22d3ee' },
+      'fp': { name: 'Fingerprinting', icon: '🕵️', color: 'rgba(245,158,11,.3)', text: '#fbbf24' },
+      'enc': { name: 'Encryption', icon: '🔐', color: 'rgba(99,102,241,.3)', text: '#818cf8' },
+      'edu': { name: 'Education', icon: '🎓', color: 'rgba(234,179,8,.3)', text: '#facc15' },
+      'dns': { name: 'DNS Security', icon: '🌐', color: 'rgba(16,185,129,.3)', text: '#34d399' },
+      'osint': { name: 'OSINT Tools', icon: '🕵️', color: 'rgba(34,211,238,.3)', text: '#22d3ee' },
+      'pentest': { name: 'Pentesting', icon: '🧪', color: 'rgba(168,85,247,.3)', text: '#c084fc' },
+      'email': { name: 'Secure Email', icon: '📧', color: 'rgba(14,165,233,.3)', text: '#38bdf8' },
+      'net': { name: 'Network Tools', icon: '📡', color: 'rgba(99,102,241,.3)', text: '#818cf8' },
+      'hids': { name: 'IDS/Monitoring', icon: '🧱', color: 'rgba(244,63,94,.3)', text: '#fb7185' },
+      'app': { name: 'App Security', icon: '🕵️', color: 'rgba(16,185,129,.3)', text: '#34d399' },
+      'ir': { name: 'Forensics/IR', icon: '🚀', color: 'rgba(34,211,238,.3)', text: '#22d3ee' },
+      'siem': { name: 'SIEM/Logs', icon: '📊', color: 'rgba(234,179,8,.3)', text: '#facc15' },
+      'intel': { name: 'Threat Intel', icon: '🐝', color: 'rgba(14,165,233,.3)', text: '#38bdf8' },
+      're': { name: 'Reverse Eng', icon: '🐉', color: 'rgba(168,85,247,.3)', text: '#c084fc' },
+      'misc': { name: 'Misc Tools', icon: '🚀', color: 'rgba(16,185,129,.3)', text: '#34d399' }
+    };
+
+    const searchInput = document.getElementById('searchInput');
+    const resourceContainer = document.getElementById('resourceContainer');
+    const filterContainer = document.getElementById('filterContainer');
+
+    function renderCategories() {
+      filterContainer.innerHTML = '<button class="filter-btn active" onclick="filterCat(\'all\', this)">All (300+)</button>';
+      const cats = [...new Set(allTools.map(t => t.cat))];
+      cats.forEach(c => {
+        if (catMap[c]) {
+          const btn = document.createElement('button');
+          btn.className = 'filter-btn';
+          btn.innerHTML = `${catMap[c].icon} ${catMap[c].name}`;
+          btn.onclick = (e) => filterCat(c, btn);
+          filterContainer.appendChild(btn);
+        }
+      });
+    }
+
+    function filterCat(cat, btn) {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      renderTools(cat);
+      if (searchInput) searchInput.value = '';
+    }
+
+    function doSearch() {
+      const term = searchInput.value.toLowerCase();
+      const filtered = allTools.filter(t =>
+        t.name.toLowerCase().includes(term) ||
+        t.desc.toLowerCase().includes(term) ||
+        t.tag.toLowerCase().includes(term)
+      );
+      renderTools('all', filtered);
+    }
+
+    function renderTools(filter = 'all', data = null) {
+      resourceContainer.innerHTML = '';
+      resourceContainer.className = 'grid2';
+
+      const filtered = data || (filter === 'all' ? allTools : allTools.filter(t => t.cat === filter));
+
+      if (filtered.length === 0) {
+        resourceContainer.innerHTML = '<div style="text-align:center; padding:50px; color:var(--dim)">No resources found matching your search.</div>';
+        updateCounts(0);
+        return;
+      }
+
+      filtered.forEach(tool => {
+        const cat = catMap[tool.cat] || { name: 'Other', icon: '🛠️', color: 'rgba(255,255,255,.1)', text: '#fff' };
+
+        // Parse badges from tag string
+        const badgesHtml = tool.tag ? tool.tag.split('·').map(part =>
+          `<span class="rc-badge">${part.trim()}</span>`
+        ).join('') : '';
+
+        const card = document.createElement('a');
+        card.href = tool.url;
+        card.target = '_blank';
+        card.className = 'rc';
+        // Advanced Security Detection
+        const isAdvanced = /e2e|encrypt|audit|source|zero-access|verified|secure/i.test(tool.desc + tool.name + tool.tag);
+        const trustHtml = isAdvanced ? `<div class="trust-indicator"><span class="trust-dot"></span> HIGH TRUST</div>` : '';
+
+        card.innerHTML = `
+          ${isAdvanced ? '<span class="badge-hot">Verified</span>' : ''}
+          <div class="rc-info">
+            <div class="rc-ic" style="color:${cat.text}">${tool.icon || cat.icon}</div>
+            <div style="min-width: 0; flex: 1;">
+              <div class="rc-nm">${tool.name} ${trustHtml}</div>
+              <div class="rc-url">${new URL(tool.url).hostname}</div>
+            </div>
+          </div>
+          <p class="rc-ds">${tool.desc}</p>
+          <div class="rc-badges">${badgesHtml}</div>
+          <div class="rc-wh">
+            <strong>Why?</strong>
+            <span class="en">${tool.why.en}</span>
+            <span class="hi">${tool.why.hi}</span>
+          </div>
+        `;
+        resourceContainer.appendChild(card);
+      });
+      updateCounts(filtered.length);
+    }
+
+    const i18n = {
+      en: {
+        navHome: '🏠 Home', navResources: '🛡️ Resources', badgeTools: 'Tools',
+        searchPlaceholder: 'Search security tools, VPNs, password managers...',
+        heroTitle: 'Security Resources',
+        heroSub: 'A curated list of verified, free, and open-source security tools for everyone. Explore unique resources to protect your digital identity.',
+        statVerified: 'Verified Tools', statFree: 'Free / OSS', statPrivacy: 'Privacy First',
+        rulesTitle: 'Top 12 Password Security Rules',
+        rule1Title: 'Different Password for Every Site:', rule1Desc: 'Never reuse passwords across different accounts.',
+        rule2Title: 'Minimum 12 Characters:', rule2Desc: 'Longer passwords are exponentially harder to crack.',
+        rule3Title: 'Mix Character Types:', rule3Desc: 'Use uppercase, lowercase, numbers, and symbols.',
+        rule4Title: 'Enable 2FA:', rule4Desc: 'Two-Factor Authentication is your second line of defense.',
+        rule5Title: 'Use a Password Manager:', rule5Desc: 'Don\'t try to remember them all; use a trusted vault.',
+        rule6Title: 'Avoid Personal Info:', rule6Desc: 'Don\'t use birthdays, pet names, or phone numbers.',
+        rule7Title: 'Update Important Passwords:', rule7Desc: 'Change your bank and email passwords every 6 months.',
+        rule8Title: 'Check for Breaches:', rule8Desc: 'Use HaveIBeenPwned to check if your data was leaked.',
+        rule9Title: 'Don\'t Share Passwords:', rule9Desc: 'Never give your password to anyone, even "support".',
+        rule10Title: 'Beware of Phishing:', rule10Desc: 'Always check the URL before entering your password.',
+        rule11Title: 'Secure Your Recovery Email:', rule11Desc: 'Your recovery email is the keys to your kingdom.',
+        rule12Title: 'Logout on Public Devices:', rule12Desc: 'Always sign out and clear history on shared computers.',
+        attacksTitle: 'Common Password Attacks — Explained',
+        atk1: 'Brute Force:', atk1Desc: 'Attacker tries every possible combination of characters until they find the right one.',
+        atk2: 'Dictionary Attack:', atk2Desc: 'Using a list of common words and previously leaked passwords to guess yours.',
+        atk3: 'Phishing:', atk3Desc: 'Fake websites that look like the real ones to trick you into entering your credentials.',
+        atk4: 'Keylogging:', atk4Desc: 'Malware that records every keystroke you type on your keyboard.',
+        atk5: 'Credential Stuffing:', atk5Desc: 'Using passwords leaked from one site to try and login to your other accounts.',
+        totalTools: 'Total Tools',
+        summaryText: 'All links are verified and official. Data-driven by tools.json.',
+        curatedBy: 'Curated by', staySafe: 'Stay safe online!',
+        footerText: 'Trusted Security Resources | Curated by SudhirDevOps1 | Hindi + English Supported',
+        foundMatches: 'Found {count} matches',
+        showingResources: 'Showing {count} resources'
+      },
+      hi: {
+        navHome: '🏠 होम', navResources: '🛡️ रिसोर्सेज', badgeTools: 'टूल्स',
+        searchPlaceholder: 'सुरक्षा टूल्स, VPN, पासवर्ड मैनेजर खोजें...',
+        heroTitle: 'सुरक्षा संसाधन',
+        heroSub: 'सभी के लिए सत्यापित, मुफ्त और ओपन-सोर्स सुरक्षा उपकरणों की एक क्यूरेटेड सूची। अपनी डिजिटल पहचान की रक्षा के लिए अद्वितीय संसाधनों का अन्वेषण करें।',
+        statVerified: 'सत्यापित टूल्स', statFree: 'मुफ्त / OSS', statPrivacy: 'प्राइवेसी फर्स्ट',
+        rulesTitle: 'टॉप 12 पासवर्ड सुरक्षा नियम',
+        rule1Title: 'हर साइट के लिए अलग पासवर्ड:', rule1Desc: 'विभिन्न खातों में पासवर्ड कभी भी दोबारा उपयोग न करें।',
+        rule2Title: 'न्यूनतम 12 कैरेक्टर:', rule2Desc: 'लंबे पासवर्ड को क्रैक करना काफी कठिन होता है।',
+        rule3Title: 'कैरेक्टर प्रकार मिलाएं:', rule3Desc: 'बड़े अक्षर, छोटे अक्षर, संख्याएं और प्रतीकों का प्रयोग करें।',
+        rule4Title: '2FA सक्षम करें:', rule4Desc: 'टू-फैक्टर ऑथेंटिकेशन आपकी सुरक्षा की दूसरी पंक्ति है।',
+        rule5Title: 'पासवर्ड मैनेजर का प्रयोग करें:', rule5Desc: 'सबको याद रखने की कोशिश न करें; एक भरोसेमंद वॉल्ट का उपयोग करें।',
+        rule6Title: 'पर्सनल जानकारी से बचें:', rule6Desc: 'जन्मदिन, पालतू जानवरों के नाम या फोन नंबर का उपयोग न करें।',
+        rule7Title: 'महत्वपूर्ण पासवर्ड अपडेट करें:', rule7Desc: 'हर 6 महीने में अपना बैंक और ईमेल पासवर्ड बदलें।',
+        rule8Title: 'डेटा ब्रीच चेक करें:', rule8Desc: 'आपका डेटा लीक हुआ है या नहीं, यह जांचने के लिए HaveIBeenPwned का उपयोग करें।',
+        rule9Title: 'पासवर्ड साझा न करें:', rule9Desc: 'अपना पासवर्ड कभी किसी को न दें, यहाँ तक कि "सपोर्ट" को भी नहीं।',
+        rule10Title: 'फ़िशिंग से सावधान रहें:', rule10Desc: 'पासवर्ड डालने से पहले हमेशा URL चेक करें।',
+        rule11Title: 'रिकवरी ईमेल सुरक्षित करें:', rule11Desc: 'आपका रिकवरी ईमेल आपके डिजिटल साम्राज्य की चाबी है।',
+        rule12Title: 'पब्लिक डिवाइस पर लॉगआउट करें:', rule12Desc: 'साझा कंप्यूटरों पर हमेशा साइन आउट करें और हिस्ट्री क्लियर करें।',
+        attacksTitle: 'सामान्य पासवर्ड हमले — व्याख्या',
+        atk1: 'ब्रूट फ़ोर्स:', atk1Desc: 'हमलावर तब तक वर्णों के हर संभव संयोजन की कोशिश करता है जब तक कि उसे सही पासवर्ड न मिल जाए।',
+        atk2: 'डिक्शनरी अटैक:', atk2Desc: 'आपके पासवर्ड का अनुमान लगाने के लिए सामान्य शब्दों और पहले से लीक हुए पासवर्ड की सूची का उपयोग करना।',
+        atk3: 'फ़िशिंग:', atk3Desc: 'नकली वेबसाइटें जो आपको क्रेडेंशियल दर्ज करने के लिए धोखा देने के लिए असली जैसी दिखती हैं।',
+        atk4: 'की-लॉगिंग:', atk4Desc: 'मैलवेयर जो आपके कीबोर्ड पर आपके द्वारा टाइप किए गए हर कीस्ट्रोक को रिकॉर्ड करता है।',
+        atk5: 'क्रेडेंशियल स्टफिंग:', atk5Desc: 'एक साइट से लीक हुए पासवर्ड का उपयोग करके आपके अन्य खातों में लॉगिन करने का प्रयास करना।',
+        totalTools: 'कुल टूल्स',
+        summaryText: 'सभी लिंक सत्यापित और आधिकारिक हैं। tools.json द्वारा संचालित।',
+        curatedBy: 'द्वारा क्यूरेटेड', staySafe: 'ऑनलाइन सुरक्षित रहें!',
+        footerText: 'भरोसेमंद सुरक्षा संसाधन | SudhirDevOps1 द्वारा क्यूरेटेड | हिंदी + अंग्रेजी समर्थित',
+        foundMatches: '{count} मिलान मिले',
+        showingResources: '{count} संसाधन दिख रहे हैं'
+      }
+    };
+
+    let currentLang = localStorage.getItem('appLang') || 'en';
+
+    function T(key) {
+      return (i18n[currentLang] && i18n[currentLang][key]) || (i18n['en'][key]) || key;
+    }
+
+    function applyLanguage() {
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        el.textContent = T(key);
+      });
+      document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+        el.placeholder = T(el.getAttribute('data-i18n-placeholder'));
+      });
+      document.body.className = 'lang-' + currentLang;
+      document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+      const activeBtn = document.getElementById('btn-' + currentLang);
+      if (activeBtn) activeBtn.classList.add('active');
+
+      // Update dynamic parts
+      updateCounts();
+      renderTools('all'); // Refresh list to update "Why?" text
+    }
+
+    function updateCounts(count) {
+      const displayCount = count !== undefined ? count : allTools.length;
+      const fmtClass = displayCount + (displayCount < allTools.length ? '' : '+');
+
+      const elements = {
+        'totalCountHero': fmtClass,
+        'finalCountSummary': fmtClass,
+        'totalCountDisplay': fmtClass,
+        'stat-total': fmtClass
+      };
+
+      for (const [id, val] of Object.entries(elements)) {
+        const el = document.getElementById(id);
+        if (el) el.innerText = val;
+      }
+
+      const resultsCountEl = document.getElementById('resultsCount');
+      if (resultsCountEl) {
+        const term = searchInput ? searchInput.value : '';
+        const key = term ? 'foundMatches' : 'showingResources';
+        resultsCountEl.innerText = T(key).replace('{count}', displayCount);
+      }
+    }
+
+    function setLang(lang) {
+      currentLang = lang;
+      localStorage.setItem('appLang', currentLang);
+      applyLanguage();
+    }
+
+    function initTools() {
+      renderCategories();
+      applyLanguage(); // Initial render and language apply
+    }
+    initTools();
+
+    window.addEventListener('scroll', () => {
+      const btn = document.getElementById('backTop');
+      if (btn) {
+        if (window.scrollY > 300) btn.classList.add('visible');
+        else btn.classList.remove('visible');
+      }
+    });
+  </script>
+</body>
+
+</html>

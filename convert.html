@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Format Converter — by SudhirDevOps1</title>
+    <link rel="stylesheet" href="shared.css">
+    <style>
+        .drop-zone {
+            border: 2px dashed rgba(255, 255, 255, .2);
+            border-radius: 16px;
+            padding: 48px 24px;
+            text-align: center;
+            cursor: pointer;
+            transition: all .3s;
+        }
+
+        .drop-zone:hover,
+        .drop-zone.over {
+            border-color: #f97316;
+            background: rgba(249, 115, 22, .05);
+        }
+
+        .fmt-btn {
+            flex: 1;
+            padding: 12px 8px;
+            border-radius: 10px;
+            border: 2px solid rgba(255, 255, 255, .08);
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 12px;
+            font-family: 'Inter', sans-serif;
+            transition: all .25s;
+            color: #94a3b8;
+            background: rgba(255, 255, 255, .04);
+        }
+
+        .fmt-btn.active {
+            background: linear-gradient(135deg, #f97316, #fb923c);
+            color: #fff;
+            border-color: transparent;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="site-header">
+        <div class="inner">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">🔐</div>
+                <div>
+                    <div class="logo-title">Password Tools</div>
+                    <div class="logo-sub">by SudhirDevOps1</div>
+                </div>
+            </a>
+            <div class="breadcrumb">
+                <a href="index.html" data-i18n="navHome">🏠 Home</a> › <span data-i18n="navConvert">🔄 Format
+                    Convert</span>
+            </div>
+            <div class="lang-toggle">
+                <button class="lang-btn" id="btn-en" onclick="setLang('en')">EN</button>
+                <button class="lang-btn" id="btn-hi" onclick="setLang('hi')">हिन्दी</button>
+            </div>
+            <div class="badge-secure"><span class="pulse"></span><span data-i18n="badgeSecure">Offline</span></div>
+        </div>
+    </header>
+    <main>
+        <a href="index.html" class="back-link" data-i18n="backHome">← Back to Tools</a>
+        <div class="card fade-up" style="margin-bottom:20px">
+            <div class="section-title" data-i18n="toolTitle">🔄 Format Converter</div>
+            <div class="section-sub" data-i18n="toolSub">Convert CSV password export → JSON, XML, TXT, KeePass XML — all
+                offline</div>
+            <div class="drop-zone" id="dropZone" onclick="document.getElementById('fi').click()">
+                <div style="font-size:48px;margin-bottom:12px">📂</div>
+                <div style="font-size:16px;font-weight:700;margin-bottom:6px" data-i18n="dropTitle">Drop CSV or Click to
+                    Upload</div>
+                <div style="font-size:13px;color:#64748b" data-i18n="dropDesc">Any browser / password manager CSV export
+                </div>
+                <input type="file" id="fi" accept=".csv,.txt" style="display:none">
+            </div>
+        </div>
+
+        <div id="cs" style="display:none">
+            <div class="card fade-up"
+                style="margin-bottom:16px;background:rgba(249,115,22,.06);border-color:rgba(249,115,22,.2)">
+                <div style="display:flex;align-items:center;justify-content:space-between">
+                    <div style="display:flex;align-items:center;gap:12px"><span style="font-size:28px">✅</span>
+                        <div>
+                            <div id="fn" style="font-weight:700;color:#fb923c"></div>
+                            <div id="fs" style="font-size:12px;color:#64748b"></div>
+                        </div>
+                    </div>
+                    <button class="btn btn-outline btn-sm" onclick="clr()">✕</button>
+                </div>
+            </div>
+            <div class="card fade-up" style="margin-bottom:16px">
+                <div style="font-weight:700;margin-bottom:12px" data-i18n="convertTo">📦 Convert To:</div>
+                <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px">
+                    <button class="fmt-btn active" id="bj" onclick="sf('json')">📦 JSON</button>
+                    <button class="fmt-btn" id="bx" onclick="sf('xml')">📋 XML</button>
+                    <button class="fmt-btn" id="bt" onclick="sf('txt')">📝 TXT</button>
+                    <button class="fmt-btn" id="bk" onclick="sf('kp')">🔑 KeePass</button>
+                    <button class="fmt-btn" id="bc" onclick="sf('csv')">📊 CSV</button>
+                </div>
+                <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+                    <label style="display:flex;align-items:center;gap:8px;font-size:13px;cursor:pointer"><input
+                            type="checkbox" id="mp" style="accent-color:#6366f1"><span data-i18n="maskPass">Mask
+                            passwords</span></label>
+                    <button class="btn btn-amber" onclick="doConvert()" data-i18n="btnConvert">⬇️ Convert &
+                        Download</button>
+                    <button class="btn btn-outline btn-sm" onclick="preview()" data-i18n="btnPreview">👁️
+                        Preview</button>
+                </div>
+            </div>
+            <div class="card fade-up" id="pv" style="display:none">
+                <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
+                    <div style="font-weight:700" data-i18n="previewTitle">Preview (5 entries)</div>
+                    <button class="copy-btn"
+                        onclick="navigator.clipboard.writeText(document.getElementById('pb').textContent)">📋</button>
+                </div>
+                <pre id="pb"
+                    style="background:rgba(255,255,255,.04);border-radius:8px;padding:12px;font-size:11px;overflow:auto;max-height:280px;color:#e2e8f0;white-space:pre-wrap;word-break:break-all"></pre>
+            </div>
+        </div>
+    </main>
+    <footer class="site-footer" data-i18n="footerText">🔒 All local — by <strong
+            style="color:#818cf8">SudhirDevOps1</strong></footer>
+    <div id="toast-container"></div>
+    <script>
+        const i18n = {
+            en: {
+                navHome: '🏠 Home', navConvert: '🔄 Format Convert', badgeSecure: 'Offline',
+                backHome: '← Back to Tools', toolTitle: '🔄 Format Converter',
+                toolSub: 'Convert CSV password export → JSON, XML, TXT, KeePass XML — all offline',
+                dropTitle: 'Drop CSV or Click to Upload', dropDesc: 'Any browser / password manager CSV export',
+                convertTo: '📦 Convert To:', maskPass: 'Mask passwords',
+                btnConvert: '⬇️ Convert & Download', btnPreview: '👁️ Preview',
+                previewTitle: 'Preview (5 entries)', footerText: '🔒 All local — by SudhirDevOps1',
+                toastNoData: 'No data', toastLoaded: '✅ {n} loaded',
+                toastDownload: '✅ Downloaded as {e}', toastLoadFirst: 'Load CSV first',
+                entries: '{n} entries'
+            },
+            hi: {
+                navHome: '🏠 होम', navConvert: '🔄 फॉर्मेट कन्वर्ट', badgeSecure: 'ऑफलाइन',
+                backHome: '← टूल्स पर वापस जाएं', toolTitle: '🔄 फॉर्मेट कनवर्टर',
+                toolSub: 'CSV पासवर्ड निर्यात को JSON, XML, TXT, KeePass XML में बदलें — सब ऑफलाइन',
+                dropTitle: 'CSV छोड़ें या अपलोड करने के लिए क्लिक करें', dropDesc: 'कोई भी ब्राउज़र / पासवर्ड मैनेजर CSV निर्यात',
+                convertTo: '📦 इसमें बदलें:', maskPass: 'पासवर्ड छिपाएं',
+                btnConvert: '⬇️ कन्वर्ट और डाउनलोड करें', btnPreview: '👁️ पूर्वावलोकन',
+                previewTitle: 'पूर्वावलोकन (5 प्रविष्टियां)', footerText: '🔒 सब स्थानीय — SudhirDevOps1 द्वारा',
+                toastNoData: 'कोई डेटा नहीं', toastLoaded: '✅ {n} प्रविष्टियां लोड की गईं',
+                toastDownload: '✅ {e} के रूप में डाउनलोड किया गया', toastLoadFirst: 'पहले CSV लोड करें',
+                entries: '{n} प्रविष्टियां'
+            }
+        };
+
+        let currentLang = localStorage.getItem('appLang') || 'en';
+
+        function T(key) {
+            return (i18n[currentLang] && i18n[currentLang][key]) || (i18n['en'][key]) || key;
+        }
+
+        function applyLanguage() {
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                el.innerHTML = T(key);
+            });
+            document.body.className = 'lang-' + currentLang;
+            document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+            const activeBtn = document.getElementById('btn-' + currentLang);
+            if (activeBtn) activeBtn.classList.add('active');
+
+            if (D.length) {
+                document.getElementById('fs').textContent = T('entries').replace('{n}', D.length);
+            }
+        }
+
+        function setLang(lang) {
+            currentLang = lang;
+            localStorage.setItem('appLang', currentLang);
+            applyLanguage();
+        }
+
+        let D = [], fmt = 'json';
+        const dz = document.getElementById('dropZone');
+        dz.addEventListener('dragover', e => { e.preventDefault(); dz.classList.add('over'); });
+        dz.addEventListener('dragleave', () => dz.classList.remove('over'));
+        dz.addEventListener('drop', e => { e.preventDefault(); dz.classList.remove('over'); if (e.dataTransfer.files[0]) lf(e.dataTransfer.files[0]); });
+        document.getElementById('fi').addEventListener('change', e => { if (e.target.files[0]) lf(e.target.files[0]); });
+        function pcl(l) { const r = []; let c = ''; let q = false; for (let i = 0; i < l.length; i++) { const ch = l[i]; if (ch === '"') { if (q && l[i + 1] === '"') { c += '"'; i++; } else q = !q; } else if (ch === ',' && !q) { r.push(c); c = ''; } else c += ch; } r.push(c); return r; }
+        function gf(row, ...keys) { for (const k of keys) { for (const rk of Object.keys(row)) { if (rk.toLowerCase().includes(k)) return row[rk] || ''; } } return ''; }
+        function lf(file) { const r = new FileReader(); r.onload = e => { const lines = e.target.result.replace(/\r\n/g, '\n').replace(/\r/g, '\n').split('\n').filter(l => l.trim()); if (lines.length < 2) { toast(T('toastNoData'), 'error'); return; } const hdrs = pcl(lines[0]); D = []; for (let i = 1; i < lines.length; i++) { const vals = pcl(lines[i]); if (vals.some(v => v.trim())) { const row = {}; hdrs.forEach((h, idx) => { row[h] = vals[idx] || ''; }); D.push({ name: gf(row, 'name', 'title'), url: gf(row, 'url', 'origin', 'hostname', 'website', 'login_uri'), username: gf(row, 'username', 'login', 'user', 'email', 'id'), password: gf(row, 'password', 'pass', 'login_password', 'pwd', 'secret'), notes: gf(row, 'note', 'notes', 'extra') }); } } document.getElementById('cs').style.display = 'block'; document.getElementById('fn').textContent = file.name; document.getElementById('fs').textContent = T('entries').replace('{n}', D.length); toast('✅ ' + T('toastLoaded').replace('{n}', D.length), 'success'); }; r.readAsText(file, 'UTF-8'); }
+        function sf(f) { fmt = f;['bj', 'bx', 'bt', 'bk', 'bc'].forEach(id => document.getElementById(id).className = 'fmt-btn'); const m = { json: 'bj', xml: 'bx', txt: 'bt', kp: 'bk', csv: 'bc' }; document.getElementById(m[f]).className = 'fmt-btn active'; document.getElementById('pv').style.display = 'none'; }
+        function getData() { const mask = document.getElementById('mp').checked; return D.map(e => ({ ...e, password: mask ? '••••••••' : e.password })); }
+        function toJ(d) { return JSON.stringify({ by: 'SudhirDevOps1', date: new Date().toISOString(), total: d.length, passwords: d }, null, 2); }
+        function toX(d) { let x = '<?xml version="1.0"?>\n<passwords>\n'; d.forEach((e, i) => { x += `  <entry id="${i + 1}"><name>${ex(e.name)}</name><url>${ex(e.url)}</url><username>${ex(e.username)}</username><password>${ex(e.password)}</password><notes>${ex(e.notes)}</notes></entry>\n`; }); return x + '</passwords>'; }
+        function toK(d) { let x = '<?xml version="1.0"?>\n<KeePassFile><Root><Group><Name>Imported</Name>\n'; d.forEach(e => { x += `<Entry><String><Key>Title</Key><Value>${ex(e.name)}</Value></String><String><Key>URL</Key><Value>${ex(e.url)}</Value></String><String><Key>UserName</Key><Value>${ex(e.username)}</Value></String><String><Key>Password</Key><Value>${ex(e.password)}</Value></String><String><Key>Notes</Key><Value>${ex(e.notes)}</Value></String></Entry>\n`; }); return x + '</Group></Root></KeePassFile>'; }
+        function toT(d) { let t = 'PASSWORDS EXPORT\nby SudhirDevOps1\n' + '═'.repeat(50) + '\n\n'; d.forEach((e, i) => { t += `[${i + 1}] ${e.name}\n  URL: ${e.url || '—'} | User: ${e.username || '—'} | Pass: ${e.password || '—'}\n  Notes: ${e.notes || '—'}\n\n`; }); return t; }
+        function toC(d) {
+            const rows = [
+                ['Name', 'URL', 'Username', 'Password', 'Notes'],
+                ...d.map(e => [e.name, e.url, e.username, e.password, e.notes].map(v => `"${(v || '').replace(/"/g, '""')}"`))
+            ];
+            return rows.map(r => r.join(',')).join('\n');
+        }
+        function cv(d) { if (fmt === 'json') return { c: toJ(d), e: 'json', t: 'application/json' }; if (fmt === 'xml') return { c: toX(d), e: 'xml', t: 'application/xml' }; if (fmt === 'kp') return { c: toK(d), e: 'xml', t: 'application/xml' }; if (fmt === 'txt') return { c: toT(d), e: 'txt', t: 'text/plain' }; return { c: toC(d), e: 'csv', t: 'text/csv' }; }
+        function doConvert() { if (!D.length) { toast(T('toastLoadFirst'), 'error'); return; } const { c, e, t } = cv(getData()); const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([c], { type: t })); a.download = 'passwords.' + e; a.click(); toast(T('toastDownload').replace('{e}', e.toUpperCase()), 'success'); }
+        function preview() { if (!D.length) { toast(T('toastLoadFirst'), 'error'); return; } const { c } = cv(getData().slice(0, 5)); document.getElementById('pb').textContent = c; document.getElementById('pv').style.display = 'block'; }
+        function clr() { D = []; document.getElementById('cs').style.display = 'none'; document.getElementById('fi').value = ''; }
+        function ex(s) { return (s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+        function toast(msg, type = 'success') { const c = document.getElementById('toast-container'); const t = document.createElement('div'); t.className = `toast ${type}`; t.textContent = msg; c.appendChild(t); setTimeout(() => { t.style.opacity = '0'; t.style.transition = 'all .3s'; setTimeout(() => t.remove(), 300); }, 2800); }
+
+        applyLanguage();
+    </script>
+</body>
+
+</html>

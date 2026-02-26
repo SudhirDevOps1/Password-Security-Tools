@@ -1,0 +1,2035 @@
+<!DOCTYPE html>
+<html lang="hi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Password Security Tools — by SudhirDevOps1</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+        :root {
+            --bg: #0a0e1a;
+            --card: rgba(255, 255, 255, 0.04);
+            --card-hover: rgba(255, 255, 255, 0.08);
+            --border: rgba(255, 255, 255, 0.1);
+            --indigo: #6366f1;
+            --indigo-light: #818cf8;
+            --green: #34d399;
+            --text: #e2e8f0;
+            --muted: #94a3b8;
+            --dim: #64748b;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        .gradient-bg {
+            background: radial-gradient(circle at top right, rgba(99, 102, 241, 0.1), transparent 40%),
+                radial-gradient(circle at bottom left, rgba(16, 185, 129, 0.05), transparent 40%),
+                var(--bg);
+            min-height: 100vh;
+        }
+
+        .card-glass {
+            background: var(--card);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--border);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .card-glass:hover {
+            border-color: rgba(99, 102, 241, 0.3);
+            background: var(--card-hover);
+            transform: translateY(-2px);
+        }
+
+        .glow-indigo {
+            box-shadow: 0 0 40px rgba(99, 102, 241, 0.25), 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .glow-emerald {
+            box-shadow: 0 0 40px rgba(16, 185, 129, 0.25), 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .glow-orange {
+            box-shadow: 0 0 40px rgba(249, 115, 22, 0.25), 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .drop-zone.dragover {
+            border-color: #818cf8 !important;
+            background: rgba(99, 102, 241, 0.15) !important;
+            transform: scale(1.01);
+        }
+
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        .pulse-dot {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 0.4;
+                transform: scale(0.8);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-8px);
+            }
+        }
+
+        .fade-in {
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        .slide-in {
+            animation: slideIn 0.4s ease-out;
+        }
+
+        .float-anim {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .browser-badge {
+            transition: all 0.2s;
+        }
+
+        .browser-badge:hover {
+            transform: translateY(-2px);
+            background: rgba(255, 255, 255, 0.12);
+        }
+
+        .btn-download {
+            transition: all 0.3s ease;
+        }
+
+        .btn-download:hover {
+            transform: translateY(-3px);
+        }
+
+        .btn-download:active {
+            transform: translateY(0);
+        }
+
+        .tool-btn {
+            transition: all 0.3s ease;
+        }
+
+        .tool-btn:hover {
+            transform: translateY(-4px) scale(1.02);
+        }
+
+        .tool-btn:active {
+            transform: translateY(0) scale(0.98);
+        }
+
+        select option {
+            background: #1e293b;
+            color: white;
+        }
+
+        @media (max-width: 640px) {
+            .mobile-text-xs {
+                font-size: 0.7rem;
+            }
+
+            .mobile-p-2 {
+                padding: 0.5rem;
+            }
+        }
+
+        input[type="password"]::-ms-reveal {
+            display: none;
+        }
+
+        .privacy-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .privacy-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--indigo);
+            background: rgba(99, 102, 241, 0.05);
+        }
+
+        .text-glow {
+            text-shadow: 0 0 20px rgba(99, 102, 241, 0.5);
+        }
+
+        .sub-text {
+            color: var(--muted);
+            line-height: 1.7;
+            font-weight: 400;
+        }
+
+        .heading-premium {
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            color: #fff;
+        }
+
+        .rainbow-border {
+            background: linear-gradient(135deg, #6366f1, #ec4899, #f59e0b, #10b981, #6366f1);
+            background-size: 300% 300%;
+            animation: gradientShift 4s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .lang-toggle {
+            transition: all 0.3s;
+        }
+
+        .lang-toggle:hover {
+            transform: scale(1.05);
+        }
+
+        .lang-toggle:active {
+            transform: scale(0.95);
+        }
+
+        .lang-switch-anim {
+            animation: fadeInUp 0.3s ease-out;
+        }
+    </style>
+</head>
+
+<body class="gradient-bg text-white">
+
+    <!-- Header -->
+    <header
+        class="py-4 sm:py-6 px-3 sm:px-4 border-b border-white/10 sticky top-0 z-40 bg-[#0a0f1e]/80 backdrop-blur-xl">
+        <div class="max-w-6xl mx-auto flex items-center justify-between">
+            <div class="flex items-center gap-2 sm:gap-3">
+                <div
+                    class="w-9 h-9 sm:w-11 sm:h-11 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-lg sm:text-xl shadow-lg float-anim">
+                    🔐</div>
+                <div>
+                    <h1 class="text-base sm:text-xl font-extrabold tracking-tight bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent"
+                        data-i18n="headerTitle">🧰 Password Security Tools</h1>
+                    <p class="text-[10px] sm:text-xs text-gray-400" data-i18n="headerSub">CSV → PDF / TXT / JSON | 🔒
+                        Offline & Secure</p>
+                </div>
+            </div>
+            <div class="flex items-center gap-3 sm:gap-6">
+                <!-- Resources Link -->
+                <a href="resources.html"
+                    class="hidden md:flex items-center gap-2 px-4 py-2 bg-indigo-500/10 border border-indigo-500/20 rounded-xl hover:bg-indigo-500/20 transition-all group">
+                    <span class="text-indigo-400 font-bold text-sm">304+ Resources</span>
+                    <span class="text-indigo-300 group-hover:translate-x-1 transition-transform">→</span>
+                </a>
+
+                <!-- Language Toggle -->
+                <button onclick="toggleLanguage()" id="langToggleBtn"
+                    class="lang-toggle flex items-center gap-1.5 text-[10px] sm:text-xs bg-gradient-to-r from-indigo-600/30 to-purple-600/30 border border-indigo-500/40 px-2.5 sm:px-3 py-1.5 sm:py-2 rounded-full hover:border-indigo-400/70 font-bold">
+                    <span id="langFlag">🇮🇳</span>
+                    <span id="langLabel">हिंदी</span>
+                    <span class="text-gray-500">|</span>
+                    <span class="text-gray-400 font-normal" id="langAlt">EN</span>
+                </button>
+                <div
+                    class="hidden sm:flex items-center gap-1.5 text-[10px] text-gray-400 bg-white/5 px-2 py-1 rounded-full">
+                    <span>👨‍💻</span>
+                    <span>by <strong class="text-indigo-400">SudhirDevOps1</strong></span>
+                </div>
+                <div
+                    class="flex items-center gap-1.5 sm:gap-2 text-[10px] sm:text-xs text-emerald-400 bg-emerald-500/10 px-2 sm:px-3 py-1 sm:py-1.5 rounded-full border border-emerald-500/20">
+                    <span class="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-emerald-400 pulse-dot inline-block"></span>
+                    <span class="hidden sm:inline" data-i18n="clientSide">Client-Side Only</span>
+                    <span class="sm:hidden" data-i18n="secure">Secure</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-3 sm:px-4 py-4 sm:py-8 space-y-4 sm:space-y-6">
+
+        <!-- Developer Card -->
+        <div class="card-glass rounded-3xl p-6 sm:p-8 fade-in relative overflow-hidden group">
+            <div
+                class="absolute top-0 right-0 w-64 h-64 bg-gradient-to-bl from-indigo-500/10 to-transparent rounded-bl-full -mr-10 -mt-10 transition-transform group-hover:scale-110">
+            </div>
+            <div class="flex items-center gap-5 sm:gap-8 relative z-10">
+                <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-full rainbow-border p-[3px] flex-shrink-0 shadow-2xl">
+                    <div
+                        class="w-full h-full rounded-full bg-gradient-to-br from-indigo-600 to-purple-700 flex items-center justify-center text-3xl sm:text-4xl font-black text-white shadow-inner">
+                        S</div>
+                </div>
+                <div>
+                    <h2 class="font-black text-2xl sm:text-3xl text-white tracking-tight mb-1">SudhirDevOps1</h2>
+                    <p class="text-xs sm:text-sm text-indigo-300 font-mono font-medium opacity-80 mb-2">@SudhirDevOps1
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                        <span
+                            class="bg-indigo-500/10 border border-indigo-500/20 px-3 py-1 rounded-full text-[10px] sm:text-xs text-indigo-300 font-bold uppercase tracking-wider">🛡️
+                            Security Expert</span>
+                        <span
+                            class="bg-emerald-500/10 border border-emerald-500/20 px-3 py-1 rounded-full text-[10px] sm:text-xs text-emerald-300 font-bold uppercase tracking-wider">💻
+                            Developer</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Supported Browsers -->
+        <div class="card-glass rounded-2xl p-4 sm:p-5 fade-in">
+            <h3 class="font-bold text-sm sm:text-base mb-3 flex items-center gap-2" data-i18n="browsersTitle">🌐
+                Supported Browsers & Apps</h3>
+            <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-8 gap-2 sm:gap-3">
+                <div class="browser-badge bg-white/5 rounded-xl p-2 sm:p-3 text-center cursor-default">
+                    <div class="text-xl sm:text-2xl mb-1">🟢</div>
+                    <div class="text-[10px] sm:text-xs font-medium">Chrome</div>
+                </div>
+                <div class="browser-badge bg-white/5 rounded-xl p-2 sm:p-3 text-center cursor-default">
+                    <div class="text-xl sm:text-2xl mb-1">🔵</div>
+                    <div class="text-[10px] sm:text-xs font-medium">Edge</div>
+                </div>
+                <div class="browser-badge bg-white/5 rounded-xl p-2 sm:p-3 text-center cursor-default">
+                    <div class="text-xl sm:text-2xl mb-1">🦊</div>
+                    <div class="text-[10px] sm:text-xs font-medium">Firefox</div>
+                </div>
+                <div class="browser-badge bg-white/5 rounded-xl p-2 sm:p-3 text-center cursor-default">
+                    <div class="text-xl sm:text-2xl mb-1">🦁</div>
+                    <div class="text-[10px] sm:text-xs font-medium">Brave</div>
+                </div>
+                <div class="browser-badge bg-white/5 rounded-xl p-2 sm:p-3 text-center cursor-default">
+                    <div class="text-xl sm:text-2xl mb-1">🦆</div>
+                    <div class="text-[10px] sm:text-xs font-medium">DuckDuckGo</div>
+                </div>
+                <div class="browser-badge bg-white/5 rounded-xl p-2 sm:p-3 text-center cursor-default">
+                    <div class="text-xl sm:text-2xl mb-1">🔴</div>
+                    <div class="text-[10px] sm:text-xs font-medium">Opera</div>
+                </div>
+                <div class="browser-badge bg-white/5 rounded-xl p-2 sm:p-3 text-center cursor-default">
+                    <div class="text-xl sm:text-2xl mb-1">🧭</div>
+                    <div class="text-[10px] sm:text-xs font-medium">Safari</div>
+                </div>
+                <div class="browser-badge bg-white/5 rounded-xl p-2 sm:p-3 text-center cursor-default">
+                    <div class="text-xl sm:text-2xl mb-1">🟣</div>
+                    <div class="text-[10px] sm:text-xs font-medium">Vivaldi</div>
+                </div>
+            </div>
+            <div class="mt-3 text-[10px] sm:text-xs text-gray-500 flex flex-wrap gap-1 sm:gap-2">
+                <span class="bg-white/5 px-2 py-0.5 rounded">Bitwarden</span>
+                <span class="bg-white/5 px-2 py-0.5 rounded">LastPass</span>
+                <span class="bg-white/5 px-2 py-0.5 rounded">1Password</span>
+                <span class="bg-white/5 px-2 py-0.5 rounded">Dashlane</span>
+                <span class="bg-white/5 px-2 py-0.5 rounded">KeePass</span>
+                <span class="bg-white/5 px-2 py-0.5 rounded">NordPass</span>
+                <span class="bg-white/5 px-2 py-0.5 rounded">Samsung Pass</span>
+                <span class="bg-white/5 px-2 py-0.5 rounded" data-i18n="plusMore">+ More</span>
+            </div>
+        </div>
+
+        <!-- How To Export Guide -->
+        <details class="card-glass rounded-3xl fade-in group border-none">
+            <summary
+                class="p-6 sm:p-8 cursor-pointer flex items-center justify-between hover:bg-white/5 rounded-3xl transition-all">
+                <span class="font-black text-lg sm:text-xl flex items-center gap-3">
+                    <span class="text-2xl">📖</span>
+                    <span class="bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent">How to Export
+                        CSV?</span>
+                </span>
+                <span class="text-indigo-400 group-open:rotate-180 transition-transform text-xl">▼</span>
+            </summary>
+            <div class="px-6 sm:px-8 pb-8 sm:pb-10 space-y-4">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div
+                        class="bg-green-500/5 border border-green-500/10 rounded-2xl p-4 hover:border-green-500/30 transition-colors">
+                        <p class="font-bold text-green-300 mb-2 flex items-center gap-2">🟢 Google Chrome / Brave</p>
+                        <p class="sub-text text-xs sm:text-sm" data-i18n="guideChrome">Settings → Passwords → Google
+                            Password Manager → Settings → Export Passwords → Download CSV</p>
+                    </div>
+                    <div
+                        class="bg-blue-500/5 border border-blue-500/10 rounded-2xl p-4 hover:border-blue-500/30 transition-colors">
+                        <p class="font-bold text-blue-300 mb-2 flex items-center gap-2">🔵 Microsoft Edge</p>
+                        <p class="sub-text text-xs sm:text-sm" data-i18n="guideEdge">Settings → Passwords → ⋮ (3 dots) →
+                            Export Passwords → Save CSV File</p>
+                    </div>
+                    <div
+                        class="bg-orange-500/5 border border-orange-500/10 rounded-2xl p-4 hover:border-orange-500/30 transition-colors">
+                        <p class="font-bold text-orange-300 mb-2 flex items-center gap-2">🦊 Mozilla Firefox</p>
+                        <p class="sub-text text-xs sm:text-sm" data-i18n="guideFirefox">Settings → Privacy → Logins → ⋮
+                            → Export Logins → Save CSV</p>
+                    </div>
+                    <div
+                        class="bg-purple-500/5 border border-purple-500/10 rounded-2xl p-4 hover:border-purple-500/30 transition-colors">
+                        <p class="font-bold text-purple-300 mb-2 flex items-center gap-2">🧭 Safari (Mac/iOS)</p>
+                        <p class="sub-text text-xs sm:text-sm" data-i18n="guideSafari">Safari → Settings → Passwords → ⋮
+                            → Export All Passwords → Save CSV</p>
+                    </div>
+                </div>
+                <div
+                    class="bg-indigo-500/5 border border-indigo-500/10 rounded-2xl p-5 hover:border-indigo-500/30 transition-colors">
+                    <p class="font-bold text-indigo-300 mb-2 flex items-center gap-2">🔑 Password Managers (Bitwarden /
+                        1Password)</p>
+                    <p class="sub-text text-xs sm:text-sm" data-i18n="guidePm">Settings → Tools → Export Vault → Choose
+                        CSV Format → Download</p>
+                </div>
+            </div>
+        </details>
+
+        <!-- Upload Section -->
+        <div class="card-glass rounded-2xl p-4 sm:p-6 fade-in">
+            <div id="dropZone"
+                class="drop-zone border-2 border-dashed border-gray-600 rounded-xl p-8 sm:p-12 text-center cursor-pointer transition-all duration-300 hover:border-indigo-400 hover:bg-white/5 active:scale-[0.99]">
+                <div class="text-5xl sm:text-6xl mb-3 sm:mb-4">📂</div>
+                <h3 class="text-base sm:text-lg font-bold mb-2" data-i18n="dropTitle">Drop CSV File Here or Tap to
+                    Upload</h3>
+                <p class="text-gray-400 text-xs sm:text-sm" data-i18n="dropSub">Upload CSV file from any Browser or
+                    Password Manager</p>
+                <p class="text-gray-500 text-[10px] sm:text-xs mt-2" data-i18n="dropNote">⚠️ Your data is never uploaded
+                    anywhere — 100% Offline</p>
+                <input type="file" id="csvInput" accept=".csv,.txt" class="hidden">
+            </div>
+            <div id="fileInfo"
+                class="hidden mt-4 p-3 sm:p-4 bg-emerald-500/10 border border-emerald-500/30 rounded-xl slide-in">
+                <div class="flex items-center justify-between gap-2">
+                    <div class="flex items-center gap-2 sm:gap-3 min-w-0">
+                        <span class="text-xl sm:text-2xl flex-shrink-0">✅</span>
+                        <div class="min-w-0">
+                            <p class="font-bold text-emerald-300 text-sm sm:text-base truncate" id="fileName"></p>
+                            <p class="text-[10px] sm:text-xs text-gray-400" id="fileStats"></p>
+                            <p class="text-[10px] sm:text-xs text-indigo-300 mt-0.5" id="detectedBrowser"></p>
+                        </div>
+                    </div>
+                    <button onclick="clearFile()"
+                        class="text-red-400 hover:text-red-300 text-xs px-2 sm:px-3 py-1 rounded-lg border border-red-400/30 hover:bg-red-400/10 transition flex-shrink-0">✕
+                        Clear</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Options Section -->
+        <div id="optionsSection" class="hidden fade-in space-y-4 sm:space-y-6">
+
+            <!-- Settings Row -->
+            <div class="card-glass rounded-2xl p-4 sm:p-6">
+                <h3 class="font-bold mb-3 sm:mb-4 flex items-center gap-2 text-sm sm:text-base"
+                    data-i18n="settingsTitle">⚙️ Settings</h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
+                    <div>
+                        <label class="text-xs text-gray-400 block mb-1.5" data-i18n="labelPassDisplay">Password
+                            Display</label>
+                        <select id="maskOption"
+                            class="w-full bg-white/10 border border-white/20 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-indigo-400 transition">
+                            <option value="show" data-i18n-opt="optShow">🔓 Show Passwords</option>
+                            <option value="mask" data-i18n-opt="optMask">🔒 Mask (••••••)</option>
+                            <option value="partial" data-i18n-opt="optPartial">🔑 Partial (ab••••)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="text-xs text-gray-400 block mb-1.5" data-i18n="labelSort">Sort By</label>
+                        <select id="sortOption"
+                            class="w-full bg-white/10 border border-white/20 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-indigo-400 transition">
+                            <option value="none" data-i18n-opt="sortNone">Default Order</option>
+                            <option value="name" data-i18n-opt="sortName">Website (A-Z)</option>
+                            <option value="url" data-i18n-opt="sortUrl">URL (A-Z)</option>
+                            <option value="username" data-i18n-opt="sortUser">Username (A-Z)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="text-xs text-gray-400 block mb-1.5" data-i18n="labelSearch">Search /
+                            Filter</label>
+                        <input type="text" id="searchInput"
+                            class="w-full bg-white/10 border border-white/20 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-indigo-400 transition"
+                            data-i18n-placeholder="searchPlaceholder" placeholder="🔍 Type to search...">
+                    </div>
+                </div>
+                <!-- PDF Settings Row -->
+                <div
+                    class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 mt-4 pt-4 border-t border-white/10">
+                    <div>
+                        <label class="text-xs text-gray-400 block mb-1.5" data-i18n="labelTheme">🎨 PDF Theme</label>
+                        <select id="pdfTheme"
+                            class="w-full bg-white/10 border border-white/20 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-indigo-400 transition">
+                            <option value="colorful-light">🌈 Colorful Light Mode</option>
+                            <option value="colorful-dark">🌙 Colorful Dark Mode</option>
+                            <option value="minimal-light">⬜ Minimal Light</option>
+                            <option value="minimal-dark">⬛ Minimal Dark</option>
+                            <option value="neon">💜 Neon Glow</option>
+                            <option value="ocean">🌊 Ocean Blue</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="text-xs text-gray-400 block mb-1.5" data-i18n="labelPdfPass">🔒 PDF Password
+                            (Optional)</label>
+                        <div class="relative">
+                            <input type="password" id="pdfPassword"
+                                class="w-full bg-white/10 border border-white/20 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-indigo-400 transition pr-10"
+                                data-i18n-placeholder="pdfPassPlaceholder" placeholder="Enter password...">
+                            <button onclick="togglePdfPassVis()"
+                                class="absolute right-2 top-1/2 -translate-y-1/2 text-gray-400 hover:text-white text-sm"
+                                id="pdfPassToggle">👁️</button>
+                        </div>
+                        <p class="text-[10px] text-yellow-400/70 mt-1" data-i18n="pdfPassNote">🔐 Password will be
+                            required to open the PDF</p>
+                    </div>
+                    <div>
+                        <label class="text-xs text-gray-400 block mb-1.5" data-i18n="labelPageSize">📐 PDF Page
+                            Size</label>
+                        <select id="pdfPageSize"
+                            class="w-full bg-white/10 border border-white/20 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-indigo-400 transition">
+                            <option value="a4">A4 (Standard)</option>
+                            <option value="letter">Letter (US)</option>
+                            <option value="legal">Legal</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Preview Table -->
+            <div class="card-glass rounded-2xl p-4 sm:p-6">
+                <div class="flex items-center justify-between mb-3 sm:mb-4 flex-wrap gap-2">
+                    <h3 class="font-bold flex items-center gap-2 text-sm sm:text-base">
+                        <span data-i18n="previewTitle">📋 Preview</span>
+                        <span id="rowCount"
+                            class="text-[10px] sm:text-xs bg-indigo-600 px-2 py-0.5 rounded-full"></span>
+                    </h3>
+                    <button onclick="togglePasswordVisibility()"
+                        class="text-[10px] sm:text-xs px-2 sm:px-3 py-1 sm:py-1.5 bg-white/10 rounded-lg hover:bg-white/20 transition"
+                        id="toggleBtn" data-i18n="togglePass">👁️ Toggle Passwords</button>
+                </div>
+                <div class="overflow-x-auto hide-scrollbar rounded-xl border border-white/10">
+                    <table class="w-full text-xs sm:text-sm" id="previewTable">
+                        <thead>
+                            <tr class="bg-white/10 text-left">
+                                <th class="px-2 sm:px-4 py-2 sm:py-3 font-semibold text-gray-300 whitespace-nowrap">#
+                                </th>
+                                <th class="px-2 sm:px-4 py-2 sm:py-3 font-semibold text-gray-300 whitespace-nowrap"
+                                    data-i18n="thWebsite">Website</th>
+                                <th class="px-2 sm:px-4 py-2 sm:py-3 font-semibold text-gray-300 whitespace-nowrap">URL
+                                </th>
+                                <th class="px-2 sm:px-4 py-2 sm:py-3 font-semibold text-gray-300 whitespace-nowrap"
+                                    data-i18n="thUsername">Username</th>
+                                <th class="px-2 sm:px-4 py-2 sm:py-3 font-semibold text-gray-300 whitespace-nowrap"
+                                    data-i18n="thPassword">Password</th>
+                                <th class="px-2 sm:px-4 py-2 sm:py-3 font-semibold text-gray-300 whitespace-nowrap"
+                                    data-i18n="thNotes">Notes</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tableBody"></tbody>
+                    </table>
+                </div>
+                <div class="flex items-center justify-between mt-3 text-xs text-gray-400" id="paginationControls">
+                    <span id="pageInfo"></span>
+                    <div class="flex gap-2">
+                        <button onclick="changePage(-1)" id="prevBtn"
+                            class="px-3 py-1 bg-white/10 rounded-lg hover:bg-white/20 transition disabled:opacity-30"
+                            disabled data-i18n="prevPage">← Prev</button>
+                        <button onclick="changePage(1)" id="nextBtn"
+                            class="px-3 py-1 bg-white/10 rounded-lg hover:bg-white/20 transition disabled:opacity-30"
+                            data-i18n="nextPage">Next →</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Download Buttons -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
+                <button onclick="downloadPDF()"
+                    class="btn-download glow-indigo bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-bold py-4 sm:py-5 px-4 sm:px-6 rounded-2xl flex items-center justify-center gap-2 sm:gap-3 text-base sm:text-lg active:scale-95 transition-all">
+                    <span data-i18n="dlPdf">📄 Download PDF</span>
+                    <span class="text-xs opacity-70" id="pdfLockIcon"></span>
+                </button>
+                <button onclick="downloadTXT()"
+                    class="btn-download glow-emerald bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-bold py-4 sm:py-5 px-4 sm:px-6 rounded-2xl flex items-center justify-center gap-2 sm:gap-3 text-base sm:text-lg active:scale-95 transition-all">
+                    <span data-i18n="dlTxt">📝 Download TXT</span>
+                </button>
+                <button onclick="downloadJSON()"
+                    class="btn-download glow-orange bg-gradient-to-r from-orange-600 to-amber-600 hover:from-orange-500 hover:to-amber-500 text-white font-bold py-4 sm:py-5 px-4 sm:px-6 rounded-2xl flex items-center justify-center gap-2 sm:gap-3 text-base sm:text-lg active:scale-95 transition-all">
+                    <span data-i18n="dlJson">📦 Download JSON</span>
+                </button>
+            </div>
+
+            <!-- Security Notice -->
+            <div class="bg-red-500/5 border border-red-500/20 rounded-2xl p-4 text-center">
+                <p class="text-xs sm:text-sm text-red-300" data-i18n="secNotice">⚠️ <strong>Important:</strong> Delete
+                    CSV file from your computer after downloading! Keep PDF file in a safe place.</p>
+            </div>
+        </div>
+
+        <!-- ==================== 10 TOOL BUTTONS ==================== -->
+        <div class="card-glass rounded-2xl p-4 sm:p-6 fade-in">
+            <h3 class="font-bold text-sm sm:text-base mb-2 flex items-center gap-2" data-i18n="toolsTitle">🧰 Password
+                Security Tools</h3>
+            <p class="text-[10px] sm:text-xs text-gray-500 mb-4">by <span
+                    class="text-indigo-400 font-semibold">SudhirDevOps1</span> —
+                <span data-i18n="toolsSub">Password related useful tools</span>
+            </p>
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-2 sm:gap-3">
+
+                <a href="generator.html" id="toolBtn1"
+                    class="tool-btn block bg-gradient-to-br from-indigo-600/20 to-indigo-800/20 border border-indigo-500/30 rounded-xl p-3 sm:p-4 text-center hover:border-indigo-400/60 group">
+                    <div class="text-2xl sm:text-3xl mb-1.5 group-hover:scale-110 transition-transform">🔑</div>
+                    <div class="text-[10px] sm:text-xs font-bold text-indigo-300" data-i18n="tool1">Password Generator
+                    </div>
+                    <div class="text-[8px] sm:text-[10px] text-gray-500 mt-0.5" data-i18n="tool1sub">Generate strong
+                        passwords</div>
+                </a>
+
+                <a href="checker.html" id="toolBtn2"
+                    class="tool-btn block bg-gradient-to-br from-emerald-600/20 to-emerald-800/20 border border-emerald-500/30 rounded-xl p-3 sm:p-4 text-center hover:border-emerald-400/60 group">
+                    <div class="text-2xl sm:text-3xl mb-1.5 group-hover:scale-110 transition-transform">🛡️</div>
+                    <div class="text-[10px] sm:text-xs font-bold text-emerald-300" data-i18n="tool2">Password Checker
+                    </div>
+                    <div class="text-[8px] sm:text-[10px] text-gray-500 mt-0.5" data-i18n="tool2sub">How strong is it?
+                    </div>
+                </a>
+
+                <a href="breach.html" id="toolBtn3"
+                    class="tool-btn block bg-gradient-to-br from-pink-600/20 to-pink-800/20 border border-pink-500/30 rounded-xl p-3 sm:p-4 text-center hover:border-pink-400/60 group">
+                    <div class="text-2xl sm:text-3xl mb-1.5 group-hover:scale-110 transition-transform">🔍</div>
+                    <div class="text-[10px] sm:text-xs font-bold text-pink-300" data-i18n="tool3">Breach Checker</div>
+                    <div class="text-[8px] sm:text-[10px] text-gray-500 mt-0.5" data-i18n="tool3sub">Data leak check
+                    </div>
+                </a>
+
+                <a href="encrypt.html" id="toolBtn4"
+                    class="tool-btn block bg-gradient-to-br from-amber-600/20 to-amber-800/20 border border-amber-500/30 rounded-xl p-3 sm:p-4 text-center hover:border-amber-400/60 group">
+                    <div class="text-2xl sm:text-3xl mb-1.5 group-hover:scale-110 transition-transform">🔐</div>
+                    <div class="text-[10px] sm:text-xs font-bold text-amber-300" data-i18n="tool4">Encrypt Text</div>
+                    <div class="text-[8px] sm:text-[10px] text-gray-500 mt-0.5" data-i18n="tool4sub">Encrypt your text
+                    </div>
+                </a>
+
+                <a href="csvviewer.html" id="toolBtn5"
+                    class="tool-btn block bg-gradient-to-br from-cyan-600/20 to-cyan-800/20 border border-cyan-500/30 rounded-xl p-3 sm:p-4 text-center hover:border-cyan-400/60 group">
+                    <div class="text-2xl sm:text-3xl mb-1.5 group-hover:scale-110 transition-transform">📋</div>
+                    <div class="text-[10px] sm:text-xs font-bold text-cyan-300" data-i18n="tool5">CSV Viewer</div>
+                    <div class="text-[8px] sm:text-[10px] text-gray-500 mt-0.5" data-i18n="tool5sub">View CSV files
+                    </div>
+                </a>
+
+                <a href="2fa.html" id="toolBtn6"
+                    class="tool-btn block bg-gradient-to-br from-violet-600/20 to-violet-800/20 border border-violet-500/30 rounded-xl p-3 sm:p-4 text-center hover:border-violet-400/60 group">
+                    <div class="text-2xl sm:text-3xl mb-1.5 group-hover:scale-110 transition-transform">🗝️</div>
+                    <div class="text-[10px] sm:text-xs font-bold text-violet-300" data-i18n="tool6">2FA Generator</div>
+                    <div class="text-[8px] sm:text-[10px] text-gray-500 mt-0.5" data-i18n="tool6sub">TOTP codes</div>
+                </a>
+
+                <a href="duplicates.html" id="toolBtn7"
+                    class="tool-btn block bg-gradient-to-br from-rose-600/20 to-rose-800/20 border border-rose-500/30 rounded-xl p-3 sm:p-4 text-center hover:border-rose-400/60 group">
+                    <div class="text-2xl sm:text-3xl mb-1.5 group-hover:scale-110 transition-transform">🧹</div>
+                    <div class="text-[10px] sm:text-xs font-bold text-rose-300" data-i18n="tool7">Duplicate Finder</div>
+                    <div class="text-[8px] sm:text-[10px] text-gray-500 mt-0.5" data-i18n="tool7sub">Find same passwords
+                    </div>
+                </a>
+
+                <a href="stats.html" id="toolBtn8"
+                    class="tool-btn block bg-gradient-to-br from-teal-600/20 to-teal-800/20 border border-teal-500/30 rounded-xl p-3 sm:p-4 text-center hover:border-teal-400/60 group">
+                    <div class="text-2xl sm:text-3xl mb-1.5 group-hover:scale-110 transition-transform">📊</div>
+                    <div class="text-[10px] sm:text-xs font-bold text-teal-300" data-i18n="tool8">Password Stats</div>
+                    <div class="text-[8px] sm:text-[10px] text-gray-500 mt-0.5" data-i18n="tool8sub">Analysis report
+                    </div>
+                </a>
+
+                <a href="convert.html" id="toolBtn9"
+                    class="tool-btn block bg-gradient-to-br from-orange-600/20 to-orange-800/20 border border-orange-500/30 rounded-xl p-3 sm:p-4 text-center hover:border-orange-400/60 group">
+                    <div class="text-2xl sm:text-3xl mb-1.5 group-hover:scale-110 transition-transform">🔄</div>
+                    <div class="text-[10px] sm:text-xs font-bold text-orange-300" data-i18n="tool9">Format Convert</div>
+                    <div class="text-[8px] sm:text-[10px] text-gray-500 mt-0.5" data-i18n="tool9sub">CSV/JSON/XML</div>
+                </a>
+
+                <a href="tips.html" id="toolBtn10"
+                    class="tool-btn block bg-gradient-to-br from-lime-600/20 to-lime-800/20 border border-lime-500/30 rounded-xl p-3 sm:p-4 text-center hover:border-lime-400/60 group">
+                    <div class="text-2xl sm:text-3xl mb-1.5 group-hover:scale-110 transition-transform">💡</div>
+                    <div class="text-[10px] sm:text-xs font-bold text-lime-300" data-i18n="tool10">Security Tips</div>
+                    <div class="text-[8px] sm:text-[10px] text-gray-500 mt-0.5" data-i18n="tool10sub">Safety tips</div>
+                </a>
+
+                <a href="resources.html" id="toolBtn11"
+                    class="tool-btn block bg-gradient-to-br from-blue-600/20 to-blue-800/20 border border-blue-500/30 rounded-xl p-3 sm:p-4 text-center hover:border-blue-400/60 group">
+                    <div class="text-2xl sm:text-3xl mb-1.5 group-hover:scale-110 transition-transform">📚</div>
+                    <div class="text-[10px] sm:text-xs font-bold text-blue-300" data-i18n="tool11">304+ Resources</div>
+                    <div class="text-[8px] sm:text-[10px] text-gray-500 mt-0.5" data-i18n="tool11sub">Security tools
+                        list</div>
+                </a>
+
+            </div>
+        </div>
+
+        <!-- ==================== PRIVACY & SECURITY SECTION ==================== -->
+        <div class="fade-in space-y-4 sm:space-y-5">
+
+            <!-- Privacy Hero -->
+            <div class="relative overflow-hidden rounded-3xl p-[1px] rainbow-border group">
+                <div class="bg-[#0a0e1a] rounded-3xl p-8 sm:p-12 text-center relative overflow-hidden">
+                    <div class="absolute inset-0 bg-indigo-500/5 group-hover:bg-indigo-500/10 transition-colors"></div>
+                    <div class="absolute -top-24 -left-24 w-64 h-64 bg-indigo-500/10 rounded-full blur-3xl"></div>
+                    <div class="absolute -bottom-24 -right-24 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl"></div>
+
+                    <div class="relative z-10">
+                        <div class="text-6xl sm:text-8xl mb-6 float-anim">🛡️</div>
+                        <h2 class="text-3xl sm:text-5xl font-black mb-4 bg-gradient-to-r from-white via-indigo-200 to-indigo-400 bg-clip-text text-transparent leading-tight"
+                            data-i18n="privacyHeroTitle">Your Privacy is Our Priority</h2>
+                        <p class="text-base sm:text-lg text-gray-400 max-w-2xl mx-auto sub-text"
+                            data-i18n="privacyHeroSub">We
+                            never collect, store, or share your data in any way. This tool runs entirely on your device,
+                            ensuring maximum security.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Privacy Cards Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+                <div class="privacy-card card-glass rounded-3xl p-6 sm:p-8">
+                    <div class="flex flex-col gap-4">
+                        <div class="text-4xl">🚫</div>
+                        <div>
+                            <h4 class="heading-premium text-lg text-red-400 mb-2" data-i18n="priv1Title">No Server
+                                Upload</h4>
+                            <p class="sub-text text-sm" data-i18n="priv1Desc">Your CSV file is never uploaded to any
+                                server. All processing happens locally in your browser. This tool works even with the
+                                internet turned off.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="privacy-card card-glass rounded-3xl p-6 sm:p-8">
+                    <div class="flex flex-col gap-4">
+                        <div class="text-4xl">🔒</div>
+                        <div>
+                            <h4 class="heading-premium text-lg text-emerald-400 mb-2" data-i18n="priv2Title">End-to-End
+                                Secure</h4>
+                            <p class="sub-text text-sm" data-i18n="priv2Desc">Your passwords are never transmitted in
+                                plain text. PDF protection uses AES-256 encryption which provides military-grade
+                                security.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="privacy-card card-glass rounded-3xl p-6 sm:p-8">
+                    <div class="flex flex-col gap-4">
+                        <div class="text-4xl">🗑️</div>
+                        <div>
+                            <h4 class="heading-premium text-lg text-amber-400 mb-2" data-i18n="priv3Title">Zero Data
+                                Retention</h4>
+                            <p class="sub-text text-sm" data-i18n="priv3Desc">All data is automatically deleted when you
+                                refresh or close the page. Nothing is saved in cookies, localStorage, or cache.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="privacy-card card-glass rounded-3xl p-6 sm:p-8">
+                    <div class="flex flex-col gap-4">
+                        <div class="text-4xl">📵</div>
+                        <div>
+                            <h4 class="heading-premium text-lg text-indigo-400 mb-2" data-i18n="priv4Title">No Internet
+                                Required</h4>
+                            <p class="sub-text text-sm" data-i18n="priv4Desc">Once the page loads, you can disconnect
+                                the internet — the tool will still work perfectly. You can even use it in Airplane Mode.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="privacy-card card-glass rounded-3xl p-6 sm:p-8">
+                    <div class="flex flex-col gap-4">
+                        <div class="text-4xl">👁️‍🗨️</div>
+                        <div>
+                            <h4 class="heading-premium text-lg text-pink-400 mb-2" data-i18n="priv5Title">No Tracking
+                            </h4>
+                            <p class="sub-text text-sm" data-i18n="priv5Desc">No Google Analytics, Facebook Pixel, or
+                                any tracking script. We don't track your activity — no logs, no fingerprinting.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="privacy-card card-glass rounded-3xl p-6 sm:p-8">
+                    <div class="flex flex-col gap-4">
+                        <div class="text-4xl">🔐</div>
+                        <div>
+                            <h4 class="heading-premium text-lg text-purple-400 mb-2" data-i18n="priv6Title">PDF
+                                Protection</h4>
+                            <p class="sub-text text-sm" data-i18n="priv6Desc">Adding a password to PDF means nobody can
+                                open it without it. Encryption is purely client-side — your password is never saved.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Security Best Practices -->
+            <div class="card-glass rounded-2xl p-4 sm:p-6">
+                <h3 class="font-bold text-sm sm:text-base mb-4 flex items-center gap-2" data-i18n="bestPracticesTitle">
+                    🛡️ Password Security Best Practices</h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div class="flex items-start gap-2 bg-white/5 rounded-xl p-3">
+                        <span class="text-lg flex-shrink-0">✅</span>
+                        <div>
+                            <p class="text-xs sm:text-sm font-medium text-white" data-i18n="bp1">Use a different
+                                password for every account</p>
+                            <p class="text-[10px] sm:text-xs text-gray-500" data-i18n="bp1sub">Don't use the same
+                                password on multiple sites</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-2 bg-white/5 rounded-xl p-3">
+                        <span class="text-lg flex-shrink-0">✅</span>
+                        <div>
+                            <p class="text-xs sm:text-sm font-medium text-white" data-i18n="bp2">Minimum 12+ character
+                                passwords</p>
+                            <p class="text-[10px] sm:text-xs text-gray-500" data-i18n="bp2sub">Mix letters, numbers, and
+                                symbols</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-2 bg-white/5 rounded-xl p-3">
+                        <span class="text-lg flex-shrink-0">✅</span>
+                        <div>
+                            <p class="text-xs sm:text-sm font-medium text-white" data-i18n="bp3">Enable Two-Factor
+                                Authentication (2FA)</p>
+                            <p class="text-[10px] sm:text-xs text-gray-500" data-i18n="bp3sub">Use Google Authenticator
+                                / SMS verification</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-2 bg-white/5 rounded-xl p-3">
+                        <span class="text-lg flex-shrink-0">✅</span>
+                        <div>
+                            <p class="text-xs sm:text-sm font-medium text-white" data-i18n="bp4">Delete CSV file after
+                                conversion</p>
+                            <p class="text-[10px] sm:text-xs text-gray-500" data-i18n="bp4sub">Plain text passwords are
+                                dangerous</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-2 bg-white/5 rounded-xl p-3">
+                        <span class="text-lg flex-shrink-0">⚠️</span>
+                        <div>
+                            <p class="text-xs sm:text-sm font-medium text-white" data-i18n="bp5">Don't enter passwords
+                                on public WiFi</p>
+                            <p class="text-[10px] sm:text-xs text-gray-500" data-i18n="bp5sub">Use VPN or mobile data
+                                instead</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-2 bg-white/5 rounded-xl p-3">
+                        <span class="text-lg flex-shrink-0">⚠️</span>
+                        <div>
+                            <p class="text-xs sm:text-sm font-medium text-white" data-i18n="bp6">Beware of phishing
+                                emails</p>
+                            <p class="text-[10px] sm:text-xs text-gray-500" data-i18n="bp6sub">Don't click on suspicious
+                                links</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-2 bg-white/5 rounded-xl p-3">
+                        <span class="text-lg flex-shrink-0">🔄</span>
+                        <div>
+                            <p class="text-xs sm:text-sm font-medium text-white" data-i18n="bp7">Change passwords every
+                                3-6 months</p>
+                            <p class="text-[10px] sm:text-xs text-gray-500" data-i18n="bp7sub">Regularly change
+                                passwords for important accounts (Bank, Email)</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-2 bg-white/5 rounded-xl p-3">
+                        <span class="text-lg flex-shrink-0">💾</span>
+                        <div>
+                            <p class="text-xs sm:text-sm font-medium text-white" data-i18n="bp8">Store PDF in encrypted
+                                drive</p>
+                            <p class="text-[10px] sm:text-xs text-gray-500" data-i18n="bp8sub">Only keep
+                                password-protected files in Google Drive, Dropbox</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Privacy Policy Detail -->
+            <details class="card-glass rounded-2xl group">
+                <summary
+                    class="p-4 sm:p-5 cursor-pointer flex items-center justify-between hover:bg-white/5 rounded-2xl transition">
+                    <span class="font-bold text-sm sm:text-base flex items-center gap-2" data-i18n="policyTitle">📜
+                        Privacy Policy — Read in Detail</span>
+                    <span class="text-gray-400 group-open:rotate-180 transition-transform text-lg">▼</span>
+                </summary>
+                <div class="px-4 sm:px-6 pb-5 space-y-4 text-xs sm:text-sm text-gray-300 leading-relaxed">
+                    <div>
+                        <h4 class="font-bold text-white text-sm sm:text-base mb-1" data-i18n="pol1Title">1. Data
+                            Collection — What do we collect?</h4>
+                        <p data-i18n="pol1Desc">Absolutely nothing. This tool works entirely client-side (in your
+                            browser). We don't collect any personal data, passwords, usernames, URLs, or any
+                            information. There is no database, no server-side processing.</p>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-white text-sm sm:text-base mb-1" data-i18n="pol2Title">2. Data Storage
+                            — Where is your data stored?</h4>
+                        <p data-i18n="pol2Desc">Nowhere. Your CSV file is only loaded into your browser's temporary
+                            memory (RAM). All data is automatically erased when you refresh, close, or navigate away. No
+                            cookies, localStorage, sessionStorage, IndexedDB, or any storage mechanism is used.</p>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-white text-sm sm:text-base mb-1" data-i18n="pol3Title">3. Data
+                            Transmission — Does data go over the internet?</h4>
+                        <p data-i18n="pol3Desc">No. Your data is never transmitted through any server, API, third-party
+                            service, or internet connection. You can use this tool even after disconnecting the internet
+                            (once the page is loaded).</p>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-white text-sm sm:text-base mb-1" data-i18n="pol4Title">4. Third-Party
+                            Services</h4>
+                        <p data-i18n="pol4Desc">Only open-source libraries (jsPDF, Tailwind CSS) are used for PDF
+                            generation and styling. These libraries are also client-side and don't transmit any data.
+                            There are no analytics, ads, trackers, or third-party scripts.</p>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-white text-sm sm:text-base mb-1" data-i18n="pol5Title">5. PDF Password
+                            Protection</h4>
+                        <p data-i18n="pol5Desc">When you set a password on a PDF, encryption happens entirely in your
+                            browser. The password is never saved, logged, or transmitted anywhere. If you forget the
+                            password, recovering the PDF is impossible — so remember your password.</p>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-white text-sm sm:text-base mb-1" data-i18n="pol6Title">6. Open Source
+                            Transparency</h4>
+                        <p data-i18n="pol6Desc">This tool is a single HTML file — you can see the complete code by Right
+                            Click → View Source. There are no hidden scripts, obfuscated code, or suspicious network
+                            calls. 100% transparent and verifiable.</p>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-white text-sm sm:text-base mb-1" data-i18n="pol7Title">7. User
+                            Responsibility</h4>
+                        <p data-i18n="pol7Desc">Security of downloaded PDF/TXT/JSON files is your responsibility. We
+                            recommend: (a) Always add a password to PDF (b) Delete CSV file immediately (c) Keep files
+                            in encrypted storage (d) Don't share files with anyone.</p>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-white text-sm sm:text-base mb-1" data-i18n="pol8Title">8. Contact &
+                            Developer</h4>
+                        <p data-i18n="pol8Desc">Developer: Sudhi (@dev1) — This tool was built keeping users' privacy
+                            and security in mind. Contact the developer for any questions or suggestions.</p>
+                    </div>
+                </div>
+            </details>
+
+            <!-- How It Works Internally -->
+            <div class="card-glass rounded-2xl p-4 sm:p-6">
+                <h3 class="font-bold text-sm sm:text-base mb-4 flex items-center gap-2" data-i18n="howTitle">⚡ How Does
+                    This Tool Work? (Technical)</h3>
+                <div class="space-y-3">
+                    <div class="flex items-center gap-3 bg-white/5 rounded-xl p-3">
+                        <div
+                            class="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-indigo-600/30 flex items-center justify-center text-sm sm:text-base font-bold text-indigo-300 flex-shrink-0">
+                            1</div>
+                        <div>
+                            <p class="text-xs sm:text-sm font-medium" data-i18n="how1">📂 CSV File Select</p>
+                            <p class="text-[10px] sm:text-xs text-gray-500" data-i18n="how1sub">File is only loaded in
+                                browser memory — never uploaded anywhere</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-3 bg-white/5 rounded-xl p-3">
+                        <div
+                            class="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-purple-600/30 flex items-center justify-center text-sm sm:text-base font-bold text-purple-300 flex-shrink-0">
+                            2</div>
+                        <div>
+                            <p class="text-xs sm:text-sm font-medium" data-i18n="how2">🔍 Auto-Detect Browser Format</p>
+                            <p class="text-[10px] sm:text-xs text-gray-500" data-i18n="how2sub">Browser/app is
+                                automatically detected by analyzing CSV headers</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-3 bg-white/5 rounded-xl p-3">
+                        <div
+                            class="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-pink-600/30 flex items-center justify-center text-sm sm:text-base font-bold text-pink-300 flex-shrink-0">
+                            3</div>
+                        <div>
+                            <p class="text-xs sm:text-sm font-medium" data-i18n="how3">📋 Data Parse & Preview</p>
+                            <p class="text-[10px] sm:text-xs text-gray-500" data-i18n="how3sub">JavaScript locally
+                                parses CSV and shows it in a table</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-3 bg-white/5 rounded-xl p-3">
+                        <div
+                            class="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-emerald-600/30 flex items-center justify-center text-sm sm:text-base font-bold text-emerald-300 flex-shrink-0">
+                            4</div>
+                        <div>
+                            <p class="text-xs sm:text-sm font-medium" data-i18n="how4">📄 PDF/TXT/JSON Generate</p>
+                            <p class="text-[10px] sm:text-xs text-gray-500" data-i18n="how4sub">jsPDF library generates
+                                PDF client-side — password encryption included</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-3 bg-white/5 rounded-xl p-3">
+                        <div
+                            class="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-amber-600/30 flex items-center justify-center text-sm sm:text-base font-bold text-amber-300 flex-shrink-0">
+                            5</div>
+                        <div>
+                            <p class="text-xs sm:text-sm font-medium" data-i18n="how5">⬇️ Direct Download</p>
+                            <p class="text-[10px] sm:text-xs text-gray-500" data-i18n="how5sub">File downloads directly
+                                to your device — no middleman</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Trust Badges -->
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3">
+                <div class="card-glass rounded-xl p-3 sm:p-4 text-center">
+                    <div class="text-2xl sm:text-3xl mb-1">🔒</div>
+                    <div class="text-[10px] sm:text-xs font-bold text-emerald-400" data-i18n="badge1">100% Offline</div>
+                    <div class="text-[8px] sm:text-[10px] text-gray-500" data-i18n="badge1sub">No server needed</div>
+                </div>
+                <div class="card-glass rounded-xl p-3 sm:p-4 text-center">
+                    <div class="text-2xl sm:text-3xl mb-1">🚫</div>
+                    <div class="text-[10px] sm:text-xs font-bold text-red-400" data-i18n="badge2">Zero Tracking</div>
+                    <div class="text-[8px] sm:text-[10px] text-gray-500" data-i18n="badge2sub">No analytics</div>
+                </div>
+                <div class="card-glass rounded-xl p-3 sm:p-4 text-center">
+                    <div class="text-2xl sm:text-3xl mb-1">🗑️</div>
+                    <div class="text-[10px] sm:text-xs font-bold text-amber-400" data-i18n="badge3">Auto Delete</div>
+                    <div class="text-[8px] sm:text-[10px] text-gray-500" data-i18n="badge3sub">On page close</div>
+                </div>
+                <div class="card-glass rounded-xl p-3 sm:p-4 text-center">
+                    <div class="text-2xl sm:text-3xl mb-1">👁️</div>
+                    <div class="text-[10px] sm:text-xs font-bold text-indigo-400" data-i18n="badge4">Open Source</div>
+                    <div class="text-[8px] sm:text-[10px] text-gray-500" data-i18n="badge4sub">View source code</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== TRUSTED SECURITY RESOURCES ==================== -->
+        <div class="card-glass rounded-2xl p-4 sm:p-6 fade-in">
+            <div class="flex items-center justify-between mb-2">
+                <h3 class="font-bold text-sm sm:text-base flex items-center gap-2">🌐 Trusted Free Security Resources
+                </h3>
+                <a href="resources.html"
+                    class="text-[10px] sm:text-xs text-indigo-400 hover:text-indigo-300 font-bold">View all 100 → </a>
+            </div>
+            <p class="text-[10px] sm:text-xs text-gray-500 mb-4">100 best free websites for cybersecurity — verified,
+                safe, recommended. कहाँ का है, क्यों use करें — सब बताया गया</p>
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2 sm:gap-3">
+                <a href="https://haveibeenpwned.com" target="_blank"
+                    class="tool-btn block bg-white/5 border border-white/10 rounded-xl p-2.5 sm:p-3 hover:border-indigo-400/40">
+                    <div class="text-base sm:text-xl mb-1">🔍</div>
+                    <div class="text-[10px] sm:text-xs font-bold text-white">HaveIBeenPwned</div>
+                    <div class="text-[8px] text-gray-500">Breach check</div>
+                </a>
+                <a href="https://keepass.info" target="_blank"
+                    class="tool-btn block bg-white/5 border border-white/10 rounded-xl p-2.5 sm:p-3 hover:border-indigo-400/40">
+                    <div class="text-base sm:text-xl mb-1">🔑</div>
+                    <div class="text-[10px] sm:text-xs font-bold text-white">KeePass</div>
+                    <div class="text-[8px] text-gray-500">Password manager</div>
+                </a>
+                <a href="https://bitwarden.com" target="_blank"
+                    class="tool-btn block bg-white/5 border border-white/10 rounded-xl p-2.5 sm:p-3 hover:border-indigo-400/40">
+                    <div class="text-base sm:text-xl mb-1">🛡️</div>
+                    <div class="text-[10px] sm:text-xs font-bold text-white">Bitwarden</div>
+                    <div class="text-[8px] text-gray-500">Free vault</div>
+                </a>
+                <a href="https://www.virustotal.com" target="_blank"
+                    class="tool-btn block bg-white/5 border border-white/10 rounded-xl p-2.5 sm:p-3 hover:border-indigo-400/40">
+                    <div class="text-base sm:text-xl mb-1">🦠</div>
+                    <div class="text-[10px] sm:text-xs font-bold text-white">VirusTotal</div>
+                    <div class="text-[8px] text-gray-500">Malware scan</div>
+                </a>
+                <a href="https://2fa.directory" target="_blank"
+                    class="tool-btn block bg-white/5 border border-white/10 rounded-xl p-2.5 sm:p-3 hover:border-indigo-400/40">
+                    <div class="text-base sm:text-xl mb-1">🗝️</div>
+                    <div class="text-[10px] sm:text-xs font-bold text-white">2FA Directory</div>
+                    <div class="text-[8px] text-gray-500">2FA support list</div>
+                </a>
+                <a href="https://www.protonmail.com" target="_blank"
+                    class="tool-btn block bg-white/5 border border-white/10 rounded-xl p-2.5 sm:p-3 hover:border-indigo-400/40">
+                    <div class="text-base sm:text-xl mb-1">✉️</div>
+                    <div class="text-[10px] sm:text-xs font-bold text-white">ProtonMail</div>
+                    <div class="text-[8px] text-gray-500">Encrypted email</div>
+                </a>
+                <a href="https://www.protonvpn.com/free-vpn" target="_blank"
+                    class="tool-btn block bg-white/5 border border-white/10 rounded-xl p-2.5 sm:p-3 hover:border-indigo-400/40">
+                    <div class="text-base sm:text-xl mb-1">🔒</div>
+                    <div class="text-[10px] sm:text-xs font-bold text-white">ProtonVPN</div>
+                    <div class="text-[8px] text-gray-500">Free VPN</div>
+                </a>
+                <a href="https://www.malwarebytes.com/free" target="_blank"
+                    class="tool-btn block bg-white/5 border border-white/10 rounded-xl p-2.5 sm:p-3 hover:border-indigo-400/40">
+                    <div class="text-base sm:text-xl mb-1">🧹</div>
+                    <div class="text-[10px] sm:text-xs font-bold text-white">Malwarebytes</div>
+                    <div class="text-[8px] text-gray-500">Free scanner</div>
+                </a>
+                <a href="https://www.privacyguides.org" target="_blank"
+                    class="tool-btn block bg-white/5 border border-white/10 rounded-xl p-2.5 sm:p-3 hover:border-indigo-400/40">
+                    <div class="text-base sm:text-xl mb-1">📖</div>
+                    <div class="text-[10px] sm:text-xs font-bold text-white">Privacy Guides</div>
+                    <div class="text-[8px] text-gray-500">Best tools list</div>
+                </a>
+                <a href="https://cryptomator.org" target="_blank"
+                    class="tool-btn block bg-white/5 border border-white/10 rounded-xl p-2.5 sm:p-3 hover:border-indigo-400/40">
+                    <div class="text-base sm:text-xl mb-1">📁</div>
+                    <div class="text-[10px] sm:text-xs font-bold text-white">Cryptomator</div>
+                    <div class="text-[8px] text-gray-500">Cloud encryption</div>
+                </a>
+                <a href="https://simplelogin.io" target="_blank"
+                    class="tool-btn block bg-white/5 border border-white/10 rounded-xl p-2.5 sm:p-3 hover:border-indigo-400/40">
+                    <div class="text-base sm:text-xl mb-1">📧</div>
+                    <div class="text-[10px] sm:text-xs font-bold text-white">SimpleLogin</div>
+                    <div class="text-[8px] text-gray-500">Email aliases</div>
+                </a>
+                <a href="https://browserleaks.com" target="_blank"
+                    class="tool-btn block bg-white/5 border border-white/10 rounded-xl p-2.5 sm:p-3 hover:border-indigo-400/40">
+                    <div class="text-base sm:text-xl mb-1">🕵️</div>
+                    <div class="text-[10px] sm:text-xs font-bold text-white">BrowserLeaks</div>
+                    <div class="text-[8px] text-gray-500">Privacy check</div>
+                </a>
+                <a href="https://www.ssllabs.com/ssltest" target="_blank"
+                    class="tool-btn block bg-white/5 border border-white/10 rounded-xl p-2.5 sm:p-3 hover:border-indigo-400/40">
+                    <div class="text-base sm:text-xl mb-1">🔐</div>
+                    <div class="text-[10px] sm:text-xs font-bold text-white">SSL Labs</div>
+                    <div class="text-[8px] text-gray-500">SSL checker</div>
+                </a>
+                <a href="https://www.phishtank.com" target="_blank"
+                    class="tool-btn block bg-white/5 border border-white/10 rounded-xl p-2.5 sm:p-3 hover:border-indigo-400/40">
+                    <div class="text-base sm:text-xl mb-1">🎣</div>
+                    <div class="text-[10px] sm:text-xs font-bold text-white">PhishTank</div>
+                    <div class="text-[8px] text-gray-500">Phishing checker</div>
+                </a>
+                <a href="https://www.cybrary.it" target="_blank"
+                    class="tool-btn block bg-white/5 border border-white/10 rounded-xl p-2.5 sm:p-3 hover:border-indigo-400/40">
+                    <div class="text-base sm:text-xl mb-1">📚</div>
+                    <div class="text-[10px] sm:text-xs font-bold text-white">Cybrary</div>
+                    <div class="text-[8px] text-gray-500">Free courses</div>
+                </a>
+                <a href="https://www.shodan.io" target="_blank"
+                    class="tool-btn block bg-white/5 border border-white/10 rounded-xl p-2.5 sm:p-3 hover:border-indigo-400/40">
+                    <div class="text-base sm:text-xl mb-1">🌐</div>
+                    <div class="text-[10px] sm:text-xs font-bold text-white">Shodan</div>
+                    <div class="text-[8px] text-gray-500">IoT search</div>
+                </a>
+                <a href="https://www.eff.org/dice" target="_blank"
+                    class="tool-btn block bg-white/5 border border-white/10 rounded-xl p-2.5 sm:p-3 hover:border-indigo-400/40">
+                    <div class="text-base sm:text-xl mb-1">🎲</div>
+                    <div class="text-[10px] sm:text-xs font-bold text-white">EFF Diceware</div>
+                    <div class="text-[8px] text-gray-500">Passphrase gen</div>
+                </a>
+                <a href="https://security.google.com/settings/security/checkup" target="_blank"
+                    class="tool-btn block bg-white/5 border border-white/10 rounded-xl p-2.5 sm:p-3 hover:border-indigo-400/40">
+                    <div class="text-base sm:text-xl mb-1">🔎</div>
+                    <div class="text-[10px] sm:text-xs font-bold text-white">Google Security</div>
+                    <div class="text-[8px] text-gray-500">Account checkup</div>
+                </a>
+                <a href="https://aegis-authenticator.com" target="_blank"
+                    class="tool-btn block bg-white/5 border border-white/10 rounded-xl p-2.5 sm:p-3 hover:border-indigo-400/40">
+                    <div class="text-base sm:text-xl mb-1">🛡️</div>
+                    <div class="text-[10px] sm:text-xs font-bold text-white">Aegis</div>
+                    <div class="text-[8px] text-gray-500">Open-source 2FA</div>
+                </a>
+                <a href="https://www.cisa.gov/cybersecurity" target="_blank"
+                    class="tool-btn block bg-white/5 border border-white/10 rounded-xl p-2.5 sm:p-3 hover:border-indigo-400/40">
+                    <div class="text-base sm:text-xl mb-1">🇺🇸</div>
+                    <div class="text-[10px] sm:text-xs font-bold text-white">CISA</div>
+                    <div class="text-[8px] text-gray-500">Gov't security</div>
+                </a>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="py-6 sm:py-8 text-center border-t border-white/5 mt-8 sm:mt-12 px-4">
+        <div class="max-w-6xl mx-auto space-y-3">
+            <div class="flex items-center justify-center gap-2 mb-2">
+                <div
+                    class="w-8 h-8 rounded-lg bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-sm">
+                    🔐</div>
+                <span
+                    class="font-bold text-sm bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent">🧰
+                    Password Security Tools</span>
+            </div>
+            <p class="text-gray-500 text-[10px] sm:text-xs" data-i18n="footerLine1">🔒 100% Offline Tool — No data goes
+                to any server | All Browsers Supported</p>
+            <p class="text-gray-600 text-[10px] sm:text-xs" data-i18n="footerLine2">Works on Mobile, Tablet, Desktop —
+                Android, iOS, Windows, Mac, Linux</p>
+            <div
+                class="flex items-center justify-center gap-2 text-[10px] sm:text-xs text-gray-600 pt-2 border-t border-white/5">
+                <span data-i18n="madeWith">Made with ❤️ by</span>
+                <span class="font-bold text-indigo-400">SudhirDevOps1</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Toast Container -->
+    <div id="toastContainer" class="fixed bottom-4 right-4 left-4 sm:left-auto sm:right-6 sm:bottom-6 z-50 space-y-2">
+    </div>
+
+    <script>
+        // ==================== i18n TRANSLATIONS ====================
+        let currentLang = localStorage.getItem('appLang') || 'hi';
+
+        const i18n = {
+            hi: {
+                headerTitle: 'Password Security Tools',
+                headerSub: 'CSV → PDF / TXT / JSON | 🔒 Offline & Secure',
+                clientSide: 'Client-Side Only',
+                secure: 'Secure',
+                devTag: '🛡️ Password Security Tools Developer',
+                browsersTitle: '🌐 Supported Browsers & Apps',
+                plusMore: '+ और भी',
+                guideTitle: '📖 CSV कैसे Export करें? (Step-by-Step Guide)',
+                guideChrome: 'Settings → Passwords & Autofill → Google Password Manager → ⚙️ Settings → Export Passwords → Download CSV',
+                guideEdge: 'Settings → Passwords → ⋮ (3 dots) → Export Passwords → Save CSV File',
+                guideFirefox: 'Settings → Privacy & Security → Logins & Passwords → ⋮ → Export Logins → Save CSV',
+                guideSafari: 'Safari → Settings → Passwords → ⋮ → Export All Passwords → Save CSV',
+                guideDuck: 'Settings → Autofill → Passwords → Export Passwords → Save CSV File',
+                guidePmTitle: '🔑 Password Managers (Bitwarden/LastPass/1Password/Dashlane)',
+                guidePm: 'Settings → Export Vault / Export Passwords → Choose CSV Format → Download',
+                guideSamsung: 'Samsung Pass → Settings → Export Data → Choose CSV → Save File',
+                dropTitle: 'CSV File यहाँ Drop करें या Tap करें',
+                dropSub: 'किसी भी Browser या Password Manager की CSV file upload करें',
+                dropNote: '⚠️ आपका डेटा कहीं भी upload नहीं होता — 100% Offline',
+                settingsTitle: '⚙️ सेटिंग्स',
+                labelPassDisplay: 'Password Display',
+                optShow: '🔓 Passwords दिखाएँ',
+                optMask: '🔒 छुपाएँ (••••••)',
+                optPartial: '🔑 आंशिक (ab••••)',
+                labelSort: 'Sort By',
+                sortNone: 'Default क्रम',
+                sortName: 'Website (A-Z)',
+                sortUrl: 'URL (A-Z)',
+                sortUser: 'Username (A-Z)',
+                labelSearch: 'खोजें / Filter',
+                searchPlaceholder: '🔍 खोजने के लिए टाइप करें...',
+                labelTheme: '🎨 PDF Theme',
+                labelPdfPass: '🔒 PDF Password (वैकल्पिक)',
+                pdfPassPlaceholder: 'Password डालें...',
+                pdfPassNote: '🔐 PDF खोलने के लिए password लगेगा',
+                labelPageSize: '📐 PDF Page Size',
+                previewTitle: '📋 प्रीव्यू',
+                togglePass: '👁️ Passwords Toggle',
+                thWebsite: 'Website',
+                thUsername: 'Username',
+                thPassword: 'Password',
+                thNotes: 'Notes',
+                prevPage: '← पिछला',
+                nextPage: 'अगला →',
+                dlPdf: '📄 PDF Download',
+                dlTxt: '📝 TXT Download',
+                dlJson: '📦 JSON Download',
+                secNotice: '⚠️ <strong>ज़रूरी:</strong> Download के बाद CSV file को अपने computer से Delete कर दें! PDF file को safe जगह रखें।',
+                toolsTitle: '🧰 Password Security Tools',
+                toolsSub: 'Password से related useful tools',
+                tool1: 'Password Generator', tool1sub: 'Strong passwords बनाएँ',
+                tool2: 'Password Checker', tool2sub: 'कितना strong है?',
+                tool3: 'Breach Checker', tool3sub: 'Data leak check',
+                tool4: 'Encrypt Text', tool4sub: 'Text encrypt करें',
+                tool5: 'CSV Viewer', tool5sub: 'CSV file देखें',
+                tool6: '2FA Generator', tool6sub: 'TOTP codes',
+                tool7: 'Duplicate Finder', tool7sub: 'Same passwords ढूंढें',
+                tool8: 'Password Stats', tool8sub: 'Analysis report',
+                tool9: 'Format Convert', tool9sub: 'CSV/JSON/XML',
+                tool10: 'Security Tips', tool10sub: '304+ Security Resources',
+                privacyHeroTitle: 'आपकी Privacy हमारी प्राथमिकता',
+                privacyHeroSub: 'हम आपके डेटा को कभी भी, किसी भी तरह से collect, store, या share नहीं करते। यह tool पूरी तरह से आपके device पर चलता है।',
+                priv1Title: 'कोई Server Upload नहीं',
+                priv1Desc: 'आपकी CSV file कभी भी किसी server पर upload नहीं होती। सारा processing आपके browser में locally होता है। Internet बंद करके भी यह tool काम करता है।',
+                priv2Title: 'End-to-End Secure',
+                priv2Desc: 'आपके passwords कभी भी plain text में transmit नहीं होते। PDF password protection AES encryption use करता है जो military-grade security provide करता है।',
+                priv3Title: 'Zero Data Retention',
+                priv3Desc: 'Page refresh या close करते ही सारा data automatically delete हो जाता है। कोई cookies, localStorage, या cache में कुछ भी save नहीं होता।',
+                priv4Title: 'No Internet Required',
+                priv4Desc: 'एक बार page load होने के बाद internet connection बंद कर दें — tool फिर भी पूरी तरह काम करेगा। आप Airplane Mode में भी use कर सकते हैं।',
+                priv5Title: 'No Tracking / Analytics',
+                priv5Desc: 'कोई Google Analytics, Facebook Pixel, या कोई भी tracking script नहीं है। हम आपकी activity track नहीं करते — कोई logs, कोई fingerprinting नहीं।',
+                priv6Title: 'PDF Password Protection',
+                priv6Desc: 'PDF में password लगाने से बिना password के कोई भी उसे open नहीं कर सकता। Encryption client-side होता है — password भी कहीं save नहीं होता।',
+                bestPracticesTitle: '🛡️ Password Security Best Practices',
+                bp1: 'हर account के लिए अलग password रखें',
+                bp1sub: 'एक ही password multiple sites पर use ना करें',
+                bp2: 'Minimum 12+ characters का password',
+                bp2sub: 'Letters, numbers, symbols mix करें',
+                bp3: 'Two-Factor Authentication (2FA) enable करें',
+                bp3sub: 'Google Authenticator / SMS verification use करें',
+                bp4: 'CSV file delete करें conversion के बाद',
+                bp4sub: 'Plain text passwords dangerous हैं',
+                bp5: 'Public WiFi पर passwords ना डालें',
+                bp5sub: 'VPN use करें या mobile data use करें',
+                bp6: 'Phishing emails से बचें',
+                bp6sub: 'Suspicious links पर click ना करें',
+                bp7: 'हर 3-6 months में passwords बदलें',
+                bp7sub: 'Important accounts (Bank, Email) के passwords regularly change करें',
+                bp8: 'PDF file encrypted drive में रखें',
+                bp8sub: 'Google Drive, Dropbox में password-protected file ही रखें',
+                policyTitle: '📜 Privacy Policy — विस्तार से पढ़ें',
+                pol1Title: '1. Data Collection — हम क्या collect करते हैं?',
+                pol1Desc: 'बिल्कुल कुछ नहीं। यह tool पूरी तरह से client-side (आपके browser में) काम करता है। हम कोई भी personal data, passwords, usernames, URLs, या कोई भी information collect नहीं करते। कोई database नहीं है, कोई server-side processing नहीं है।',
+                pol2Title: '2. Data Storage — आपका data कहाँ store होता है?',
+                pol2Desc: 'कहीं नहीं। आपकी CSV file सिर्फ आपके browser की temporary memory (RAM) में load होती है। Page refresh, close, या navigate करने पर सारा data automatically erase हो जाता है। कोई cookies, localStorage, sessionStorage, IndexedDB, या किसी भी storage mechanism का use नहीं किया जाता।',
+                pol3Title: '3. Data Transmission — क्या data internet पर जाता है?',
+                pol3Desc: 'नहीं। आपका data कभी भी किसी server, API, third-party service, या internet connection के through transmit नहीं होता। आप internet disconnect करके भी इस tool को use कर सकते हैं (page load होने के बाद)।',
+                pol4Title: '4. Third-Party Services',
+                pol4Desc: 'इस tool में सिर्फ open-source libraries (jsPDF, Tailwind CSS) use होती हैं जो PDF generation और styling के लिए हैं। ये libraries भी client-side हैं और कोई data transmit नहीं करतीं। कोई analytics, ads, trackers, या third-party scripts नहीं हैं।',
+                pol5Title: '5. PDF Password Protection',
+                pol5Desc: 'जब आप PDF में password set करते हैं, तो encryption पूरी तरह से आपके browser में होता है। Password कहीं भी save, log, या transmit नहीं होता। अगर आप password भूल जाते हैं, तो PDF को recover करना impossible है — इसलिए password याद रखें।',
+                pol6Title: '6. Open Source Transparency',
+                pol6Desc: 'यह tool एक single HTML file है — आप Right Click → View Source करके पूरा code देख सकते हैं। कोई hidden scripts, obfuscated code, या suspicious network calls नहीं हैं। 100% transparent और verifiable।',
+                pol7Title: '7. User Responsibility',
+                pol7Desc: 'Download की गई PDF/TXT/JSON files की security आपकी responsibility है। हम recommend करते हैं: (a) PDF में हमेशा password लगाएँ (b) CSV file तुरंत delete करें (c) Files को encrypted storage में रखें (d) Files को किसी के साथ share ना करें।',
+                pol8Title: '8. Contact & Developer',
+                pol8Desc: 'Developer: Sudhi (@dev1) — यह tool users की privacy और security को ध्यान में रखकर बनाया गया है। किसी भी सवाल या सुझाव के लिए developer से संपर्क करें।',
+                howTitle: '⚡ यह Tool कैसे काम करता है? (Technical)',
+                how1: '📂 CSV File Select',
+                how1sub: 'File सिर्फ browser memory में load होती है — कहीं upload नहीं होती',
+                how2: '🔍 Auto-Detect Browser Format',
+                how2sub: 'CSV headers analyze करके browser/app automatically detect होता है',
+                how3: '📋 Data Parse & Preview',
+                how3sub: 'JavaScript locally CSV parse करके table में show करता है',
+                how4: '📄 PDF/TXT/JSON Generate',
+                how4sub: 'jsPDF library client-side PDF generate करती है — password encryption included',
+                how5: '⬇️ Direct Download',
+                how5sub: 'File directly आपके device पर download होती है — कोई middleman नहीं',
+                badge1: '100% Offline', badge1sub: 'Server की ज़रूरत नहीं',
+                badge2: 'Zero Tracking', badge2sub: 'कोई analytics नहीं',
+                badge3: 'Auto Delete', badge3sub: 'Page बंद करने पर',
+                badge4: 'Open Source', badge4sub: 'Source code देखें',
+                footerLine1: '🔒 304+ Verified Security Tools — 100% Offline | All Browsers Supported',
+                footerLine2: 'Mobile, Tablet, Desktop पर काम करता है — Android, iOS, Windows, Mac, Linux',
+                madeWith: '❤️ से बनाया',
+                // Toast & dynamic
+                toastLoaded: 'passwords सफलतापूर्वक load हो गए!',
+                toastPdfDone: 'Colorful PDF Download हो गई! 📄',
+                toastPdfLock: 'Password-Protected PDF Download हो गई! 🔒',
+                toastTxtDone: 'TXT सफलतापूर्वक Download हो गई!',
+                toastJsonDone: 'JSON सफलतापूर्वक Download हो गई!',
+                toastNoData: 'Export के लिए कोई data नहीं!',
+                toastBadFile: 'कृपया सिर्फ .csv file ही Drop करें!',
+                toastEmpty: 'इस file में कोई password नहीं मिला!',
+                toastParseErr: 'File parse करने में error: ',
+                passwordsFound: 'passwords मिले',
+                detected: '🔍 Detected:',
+                pageOf: 'of',
+                total: 'total',
+                entries: 'entries',
+            },
+            en: {
+                headerTitle: 'Password Security Tools',
+                headerSub: 'CSV → PDF / TXT / JSON | 🔒 Offline & Secure',
+                clientSide: 'Client-Side Only',
+                secure: 'Secure',
+                devTag: '🛡️ Password Security Tools Developer',
+                browsersTitle: '🌐 Supported Browsers & Apps',
+                plusMore: '+ More',
+                guideTitle: '📖 How to Export CSV? (Step-by-Step Guide)',
+                guideChrome: 'Settings → Passwords & Autofill → Google Password Manager → ⚙️ Settings → Export Passwords → Download CSV',
+                guideEdge: 'Settings → Passwords → ⋮ (3 dots) → Export Passwords → Save CSV File',
+                guideFirefox: 'Settings → Privacy & Security → Logins & Passwords → ⋮ → Export Logins → Save CSV',
+                guideSafari: 'Safari → Settings → Passwords → ⋮ → Export All Passwords → Save CSV',
+                guideDuck: 'Settings → Autofill → Passwords → Export Passwords → Save CSV File',
+                guidePmTitle: '🔑 Password Managers (Bitwarden/LastPass/1Password/Dashlane)',
+                guidePm: 'Settings → Export Vault / Export Passwords → Choose CSV Format → Download',
+                guideSamsung: 'Samsung Pass → Settings → Export Data → Choose CSV → Save File',
+                dropTitle: 'Drop CSV File Here or Tap to Upload',
+                dropSub: 'Upload CSV file from any Browser or Password Manager',
+                dropNote: '⚠️ Your data is never uploaded anywhere — 100% Offline',
+                settingsTitle: '⚙️ Settings',
+                labelPassDisplay: 'Password Display',
+                optShow: '🔓 Show Passwords',
+                optMask: '🔒 Mask (••••••)',
+                optPartial: '🔑 Partial (ab••••)',
+                labelSort: 'Sort By',
+                sortNone: 'Default Order',
+                sortName: 'Website (A-Z)',
+                sortUrl: 'URL (A-Z)',
+                sortUser: 'Username (A-Z)',
+                labelSearch: 'Search / Filter',
+                searchPlaceholder: '🔍 Type to search...',
+                labelTheme: '🎨 PDF Theme',
+                labelPdfPass: '🔒 PDF Password (Optional)',
+                pdfPassPlaceholder: 'Enter password...',
+                pdfPassNote: '🔐 Password will be required to open the PDF',
+                labelPageSize: '📐 PDF Page Size',
+                previewTitle: '📋 Preview',
+                togglePass: '👁️ Toggle Passwords',
+                thWebsite: 'Website',
+                thUsername: 'Username',
+                thPassword: 'Password',
+                thNotes: 'Notes',
+                prevPage: '← Prev',
+                nextPage: 'Next →',
+                dlPdf: '📄 Download PDF',
+                dlTxt: '📝 Download TXT',
+                dlJson: '📦 Download JSON',
+                secNotice: '⚠️ <strong>Important:</strong> Delete CSV file from your computer after downloading! Keep PDF file in a safe place.',
+                toolsTitle: '🧰 Password Security Tools',
+                toolsSub: 'Password related useful tools',
+                tool1: 'Password Generator', tool1sub: 'Generate strong passwords',
+                tool2: 'Password Checker', tool2sub: 'How strong is it?',
+                tool3: 'Breach Checker', tool3sub: 'Data leak check',
+                tool4: 'Encrypt Text', tool4sub: 'Encrypt your text',
+                tool5: 'CSV Viewer', tool5sub: 'View CSV files',
+                tool6: '2FA Generator', tool6sub: 'TOTP codes',
+                tool7: 'Duplicate Finder', tool7sub: 'Find same passwords',
+                tool8: 'Password Stats', tool8sub: 'Analysis report',
+                tool9: 'Format Convert', tool9sub: 'CSV/JSON/XML',
+                tool10: 'Security Tips', tool10sub: '304+ Security Resources',
+                privacyHeroTitle: 'Your Privacy is Our Priority',
+                privacyHeroSub: 'We never collect, store, or share your data in any way. This tool runs entirely on your device.',
+                priv1Title: 'No Server Upload',
+                priv1Desc: 'Your CSV file is never uploaded to any server. All processing happens locally in your browser. This tool works even with the internet turned off.',
+                priv2Title: 'End-to-End Secure',
+                priv2Desc: 'Your passwords are never transmitted in plain text. PDF password protection uses AES encryption which provides military-grade security.',
+                priv3Title: 'Zero Data Retention',
+                priv3Desc: 'All data is automatically deleted when you refresh or close the page. Nothing is saved in cookies, localStorage, or cache.',
+                priv4Title: 'No Internet Required',
+                priv4Desc: 'Once the page loads, you can disconnect the internet — the tool will still work perfectly. You can even use it in Airplane Mode.',
+                priv5Title: 'No Tracking / Analytics',
+                priv5Desc: 'No Google Analytics, Facebook Pixel, or any tracking script. We don\'t track your activity — no logs, no fingerprinting.',
+                priv6Title: 'PDF Password Protection',
+                priv6Desc: 'Adding a password to PDF means nobody can open it without the password. Encryption is client-side — the password is never saved anywhere.',
+                bestPracticesTitle: '🛡️ Password Security Best Practices',
+                bp1: 'Use a different password for every account',
+                bp1sub: 'Don\'t use the same password on multiple sites',
+                bp2: 'Minimum 12+ character passwords',
+                bp2sub: 'Mix letters, numbers, and symbols',
+                bp3: 'Enable Two-Factor Authentication (2FA)',
+                bp3sub: 'Use Google Authenticator / SMS verification',
+                bp4: 'Delete CSV file after conversion',
+                bp4sub: 'Plain text passwords are dangerous',
+                bp5: 'Don\'t enter passwords on public WiFi',
+                bp5sub: 'Use VPN or mobile data instead',
+                bp6: 'Beware of phishing emails',
+                bp6sub: 'Don\'t click on suspicious links',
+                bp7: 'Change passwords every 3-6 months',
+                bp7sub: 'Regularly change passwords for important accounts (Bank, Email)',
+                bp8: 'Store PDF in encrypted drive',
+                bp8sub: 'Only keep password-protected files in Google Drive, Dropbox',
+                policyTitle: '📜 Privacy Policy — Read in Detail',
+                pol1Title: '1. Data Collection — What do we collect?',
+                pol1Desc: 'Absolutely nothing. This tool works entirely client-side (in your browser). We don\'t collect any personal data, passwords, usernames, URLs, or any information. There is no database, no server-side processing.',
+                pol2Title: '2. Data Storage — Where is your data stored?',
+                pol2Desc: 'Nowhere. Your CSV file is only loaded into your browser\'s temporary memory (RAM). All data is automatically erased when you refresh, close, or navigate away. No cookies, localStorage, sessionStorage, IndexedDB, or any storage mechanism is used.',
+                pol3Title: '3. Data Transmission — Does data go over the internet?',
+                pol3Desc: 'No. Your data is never transmitted through any server, API, third-party service, or internet connection. You can use this tool even after disconnecting the internet (once the page is loaded).',
+                pol4Title: '4. Third-Party Services',
+                pol4Desc: 'Only open-source libraries (jsPDF, Tailwind CSS) are used for PDF generation and styling. These libraries are also client-side and don\'t transmit any data. There are no analytics, ads, trackers, or third-party scripts.',
+                pol5Title: '5. PDF Password Protection',
+                pol5Desc: 'When you set a password on a PDF, encryption happens entirely in your browser. The password is never saved, logged, or transmitted anywhere. If you forget the password, recovering the PDF is impossible — so remember your password.',
+                pol6Title: '6. Open Source Transparency',
+                pol6Desc: 'This tool is a single HTML file — you can see the complete code by Right Click → View Source. There are no hidden scripts, obfuscated code, or suspicious network calls. 100% transparent and verifiable.',
+                pol7Title: '7. User Responsibility',
+                pol7Desc: 'Security of downloaded PDF/TXT/JSON files is your responsibility. We recommend: (a) Always add a password to PDF (b) Delete CSV file immediately (c) Keep files in encrypted storage (d) Don\'t share files with anyone.',
+                pol8Title: '8. Contact & Developer',
+                pol8Desc: 'Developer: Sudhi (@dev1) — This tool was built keeping users\' privacy and security in mind. Contact the developer for any questions or suggestions.',
+                howTitle: '⚡ How Does This Tool Work? (Technical)',
+                how1: '📂 CSV File Select',
+                how1sub: 'File is only loaded in browser memory — never uploaded anywhere',
+                how2: '🔍 Auto-Detect Browser Format',
+                how2sub: 'Browser/app is automatically detected by analyzing CSV headers',
+                how3: '📋 Data Parse & Preview',
+                how3sub: 'JavaScript locally parses CSV and shows it in a table',
+                how4: '📄 PDF/TXT/JSON Generate',
+                how4sub: 'jsPDF library generates PDF client-side — password encryption included',
+                how5: '⬇️ Direct Download',
+                how5sub: 'File downloads directly to your device — no middleman',
+                badge1: '100% Offline', badge1sub: 'No server needed',
+                badge2: 'Zero Tracking', badge2sub: 'No analytics',
+                badge3: 'Auto Delete', badge3sub: 'On page close',
+                badge4: 'Open Source', badge4sub: 'View source code',
+                footerLine1: '🔒 300+ Verified Security Tools — 100% Offline | All Browsers Supported',
+                footerLine2: 'Works on Mobile, Tablet, Desktop — Android, iOS, Windows, Mac, Linux',
+                madeWith: 'Made with ❤️ by',
+                toastLoaded: 'passwords loaded successfully!',
+                toastPdfDone: 'Colorful PDF Downloaded! 📄',
+                toastPdfLock: 'Password-Protected PDF Downloaded! 🔒',
+                toastTxtDone: 'TXT Downloaded Successfully!',
+                toastJsonDone: 'JSON Downloaded Successfully!',
+                toastNoData: 'No data to export!',
+                toastBadFile: 'Please drop a .csv file only!',
+                toastEmpty: 'No passwords found in this file!',
+                toastParseErr: 'Error parsing file: ',
+                passwordsFound: 'passwords found',
+                detected: '🔍 Detected:',
+                pageOf: 'of',
+                total: 'total',
+                entries: 'entries',
+            }
+        };
+
+        function T(key) { return (i18n[currentLang] && i18n[currentLang][key]) || (i18n['en'][key]) || key; }
+
+        function applyLanguage() {
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (key === 'secNotice') { el.innerHTML = T(key); }
+                else { el.textContent = T(key); }
+            });
+            document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+                el.placeholder = T(el.getAttribute('data-i18n-placeholder'));
+            });
+            document.querySelectorAll('[data-i18n-opt]').forEach(opt => {
+                opt.textContent = T(opt.getAttribute('data-i18n-opt'));
+            });
+            // Update lang toggle button
+            const flag = document.getElementById('langFlag');
+            const label = document.getElementById('langLabel');
+            const alt = document.getElementById('langAlt');
+            if (currentLang === 'hi') {
+                flag.textContent = '🇮🇳'; label.textContent = 'हिंदी'; alt.textContent = 'EN';
+            } else {
+                flag.textContent = '🇬🇧'; label.textContent = 'English'; alt.textContent = 'हि';
+            }
+            document.documentElement.lang = currentLang === 'hi' ? 'hi' : 'en';
+            // Re-render table if data exists
+            if (parsedData.length > 0) renderTable();
+        }
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'hi' ? 'en' : 'hi';
+            localStorage.setItem('appLang', currentLang);
+            applyLanguage();
+            const btn = document.getElementById('langToggleBtn');
+            btn.classList.add('lang-switch-anim');
+            setTimeout(() => btn.classList.remove('lang-switch-anim'), 300);
+            showToast(currentLang === 'hi' ? '🇮🇳 भाषा: हिंदी' : '🇬🇧 Language: English', 'info');
+        }
+
+        // Initialize language
+        applyLanguage();
+
+        // ==================== APP STATE ====================
+        let parsedData = [];
+        let headers = [];
+        let passwordsVisible = true;
+        let currentPage = 1;
+        const PAGE_SIZE = 50;
+        let detectedFormat = '';
+
+        // ==================== DROP ZONE ====================
+        const dropZone = document.getElementById('dropZone');
+        const csvInput = document.getElementById('csvInput');
+
+        dropZone.addEventListener('click', () => csvInput.click());
+        dropZone.addEventListener('dragover', (e) => { e.preventDefault(); dropZone.classList.add('dragover'); });
+        dropZone.addEventListener('dragleave', () => dropZone.classList.remove('dragover'));
+        dropZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            dropZone.classList.remove('dragover');
+            const file = e.dataTransfer.files[0];
+            if (file && (file.name.endsWith('.csv') || file.name.endsWith('.txt'))) {
+                processFile(file);
+            } else {
+                showToast('⚠️ ' + T('toastBadFile'), 'error');
+            }
+        });
+        csvInput.addEventListener('change', (e) => { if (e.target.files[0]) processFile(e.target.files[0]); });
+        dropZone.addEventListener('touchend', (e) => { e.preventDefault(); csvInput.click(); });
+
+        // Event listeners
+        document.getElementById('searchInput').addEventListener('input', () => { currentPage = 1; renderTable(); });
+        document.getElementById('sortOption').addEventListener('change', () => { currentPage = 1; renderTable(); });
+        document.getElementById('maskOption').addEventListener('change', renderTable);
+        document.getElementById('pdfPassword').addEventListener('input', updatePdfLockIcon);
+
+        function updatePdfLockIcon() {
+            const pwd = document.getElementById('pdfPassword').value;
+            document.getElementById('pdfLockIcon').textContent = pwd ? '🔒' : '';
+        }
+
+        function togglePdfPassVis() {
+            const inp = document.getElementById('pdfPassword');
+            const btn = document.getElementById('pdfPassToggle');
+            if (inp.type === 'password') { inp.type = 'text'; btn.textContent = '🙈'; }
+            else { inp.type = 'password'; btn.textContent = '👁️'; }
+        }
+
+        // ==================== CSV PARSING ====================
+        function detectFormat(headerRow) {
+            const h = headerRow.map(x => x.trim().toLowerCase());
+            if (h.includes('name') && h.includes('url') && h.includes('username') && h.includes('password')) {
+                if (h.includes('note') || h.includes('notes')) return 'Chrome/Edge/Brave (with Notes)';
+                return 'Chrome / Edge / Brave / Opera / Vivaldi';
+            }
+            if (h.includes('hostname') || h.includes('httprealm') || h.includes('formactionorigin')) return 'Mozilla Firefox';
+            if (h.includes('url') && h.includes('username') && h.includes('password') && h.includes('guid')) return 'Mozilla Firefox';
+            if (h.includes('title') && h.includes('url') && h.includes('username') && h.includes('password')) return 'Apple Safari / DuckDuckGo';
+            if (h.includes('login_uri') || h.includes('login_username') || h.includes('login_password')) return 'Bitwarden';
+            if (h.includes('folder') && h.includes('type') && h.includes('name')) return 'Bitwarden';
+            if (h.includes('grouping') && h.includes('fav')) return 'LastPass';
+            if (h.includes('extra') && h.includes('grouping')) return 'LastPass';
+            if (h.includes('login') && h.includes('website')) return '1Password';
+            if (h.includes('username') && h.includes('password') && h.includes('title') && !h.includes('name')) return 'Dashlane';
+            if (h.includes('group') && h.includes('title') && h.includes('username')) return 'KeePass';
+            if (h.includes('name') && h.includes('url') && h.includes('username') && h.includes('password') && h.includes('cardholdername')) return 'NordPass';
+            if (h.includes('url') && h.includes('id') && h.includes('password')) return 'Samsung Pass';
+            if (h.includes('url') && h.includes('password')) return 'Generic CSV';
+            if (h.includes('website') && h.includes('password')) return 'Generic CSV';
+            return 'Unknown Format (Auto-detect)';
+        }
+
+        function processFile(file) {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                try {
+                    const text = e.target.result;
+                    parseCSV(text);
+                    if (parsedData.length === 0) { showToast('⚠️ ' + T('toastEmpty'), 'error'); return; }
+                    document.getElementById('fileName').textContent = file.name;
+                    document.getElementById('fileStats').textContent = `${parsedData.length} ${T('passwordsFound')} • ${(file.size / 1024).toFixed(1)} KB`;
+                    document.getElementById('detectedBrowser').textContent = `${T('detected')} ${detectedFormat}`;
+                    document.getElementById('fileInfo').classList.remove('hidden');
+                    document.getElementById('optionsSection').classList.remove('hidden');
+                    currentPage = 1;
+                    renderTable();
+                    showToast(`✅ ${parsedData.length} ${T('toastLoaded')}`, 'success');
+                } catch (err) { showToast('❌ ' + T('toastParseErr') + err.message, 'error'); }
+            };
+            reader.readAsText(file, 'UTF-8');
+        }
+
+        function parseCSV(text) {
+            const lines = text.replace(/\r\n/g, '\n').replace(/\r/g, '\n').split('\n').filter(line => line.trim());
+            if (lines.length < 2) { showToast('⚠️ ' + T('toastEmpty'), 'error'); return; }
+            headers = parseCSVLine(lines[0]);
+            detectedFormat = detectFormat(headers);
+            parsedData = [];
+            for (let i = 1; i < lines.length; i++) {
+                const values = parseCSVLine(lines[i]);
+                if (values.length >= 2 && values.some(v => v.trim())) {
+                    const row = {};
+                    headers.forEach((h, idx) => { row[h.trim().toLowerCase().replace(/[\s-]/g, '_')] = (values[idx] || '').trim(); });
+                    if (getUrl(row) || getUsername(row) || getPassword(row)) parsedData.push(row);
+                }
+            }
+        }
+
+        function parseCSVLine(line) {
+            const result = []; let current = ''; let inQuotes = false;
+            for (let i = 0; i < line.length; i++) {
+                const char = line[i];
+                if (char === '"') { if (inQuotes && line[i + 1] === '"') { current += '"'; i++; } else { inQuotes = !inQuotes; } }
+                else if (char === ',' && !inQuotes) { result.push(current); current = ''; }
+                else { current += char; }
+            }
+            result.push(current); return result;
+        }
+
+        // ==================== FIELD EXTRACTORS ====================
+        function getName(row) { return row['name'] || row['title'] || row['website'] || row['origin'] || row['login_name'] || row['entry'] || row['group'] || extractDomain(getUrl(row)) || ''; }
+        function getUrl(row) { return row['url'] || row['origin'] || row['hostname'] || row['website'] || row['login_uri'] || row['web_site'] || row['site'] || row['domain'] || ''; }
+        function getUsername(row) { return row['username'] || row['login'] || row['user'] || row['email'] || row['login_username'] || row['id'] || row['account'] || row['user_name'] || ''; }
+        function getPassword(row) { return row['password'] || row['pass'] || row['login_password'] || row['pwd'] || row['secret'] || ''; }
+        function getNotes(row) { return row['note'] || row['notes'] || row['extra'] || row['comment'] || row['comments'] || row['memo'] || row['otpauth'] || row['login_totp'] || row['totp'] || ''; }
+
+        function extractDomain(url) {
+            try { if (!url) return ''; if (!url.startsWith('http')) url = 'https://' + url; return new URL(url).hostname.replace('www.', ''); } catch { return ''; }
+        }
+
+        function maskPassword(pwd, mode) {
+            if (!pwd) return '';
+            if (mode === 'show') return pwd;
+            if (mode === 'mask') return '••••••••';
+            if (mode === 'partial') return pwd.length > 2 ? pwd.substring(0, 2) + '••••••' : '••••••';
+            return pwd;
+        }
+
+        // ==================== FILTERING & TABLE ====================
+        function getFilteredData() {
+            const search = document.getElementById('searchInput').value.toLowerCase();
+            const sort = document.getElementById('sortOption').value;
+            let data = [...parsedData];
+            if (search) {
+                data = data.filter(row => getName(row).toLowerCase().includes(search) || getUrl(row).toLowerCase().includes(search) || getUsername(row).toLowerCase().includes(search) || getNotes(row).toLowerCase().includes(search));
+            }
+            if (sort === 'name') data.sort((a, b) => getName(a).localeCompare(getName(b)));
+            if (sort === 'url') data.sort((a, b) => getUrl(a).localeCompare(getUrl(b)));
+            if (sort === 'username') data.sort((a, b) => getUsername(a).localeCompare(getUsername(b)));
+            return data;
+        }
+
+        function renderTable() {
+            const allData = getFilteredData();
+            const maskMode = document.getElementById('maskOption').value;
+            const totalPages = Math.max(1, Math.ceil(allData.length / PAGE_SIZE));
+            if (currentPage > totalPages) currentPage = totalPages;
+            const start = (currentPage - 1) * PAGE_SIZE;
+            const data = allData.slice(start, start + PAGE_SIZE);
+            const tbody = document.getElementById('tableBody');
+            document.getElementById('rowCount').textContent = `${allData.length} ${T('entries')}`;
+            document.getElementById('pageInfo').textContent = `Page ${currentPage} ${T('pageOf')} ${totalPages} (${allData.length} ${T('total')})`;
+            document.getElementById('prevBtn').disabled = currentPage <= 1;
+            document.getElementById('nextBtn').disabled = currentPage >= totalPages;
+            if (data.length === 0) { tbody.innerHTML = '<tr><td colspan="6" class="text-center py-8 text-gray-500">No data found</td></tr>'; return; }
+            tbody.innerHTML = data.map((row, i) => {
+                const globalIdx = start + i + 1;
+                const notes = getNotes(row);
+                return `<tr class="border-t border-white/5 hover:bg-white/5 transition">
+                    <td class="px-2 sm:px-4 py-2 sm:py-3 text-gray-500 text-xs">${globalIdx}</td>
+                    <td class="px-2 sm:px-4 py-2 sm:py-3 font-medium text-xs sm:text-sm max-w-[120px] sm:max-w-[180px] truncate">${escapeHtml(getName(row)) || '<span class="text-gray-500">—</span>'}</td>
+                    <td class="px-2 sm:px-4 py-2 sm:py-3 text-indigo-300 text-[10px] sm:text-xs max-w-[120px] sm:max-w-[200px] truncate">${escapeHtml(getUrl(row)) || '<span class="text-gray-500">—</span>'}</td>
+                    <td class="px-2 sm:px-4 py-2 sm:py-3 text-emerald-300 text-xs sm:text-sm max-w-[100px] sm:max-w-[150px] truncate">${escapeHtml(getUsername(row)) || '<span class="text-gray-500">—</span>'}</td>
+                    <td class="px-2 sm:px-4 py-2 sm:py-3 font-mono text-amber-300 text-xs max-w-[100px] sm:max-w-[140px] truncate">${escapeHtml(maskPassword(getPassword(row), passwordsVisible ? maskMode : 'mask'))}</td>
+                    <td class="px-2 sm:px-4 py-2 sm:py-3 text-gray-400 text-[10px] sm:text-xs max-w-[80px] sm:max-w-[120px] truncate">${notes ? escapeHtml(notes.substring(0, 30)) : '<span class="text-gray-600">—</span>'}</td>
+                </tr>`;
+            }).join('');
+        }
+
+        function changePage(dir) {
+            const allData = getFilteredData();
+            const totalPages = Math.max(1, Math.ceil(allData.length / PAGE_SIZE));
+            currentPage = Math.max(1, Math.min(totalPages, currentPage + dir));
+            renderTable();
+        }
+
+        function escapeHtml(str) { if (!str) return ''; const div = document.createElement('div'); div.textContent = str; return div.innerHTML; }
+
+        function togglePasswordVisibility() {
+            passwordsVisible = !passwordsVisible;
+            document.getElementById('toggleBtn').textContent = passwordsVisible ? '👁️ ' + T('togglePass') : '🙈 ' + T('togglePass');
+            renderTable();
+        }
+
+        function clearFile() {
+            parsedData = []; headers = []; csvInput.value = '';
+            document.getElementById('fileInfo').classList.add('hidden');
+            document.getElementById('optionsSection').classList.add('hidden');
+        }
+
+        // ==================== PDF THEMES ====================
+        function getPdfTheme(themeName) {
+            const themes = {
+                'colorful-light': {
+                    bg: [255, 255, 255], textColor: [30, 30, 30],
+                    headerBg: [99, 102, 241], headerText: [255, 255, 255],
+                    altRow: [238, 242, 255], stripe2: [255, 255, 255],
+                    accentColor: [99, 102, 241], titleColor: [79, 70, 229],
+                    subtitleColor: [100, 100, 120], borderColor: [200, 200, 220],
+                    nameCol: [30, 58, 138], urlCol: [67, 56, 202],
+                    userCol: [5, 150, 105], passCol: [180, 83, 9],
+                    watermark: [230, 230, 250], headerGradient: true,
+                    footerBg: [245, 245, 255], footerText: [140, 140, 160],
+                    pageBg: [252, 252, 255]
+                },
+                'colorful-dark': {
+                    bg: [15, 23, 42], textColor: [226, 232, 240],
+                    headerBg: [79, 70, 229], headerText: [255, 255, 255],
+                    altRow: [30, 41, 59], stripe2: [15, 23, 42],
+                    accentColor: [129, 140, 248], titleColor: [165, 180, 252],
+                    subtitleColor: [148, 163, 184], borderColor: [51, 65, 85],
+                    nameCol: [199, 210, 254], urlCol: [165, 180, 252],
+                    userCol: [110, 231, 183], passCol: [252, 211, 77],
+                    watermark: [30, 41, 59], headerGradient: true,
+                    footerBg: [15, 23, 42], footerText: [100, 116, 139],
+                    pageBg: [15, 23, 42]
+                },
+                'minimal-light': {
+                    bg: [255, 255, 255], textColor: [50, 50, 50],
+                    headerBg: [240, 240, 240], headerText: [50, 50, 50],
+                    altRow: [248, 248, 248], stripe2: [255, 255, 255],
+                    accentColor: [80, 80, 80], titleColor: [30, 30, 30],
+                    subtitleColor: [120, 120, 120], borderColor: [220, 220, 220],
+                    nameCol: [30, 30, 30], urlCol: [80, 80, 80],
+                    userCol: [50, 50, 50], passCol: [60, 60, 60],
+                    watermark: [245, 245, 245], headerGradient: false,
+                    footerBg: [250, 250, 250], footerText: [160, 160, 160],
+                    pageBg: [255, 255, 255]
+                },
+                'minimal-dark': {
+                    bg: [24, 24, 27], textColor: [212, 212, 216],
+                    headerBg: [39, 39, 42], headerText: [212, 212, 216],
+                    altRow: [32, 32, 35], stripe2: [24, 24, 27],
+                    accentColor: [161, 161, 170], titleColor: [228, 228, 231],
+                    subtitleColor: [113, 113, 122], borderColor: [63, 63, 70],
+                    nameCol: [228, 228, 231], urlCol: [161, 161, 170],
+                    userCol: [212, 212, 216], passCol: [228, 228, 231],
+                    watermark: [32, 32, 35], headerGradient: false,
+                    footerBg: [24, 24, 27], footerText: [82, 82, 91],
+                    pageBg: [24, 24, 27]
+                },
+                'neon': {
+                    bg: [10, 5, 30], textColor: [220, 220, 255],
+                    headerBg: [120, 0, 255], headerText: [255, 255, 255],
+                    altRow: [20, 10, 50], stripe2: [10, 5, 30],
+                    accentColor: [180, 100, 255], titleColor: [200, 150, 255],
+                    subtitleColor: [140, 100, 200], borderColor: [60, 30, 120],
+                    nameCol: [220, 180, 255], urlCol: [150, 100, 255],
+                    userCol: [100, 255, 200], passCol: [255, 200, 100],
+                    watermark: [20, 10, 50], headerGradient: true,
+                    footerBg: [10, 5, 30], footerText: [80, 50, 130],
+                    pageBg: [10, 5, 30]
+                },
+                'ocean': {
+                    bg: [240, 249, 255], textColor: [30, 58, 138],
+                    headerBg: [14, 116, 144], headerText: [255, 255, 255],
+                    altRow: [224, 242, 254], stripe2: [240, 249, 255],
+                    accentColor: [6, 182, 212], titleColor: [8, 145, 178],
+                    subtitleColor: [100, 130, 160], borderColor: [186, 230, 253],
+                    nameCol: [12, 74, 110], urlCol: [14, 116, 144],
+                    userCol: [5, 150, 105], passCol: [146, 64, 14],
+                    watermark: [224, 242, 254], headerGradient: true,
+                    footerBg: [240, 249, 255], footerText: [125, 160, 190],
+                    pageBg: [240, 249, 255]
+                }
+            };
+            return themes[themeName] || themes['colorful-light'];
+        }
+
+        // ==================== PDF DOWNLOAD ====================
+        function downloadPDF() {
+            const { jsPDF } = window.jspdf;
+            const data = getFilteredData();
+            const maskMode = document.getElementById('maskOption').value;
+            const pdfPass = document.getElementById('pdfPassword').value.trim();
+            const themeName = document.getElementById('pdfTheme').value;
+            const pageSize = document.getElementById('pdfPageSize').value;
+            const theme = getPdfTheme(themeName);
+
+            if (data.length === 0) { showToast('⚠️ ' + T('toastNoData'), 'error'); return; }
+
+            const pdfOptions = { orientation: 'l', unit: 'mm', format: pageSize };
+            if (pdfPass) {
+                pdfOptions.encryption = { userPassword: pdfPass, ownerPassword: pdfPass + '_owner', userPermissions: ['print'] };
+            }
+            const doc = new jsPDF(pdfOptions);
+            const pageW = doc.internal.pageSize.getWidth();
+            const pageH = doc.internal.pageSize.getHeight();
+
+            doc.setFillColor(...theme.pageBg);
+            doc.rect(0, 0, pageW, pageH, 'F');
+            doc.setFillColor(...theme.headerBg);
+            doc.rect(0, 0, pageW, 3, 'F');
+            doc.setFillColor(...theme.accentColor);
+            doc.rect(14, 12, 40, 1, 'F');
+
+            doc.setFontSize(22);
+            doc.setTextColor(...theme.titleColor);
+            doc.text('Saved Passwords Export', 14, 22);
+
+            doc.setFontSize(9);
+            doc.setTextColor(...theme.subtitleColor);
+            doc.text(`Generated: ${new Date().toLocaleString()}`, 14, 29);
+            doc.text(`Total: ${data.length} passwords  |  Format: ${detectedFormat}`, 14, 34);
+            doc.text(`Theme: ${themeName}  |  Tool by SudhirDevOps1`, 14, 39);
+
+            if (pdfPass) {
+                doc.setFillColor(220, 38, 38);
+                doc.roundedRect(pageW - 70, 10, 56, 8, 2, 2, 'F');
+                doc.setFontSize(8);
+                doc.setTextColor(255, 255, 255);
+                doc.text('PASSWORD PROTECTED', pageW - 68, 15.5);
+            }
+
+            doc.setDrawColor(...theme.accentColor);
+            doc.setLineWidth(0.5);
+            doc.line(14, 43, pageW - 14, 43);
+
+            const tableData = data.map((row, i) => [
+                i + 1,
+                getName(row) || '—',
+                getUrl(row) || '—',
+                getUsername(row) || '—',
+                maskPassword(getPassword(row), maskMode),
+                getNotes(row) ? getNotes(row).substring(0, 40) : '—'
+            ]);
+
+            doc.autoTable({
+                head: [['#', 'Website', 'URL', 'Username', 'Password', 'Notes']],
+                body: tableData,
+                startY: 47,
+                styles: {
+                    fontSize: 7.5, cellPadding: 3, overflow: 'ellipsize',
+                    textColor: theme.textColor, lineColor: theme.borderColor, lineWidth: 0.2,
+                },
+                headStyles: {
+                    fillColor: theme.headerBg, textColor: theme.headerText,
+                    fontStyle: 'bold', fontSize: 8.5, cellPadding: 4, halign: 'left',
+                },
+                alternateRowStyles: { fillColor: theme.altRow },
+                bodyStyles: { fillColor: theme.stripe2 },
+                columnStyles: {
+                    0: { cellWidth: 10, halign: 'center', fontStyle: 'bold', textColor: theme.accentColor },
+                    1: { cellWidth: 38, textColor: theme.nameCol, fontStyle: 'bold' },
+                    2: { cellWidth: 68, textColor: theme.urlCol, fontSize: 6.5 },
+                    3: { cellWidth: 45, textColor: theme.userCol },
+                    4: { cellWidth: 40, fontStyle: 'bold', textColor: theme.passCol, fontSize: 8 },
+                    5: { cellWidth: 32, textColor: theme.subtitleColor, fontSize: 6.5 }
+                },
+                willDrawPage: function (pageData) {
+                    doc.setFillColor(...theme.pageBg);
+                    doc.rect(0, 0, pageW, pageH, 'F');
+                    doc.setFillColor(...theme.headerBg);
+                    doc.rect(0, 0, pageW, 2, 'F');
+                },
+                didDrawPage: function (pageData) {
+                    const pageCount = doc.internal.getNumberOfPages();
+                    const currentPg = doc.internal.getCurrentPageInfo().pageNumber;
+                    doc.setFillColor(...theme.footerBg);
+                    doc.rect(0, pageH - 12, pageW, 12, 'F');
+                    doc.setDrawColor(...theme.borderColor);
+                    doc.line(0, pageH - 12, pageW, pageH - 12);
+                    doc.setFontSize(7);
+                    doc.setTextColor(...theme.footerText);
+                    doc.text(`Page ${currentPg} of ${pageCount}`, 14, pageH - 5);
+                    doc.text(`Password Security Tools by SudhirDevOps1 — Keep this file secure!`, pageW / 2, pageH - 5, { align: 'center' });
+                    doc.text(`${new Date().toLocaleDateString()}`, pageW - 14, pageH - 5, { align: 'right' });
+                },
+                margin: { top: 10, bottom: 16, left: 14, right: 14 },
+                tableLineColor: theme.borderColor, tableLineWidth: 0.1,
+            });
+
+            const finalY = doc.lastAutoTable.finalY || 100;
+            if (finalY + 30 < pageH - 20) {
+                doc.setFillColor(...theme.altRow);
+                doc.setDrawColor(...theme.accentColor);
+                doc.setLineWidth(0.5);
+                doc.roundedRect(14, finalY + 8, pageW - 28, 20, 3, 3, 'FD');
+                doc.setFontSize(8);
+                doc.setTextColor(...theme.titleColor);
+                doc.text(`Total Passwords Exported: ${data.length}`, 20, finalY + 16);
+                doc.setTextColor(...theme.subtitleColor);
+                doc.setFontSize(7);
+                doc.text(`Important: Delete CSV file after conversion. Store this PDF securely. ${pdfPass ? 'This PDF is password protected.' : 'Consider adding a password for extra security.'}`, 20, finalY + 22);
+            }
+
+            const fileName = pdfPass ? 'passwords_protected.pdf' : 'passwords_export.pdf';
+            doc.save(fileName);
+            showToast('✅ ' + (pdfPass ? T('toastPdfLock') : T('toastPdfDone')), 'success');
+        }
+
+        // ==================== TXT DOWNLOAD ====================
+        function downloadTXT() {
+            const data = getFilteredData();
+            const maskMode = document.getElementById('maskOption').value;
+            if (data.length === 0) { showToast('⚠️ ' + T('toastNoData'), 'error'); return; }
+
+            let txt = '';
+            txt += '╔════════════════════════════════════════════════════════════════╗\n';
+            txt += '║           SAVED PASSWORDS EXPORT                             ║\n';
+            txt += '║           Tool by SudhirDevOps1                               ║\n';
+            txt += '╠════════════════════════════════════════════════════════════════╣\n';
+            txt += `║  Date      : ${new Date().toLocaleString().padEnd(48)}║\n`;
+            txt += `║  Total     : ${String(data.length + ' passwords').padEnd(48)}║\n`;
+            txt += `║  Source    : ${detectedFormat.padEnd(48)}║\n`;
+            txt += '╚════════════════════════════════════════════════════════════════╝\n\n';
+
+            data.forEach((row, i) => {
+                txt += `━━━━━━━━━━━━━━ [${i + 1}] ━━━━━━━━━━━━━━\n`;
+                txt += `  Website  : ${getName(row) || '—'}\n`;
+                txt += `  URL      : ${getUrl(row) || '—'}\n`;
+                txt += `  Username : ${getUsername(row) || '—'}\n`;
+                txt += `  Password : ${maskPassword(getPassword(row), maskMode)}\n`;
+                const notes = getNotes(row);
+                if (notes) txt += `  Notes    : ${notes}\n`;
+                txt += '\n';
+            });
+
+            txt += '\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n';
+            txt += '  IMPORTANT: Keep this file secure!\n';
+            txt += '  Delete the CSV file after conversion.\n';
+            txt += '  Tool by SudhirDevOps1\n';
+            txt += '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n';
+
+            const blob = new Blob([txt], { type: 'text/plain;charset=utf-8' });
+            downloadBlob(blob, 'passwords_export.txt');
+            showToast('✅ ' + T('toastTxtDone'), 'success');
+        }
+
+        // ==================== JSON DOWNLOAD ====================
+        function downloadJSON() {
+            const data = getFilteredData();
+            const maskMode = document.getElementById('maskOption').value;
+            if (data.length === 0) { showToast('⚠️ ' + T('toastNoData'), 'error'); return; }
+
+            const jsonData = {
+                exportInfo: {
+                    date: new Date().toISOString(),
+                    totalPasswords: data.length,
+                    detectedFormat: detectedFormat,
+                    tool: 'Password Security Tools by SudhirDevOps1'
+                },
+                passwords: data.map((row, i) => {
+                    const entry = { id: i + 1, name: getName(row), url: getUrl(row), username: getUsername(row), password: maskPassword(getPassword(row), maskMode) };
+                    const notes = getNotes(row);
+                    if (notes) entry.notes = notes;
+                    return entry;
+                })
+            };
+
+            const blob = new Blob([JSON.stringify(jsonData, null, 2)], { type: 'application/json;charset=utf-8' });
+            downloadBlob(blob, 'passwords_export.json');
+            showToast('✅ ' + T('toastJsonDone'), 'success');
+        }
+
+        // ==================== HELPERS ====================
+        function downloadBlob(blob, filename) {
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url; a.download = filename;
+            document.body.appendChild(a); a.click(); document.body.removeChild(a);
+            setTimeout(() => URL.revokeObjectURL(url), 5000);
+        }
+
+        function showToast(msg, type = 'success') {
+            const container = document.getElementById('toastContainer');
+            const toast = document.createElement('div');
+            const bg = type === 'success' ? 'bg-emerald-600' : type === 'error' ? 'bg-red-600' : 'bg-indigo-600';
+            toast.className = `${bg} text-white px-4 sm:px-6 py-3 rounded-xl shadow-2xl font-semibold text-xs sm:text-sm slide-in`;
+            toast.textContent = msg;
+            container.appendChild(toast);
+            setTimeout(() => {
+                toast.style.opacity = '0'; toast.style.transform = 'translateX(20px)'; toast.style.transition = 'all 0.3s';
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+
+        document.addEventListener('keydown', (e) => { if (e.ctrlKey && e.key === 'o') { e.preventDefault(); csvInput.click(); } });
+
+        // ==================== INIT ====================
+        applyLanguage();
+    </script>
+</body>
+
+</html>

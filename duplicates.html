@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Duplicate Password Finder — by SudhirDevOps1</title>
+    <link rel="stylesheet" href="shared.css">
+    <style>
+        .drop-zone {
+            border: 2px dashed rgba(255, 255, 255, .2);
+            border-radius: 16px;
+            padding: 48px 24px;
+            text-align: center;
+            cursor: pointer;
+            transition: all .3s;
+        }
+
+        .drop-zone:hover,
+        .drop-zone.over {
+            border-color: #f43f5e;
+            background: rgba(244, 63, 94, .05);
+        }
+
+        .dup-group {
+            border: 1px solid rgba(244, 63, 94, .3);
+            border-radius: 12px;
+            margin-bottom: 12px;
+            overflow: hidden;
+        }
+
+        .dup-header {
+            background: rgba(244, 63, 94, .12);
+            padding: 12px 16px;
+            font-weight: 700;
+            font-size: 13px;
+            color: #fb7185;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .dup-row {
+            padding: 10px 16px;
+            border-top: 1px solid rgba(255, 255, 255, .06);
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="site-header">
+        <div class="inner">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">🔐</div>
+                <div>
+                    <div class="logo-title">Password Tools</div>
+                    <div class="logo-sub">by SudhirDevOps1</div>
+                </div>
+            </a>
+            <div class="breadcrumb">
+                <a href="index.html" data-i18n="navHome">🏠 Home</a> › <span data-i18n="navDuplicates">🧹 Duplicate
+                    Finder</span>
+            </div>
+            <div class="lang-toggle">
+                <button class="lang-btn" id="btn-en" onclick="setLang('en')">EN</button>
+                <button class="lang-btn" id="btn-hi" onclick="setLang('hi')">हिन्दी</button>
+            </div>
+            <div class="badge-secure"><span class="pulse"></span><span data-i18n="badgeSecure">Offline & Secure</span>
+            </div>
+        </div>
+    </header>
+    <main>
+        <a href="index.html" class="back-link" data-i18n="backHome">← Back to Tools</a>
+
+        <div class="card fade-up" style="margin-bottom:20px">
+            <div class="section-title" data-i18n="toolTitle">🧹 Duplicate Password Finder</div>
+            <div class="section-sub" data-i18n="toolSub">Find accounts that share the same password — reused passwords
+                are a serious security risk</div>
+            <div class="drop-zone" id="dropZone" onclick="document.getElementById('csvInput').click()">
+                <div style="font-size:48px;margin-bottom:12px">📂</div>
+                <div style="font-size:16px;font-weight:700;margin-bottom:6px" data-i18n="dropTitle">Drop CSV or Click to
+                    Upload</div>
+                <div style="font-size:13px;color:#64748b" data-i18n="dropDesc">Supports all browser CSV exports</div>
+                <input type="file" id="csvInput" accept=".csv,.txt" style="display:none">
+            </div>
+        </div>
+
+        <div id="results" style="display:none">
+            <!-- Stats -->
+            <div class="grid-3 fade-up" style="margin-bottom:20px">
+                <div class="card card-sm" style="text-align:center">
+                    <div style="font-size:32px;font-weight:900;color:#818cf8" id="totalCount">0</div>
+                    <div style="font-size:12px;color:#64748b;margin-top:4px" data-i18n="statTotal">Total Passwords</div>
+                </div>
+                <div class="card card-sm"
+                    style="text-align:center;border-color:rgba(244,63,94,.3);background:rgba(244,63,94,.06)">
+                    <div style="font-size:32px;font-weight:900;color:#fb7185" id="dupCount">0</div>
+                    <div style="font-size:12px;color:#64748b;margin-top:4px" data-i18n="statGroups">Duplicate Groups
+                    </div>
+                </div>
+                <div class="card card-sm"
+                    style="text-align:center;border-color:rgba(245,158,11,.3);background:rgba(245,158,11,.06)">
+                    <div style="font-size:32px;font-weight:900;color:#fbbf24" id="affectedCount">0</div>
+                    <div style="font-size:12px;color:#64748b;margin-top:4px" data-i18n="statAffected">Accounts Affected
+                    </div>
+                </div>
+            </div>
+
+            <!-- Duplicate Groups -->
+            <div class="card fade-up">
+                <div
+                    style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:8px">
+                    <div style="font-weight:700;font-size:15px" data-i18n="resTitle">⚠️ Duplicate Password Groups</div>
+                    <button class="btn btn-outline btn-sm" onclick="clearData()" data-i18n="btnClear">✕ Clear</button>
+                </div>
+                <div id="dupList"></div>
+            </div>
+        </div>
+
+        <!-- Why duplicates are bad -->
+        <div class="card fade-up" style="margin-top:20px">
+            <div style="font-size:15px;font-weight:700;margin-bottom:14px" data-i18n="whyTitle">🎯 Why Reused Passwords
+                Are Dangerous</div>
+            <div style="display:flex;flex-direction:column;gap:10px">
+                <div
+                    style="display:flex;gap:12px;padding:10px;background:rgba(244,63,94,.06);border-radius:10px;border-left:3px solid #ef4444">
+                    <span style="font-size:20px">💀</span>
+                    <div style="font-size:13px;color:#94a3b8" data-i18n="why1"><strong style="color:#e2e8f0">Credential
+                            Stuffing:</strong> Hackers take leaked username/password pairs from one breach and try them
+                        on hundreds of other sites automatically. If you reuse passwords, many accounts fall at once.
+                    </div>
+                </div>
+                <div
+                    style="display:flex;gap:12px;padding:10px;background:rgba(245,158,11,.06);border-radius:10px;border-left:3px solid #f59e0b">
+                    <span style="font-size:20px">🎣</span>
+                    <div style="font-size:13px;color:#94a3b8" data-i18n="why2"><strong style="color:#e2e8f0">Phishing
+                            Amplification:</strong> If you're tricked into entering your password on a fake site,
+                        attackers immediately try it on your email, bank, and other services.</div>
+                </div>
+                <div
+                    style="display:flex;gap:12px;padding:10px;background:rgba(16,185,129,.06);border-radius:10px;border-left:3px solid #10b981">
+                    <span style="font-size:20px">✅</span>
+                    <div style="font-size:13px;color:#94a3b8" data-i18n="why3"><strong
+                            style="color:#e2e8f0">Solution:</strong> Use a unique, strong password for every account.
+                        Use a <a href="https://keepass.info" target="_blank" style="color:#34d399">password manager</a>
+                        so you don't have to remember them.</div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer class="site-footer" data-i18n="footerText">🔒 100% Offline — No data leaves your device | by <strong
+            style="color:#818cf8">SudhirDevOps1</strong></footer>
+    <div id="toast-container"></div>
+    <script>
+        const i18n = {
+            en: {
+                navHome: '🏠 Home', navDuplicates: '🧹 Duplicate Finder', badgeSecure: 'Offline & Secure',
+                backHome: '← Back to Tools', toolTitle: '🧹 Duplicate Password Finder',
+                toolSub: 'Find accounts that share the same password — reused passwords are a serious security risk',
+                dropTitle: 'Drop CSV or Click to Upload', dropDesc: 'Supports all browser CSV exports',
+                statTotal: 'Total Passwords', statGroups: 'Duplicate Groups', statAffected: 'Accounts Affected',
+                resTitle: '⚠️ Duplicate Password Groups', btnClear: '✕ Clear',
+                whyTitle: '🎯 Why Reused Passwords Are Dangerous',
+                why1: '<strong style="color:#e2e8f0">Credential Stuffing:</strong> Hackers take leaked username/password pairs from one breach and try them on hundreds of other sites automatically. If you reuse passwords, many accounts fall at once.',
+                why2: '<strong style="color:#e2e8f0">Phishing Amplification:</strong> If you\'re tricked into entering your password on a fake site, attackers immediately try it on your email, bank, and other services.',
+                why3: '<strong style="color:#e2e8f0">Solution:</strong> Use a unique, strong password for every account. Use a <a href="https://keepass.info" target="_blank" style="color:#34d399">password manager</a> so you don\'t have to remember them.',
+                footerText: '🔒 100% Offline — No data leaves your device | by SudhirDevOps1',
+                toastNoData: 'No data', toastNoDups: '🎉 No duplicates found!',
+                toastFound: '⚠️ Found {n} duplicate groups',
+                msgNoDups: '🎉 Great! No duplicate passwords found!',
+                groupLabel: '🔑 Group {n} — Password used on {c} accounts'
+            },
+            hi: {
+                navHome: '🏠 होम', navDuplicates: '🧹 डुप्लीकेट फाइंडर', badgeSecure: 'ऑफलाइन और सुरक्षित',
+                backHome: '← टूल्स पर वापस जाएं', toolTitle: '🧹 डुप्लीकेट पासवर्ड फाइंडर',
+                toolSub: 'उन खातों को खोजें जो एक ही पासवर्ड साझा करते हैं — पुन: उपयोग किए गए पासवर्ड एक गंभीर सुरक्षा जोखिम हैं',
+                dropTitle: 'CSV छोड़ें या अपलोड करने के लिए क्लिक करें', dropDesc: 'सभी ब्राउज़र CSV निर्यात का समर्थन करता है',
+                statTotal: 'कुल पासवर्ड', statGroups: 'डुप्लीकेट समूह', statAffected: 'प्रभावित खाते',
+                resTitle: '⚠️ डुप्लीकेट पासवर्ड समूह', btnClear: '✕ साफ़ करें',
+                whyTitle: '🎯 पुन: उपयोग किए गए पासवर्ड खतरनाक क्यों हैं',
+                why1: '<strong style="color:#e2e8f0">क्रेडेंशियल स्टफिंग:</strong> हैकर्स एक ब्रीच से लीक हुए यूजरनेम/पासवर्ड जोड़े लेते हैं और उन्हें सैकड़ों अन्य साइटों पर स्वचालित रूप से आज़माते हैं। यदि आप पासवर्ड का पुन: उपयोग करते हैं, तो कई खाते एक साथ गिर जाते हैं।',
+                why2: '<strong style="color:#e2e8f0">फ़िशिंग प्रवर्धन:</strong> यदि आपको किसी नकली साइट पर अपना पासवर्ड दर्ज करने के लिए फंसाया जाता है, तो हमलावर तुरंत इसे आपके ईमेल, बैंक और अन्य सेवाओं पर आज़माते हैं।',
+                why3: '<strong style="color:#e2e8f0">समाधान:</strong> प्रत्येक खाते के लिए एक विशिष्ट, मजबूत पासवर्ड का उपयोग करें। <a href="https://keepass.info" target="_blank" style="color:#34d399">पासवर्ड मैनेजर</a> का उपयोग करें ताकि आपको उन्हें याद न रखना पड़े।',
+                footerText: '🔒 100% ऑफलाइन — आपके डिवाइस से कोई डेटा बाहर नहीं जाता है | SudhirDevOps1 द्वारा',
+                toastNoData: 'कोई डेटा नहीं', toastNoDups: '🎉 बहुत बढ़िया! कोई डुप्लीकेट पासवर्ड नहीं मिला!',
+                toastFound: '⚠️ {n} डुप्लीकेट समूह मिले',
+                msgNoDups: '🎉 बहुत बढ़िया! कोई डुप्लीकेट पासवर्ड नहीं मिला!',
+                groupLabel: '🔑 समूह {n} — पासवर्ड {c} खातों पर उपयोग किया गया'
+            }
+        };
+
+        let currentLang = localStorage.getItem('appLang') || 'en';
+
+        function T(key) {
+            return (i18n[currentLang] && i18n[currentLang][key]) || (i18n['en'][key]) || key;
+        }
+
+        function applyLanguage() {
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                el.innerHTML = T(key);
+            });
+            document.body.className = 'lang-' + currentLang;
+            document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+            const activeBtn = document.getElementById('btn-' + currentLang);
+            if (activeBtn) activeBtn.classList.add('active');
+
+            if (allData.length) findDuplicates();
+        }
+
+        function setLang(lang) {
+            currentLang = lang;
+            localStorage.setItem('appLang', currentLang);
+            applyLanguage();
+        }
+
+        let allData = [];
+        const dz = document.getElementById('dropZone');
+        dz.addEventListener('dragover', e => { e.preventDefault(); dz.classList.add('over'); });
+        dz.addEventListener('dragleave', () => dz.classList.remove('over'));
+        dz.addEventListener('drop', e => { e.preventDefault(); dz.classList.remove('over'); const f = e.dataTransfer.files[0]; if (f) loadFile(f); });
+        document.getElementById('csvInput').addEventListener('change', e => { if (e.target.files[0]) loadFile(e.target.files[0]); });
+        function loadFile(f) { const r = new FileReader(); r.onload = e => { parse(e.target.result); }; r.readAsText(f, 'UTF-8'); }
+        function parseCSVLine(l) { const r = []; let c = ''; let q = false; for (let i = 0; i < l.length; i++) { const ch = l[i]; if (ch === '"') { if (q && l[i + 1] === '"') { c += '"'; i++; } else q = !q; } else if (ch === ',' && !q) { r.push(c); c = ''; } else c += ch; } r.push(c); return r; }
+        function parse(text) {
+            const lines = text.replace(/\r\n/g, '\n').replace(/\r/g, '\n').split('\n').filter(l => l.trim());
+            if (lines.length < 2) { showToast(T('toastNoData'), 'error'); return; }
+            const headers = parseCSVLine(lines[0]);
+            allData = [];
+            const PWD = ['password', 'pass', 'login_password', 'pwd', 'secret'];
+            const URL_K = ['url', 'origin', 'hostname', 'website', 'login_uri', 'site'];
+            const USR_K = ['username', 'login', 'user', 'email', 'login_username', 'id'];
+            const NAM_K = ['name', 'title', 'website', 'origin', 'login_name'];
+            function get(row, keys) { for (const k of keys) { for (const h of headers) { if (h.toLowerCase().includes(k)) return row[h] || ''; } } return ''; }
+            for (let i = 1; i < lines.length; i++) {
+                const vals = parseCSVLine(lines[i]);
+                if (vals.some(v => v.trim())) {
+                    const row = {}; headers.forEach((h, idx) => { row[h] = vals[idx] || ''; });
+                    const pw = get(row, PWD);
+                    if (pw) allData.push({ name: get(row, NAM_K) || get(row, URL_K), url: get(row, URL_K), user: get(row, USR_K), pass: pw });
+                }
+            }
+            findDuplicates();
+        }
+        function findDuplicates() {
+            const groups = {};
+            allData.forEach(e => { if (!groups[e.pass]) groups[e.pass] = []; groups[e.pass].push(e); });
+            const dupGroups = Object.entries(groups).filter(([, v]) => v.length > 1).sort((a, b) => b[1].length - a[1].length);
+            document.getElementById('results').style.display = 'block';
+            document.getElementById('totalCount').textContent = allData.length;
+            document.getElementById('dupCount').textContent = dupGroups.length;
+            document.getElementById('affectedCount').textContent = dupGroups.reduce((s, [, v]) => s + v.length, 0);
+            if (!dupGroups.length) {
+                document.getElementById('dupList').innerHTML = `<div style="text-align:center;padding:32px;font-size:15px;color:#34d399">${T('msgNoDups')}</div>`;
+                return;
+            }
+            document.getElementById('dupList').innerHTML = dupGroups.map(([pass, entries], gi) => `
+    <div class="dup-group">
+      <div class="dup-header">
+        <span>${T('groupLabel').replace('{n}', gi + 1).replace('{c}', entries.length)}</span>
+        <span style="font-family:monospace;font-size:12px;color:#fbbf24">${pass.substring(0, 4)}${'•'.repeat(Math.max(0, pass.length - 4))}</span>
+      </div>
+      ${entries.map(e => `<div class="dup-row">
+        <span style="font-size:16px">⚠️</span>
+        <div style="flex:1">
+          <div style="font-weight:600">${escH(e.name) || escH(e.url) || 'Unknown'}</div>
+          <div style="font-size:12px;color:#64748b">${escH(e.user)} · ${escH(e.url)}</div>
+        </div>
+      </div>`).join('')}
+    </div>`).join('');
+        }
+        function clearData() { allData = []; document.getElementById('results').style.display = 'none'; document.getElementById('csvInput').value = ''; }
+        function escH(s) { const d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
+        function showToast(msg, type = 'success') { const c = document.getElementById('toast-container'); const t = document.createElement('div'); t.className = `toast ${type}`; t.textContent = msg; c.appendChild(t); setTimeout(() => { t.style.opacity = '0'; t.style.transition = 'all .3s'; setTimeout(() => t.remove(), 300); }, 2800); }
+
+        applyLanguage();
+    </script>
+</body>
+
+</html>
