@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>304+ Security Resources — by SudhirDevOps1</title>
+  <title>467+ Security Resources — by SudhirDevOps1</title>
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
   <style>
     :root {
@@ -389,8 +389,8 @@
     }
 
     .rc-ds {
-      font-size: 14px;
-      color: var(--text);
+      font-size: 13px;
+      color: var(--muted);
       line-height: 1.6;
       margin-bottom: 20px;
       font-weight: 400;
@@ -432,13 +432,6 @@
       border-radius: 6px;
       text-transform: uppercase;
       border: 1px solid rgba(99, 102, 241, .1);
-    }
-
-    .rc-ds {
-      font-size: 13px;
-      color: var(--muted);
-      line-height: 1.6;
-      margin-bottom: 20px;
     }
 
     .rc-wh {
@@ -557,11 +550,55 @@
       border: none;
       opacity: 0;
       transition: .3s;
+      pointer-events: none;
     }
 
     .back-top.visible {
       opacity: 1;
       pointer-events: auto;
+    }
+
+    .cat-hdr {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 20px;
+      font-weight: 800;
+      margin-bottom: 24px;
+    }
+
+    .cat-badge {
+      padding: 6px 10px;
+      border-radius: 10px;
+      font-size: 18px;
+    }
+
+    @media (max-width: 640px) {
+      .hero-title {
+        font-size: 28px;
+      }
+
+      .grid2 {
+        grid-template-columns: 1fr;
+      }
+
+      .stat-row {
+        grid-template-columns: 1fr;
+      }
+
+      .header-inner {
+        justify-content: center;
+      }
+
+      .breadcrumb {
+        margin-left: 0;
+        width: 100%;
+        text-align: center;
+      }
+
+      .tips-section {
+        padding: 20px;
+      }
     }
   </style>
 </head>
@@ -572,14 +609,14 @@
       <a href="index.html" class="logo">
         <div class="logo-icon">🔐</div>
         <div>
-          <div class="logo-title">Password Tools</div>
+          <div class="logo-title">Security Toolkit</div>
           <div class="logo-sub">by SudhirDevOps1</div>
         </div>
       </a>
       <div class="breadcrumb">
         <a href="index.html" data-i18n="navHome">🏠 Home</a> › <span data-i18n="navResources">🛡️ Resources</span>
       </div>
-      <div class="badge"><span class="pulse"></span><span id="totalCountDisplay">304+</span> <span
+      <div class="badge"><span class="pulse"></span><span id="totalCountDisplay">467+</span> <span
           data-i18n="badgeTools">Tools</span></div>
       <div class="lang-toggle">
         <button class="lang-btn active" id="btn-en" onclick="setLang('en')">EN</button>
@@ -590,19 +627,19 @@
 
   <div class="search-wrap">
     <input type="text" class="search-box" id="searchInput" data-i18n-placeholder="searchPlaceholder"
-      placeholder="Search security tools, VPNs, password managers..." oninput="doSearch()">
+      placeholder="Search security tools, VPNs, password managers, recovery..." oninput="doSearch()">
     <div id="resultsCount" style="font-size:12px; color:var(--indigo-light); margin-top:8px;"></div>
   </div>
 
   <div class="filters" id="filterContainer">
-    <button class="filter-btn active" onclick="filterCat('all', this)">All (304+)</button>
-    <!-- Powered by JS -->
+    <button class="filter-btn active" onclick="filterCat('all', this)">All</button>
   </div>
 
   <main id="mainContent">
     <div class="hero fade-up">
-      <div class="hero-icon">🛡️</div>
-      <h1 class="hero-title"><span id="totalCountHero">304+</span> <span data-i18n="heroTitle">Security Resources</span>
+      <div style="font-size:48px;margin-bottom:16px">🛡️</div>
+      <h1 class="hero-title"><span id="totalCountHero">467+</span> <span data-i18n="heroTitle">Security
+          Resources</span>
       </h1>
       <p class="hero-sub" data-i18n="heroSub">
         A curated list of verified, free, and open-source security tools for everyone.
@@ -611,12 +648,12 @@
 
       <div class="stat-row">
         <div class="stat-card">
-          <div class="stat-val" id="stat-total">304+</div>
+          <div class="stat-val" id="stat-total">467+</div>
           <div class="stat-lbl" data-i18n="statVerified">Verified Tools</div>
         </div>
         <div class="stat-card">
-          <div class="stat-val">100%</div>
-          <div class="stat-lbl" data-i18n="statFree">Free / OSS</div>
+          <div class="stat-val" id="stat-categories">37</div>
+          <div class="stat-lbl" data-i18n="statCategories">Categories</div>
         </div>
         <div class="stat-card">
           <div class="stat-val">24/7</div>
@@ -626,83 +663,171 @@
     </div>
 
     <div id="resourceContainer">
-      <!-- Tools injected here by JS -->
       <div style="text-align:center; padding:50px; color:var(--dim)">Loading resources...</div>
     </div>
 
-    <!-- Extra sections injected here by JS -->
     <div id="extraContent">
       <section class="tips-section" id="rules">
         <h2 class="cat-hdr"><span class="cat-badge" style="background:rgba(16,185,129,.1);color:var(--green)">📜</span>
           <span data-i18n="rulesTitle">Top 12 Password Security Rules</span>
         </h2>
         <div class="tip-card">
-          <div class="tip-num" style="background:var(--indigo)">1</div> <strong data-i18n="rule1Title">Different
-            Password for Every Site:</strong> <span data-i18n="rule1Desc">Never reuse passwords across different
-            accounts.</span>
+          <div class="tip-num">1</div>
+          <div><strong data-i18n="rule1Title">Different Password for Every Site:</strong> <span
+              data-i18n="rule1Desc">Never reuse passwords across different accounts.</span></div>
         </div>
         <div class="tip-card">
-          <div class="tip-num" style="background:var(--indigo)">2</div> <strong data-i18n="rule2Title">Minimum 12
-            Characters:</strong> <span data-i18n="rule2Desc">Longer passwords are exponentially harder to crack.</span>
+          <div class="tip-num">2</div>
+          <div><strong data-i18n="rule2Title">Minimum 12 Characters:</strong> <span data-i18n="rule2Desc">Longer
+              passwords are exponentially harder to crack.</span></div>
         </div>
         <div class="tip-card">
-          <div class="tip-num" style="background:var(--indigo)">3</div> <strong data-i18n="rule3Title">Mix Character
-            Types:</strong> <span data-i18n="rule3Desc">Use uppercase, lowercase, numbers, and symbols.</span>
+          <div class="tip-num">3</div>
+          <div><strong data-i18n="rule3Title">Mix Character Types:</strong> <span data-i18n="rule3Desc">Use uppercase,
+              lowercase, numbers, and symbols.</span></div>
         </div>
         <div class="tip-card">
-          <div class="tip-num" style="background:var(--indigo)">4</div> <strong data-i18n="rule4Title">Enable
-            2FA:</strong> <span data-i18n="rule4Desc">Two-Factor Authentication is your second line of defense.</span>
+          <div class="tip-num">4</div>
+          <div><strong data-i18n="rule4Title">Enable 2FA:</strong> <span data-i18n="rule4Desc">Two-Factor
+              Authentication is your second line of defense.</span></div>
         </div>
         <div class="tip-card">
-          <div class="tip-num" style="background:var(--indigo)">5</div> <strong data-i18n="rule5Title">Use a Password
-            Manager:</strong> <span data-i18n="rule5Desc">Don't try to remember them all; use a trusted vault.</span>
+          <div class="tip-num">5</div>
+          <div><strong data-i18n="rule5Title">Use a Password Manager:</strong> <span data-i18n="rule5Desc">Don't try to
+              remember them all; use a trusted vault.</span></div>
         </div>
         <div class="tip-card">
-          <div class="tip-num" style="background:var(--indigo)">6</div> <strong data-i18n="rule6Title">Avoid Personal
-            Info:</strong> <span data-i18n="rule6Desc">Don't use birthdays, pet names, or phone numbers.</span>
+          <div class="tip-num">6</div>
+          <div><strong data-i18n="rule6Title">Avoid Personal Info:</strong> <span data-i18n="rule6Desc">Don't use
+              birthdays, pet names, or phone numbers.</span></div>
         </div>
         <div class="tip-card">
-          <div class="tip-num" style="background:var(--indigo)">7</div> <strong data-i18n="rule7Title">Update Important
-            Passwords:</strong> <span data-i18n="rule7Desc">Change your bank and email passwords every 6 months.</span>
+          <div class="tip-num">7</div>
+          <div><strong data-i18n="rule7Title">Update Important Passwords:</strong> <span data-i18n="rule7Desc">Change
+              your bank and email passwords every 6 months.</span></div>
         </div>
         <div class="tip-card">
-          <div class="tip-num" style="background:var(--indigo)">8</div> <strong data-i18n="rule8Title">Check for
-            Breaches:</strong> <span data-i18n="rule8Desc">Use HaveIBeenPwned to check if your data was leaked.</span>
+          <div class="tip-num">8</div>
+          <div><strong data-i18n="rule8Title">Check for Breaches:</strong> <span data-i18n="rule8Desc">Use
+              HaveIBeenPwned to check if your data was leaked.</span></div>
         </div>
         <div class="tip-card">
-          <div class="tip-num" style="background:var(--indigo)">9</div> <strong data-i18n="rule9Title">Don't Share
-            Passwords:</strong> <span data-i18n="rule9Desc">Never give your password to anyone, even "support".</span>
+          <div class="tip-num">9</div>
+          <div><strong data-i18n="rule9Title">Don't Share Passwords:</strong> <span data-i18n="rule9Desc">Never give
+              your password to anyone, even "support".</span></div>
         </div>
         <div class="tip-card">
-          <div class="tip-num" style="background:var(--indigo)">10</div> <strong data-i18n="rule10Title">Beware of
-            Phishing:</strong> <span data-i18n="rule10Desc">Always check the URL before entering your password.</span>
+          <div class="tip-num">10</div>
+          <div><strong data-i18n="rule10Title">Beware of Phishing:</strong> <span data-i18n="rule10Desc">Always check
+              the URL before entering your password.</span></div>
         </div>
         <div class="tip-card">
-          <div class="tip-num" style="background:var(--indigo)">11</div> <strong data-i18n="rule11Title">Secure Your
-            Recovery Email:</strong> <span data-i18n="rule11Desc">Your recovery email is the keys to your
-            kingdom.</span>
+          <div class="tip-num">11</div>
+          <div><strong data-i18n="rule11Title">Secure Your Recovery Email:</strong> <span
+              data-i18n="rule11Desc">Your recovery email is the keys to your kingdom.</span></div>
         </div>
         <div class="tip-card">
-          <div class="tip-num" style="background:var(--indigo)">12</div> <strong data-i18n="rule12Title">Logout on
-            Public Devices:</strong> <span data-i18n="rule12Desc">Always sign out and clear history on shared
-            computers.</span>
+          <div class="tip-num">12</div>
+          <div><strong data-i18n="rule12Title">Logout on Public Devices:</strong> <span
+              data-i18n="rule12Desc">Always sign out and clear history on shared computers.</span></div>
         </div>
       </section>
 
       <section class="tips-section" id="attacks">
-        <h2 class="cat-hdr"><span class="cat-badge" style="background:rgba(244,63,94,.1);color:var(--red)">🛡️</span>
+        <h2 class="cat-hdr"><span
+            class="cat-badge" style="background:rgba(244,63,94,.1);color:var(--red)">🛡️</span>
           <span data-i18n="attacksTitle">Common Password Attacks — Explained</span>
         </h2>
-        <div class="tip-card"><strong data-i18n="atk1">Brute Force:</strong> <span data-i18n="atk1Desc">Attacker tries
-            every possible combination of characters until they find the right one.</span></div>
-        <div class="tip-card"><strong data-i18n="atk2">Dictionary Attack:</strong> <span data-i18n="atk2Desc">Using a
-            list of common words and previously leaked passwords to guess yours.</span></div>
-        <div class="tip-card"><strong data-i18n="atk3">Phishing:</strong> <span data-i18n="atk3Desc">Fake websites that
-            look like the real ones to trick you into entering your credentials.</span></div>
-        <div class="tip-card"><strong data-i18n="atk4">Keylogging:</strong> <span data-i18n="atk4Desc">Malware that
-            records every keystroke you type on your keyboard.</span></div>
-        <div class="tip-card"><strong data-i18n="atk5">Credential Stuffing:</strong> <span data-i18n="atk5Desc">Using
-            passwords leaked from one site to try and login to your other accounts.</span></div>
+        <div class="tip-card">
+          <div><strong data-i18n="atk1">Brute Force:</strong> <span data-i18n="atk1Desc">Attacker tries every possible
+              combination of characters until they find the right one.</span></div>
+        </div>
+        <div class="tip-card">
+          <div><strong data-i18n="atk2">Dictionary Attack:</strong> <span data-i18n="atk2Desc">Using a list of common
+              words and previously leaked passwords to guess yours.</span></div>
+        </div>
+        <div class="tip-card">
+          <div><strong data-i18n="atk3">Phishing:</strong> <span data-i18n="atk3Desc">Fake websites that look like the
+              real ones to trick you into entering your credentials.</span></div>
+        </div>
+        <div class="tip-card">
+          <div><strong data-i18n="atk4">Keylogging:</strong> <span data-i18n="atk4Desc">Malware that records every
+              keystroke you type on your keyboard.</span></div>
+        </div>
+        <div class="tip-card">
+          <div><strong data-i18n="atk5">Credential Stuffing:</strong> <span data-i18n="atk5Desc">Using passwords leaked
+              from one site to try and login to your other accounts.</span></div>
+        </div>
+        <div class="tip-card">
+          <div><strong data-i18n="atk6">Rainbow Table Attack:</strong> <span data-i18n="atk6Desc">Pre-computed hash
+              tables used to reverse password hashes quickly.</span></div>
+        </div>
+        <div class="tip-card">
+          <div><strong data-i18n="atk7">Social Engineering:</strong> <span data-i18n="atk7Desc">Manipulating people
+              into revealing passwords through deception and trust exploitation.</span></div>
+        </div>
+        <div class="tip-card">
+          <div><strong data-i18n="atk8">Man-in-the-Middle:</strong> <span data-i18n="atk8Desc">Intercepting
+              communication between you and the website to steal credentials in transit.</span></div>
+        </div>
+      </section>
+
+      <!-- NEW: Quick Start Security Checklist -->
+      <section class="tips-section" id="checklist">
+        <h2 class="cat-hdr"><span
+            class="cat-badge" style="background:rgba(99,102,241,.1);color:var(--indigo-light)">✅</span>
+          <span data-i18n="checklistTitle">Quick Start Security Checklist</span>
+        </h2>
+        <div class="tip-card">
+          <div class="tip-num" style="background:var(--green)">✓</div>
+          <div><strong data-i18n="chk1">Install a password manager</strong> <span data-i18n="chk1d">— Bitwarden or
+              KeePassXC recommended</span></div>
+        </div>
+        <div class="tip-card">
+          <div class="tip-num" style="background:var(--green)">✓</div>
+          <div><strong data-i18n="chk2">Enable 2FA on all important accounts</strong> <span data-i18n="chk2d">— Email,
+              bank, social media</span></div>
+        </div>
+        <div class="tip-card">
+          <div class="tip-num" style="background:var(--green)">✓</div>
+          <div><strong data-i18n="chk3">Check HaveIBeenPwned</strong> <span data-i18n="chk3d">— See if your email was
+              in any data breach</span></div>
+        </div>
+        <div class="tip-card">
+          <div class="tip-num" style="background:var(--green)">✓</div>
+          <div><strong data-i18n="chk4">Install uBlock Origin</strong> <span data-i18n="chk4d">— Block ads, trackers,
+              malware domains</span></div>
+        </div>
+        <div class="tip-card">
+          <div class="tip-num" style="background:var(--green)">✓</div>
+          <div><strong data-i18n="chk5">Use encrypted DNS</strong> <span data-i18n="chk5d">— Cloudflare 1.1.1.1 or
+              Quad9</span></div>
+        </div>
+        <div class="tip-card">
+          <div class="tip-num" style="background:var(--green)">✓</div>
+          <div><strong data-i18n="chk6">Update all software regularly</strong> <span data-i18n="chk6d">— OS, browser,
+              apps — enable auto-update</span></div>
+        </div>
+        <div class="tip-card">
+          <div class="tip-num" style="background:var(--green)">✓</div>
+          <div><strong data-i18n="chk7">Backup important data</strong> <span data-i18n="chk7d">— Use 3-2-1 rule: 3
+              copies, 2 media, 1 offsite</span></div>
+        </div>
+        <div class="tip-card">
+          <div class="tip-num" style="background:var(--green)">✓</div>
+          <div><strong data-i18n="chk8">Review app permissions on phone</strong> <span data-i18n="chk8d">— Remove
+              unnecessary camera/mic/location access</span></div>
+        </div>
+        <div class="tip-card">
+          <div class="tip-num" style="background:var(--green)">✓</div>
+          <div><strong data-i18n="chk9">Delete unused accounts</strong> <span data-i18n="chk9d">— Use JustDeleteMe to
+              find deletion links</span></div>
+        </div>
+        <div class="tip-card">
+          <div class="tip-num" style="background:var(--green)">✓</div>
+          <div><strong data-i18n="chk10">Secure your home WiFi</strong> <span data-i18n="chk10d">— WPA3, strong
+              password, disable WPS</span></div>
+        </div>
       </section>
     </div>
 
@@ -711,7 +836,7 @@
       style="text-align:center;margin-top:40px;padding:28px;background:linear-gradient(135deg,rgba(99,102,241,.1),rgba(16,185,129,.06));border-radius:20px;border:1px solid rgba(99,102,241,.2)">
       <div style="font-size:32px;margin-bottom:10px">🎯</div>
       <div style="font-size:16px;font-weight:900;margin-bottom:8px"><span data-i18n="totalTools">Total Tools</span>:
-        <span id="finalCountSummary">304+</span>
+        <span id="finalCountSummary">467+</span>
       </div>
       <div style="font-size:12px;color:var(--muted);max-width:560px;margin:0 auto;line-height:1.6"
         data-i18n="summaryText">
@@ -726,22 +851,24 @@
   </main>
 
   <footer class="site-footer" id="siteFooter">
-    🔒 304+ <span data-i18n="footerText">Trusted Security Resources | Curated by <strong>SudhirDevOps1</strong> | Hindi
-      + English Supported</span>
+    🔒 <span id="footerCount">467+</span> <span data-i18n="footerText">Trusted Security Resources | Curated by
+      <strong>SudhirDevOps1</strong> | Hindi + English Supported</span>
   </footer>
 
   <button class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
 
   <script src="tools.js"></script>
   <script>
-    // allTools is now globally defined in tools.js
+    // ============================================================
+    // FULL i18n — English + Hindi
+    // ============================================================
     const i18n = {
       en: {
         navHome: '🏠 Home', navResources: '🛡️ Resources', badgeTools: 'Tools',
-        searchPlaceholder: 'Search security tools, VPNs, password managers...',
+        searchPlaceholder: 'Search 467+ tools — passwords, VPN, recovery, forensics, OSINT...',
         heroTitle: 'Security Resources',
-        heroSub: 'A curated list of verified, free, and open-source security tools for everyone. Explore unique resources to protect your digital identity.',
-        statVerified: 'Verified Tools', statFree: 'Free / OSS', statPrivacy: 'Privacy First',
+        heroSub: 'The largest curated collection of verified, free & open-source cybersecurity tools. Password managers, breach checkers, recovery tools, forensics, pentesting and more.',
+        statVerified: 'Verified Tools', statCategories: 'Categories', statPrivacy: 'Privacy First',
         rulesTitle: 'Top 12 Password Security Rules',
         rule1Title: 'Different Password for Every Site:', rule1Desc: 'Never reuse passwords across different accounts.',
         rule2Title: 'Minimum 12 Characters:', rule2Desc: 'Longer passwords are exponentially harder to crack.',
@@ -756,11 +883,25 @@
         rule11Title: 'Secure Your Recovery Email:', rule11Desc: 'Your recovery email is the keys to your kingdom.',
         rule12Title: 'Logout on Public Devices:', rule12Desc: 'Always sign out and clear history on shared computers.',
         attacksTitle: 'Common Password Attacks — Explained',
-        atk1: 'Brute Force:', atk1Desc: 'Attacker tries every possible combination of characters until they find the right one.',
-        atk2: 'Dictionary Attack:', atk2Desc: 'Using a list of common words and previously leaked passwords to guess yours.',
-        atk3: 'Phishing:', atk3Desc: 'Fake websites that look like the real ones to trick you into entering your credentials.',
-        atk4: 'Keylogging:', atk4Desc: 'Malware that records every keystroke you type on your keyboard.',
-        atk5: 'Credential Stuffing:', atk5Desc: 'Using passwords leaked from one site to try and login to your other accounts.',
+        atk1: 'Brute Force:', atk1Desc: 'Attacker tries every possible combination until they find the right one.',
+        atk2: 'Dictionary Attack:', atk2Desc: 'Using common words and leaked passwords to guess yours.',
+        atk3: 'Phishing:', atk3Desc: 'Fake websites tricking you into entering credentials.',
+        atk4: 'Keylogging:', atk4Desc: 'Malware recording every keystroke you type.',
+        atk5: 'Credential Stuffing:', atk5Desc: 'Using leaked passwords from one site to login to others.',
+        atk6: 'Rainbow Table Attack:', atk6Desc: 'Pre-computed hash tables to reverse password hashes quickly.',
+        atk7: 'Social Engineering:', atk7Desc: 'Manipulating people into revealing passwords through deception.',
+        atk8: 'Man-in-the-Middle:', atk8Desc: 'Intercepting communication to steal credentials in transit.',
+        checklistTitle: 'Quick Start Security Checklist',
+        chk1: 'Install a password manager', chk1d: '— Bitwarden or KeePassXC recommended',
+        chk2: 'Enable 2FA on all important accounts', chk2d: '— Email, bank, social media',
+        chk3: 'Check HaveIBeenPwned', chk3d: '— See if your email was in any data breach',
+        chk4: 'Install uBlock Origin', chk4d: '— Block ads, trackers, malware domains',
+        chk5: 'Use encrypted DNS', chk5d: '— Cloudflare 1.1.1.1 or Quad9',
+        chk6: 'Update all software regularly', chk6d: '— OS, browser, apps — enable auto-update',
+        chk7: 'Backup important data', chk7d: '— Use 3-2-1 rule: 3 copies, 2 media, 1 offsite',
+        chk8: 'Review app permissions on phone', chk8d: '— Remove unnecessary camera/mic/location access',
+        chk9: 'Delete unused accounts', chk9d: '— Use JustDeleteMe to find deletion links',
+        chk10: 'Secure your home WiFi', chk10d: '— WPA3, strong password, disable WPS',
         totalTools: 'Total Tools',
         summaryText: 'All links are verified and official. Data-driven by tools.json.',
         curatedBy: 'Curated by', staySafe: 'Stay safe online!',
@@ -771,21 +912,27 @@
         verifiedLabel: 'Verified',
         highTrust: 'HIGH TRUST',
         noResults: 'No resources found matching your search.',
-        allText: 'All (300+)',
-        catPwd: 'Password Managers', catBreach: 'Breach Checkers', cat2fa: '2FA Tools',
-        catVpn: 'Privacy & VPN', catAv: 'Anti-Malware', catWeb: 'Web Security',
-        catFp: 'Fingerprinting', catEnc: 'Encryption', catEdu: 'Education',
-        catDns: 'DNS Security', catOsint: 'OSINT Tools', catPentest: 'Pentesting',
-        catEmail: 'Secure Email', catNet: 'Network Tools', catHids: 'IDS/Monitoring',
-        catApp: 'App Security', catIr: 'Forensics/IR', catSiem: 'SIEM/Logs',
-        catIntel: 'Threat Intel', catRe: 'Reverse Eng', catMisc: 'Misc Tools'
+        // Category names
+        catPwd: '🔑 Password Managers', catBreach: '🔍 Breach Checkers', cat2fa: '🗝️ 2FA Tools',
+        catVpn: '🛡️ Privacy & VPN', catAv: '🦠 Anti-Malware', catWeb: '🕸️ Web Security',
+        catFp: '🕵️ Fingerprinting', catEnc: '🔐 Encryption', catEdu: '🎓 Education',
+        catDns: '🌐 DNS & Network', catOsint: '🔭 OSINT Tools', catPentest: '🧪 Pentesting',
+        catEmail: '📧 Secure Email', catNet: '📡 Network Tools', catHids: '🧱 IDS/Monitoring',
+        catApp: '📱 App Security', catIr: '🚀 Forensics/IR', catSiem: '📊 SIEM/Logs',
+        catIntel: '🐝 Threat Intel', catRe: '🐉 Reverse Eng', catMisc: '🧩 Misc Tools',
+        catRecovery: '♻️ File Recovery', catClean: '🧹 System Cleaning', catMobile: '📱 Mobile Security',
+        catExt: '🌐 Browser Extensions', catOs: '🖥️ Secure OS', catPhish: '🎣 Phishing Simulation',
+        catServer: '🔑 Server Security', catForensic: '🏥 Digital Forensics', catMonitor: '📊 Monitoring',
+        catHw: '🔐 Hardware Security', catApi: '🧩 API Security', catCloud: '☁️ Cloud Security',
+        catVuln: '🧪 Vulnerability DBs', catCareer: '🎓 Security Careers', catIot: '📱 IoT Security',
+        catShred: '🗑️ Secure Deletion'
       },
       hi: {
         navHome: '🏠 होम', navResources: '🛡️ रिसोर्सेज', badgeTools: 'टूल्स',
-        searchPlaceholder: 'सुरक्षा टूल्स, VPN, पासवर्ड मैनेजर खोजें...',
+        searchPlaceholder: '467+ टूल्स खोजें — पासवर्ड, VPN, रिकवरी, फोरेंसिक, OSINT...',
         heroTitle: 'सुरक्षा संसाधन',
-        heroSub: 'सभी के लिए सत्यापित, मुफ्त और ओपन-सोर्स सुरक्षा उपकरणों की एक क्यूरेटेड सूची। अपनी डिजिटल पहचान की रक्षा के लिए अद्वितीय संसाधनों का अन्वेषण करें।',
-        statVerified: 'सत्यापित टूल्स', statFree: 'मुफ्त / OSS', statPrivacy: 'प्राइवेसी फर्स्ट',
+        heroSub: 'सत्यापित, मुफ्त और ओपन-सोर्स साइबर सुरक्षा उपकरणों का सबसे बड़ा क्यूरेटेड संग्रह। पासवर्ड मैनेजर, ब्रीच चेकर, रिकवरी टूल्स, फोरेंसिक, पेनटेस्टिंग और बहुत कुछ।',
+        statVerified: 'सत्यापित टूल्स', statCategories: 'श्रेणियां', statPrivacy: 'प्राइवेसी फर्स्ट',
         rulesTitle: 'टॉप 12 पासवर्ड सुरक्षा नियम',
         rule1Title: 'हर साइट के लिए अलग पासवर्ड:', rule1Desc: 'विभिन्न खातों में पासवर्ड कभी भी दोबारा उपयोग न करें।',
         rule2Title: 'न्यूनतम 12 कैरेक्टर:', rule2Desc: 'लंबे पासवर्ड को क्रैक करना काफी कठिन होता है।',
@@ -794,19 +941,32 @@
         rule5Title: 'पासवर्ड मैनेजर का प्रयोग करें:', rule5Desc: 'सबको याद रखने की कोशिश न करें; एक भरोसेमंद वॉल्ट का उपयोग करें।',
         rule6Title: 'पर्सनल जानकारी से बचें:', rule6Desc: 'जन्मदिन, पालतू जानवरों के नाम या फोन नंबर का उपयोग न करें।',
         rule7Title: 'महत्वपूर्ण पासवर्ड अपडेट करें:', rule7Desc: 'हर 6 महीने में अपना बैंक और ईमेल पासवर्ड बदलें।',
-        rule8Title: 'डेटा ब्रीच चेक करें:', rule8Desc: 'आपका डेटा लीक हुआ है या नहीं, यह जांचने के लिए HaveIBeenPwned का उपयोग करें।',
-        rule9Title: 'पासवर्ड साझा न करें:', rule9Desc: 'अपना पासवर्ड कभी किसी को न दें, यहाँ तक कि "सपोर्ट" को भी नहीं।',
+        rule8Title: 'डेटा ब्रीच चेक करें:', rule8Desc: 'HaveIBeenPwned से जांचें कि आपका डेटा लीक हुआ है या नहीं।',
+        rule9Title: 'पासवर्ड साझा न करें:', rule9Desc: 'अपना पासवर्ड कभी किसी को न दें, "सपोर्ट" को भी नहीं।',
         rule10Title: 'फ़िशिंग से सावधान रहें:', rule10Desc: 'पासवर्ड डालने से पहले हमेशा URL चेक करें।',
         rule11Title: 'रिकवरी ईमेल सुरक्षित करें:', rule11Desc: 'आपका रिकवरी ईमेल आपके डिजिटल साम्राज्य की चाबी है।',
-        rule12Title: 'पब्लिक डिवाइस पर लॉगआउट करें:', rule12Desc: 'साझा कंप्यूटरों पर हमेशा साइन आउट करें और हिस्ट्री क्लियर करें।',
+        rule12Title: 'पब्लिक डिवाइस पर लॉगआउट करें:', rule12Desc: 'साझा कंप्यूटरों पर हमेशा साइन आउट करें।',
         attacksTitle: 'सामान्य पासवर्ड हमले — व्याख्या',
-        atk1: 'ब्रूट फ़ोर्स:', atk1Desc: 'हमलावर तब तक वर्णों के हर संभव संयोजन की कोशिश करता है जब तक कि उसे सही पासवर्ड न मिल जाए।',
-        atk2: 'डिक्शनरी अटैक:', atk2Desc: 'आपके पासवर्ड का अनुमान लगाने के लिए सामान्य शब्दों और पहले से लीक हुए पासवर्ड की सूची का उपयोग करना।',
-        atk3: 'फ़िशिंग:', atk3Desc: 'नकली वेबसाइटें जो आपको क्रेडेंशियल दर्ज करने के लिए धोखा देने के लिए असली जैसी दिखती हैं।',
-        atk4: 'की-लॉगिंग:', atk4Desc: 'मैलवेयर जो आपके कीबोर्ड पर आपके द्वारा टाइप किए गए हर कीस्ट्रोक को रिकॉर्ड करता है।',
-        atk5: 'क्रेडेंशियल स्टफिंग:', atk5Desc: 'एक साइट से लीक हुए पासवर्ड का उपयोग करके आपके अन्य खातों में लॉगिन करने का प्रयास करना।',
+        atk1: 'ब्रूट फ़ोर्स:', atk1Desc: 'हमलावर हर संभव संयोजन की कोशिश करता है।',
+        atk2: 'डिक्शनरी अटैक:', atk2Desc: 'सामान्य शब्दों और लीक पासवर्ड की सूची से अनुमान लगाना।',
+        atk3: 'फ़िशिंग:', atk3Desc: 'नकली वेबसाइटें जो आपको क्रेडेंशियल दर्ज करने के लिए धोखा देती हैं।',
+        atk4: 'की-लॉगिंग:', atk4Desc: 'मैलवेयर जो आपके हर कीस्ट्रोक को रिकॉर्ड करता है।',
+        atk5: 'क्रेडेंशियल स्टफिंग:', atk5Desc: 'एक साइट से लीक पासवर्ड से दूसरे खातों में लॉगिन का प्रयास।',
+        atk6: 'रेनबो टेबल अटैक:', atk6Desc: 'पहले से गणना की गई हैश टेबल से पासवर्ड हैश को तोड़ना।',
+        atk7: 'सोशल इंजीनियरिंग:', atk7Desc: 'धोखे से लोगों को पासवर्ड बताने के लिए मजबूर करना।',
+        atk8: 'मैन-इन-द-मिडल:', atk8Desc: 'आपके और वेबसाइट के बीच संवाद को रोककर क्रेडेंशियल चुराना।',
+        checklistTitle: 'त्वरित सुरक्षा चेकलिस्ट',
+        chk1: 'पासवर्ड मैनेजर इंस्टॉल करें', chk1d: '— Bitwarden या KeePassXC सुझाया',
+        chk2: 'सभी महत्वपूर्ण खातों पर 2FA सक्षम करें', chk2d: '— ईमेल, बैंक, सोशल मीडिया',
+        chk3: 'HaveIBeenPwned चेक करें', chk3d: '— देखें कि आपका ईमेल किसी ब्रीच में था या नहीं',
+        chk4: 'uBlock Origin इंस्टॉल करें', chk4d: '— विज्ञापन, ट्रैकर, मैलवेयर डोमेन ब्लॉक करें',
+        chk5: 'एन्क्रिप्टेड DNS उपयोग करें', chk5d: '— Cloudflare 1.1.1.1 या Quad9',
+        chk6: 'सभी सॉफ़्टवेयर नियमित रूप से अपडेट करें', chk6d: '— OS, ब्राउज़र, ऐप्स — ऑटो-अपडेट चालू करें',
+        chk7: 'महत्वपूर्ण डेटा का बैकअप लें', chk7d: '— 3-2-1 नियम: 3 कॉपी, 2 मीडिया, 1 ऑफसाइट',
+        chk8: 'फोन पर ऐप अनुमतियां जांचें', chk8d: '— अनावश्यक कैमरा/माइक/लोकेशन एक्सेस हटाएं',
+        chk9: 'अनुपयोगी खाते हटाएं', chk9d: '— JustDeleteMe से डिलीशन लिंक खोजें',
+        chk10: 'अपना होम WiFi सुरक्षित करें', chk10d: '— WPA3, मजबूत पासवर्ड, WPS बंद करें',
         totalTools: 'कुल टूल्स',
-        totalMatches: '{count} मिलान मिले',
         summaryText: 'सभी लिंक सत्यापित और आधिकारिक हैं। tools.json द्वारा संचालित।',
         curatedBy: 'द्वारा क्यूरेटेड', staySafe: 'ऑनलाइन सुरक्षित रहें!',
         footerText: 'भरोसेमंद सुरक्षा संसाधन | SudhirDevOps1 द्वारा क्यूरेटेड | हिंदी + अंग्रेजी समर्थित',
@@ -816,23 +976,83 @@
         verifiedLabel: 'सत्यापित',
         highTrust: 'उच्च विश्वास',
         noResults: 'आपकी खोज से मेल खाने वाला कोई संसाधन नहीं मिला।',
-        allText: 'सभी (300+)',
-        catPwd: 'पासवर्ड मैनेजर', catBreach: 'ब्रीच चेकर्स', cat2fa: '2FA टूल्स',
-        catVpn: 'प्राइवेसी और VPN', catAv: 'एंटी-मैलवेयर', catWeb: 'वेब सुरक्षा',
-        catFp: 'फिंगरप्रिंटिंग', catEnc: 'एन्क्रिप्शन', catEdu: 'शिक्षा',
-        catDns: 'DNS सुरक्षा', catOsint: 'OSINT टूल्स', catPentest: 'पेनटेस्टिंग',
-        catEmail: 'सुरक्षित ईमेल', catNet: 'नेटवर्क टूल्स', catHids: 'IDS/मॉनिटरिंग',
-        catApp: 'ऐप सुरक्षा', catIr: 'फ़ोरेंसिक/IR', catSiem: 'SIEM/लॉग्स',
-        catIntel: 'थ्रेट इंटेल', catRe: 'रिवर्स इंजीनियरिंग', catMisc: 'विविध टूल्स'
+        // Category names Hindi
+        catPwd: '🔑 पासवर्ड मैनेजर', catBreach: '🔍 ब्रीच चेकर्स', cat2fa: '🗝️ 2FA टूल्स',
+        catVpn: '🛡️ प्राइवेसी और VPN', catAv: '🦠 एंटी-मैलवेयर', catWeb: '🕸️ वेब सुरक्षा',
+        catFp: '🕵️ फिंगरप्रिंटिंग', catEnc: '🔐 एन्क्रिप्शन', catEdu: '🎓 शिक्षा',
+        catDns: '🌐 DNS और नेटवर्क', catOsint: '🔭 OSINT टूल्स', catPentest: '🧪 पेनटेस्टिंग',
+        catEmail: '📧 सुरक्षित ईमेल', catNet: '📡 नेटवर्क टूल्स', catHids: '🧱 IDS/मॉनिटरिंग',
+        catApp: '📱 ऐप सुरक्षा', catIr: '🚀 फ़ोरेंसिक/IR', catSiem: '📊 SIEM/लॉग्स',
+        catIntel: '🐝 थ्रेट इंटेल', catRe: '🐉 रिवर्स इंजीनियरिंग', catMisc: '🧩 विविध टूल्स',
+        catRecovery: '♻️ फ़ाइल रिकवरी', catClean: '🧹 सिस्टम क्लीनिंग', catMobile: '📱 मोबाइल सुरक्षा',
+        catExt: '🌐 ब्राउज़र एक्सटेंशन', catOs: '🖥️ सुरक्षित OS', catPhish: '🎣 फ़िशिंग सिमुलेशन',
+        catServer: '🔑 सर्वर सुरक्षा', catForensic: '🏥 डिजिटल फ़ोरेंसिक', catMonitor: '📊 मॉनिटरिंग',
+        catHw: '🔐 हार्डवेयर सुरक्षा', catApi: '🧩 API सुरक्षा', catCloud: '☁️ क्लाउड सुरक्षा',
+        catVuln: '🧪 कमज़ोरी डेटाबेस', catCareer: '🎓 सुरक्षा करियर', catIot: '📱 IoT सुरक्षा',
+        catShred: '🗑️ सुरक्षित डिलीशन'
       }
     };
 
-    let currentLang = localStorage.getItem('appLang') || 'hi';
+    let currentLang = localStorage.getItem('appLang') || 'en';
 
     function T(key) {
       return (i18n[currentLang] && i18n[currentLang][key]) || (i18n['en'][key]) || key;
     }
 
+    // ============================================================
+    // CATEGORY MAP — all 37 categories
+    // ============================================================
+    function getCatMap() {
+      return {
+        'pwd': { name: T('catPwd'), icon: '🔑', color: 'rgba(99,102,241,.15)', text: '#818cf8' },
+        'breach': { name: T('catBreach'), icon: '🔍', color: 'rgba(244,63,94,.15)', text: '#fb7185' },
+        '2fa': { name: T('cat2fa'), icon: '🗝️', color: 'rgba(16,185,129,.15)', text: '#34d399' },
+        'vpn': { name: T('catVpn'), icon: '🛡️', color: 'rgba(168,85,247,.15)', text: '#c084fc' },
+        'av': { name: T('catAv'), icon: '🦠', color: 'rgba(239,68,68,.15)', text: '#f87171' },
+        'web': { name: T('catWeb'), icon: '🕸️', color: 'rgba(34,211,238,.15)', text: '#22d3ee' },
+        'fp': { name: T('catFp'), icon: '🕵️', color: 'rgba(245,158,11,.15)', text: '#fbbf24' },
+        'enc': { name: T('catEnc'), icon: '🔐', color: 'rgba(99,102,241,.15)', text: '#818cf8' },
+        'edu': { name: T('catEdu'), icon: '🎓', color: 'rgba(234,179,8,.15)', text: '#facc15' },
+        'dns': { name: T('catDns'), icon: '🌐', color: 'rgba(16,185,129,.15)', text: '#34d399' },
+        'osint': { name: T('catOsint'), icon: '🔭', color: 'rgba(34,211,238,.15)', text: '#22d3ee' },
+        'pentest': { name: T('catPentest'), icon: '🧪', color: 'rgba(168,85,247,.15)', text: '#c084fc' },
+        'email': { name: T('catEmail'), icon: '📧', color: 'rgba(14,165,233,.15)', text: '#38bdf8' },
+        'net': { name: T('catNet'), icon: '📡', color: 'rgba(99,102,241,.15)', text: '#818cf8' },
+        'hids': { name: T('catHids'), icon: '🧱', color: 'rgba(244,63,94,.15)', text: '#fb7185' },
+        'app': { name: T('catApp'), icon: '📱', color: 'rgba(16,185,129,.15)', text: '#34d399' },
+        'ir': { name: T('catIr'), icon: '🚀', color: 'rgba(34,211,238,.15)', text: '#22d3ee' },
+        'siem': { name: T('catSiem'), icon: '📊', color: 'rgba(234,179,8,.15)', text: '#facc15' },
+        'intel': { name: T('catIntel'), icon: '🐝', color: 'rgba(14,165,233,.15)', text: '#38bdf8' },
+        're': { name: T('catRe'), icon: '🐉', color: 'rgba(168,85,247,.15)', text: '#c084fc' },
+        'misc': { name: T('catMisc'), icon: '🧩', color: 'rgba(16,185,129,.15)', text: '#34d399' },
+        // NEW CATEGORIES
+        'recovery': { name: T('catRecovery'), icon: '♻️', color: 'rgba(34,197,94,.15)', text: '#4ade80' },
+        'clean': { name: T('catClean'), icon: '🧹', color: 'rgba(251,146,60,.15)', text: '#fb923c' },
+        'mobile': { name: T('catMobile'), icon: '📱', color: 'rgba(56,189,248,.15)', text: '#38bdf8' },
+        'ext': { name: T('catExt'), icon: '🌐', color: 'rgba(192,132,252,.15)', text: '#c084fc' },
+        'os': { name: T('catOs'), icon: '🖥️', color: 'rgba(45,212,191,.15)', text: '#2dd4bf' },
+        'phish': { name: T('catPhish'), icon: '🎣', color: 'rgba(248,113,113,.15)', text: '#f87171' },
+        'server': { name: T('catServer'), icon: '🔑', color: 'rgba(129,140,248,.15)', text: '#818cf8' },
+        'forensic': { name: T('catForensic'), icon: '🏥', color: 'rgba(74,222,128,.15)', text: '#4ade80' },
+        'monitor': { name: T('catMonitor'), icon: '📊', color: 'rgba(250,204,21,.15)', text: '#facc15' },
+        'hw': { name: T('catHw'), icon: '🔐', color: 'rgba(167,139,250,.15)', text: '#a78bfa' },
+        'api': { name: T('catApi'), icon: '🧩', color: 'rgba(52,211,153,.15)', text: '#34d399' },
+        'cloud': { name: T('catCloud'), icon: '☁️', color: 'rgba(56,189,248,.15)', text: '#38bdf8' },
+        'vuln': { name: T('catVuln'), icon: '🧪', color: 'rgba(244,114,182,.15)', text: '#f472b6' },
+        'career': { name: T('catCareer'), icon: '🎓', color: 'rgba(253,186,116,.15)', text: '#fdba74' },
+        'iot': { name: T('catIot'), icon: '📡', color: 'rgba(147,197,253,.15)', text: '#93c5fd' },
+        'shred': { name: T('catShred'), icon: '🗑️', color: 'rgba(239,68,68,.15)', text: '#ef4444' }
+      };
+    }
+
+    let catMap = getCatMap();
+    const searchInput = document.getElementById('searchInput');
+    const resourceContainer = document.getElementById('resourceContainer');
+    const filterContainer = document.getElementById('filterContainer');
+
+    // ============================================================
+    // LANGUAGE SYSTEM
+    // ============================================================
     function applyLanguage() {
       document.querySelectorAll('[data-i18n]').forEach(el => {
         const key = el.getAttribute('data-i18n');
@@ -846,31 +1066,10 @@
       const activeBtn = document.getElementById('btn-' + currentLang);
       if (activeBtn) activeBtn.classList.add('active');
 
-      // Update dynamic parts
+      catMap = getCatMap();
       renderCategories();
       updateCounts();
       renderTools('all');
-    }
-
-    function updateCounts(count) {
-      const displayCount = count !== undefined ? count : allTools.length;
-      const fmtClass = displayCount + (displayCount < allTools.length ? '' : '+');
-      const elements = {
-        'totalCountHero': fmtClass,
-        'finalCountSummary': fmtClass,
-        'totalCountDisplay': fmtClass,
-        'stat-total': fmtClass
-      };
-      for (const [id, val] of Object.entries(elements)) {
-        const el = document.getElementById(id);
-        if (el) el.innerText = val;
-      }
-      const resultsCountEl = document.getElementById('resultsCount');
-      if (resultsCountEl) {
-        const term = searchInput ? searchInput.value : '';
-        const key = term ? 'foundMatches' : 'showingResources';
-        resultsCountEl.innerText = T(key).replace('{count}', displayCount);
-      }
     }
 
     function setLang(lang) {
@@ -879,43 +1078,61 @@
       applyLanguage();
     }
 
-    const catMap = {
-      'pwd': { name: T('catPwd'), icon: '🔑', color: 'rgba(99,102,241,.3)', text: '#818cf8' },
-      'breach': { name: T('catBreach'), icon: '🔍', color: 'rgba(244,63,94,.3)', text: '#fb7185' },
-      '2fa': { name: T('cat2fa'), icon: '🗝️', color: 'rgba(16,185,129,.3)', text: '#34d399' },
-      'vpn': { name: T('catVpn'), icon: '🛡️', color: 'rgba(168,85,247,.3)', text: '#c084fc' },
-      'av': { name: T('catAv'), icon: '🦠', color: 'rgba(239,68,68,.3)', text: '#f87171' },
-      'web': { name: T('catWeb'), icon: '🕸️', color: 'rgba(34,211,238,.3)', text: '#22d3ee' },
-      'fp': { name: T('catFp'), icon: '🕵️', color: 'rgba(245,158,11,.3)', text: '#fbbf24' },
-      'enc': { name: T('catEnc'), icon: '🔐', color: 'rgba(99,102,241,.3)', text: '#818cf8' },
-      'edu': { name: T('catEdu'), icon: '🎓', color: 'rgba(234,179,8,.3)', text: '#facc15' },
-      'dns': { name: T('catDns'), icon: '🌐', color: 'rgba(16,185,129,.3)', text: '#34d399' },
-      'osint': { name: T('catOsint'), icon: '🕵️', color: 'rgba(34,211,238,.3)', text: '#22d3ee' },
-      'pentest': { name: T('catPentest'), icon: '🧪', color: 'rgba(168,85,247,.3)', text: '#c084fc' },
-      'email': { name: T('catEmail'), icon: '📧', color: 'rgba(14,165,233,.3)', text: '#38bdf8' },
-      'net': { name: T('catNet'), icon: '📡', color: 'rgba(99,102,241,.3)', text: '#818cf8' },
-      'hids': { name: T('catHids'), icon: '🧱', color: 'rgba(244,63,94,.3)', text: '#fb7185' },
-      'app': { name: T('catApp'), icon: '🕵️', color: 'rgba(16,185,129,.3)', text: '#34d399' },
-      'ir': { name: T('catIr'), icon: '🚀', color: 'rgba(34,211,238,.3)', text: '#22d3ee' },
-      'siem': { name: T('catSiem'), icon: '📊', color: 'rgba(234,179,8,.3)', text: '#facc15' },
-      'intel': { name: T('catIntel'), icon: '🐝', color: 'rgba(14,165,233,.3)', text: '#38bdf8' },
-      're': { name: T('catRe'), icon: '🐉', color: 'rgba(168,85,247,.3)', text: '#c084fc' },
-      'misc': { name: T('catMisc'), icon: '🚀', color: 'rgba(16,185,129,.3)', text: '#34d399' }
-    };
+    // ============================================================
+    // COUNT UPDATES
+    // ============================================================
+    function updateCounts(count) {
+      const total = (typeof allTools !== 'undefined') ? allTools.length : 0;
+      const displayCount = count !== undefined ? count : total;
+      const fmtTotal = total + '+';
+      const fmtDisplay = count !== undefined ? displayCount.toString() : fmtTotal;
 
-    const searchInput = document.getElementById('searchInput');
-    const resourceContainer = document.getElementById('resourceContainer');
-    const filterContainer = document.getElementById('filterContainer');
+      ['totalCountHero', 'finalCountSummary', 'totalCountDisplay', 'stat-total', 'footerCount'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.innerText = fmtDisplay;
+      });
 
+      // Category count
+      if (typeof allTools !== 'undefined') {
+        const catCount = [...new Set(allTools.map(t => t.cat))].length;
+        const catEl = document.getElementById('stat-categories');
+        if (catEl) catEl.innerText = catCount;
+      }
+
+      const resultsCountEl = document.getElementById('resultsCount');
+      if (resultsCountEl) {
+        const term = searchInput ? searchInput.value : '';
+        const key = term ? 'foundMatches' : 'showingResources';
+        resultsCountEl.innerText = T(key).replace('{count}', displayCount);
+      }
+    }
+
+    // ============================================================
+    // CATEGORY FILTER BUTTONS
+    // ============================================================
     function renderCategories() {
-      filterContainer.innerHTML = `<button class="filter-btn active" onclick="filterCat('all', this)">${T('allText')}</button>`;
+      if (typeof allTools === 'undefined') return;
+
+      const total = allTools.length;
+      filterContainer.innerHTML = `<button class="filter-btn active" onclick="filterCat('all', this)">📋 All (${total}+)</button>`;
+
       const cats = [...new Set(allTools.map(t => t.cat))];
+
+      // Sort categories by count (descending)
+      const catCounts = {};
       cats.forEach(c => {
-        if (catMap[c]) {
+        catCounts[c] = allTools.filter(t => t.cat === c).length;
+      });
+      cats.sort((a, b) => catCounts[b] - catCounts[a]);
+
+      cats.forEach(c => {
+        const cm = catMap[c];
+        if (cm) {
+          const count = catCounts[c];
           const btn = document.createElement('button');
           btn.className = 'filter-btn';
-          btn.innerHTML = `${catMap[c].icon} ${catMap[c].name}`;
-          btn.onclick = (e) => filterCat(c, btn);
+          btn.innerHTML = `${cm.name} <span style="opacity:.5;font-size:10px">${count}</span>`;
+          btn.onclick = () => filterCat(c, btn);
           filterContainer.appendChild(btn);
         }
       });
@@ -923,21 +1140,38 @@
 
     function filterCat(cat, btn) {
       document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
+      if (btn) btn.classList.add('active');
       renderTools(cat);
       if (searchInput) searchInput.value = '';
     }
 
+    // ============================================================
+    // SEARCH
+    // ============================================================
     function doSearch() {
-      const term = searchInput.value.toLowerCase();
+      const term = searchInput.value.toLowerCase().trim();
+      if (!term) {
+        renderTools('all');
+        return;
+      }
       const filtered = allTools.filter(t =>
         t.name.toLowerCase().includes(term) ||
         t.desc.toLowerCase().includes(term) ||
-        (t.tag && t.tag.toLowerCase().includes(term))
+        (t.tag && t.tag.toLowerCase().includes(term)) ||
+        (t.cat && t.cat.toLowerCase().includes(term)) ||
+        (t.why && t.why.en && t.why.en.toLowerCase().includes(term)) ||
+        (t.why && t.why.hi && t.why.hi.toLowerCase().includes(term))
       );
       renderTools('all', filtered);
+
+      // Reset active filter
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      document.querySelector('.filter-btn').classList.add('active');
     }
 
+    // ============================================================
+    // RENDER TOOL CARDS
+    // ============================================================
     function renderTools(filter = 'all', data = null) {
       resourceContainer.innerHTML = '';
       resourceContainer.className = 'grid2';
@@ -945,72 +1179,106 @@
       const filtered = data || (filter === 'all' ? allTools : allTools.filter(t => t.cat === filter));
 
       if (filtered.length === 0) {
-        resourceContainer.innerHTML = `<div style="text-align:center; padding:50px; color:var(--dim)">${T('noResults')}</div>`;
+        resourceContainer.innerHTML = `
+          <div style="text-align:center; padding:60px 20px; color:var(--dim); grid-column: 1 / -1">
+            <div style="font-size:48px; margin-bottom:16px">🔍</div>
+            <h3 style="font-size:18px; margin-bottom:8px; color:var(--muted)">${T('noResults')}</h3>
+          </div>`;
         updateCounts(0);
         return;
       }
 
       filtered.forEach(tool => {
-        const cat = catMap[tool.cat] || { name: 'Other', icon: '🛠️', color: 'rgba(255,255,255,.1)', text: '#fff' };
+        const cat = catMap[tool.cat] || { name: 'Other', icon: '🛠️', color: 'rgba(255,255,255,.1)', text: '#9ca3af' };
 
-        // Parse badges from tag string
         const badgesHtml = tool.tag ? tool.tag.split('·').map(part =>
           `<span class="rc-badge">${part.trim()}</span>`
         ).join('') : '';
 
-        // Advanced Security Detection
-        const isAdvanced = /e2e|encrypt|audit|source|zero-access|verified|secure/i.test(tool.desc + tool.name + tool.tag);
-        const trustHtml = isAdvanced ? `<div class="trust-indicator"><span class="trust-dot"></span> ${T('highTrust')}</div>` : '';
+        const isAdvanced = /e2e|encrypt|audit|open.source|zero-access|verified|secure|privacy|trusted/i.test(
+          tool.desc + tool.name + (tool.tag || '')
+        );
+        const trustHtml = isAdvanced
+          ? `<div class="trust-indicator"><span class="trust-dot"></span> ${T('highTrust')}</div>`
+          : '';
+
+        const whyBlock = (tool.why && (tool.why.en || tool.why.hi))
+          ? `<div class="rc-wh">
+              <b>${T('whyLabel')}</b>
+              <span class="en">${tool.why.en || ''}</span>
+              <span class="hi">${tool.why.hi || ''}</span>
+            </div>`
+          : '';
+
+        const urlDisplay = tool.url
+          ? tool.url.replace(/^https?:\/\//, '').replace(/\/$/, '').split('/')[0]
+          : 'Direct Tool';
 
         const card = document.createElement('a');
-        card.href = tool.url;
-        card.target = '_blank';
+        card.href = tool.url || '#';
+        card.target = tool.url ? '_blank' : '_self';
+        card.rel = 'noopener noreferrer';
         card.className = 'rc';
         card.innerHTML = `
           ${isAdvanced ? `<span class="badge-hot">${T('verifiedLabel')}</span>` : ''}
           <div class="rc-info">
-            <div class="rc-ic" style="color:${cat.text}">${tool.icon || cat.icon}</div>
-            <div style="min-width: 0; flex: 1;">
+            <div class="rc-ic" style="color:${cat.text};background:${cat.color}">${tool.icon || cat.icon}</div>
+            <div style="min-width:0;flex:1">
               <div class="rc-nm">${tool.name} ${trustHtml}</div>
-              <div class="rc-url">${tool.url ? tool.url.replace(/^https?:\/\//, '').split('/')[0] : 'Direct Link'}</div>
+              <div class="rc-url">${urlDisplay}</div>
             </div>
           </div>
-          <p class="rc-ds">${currentLang === 'hi' ? (tool.desc_hi || tool.desc) : tool.desc}</p>
+          <p class="rc-ds">${tool.desc}</p>
           <div class="rc-badges">${badgesHtml}</div>
-          <div class="rc-wh">
-            <b>${T('whyLabel')}</b>
-            <span class="en">${tool.why.en}</span>
-            <span class="hi">${tool.why.hi}</span>
-          </div>
+          ${whyBlock}
         `;
         resourceContainer.appendChild(card);
       });
+
       updateCounts(filtered.length);
     }
 
-
+    // ============================================================
+    // INIT
+    // ============================================================
     function initTools() {
       if (typeof allTools !== 'undefined' && Array.isArray(allTools)) {
-        renderCategories();
-        applyLanguage(); // Initial render and language apply
+        console.log(`✅ Loaded ${allTools.length} tools from tools.js`);
+        applyLanguage();
       } else {
-        console.error('allTools is not defined. Please ensure tools.js is loaded correctly.');
+        console.error('❌ allTools not found. Ensure tools.js is loaded correctly.');
         resourceContainer.innerHTML = `
-          <div style="text-align:center; padding:50px; color:var(--dim)">
-            <div style="font-size: 3rem; margin-bottom: 20px;">⚠️</div>
-            <h3 style="font-size: 1.5rem; margin-bottom: 10px;">Failed to load tools.js</h3>
-            <p>Please ensure tools.js is in the same directory and is a valid JavaScript file.</p>
-          </div>
-        `;
+          <div style="text-align:center; padding:60px; color:var(--dim); grid-column: 1 / -1">
+            <div style="font-size:48px; margin-bottom:20px">⚠️</div>
+            <h3 style="font-size:18px; margin-bottom:12px; color:var(--red)">Failed to load tools.js</h3>
+            <p style="color:var(--muted); font-size:14px">
+              Please ensure <code style="background:rgba(255,255,255,.1);padding:2px 8px;border-radius:4px">tools.js</code> 
+              is in the same directory and contains a valid <code style="background:rgba(255,255,255,.1);padding:2px 8px;border-radius:4px">allTools</code> array.
+            </p>
+          </div>`;
       }
     }
+
     initTools();
 
+    // Back to top button
     window.addEventListener('scroll', () => {
       const btn = document.getElementById('backTop');
       if (btn) {
-        if (window.scrollY > 300) btn.classList.add('visible');
-        else btn.classList.remove('visible');
+        btn.classList.toggle('visible', window.scrollY > 300);
+      }
+    });
+
+    // Keyboard shortcut: Ctrl+K or / to focus search
+    document.addEventListener('keydown', (e) => {
+      if ((e.ctrlKey && e.key === 'k') || (e.key === '/' && document.activeElement.tagName !== 'INPUT')) {
+        e.preventDefault();
+        searchInput.focus();
+      }
+      if (e.key === 'Escape') {
+        searchInput.blur();
+        searchInput.value = '';
+        renderTools('all');
       }
     });
   </script>
