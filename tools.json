@@ -3565,5 +3565,633 @@
       "hi": "Maximum privacy settings by default in Firefox",
       "en": "Maximum privacy settings by default in Firefox"
     }
+  },
+
+  {
+    "url": "https://www.recuva.com",
+    "cat": "recovery",
+    "icon": "♻️",
+    "name": "Recuva",
+    "tag": "recuva.com · Piriform/CCleaner · Free",
+    "desc": "Recover deleted files from HDD, SSD, USB, memory cards. Deep scan mode for thorough recovery.",
+    "why": {
+      "hi": "Sabse popular free recovery tool, simple UI, deep scan",
+      "en": "Most popular free recovery tool, simple UI with deep scan"
+    }
+  },
+  {
+    "url": "https://www.cgsecurity.org/wiki/TestDisk",
+    "cat": "recovery",
+    "icon": "🔧",
+    "name": "TestDisk",
+    "tag": "cgsecurity.org · Open Source · Free",
+    "desc": "Recover lost partitions, fix boot sectors, rebuild partition tables. Works on all OS. CLI-based.",
+    "why": {
+      "hi": "Lost partitions recover karo, open-source, cross-platform",
+      "en": "Recover lost partitions, open-source, cross-platform power tool"
+    }
+  },
+  {
+    "url": "https://www.cgsecurity.org/wiki/PhotoRec",
+    "cat": "recovery",
+    "icon": "📸",
+    "name": "PhotoRec",
+    "tag": "cgsecurity.org · Open Source · Free",
+    "desc": "Recover photos, videos, documents from any storage — ignores filesystem, reads raw data. 480+ formats.",
+    "why": {
+      "hi": "Photos/videos recover karo even from formatted drives, 480+ formats",
+      "en": "Recover photos/videos even from formatted drives, 480+ file formats"
+    }
+  },
+  {
+    "url": "https://www.diskdrill.com",
+    "cat": "recovery",
+    "icon": "🔩",
+    "name": "Disk Drill Free",
+    "tag": "diskdrill.com · CleverFiles · Free tier",
+    "desc": "Recover up to 500MB free on Windows. Supports 400+ file types, HDD/SSD/USB/SD card recovery.",
+    "why": {
+      "hi": "Modern UI, 500MB free recovery, 400+ file types",
+      "en": "Modern UI with 500MB free recovery and 400+ file types"
+    }
+  },
+  {
+    "url": "https://www.easeus.com/datarecoverywizard/free-data-recovery-software.htm",
+    "cat": "recovery",
+    "icon": "🧙",
+    "name": "EaseUS Data Recovery Free",
+    "tag": "easeus.com · China · Free (2GB limit)",
+    "desc": "Recover up to 2GB free — deleted files, formatted drives, lost partitions. Wizard-guided UI.",
+    "why": {
+      "hi": "2GB free recovery, wizard-guided, beginners ke liye best",
+      "en": "2GB free recovery with wizard-guided UI, great for beginners"
+    }
+  },
+  {
+    "url": "https://www.stellarinfo.com/free-data-recovery.php",
+    "cat": "recovery",
+    "icon": "⭐",
+    "name": "Stellar Data Recovery Free",
+    "tag": "stellarinfo.com · India · Free (1GB limit)",
+    "desc": "Recover up to 1GB free — supports all file types, HDD/SSD/USB/optical media. Indian company.",
+    "why": {
+      "hi": "Indian company, 1GB free recovery, professional grade",
+      "en": "Indian company, 1GB free recovery, professional-grade tool"
+    }
+  },
+  {
+    "url": "https://www.puran.net/puran-file-recovery.html",
+    "cat": "recovery",
+    "icon": "📂",
+    "name": "Puran File Recovery",
+    "tag": "puran.net · Free · Windows",
+    "desc": "Completely free — no size limits. Recover deleted files from NTFS/FAT drives, USB, SD cards.",
+    "why": {
+      "hi": "100% free, no limit, lightweight, simple interface",
+      "en": "100% free with no recovery limits, lightweight and simple"
+    }
+  },
+  {
+    "url": "https://www.runtime.org/data-recovery-software.htm",
+    "cat": "recovery",
+    "icon": "💾",
+    "name": "Runtime GetDataBack",
+    "tag": "runtime.org · Free demo · Windows",
+    "desc": "Advanced data recovery for NTFS/FAT/exFAT/EXT. Deep recovery from damaged or formatted drives.",
+    "why": {
+      "hi": "Advanced recovery, damaged drives se bhi data nikale",
+      "en": "Advanced recovery even from damaged and formatted drives"
+    }
+  },
+  {
+    "url": "https://www.pandorarecovery.com",
+    "cat": "recovery",
+    "icon": "📦",
+    "name": "Pandora Recovery (Disk Drill)",
+    "tag": "pandorarecovery.com · Free · Windows",
+    "desc": "Preview recoverable files before restoring. Surface & deep scan. Now part of Disk Drill family.",
+    "why": {
+      "hi": "Preview dekho recover karne se pehle, free deep scan",
+      "en": "Preview files before recovery, free deep scan available"
+    }
+  },
+  {
+    "url": "https://www.minitool.com/data-recovery-software/free-for-windows.html",
+    "cat": "recovery",
+    "icon": "🛠️",
+    "name": "MiniTool Power Data Recovery Free",
+    "tag": "minitool.com · Free (1GB limit)",
+    "desc": "Recover 1GB free — deleted files, formatted partitions, crashed OS, lost data from any storage.",
+    "why": {
+      "hi": "1GB free, crashed system se bhi data recover karo",
+      "en": "1GB free recovery, even from crashed systems and OS failures"
+    }
+  },
+  {
+    "url": "https://www.wisecleaner.com/wise-data-recovery.html",
+    "cat": "recovery",
+    "icon": "🦉",
+    "name": "Wise Data Recovery",
+    "tag": "wisecleaner.com · Free · Windows",
+    "desc": "Fast free recovery — shows recovery quality rating for each file. Portable version available.",
+    "why": {
+      "hi": "Portable version available, recovery quality rating dikhata hai",
+      "en": "Portable version available, shows recovery quality rating per file"
+    }
+  },
+  {
+    "url": "https://www.intretech.com/iasr-free-data-recovery.html",
+    "cat": "recovery",
+    "icon": "🔄",
+    "name": "iASR Free Data Recovery",
+    "tag": "intretech.com · Free · Windows",
+    "desc": "Lightweight free recovery tool — simple wizard, fast scanning, no installation needed.",
+    "why": {
+      "hi": "No install needed, lightweight, quick recovery",
+      "en": "No installation needed, lightweight and quick recovery"
+    }
+  },
+  {
+    "url": "https://www.r-studio.com/free-undelete.html",
+    "cat": "recovery",
+    "icon": "🔬",
+    "name": "R-Undelete Free",
+    "tag": "r-studio.com · R-Tools · Free tier",
+    "desc": "Free version of professional R-Studio — FAT/exFAT recovery, file preview, advanced algorithms.",
+    "why": {
+      "hi": "Professional-grade recovery engine, FAT/exFAT ke liye best",
+      "en": "Professional-grade recovery engine, best for FAT/exFAT drives"
+    }
+  },
+  {
+    "url": "https://sourceforge.net/projects/ntfs-undelete",
+    "cat": "recovery",
+    "icon": "🗂️",
+    "name": "NTFS Undelete",
+    "tag": "sourceforge.net · Open Source · Free",
+    "desc": "Recover deleted files from NTFS drives — portable, no installation. Scans MFT directly.",
+    "why": {
+      "hi": "NTFS drives ke liye specialized, portable, open-source",
+      "en": "Specialized for NTFS drives, portable, open-source"
+    }
+  },
+  {
+    "url": "https://www.file-recovery.com/recovery.html",
+    "cat": "recovery",
+    "icon": "📁",
+    "name": "PC Inspector File Recovery",
+    "tag": "file-recovery.com · Free · Windows",
+    "desc": "Fully free — recovers files even when boot sector is damaged. Supports FAT/NTFS.",
+    "why": {
+      "hi": "Boot sector damaged ho tab bhi recovery possible, 100% free",
+      "en": "Recovery possible even with damaged boot sector, 100% free"
+    }
+  },
+  {
+    "url": "https://www.undeleteplus.com",
+    "cat": "recovery",
+    "icon": "➕",
+    "name": "Undelete Plus",
+    "tag": "undeleteplus.com · Free · Windows",
+    "desc": "Fast undelete tool — scan and recover quickly from HDD/SSD/USB/memory cards. Green/red status.",
+    "why": {
+      "hi": "Fast scanning, recovery chance green/red indicator dikhata hai",
+      "en": "Fast scanning with green/red recovery chance indicators"
+    }
+  },
+  {
+    "url": "https://www.glarysoft.com/glary-undelete",
+    "cat": "recovery",
+    "icon": "✨",
+    "name": "Glary Undelete",
+    "tag": "glarysoft.com · Free · Windows",
+    "desc": "Simple free undelete — filter by name/date/size/state. Recovery status shown per file.",
+    "why": {
+      "hi": "Simple filters, recovery status per file, completely free",
+      "en": "Simple filters with recovery status per file, completely free"
+    }
+  },
+  {
+    "url": "https://extundelete.sourceforge.net",
+    "cat": "recovery",
+    "icon": "🐧",
+    "name": "extundelete",
+    "tag": "sourceforge.net · Open Source · Linux",
+    "desc": "Recover deleted files from ext3/ext4 Linux filesystems. CLI tool for Linux sysadmins.",
+    "why": {
+      "hi": "Linux ext3/ext4 ke liye best recovery tool, CLI",
+      "en": "Best recovery tool for Linux ext3/ext4 filesystems, CLI"
+    }
+  },
+  {
+    "url": "https://www.sleuthkit.org",
+    "cat": "recovery",
+    "icon": "🔍",
+    "name": "The Sleuth Kit (TSK)",
+    "tag": "sleuthkit.org · Open Source · Free",
+    "desc": "Digital forensics toolkit — analyze disk images, recover deleted files, investigate filesystems.",
+    "why": {
+      "hi": "Forensic-grade file recovery, disk image analysis",
+      "en": "Forensic-grade file recovery and disk image analysis"
+    }
+  },
+  {
+    "url": "https://www.sleuthkit.org/autopsy",
+    "cat": "recovery",
+    "icon": "🏥",
+    "name": "Autopsy",
+    "tag": "sleuthkit.org · Open Source · Free",
+    "desc": "GUI for Sleuth Kit — digital forensics platform. Recover deleted files, timeline analysis, keyword search.",
+    "why": {
+      "hi": "Forensic recovery with GUI, timeline analysis, free",
+      "en": "Forensic recovery platform with GUI and timeline analysis, free"
+    }
+  },
+  {
+    "url": "https://foremost.sourceforge.net",
+    "cat": "recovery",
+    "icon": "🗃️",
+    "name": "Foremost",
+    "tag": "sourceforge.net · Open Source · Linux",
+    "desc": "Console-based file carving program — recovers files based on headers, footers, and data structures.",
+    "why": {
+      "hi": "File carving tool, headers se files recover karta hai",
+      "en": "File carving tool that recovers based on headers and footers"
+    }
+  },
+  {
+    "url": "https://github.com/sleuthkit/scalpel",
+    "cat": "recovery",
+    "icon": "🔪",
+    "name": "Scalpel",
+    "tag": "GitHub · Open Source · Linux/Windows",
+    "desc": "High-performance file carving — header/footer based recovery. Successor to Foremost, faster.",
+    "why": {
+      "hi": "Foremost se faster, high-performance file carving",
+      "en": "Faster than Foremost, high-performance file carving tool"
+    }
+  },
+  {
+    "url": "https://www.freedatarecovery.org",
+    "cat": "recovery",
+    "icon": "🆓",
+    "name": "Free Data Recovery",
+    "tag": "freedatarecovery.org · Free · Windows",
+    "desc": "Completely free file recovery — no size limits, recover photos, docs, videos from any storage.",
+    "why": {
+      "hi": "No limits, completely free, simple interface",
+      "en": "No recovery limits, completely free with simple interface"
+    }
+  },
+  {
+    "url": "https://www.dmde.com/download.html",
+    "cat": "recovery",
+    "icon": "💿",
+    "name": "DMDE Free",
+    "tag": "dmde.com · Free tier · Windows/Linux/Mac",
+    "desc": "Powerful disk editor and data recovery — recover up to 4000 files free per directory. RAID support.",
+    "why": {
+      "hi": "RAID support, disk editor + recovery, cross-platform",
+      "en": "RAID support, disk editor plus recovery, cross-platform"
+    }
+  },
+  {
+    "url": "https://www.handyrecovery.com",
+    "cat": "recovery",
+    "icon": "🤲",
+    "name": "Handy Recovery Free",
+    "tag": "handyrecovery.com · Free tier · Windows",
+    "desc": "Preview and recover deleted files — virtual folder view shows deleted files alongside existing ones.",
+    "why": {
+      "hi": "Deleted files ko existing folders ke saath dikhata hai",
+      "en": "Shows deleted files alongside existing ones in virtual view"
+    }
+  },
+  {
+    "url": "https://www.lazesoft.com/lazesoft-mac-data-recovery.html",
+    "cat": "recovery",
+    "icon": "🍎",
+    "name": "Lazesoft Mac Data Recovery",
+    "tag": "lazesoft.com · Free · macOS",
+    "desc": "Free Mac file recovery — recover from HDD/SSD/USB/SD on macOS. Supports HFS+, APFS, FAT, NTFS.",
+    "why": {
+      "hi": "Mac ke liye free recovery tool, APFS support",
+      "en": "Free Mac recovery tool with APFS and HFS+ support"
+    }
+  },
+  {
+    "url": "https://www.lazesoft.com/lazesoft-windows-recovery.html",
+    "cat": "recovery",
+    "icon": "🪟",
+    "name": "Lazesoft Windows Recovery",
+    "tag": "lazesoft.com · Free · Windows",
+    "desc": "Boot from CD/USB to recover data from unbootable Windows. Recover files even if OS won't start.",
+    "why": {
+      "hi": "Windows boot na ho tab bhi data recover karo, bootable USB",
+      "en": "Recover data from unbootable Windows using bootable USB/CD"
+    }
+  },
+  {
+    "url": "https://github.com/lclevy/fiern",
+    "cat": "recovery",
+    "icon": "🔥",
+    "name": "FiERN (File Recovery NTFS)",
+    "tag": "GitHub · Open Source · Free",
+    "desc": "Open-source NTFS file recovery — command line, lightweight, direct MFT parsing for fast recovery.",
+    "why": {
+      "hi": "Lightweight open-source NTFS recovery, direct MFT parse",
+      "en": "Lightweight open-source NTFS recovery with direct MFT parsing"
+    }
+  },
+  {
+    "url": "https://www.winfrfree.com",
+    "cat": "recovery",
+    "icon": "🪟",
+    "name": "Windows File Recovery (winfr)",
+    "tag": "Microsoft · Free · Windows 10/11",
+    "desc": "Microsoft's official free recovery tool — CLI-based, NTFS/FAT/exFAT, regular & extensive modes.",
+    "why": {
+      "hi": "Microsoft ka official free tool, Windows Store se install karo",
+      "en": "Microsoft's official free tool, install from Windows Store"
+    }
+  },
+  {
+    "url": "https://github.com/binwalk/binwalk",
+    "cat": "recovery",
+    "icon": "🔎",
+    "name": "Binwalk",
+    "tag": "GitHub · Open Source · Free",
+    "desc": "Firmware analysis and file extraction tool — extract embedded files from binary blobs and images.",
+    "why": {
+      "hi": "Binary files me se embedded data extract karo",
+      "en": "Extract embedded data from firmware and binary files"
+    }
+  },
+  {
+    "url": "https://www.ccleaner.com/recuva/builds",
+    "cat": "recovery",
+    "icon": "🔃",
+    "name": "Recuva Portable",
+    "tag": "recuva.com · Piriform · Free",
+    "desc": "Portable version — run from USB without installing. Prevents overwriting deleted data on target drive.",
+    "why": {
+      "hi": "USB se run karo, install nahi karna — data overwrite nahi hota",
+      "en": "Run from USB without installing, prevents data overwrite"
+    }
+  },
+  {
+    "url": "https://www.icare-recovery.com/free",
+    "cat": "recovery",
+    "icon": "💊",
+    "name": "iCare Data Recovery Free",
+    "tag": "icare-recovery.com · Free (1GB) · Windows",
+    "desc": "Recover 1GB free — deep scan, raw recovery, formatted drive recovery, deleted partition recovery.",
+    "why": {
+      "hi": "1GB free, raw recovery support, formatted drives se recover",
+      "en": "1GB free with raw recovery from formatted and deleted partitions"
+    }
+  },
+  {
+    "url": "https://www.hasleo.com/free-windows-data-recovery.html",
+    "cat": "recovery",
+    "icon": "🏷️",
+    "name": "Hasleo Free Data Recovery",
+    "tag": "hasleo.com · Free (2GB) · Windows",
+    "desc": "2GB free recovery — supports BitLocker encrypted drives, NTFS/FAT/exFAT/EXT2/3/4.",
+    "why": {
+      "hi": "BitLocker encrypted drives se bhi recovery, 2GB free",
+      "en": "Recovery from BitLocker encrypted drives, 2GB free limit"
+    }
+  },
+  {
+    "url": "https://www.rl-recovery.com/en",
+    "cat": "recovery",
+    "icon": "🔗",
+    "name": "R-Linux",
+    "tag": "r-studio.com · Free · Linux",
+    "desc": "Free file recovery for Linux ext2/ext3/ext4 filesystems. By R-Tools, professional grade.",
+    "why": {
+      "hi": "Linux filesystems ke liye professional-grade free recovery",
+      "en": "Professional-grade free recovery for Linux ext filesystems"
+    }
+  },
+  {
+    "url": "https://github.com/Disassembler0/ERFS",
+    "cat": "recovery",
+    "icon": "🐧",
+    "name": "ext4magic",
+    "tag": "Open Source · Linux · Free",
+    "desc": "Recover deleted files from ext3/ext4 using filesystem journal. Time-based recovery options.",
+    "why": {
+      "hi": "Journal-based ext4 recovery, time-stamp se recover karo",
+      "en": "Journal-based ext4 recovery with time-stamp based options"
+    }
+  },
+  {
+    "url": "https://github.com/thewhiteh4t/FinalRecon",
+    "cat": "recovery",
+    "icon": "🌐",
+    "name": "FinalRecon",
+    "tag": "GitHub · Open Source · Free",
+    "desc": "Web reconnaissance tool — recovers cached/archived data from websites, headers, DNS, whois.",
+    "why": {
+      "hi": "Web data recovery and reconnaissance, OSINT",
+      "en": "Web data recovery and reconnaissance via OSINT"
+    }
+  },
+  {
+    "url": "https://www.osforensics.com/tools/deleted-file-search.html",
+    "cat": "recovery",
+    "icon": "🕵️",
+    "name": "OSForensics Free",
+    "tag": "osforensics.com · Free tier · Windows",
+    "desc": "Forensic file recovery — find deleted files, search file contents, timeline viewer, hash verification.",
+    "why": {
+      "hi": "Forensic-grade deleted file search, hash verification",
+      "en": "Forensic-grade deleted file search with hash verification"
+    }
+  },
+  {
+    "url": "https://www.yourkit.com/winutils/undel",
+    "cat": "recovery",
+    "icon": "🗑️",
+    "name": "Undel",
+    "tag": "yourkit.com · Free · Windows",
+    "desc": "Simple undeletion tool for FAT and NTFS — fast scan, lightweight, no complex settings.",
+    "why": {
+      "hi": "Lightweight, no complex settings, fast undelete",
+      "en": "Lightweight fast undelete tool with no complex settings"
+    }
+  },
+  {
+    "url": "https://www.zero-assumption.com/zar",
+    "cat": "recovery",
+    "icon": "📷",
+    "name": "ZAR (Zero Assumption Recovery)",
+    "tag": "zero-assumption.com · Free for photos · Windows",
+    "desc": "Free for photo/video recovery — unlimited image recovery. RAID reconstruction, advanced algorithms.",
+    "why": {
+      "hi": "Photos unlimited free recover karo, RAID support",
+      "en": "Unlimited free photo recovery with RAID reconstruction support"
+    }
+  },
+  {
+    "url": "https://github.com/ctfs/write-ups-2014",
+    "cat": "recovery",
+    "icon": "🏁",
+    "name": "Bulk Extractor",
+    "tag": "GitHub · Open Source · Free",
+    "desc": "Digital forensics tool — extracts emails, URLs, credit card numbers, phone numbers from disk images.",
+    "why": {
+      "hi": "Disk images se PII data extract karo, forensics",
+      "en": "Extract PII data from disk images for digital forensics"
+    }
+  },
+  {
+    "url": "https://www.yourkit.com/winutils/wipe",
+    "cat": "recovery",
+    "icon": "🧹",
+    "name": "Eraser",
+    "tag": "eraser.heidi.ie · Open Source · Free",
+    "desc": "Securely erase files — overwrite deleted data so it can NEVER be recovered. DoD 5220.22-M standard.",
+    "why": {
+      "hi": "Files permanently delete karo, recovery impossible banao",
+      "en": "Permanently delete files making recovery impossible"
+    }
+  },
+  {
+    "url": "https://ssd.eff.org/module/how-delete-your-data-securely",
+    "cat": "recovery",
+    "icon": "🔐",
+    "name": "EFF Secure Deletion Guide",
+    "tag": "eff.org · Free Guide",
+    "desc": "EFF's guide on secure file deletion — understand when recovery is possible and how to prevent it.",
+    "why": {
+      "hi": "Samjho kab recovery possible hai aur kaise permanently delete karo",
+      "en": "Understand when recovery is possible and how to prevent it"
+    }
+  },
+  {
+    "url": "https://www.dban.org",
+    "cat": "recovery",
+    "icon": "💣",
+    "name": "DBAN (Darik's Boot and Nuke)",
+    "tag": "dban.org · Free · Bootable",
+    "desc": "Boot from USB/CD to completely wipe hard drives. Used before selling/donating computers.",
+    "why": {
+      "hi": "Computer bechne se pehle poora drive wipe karo securely",
+      "en": "Securely wipe entire drives before selling or donating computers"
+    }
+  },
+  {
+    "url": "https://www.sdcard.org/downloads/formatter",
+    "cat": "recovery",
+    "icon": "💳",
+    "name": "SD Card Formatter",
+    "tag": "sdcard.org · SD Association · Free",
+    "desc": "Official SD card formatter — proper formatting prevents data corruption. Recovery prep tool.",
+    "why": {
+      "hi": "SD card properly format karo, corruption prevent karo",
+      "en": "Properly format SD cards to prevent data corruption"
+    }
+  },
+  {
+    "url": "https://www.hddguru.com/software/HDD-Raw-Copy-Tool",
+    "cat": "recovery",
+    "icon": "📀",
+    "name": "HDD Raw Copy Tool",
+    "tag": "hddguru.com · Free · Windows",
+    "desc": "Create raw disk image before recovery — sector-by-sector cloning. Recover from image, not original.",
+    "why": {
+      "hi": "Pehle disk image banao, phir recover karo — safe method",
+      "en": "Create disk image first then recover — safest method"
+    }
+  },
+  {
+    "url": "https://clonezilla.org",
+    "cat": "recovery",
+    "icon": "🐑",
+    "name": "Clonezilla",
+    "tag": "clonezilla.org · Open Source · Free",
+    "desc": "Disk cloning and imaging — clone dying drive to new one. Bootable, supports all filesystems.",
+    "why": {
+      "hi": "Dying drive ko clone karo new drive pe, data bacha lo",
+      "en": "Clone dying drive to new one before it fails completely"
+    }
+  },
+  {
+    "url": "https://www.gnu.org/software/ddrescue",
+    "cat": "recovery",
+    "icon": "🚑",
+    "name": "GNU ddrescue",
+    "tag": "gnu.org · Open Source · Free",
+    "desc": "Data recovery from failing drives — reads good sectors first, retries bad ones later. Smart algorithm.",
+    "why": {
+      "hi": "Failing drive se pehle good data copy karo, smart recovery",
+      "en": "Smart recovery from failing drives, reads good sectors first"
+    }
+  },
+  {
+    "url": "https://github.com/gilbertchen/duplicacy",
+    "cat": "recovery",
+    "icon": "📋",
+    "name": "Duplicacy",
+    "tag": "GitHub · Open Source · Free CLI",
+    "desc": "Lock-free deduplication cloud backup — prevent data loss before it happens. Encrypted backups.",
+    "why": {
+      "hi": "Data loss hone se pehle backup lo, encrypted, deduplicated",
+      "en": "Prevent data loss with encrypted deduplicated cloud backups"
+    }
+  },
+  {
+    "url": "https://restic.net",
+    "cat": "recovery",
+    "icon": "🔒",
+    "name": "Restic",
+    "tag": "restic.net · Open Source · Free",
+    "desc": "Fast, secure, efficient backup program — encrypted, deduplicated, supports 20+ cloud backends.",
+    "why": {
+      "hi": "Encrypted backups, 20+ cloud services support, fast",
+      "en": "Encrypted backups to 20+ cloud backends, fast and efficient"
+    }
+  },
+  {
+    "url": "https://www.borgbackup.org",
+    "cat": "recovery",
+    "icon": "🏰",
+    "name": "BorgBackup",
+    "tag": "borgbackup.org · Open Source · Free",
+    "desc": "Deduplicating backup program — space efficient, encrypted, compression. Best Linux backup tool.",
+    "why": {
+      "hi": "Linux ka best backup tool, encrypted, space-efficient",
+      "en": "Best Linux backup tool with encryption and space efficiency"
+    }
+  },
+  {
+    "url": "https://www.veeam.com/virtual-machine-backup-solution-free.html",
+    "cat": "recovery",
+    "icon": "🏢",
+    "name": "Veeam Backup Free",
+    "tag": "veeam.com · Free · Enterprise",
+    "desc": "Free VM backup — VMware/Hyper-V backup, instant recovery, file-level restore from VM backups.",
+    "why": {
+      "hi": "VM backup free, enterprise-grade, instant recovery",
+      "en": "Free enterprise-grade VM backup with instant recovery"
+    }
+  },
+  {
+    "url": "https://duplicati.com",
+    "cat": "recovery",
+    "icon": "☁️",
+    "name": "Duplicati",
+    "tag": "duplicati.com · Open Source · Free",
+    "desc": "Free encrypted backup to any cloud — Google Drive, S3, Backblaze, SFTP, OneDrive. Scheduled backups.",
+    "why": {
+      "hi": "Any cloud pe encrypted backup schedule karo, free",
+      "en": "Schedule encrypted backups to any cloud service, free"
+    }
   }
+
+
+
 ]
