@@ -3566,7 +3566,6 @@
       "en": "Maximum privacy settings by default in Firefox"
     }
   },
-
   {
     "url": "https://www.recuva.com",
     "cat": "recovery",
@@ -4190,8 +4189,1481 @@
       "hi": "Any cloud pe encrypted backup schedule karo, free",
       "en": "Schedule encrypted backups to any cloud service, free"
     }
+  },
+  {
+    "url": "https://www.bleachbit.org",
+    "cat": "clean",
+    "icon": "🧹",
+    "name": "BleachBit",
+    "tag": "bleachbit.org · Open Source · Free",
+    "desc": "Deep system cleaner — delete cookies, cache, temp files, logs. Used by Hillary Clinton's team famously.",
+    "why": {
+      "hi": "System clean karo, tracking data delete karo, open-source",
+      "en": "Deep clean system, delete tracking data, open-source"
+    }
+  },
+  {
+    "url": "https://www.ccleaner.com/ccleaner/download",
+    "cat": "clean",
+    "icon": "🧽",
+    "name": "CCleaner Free",
+    "tag": "ccleaner.com · Piriform · Free",
+    "desc": "Clean junk files, browser cache, cookies, registry. Manage startup programs for faster boot.",
+    "why": {
+      "hi": "Most popular system cleaner, browser data cleanup",
+      "en": "Most popular system cleaner with browser data cleanup"
+    }
+  },
+  {
+    "url": "https://privazer.com",
+    "cat": "clean",
+    "icon": "🔏",
+    "name": "PrivaZer",
+    "tag": "privazer.com · Free · Windows",
+    "desc": "Deep privacy cleaner — scans and removes traces of internet activity, old files, residual data.",
+    "why": {
+      "hi": "Internet activity traces completely remove karo",
+      "en": "Completely remove all traces of internet activity"
+    }
+  },
+  {
+    "url": "https://www.oo-software.com/en/shutup10",
+    "cat": "clean",
+    "icon": "🤫",
+    "name": "O&O ShutUp10++",
+    "tag": "oo-software.com · Free · Windows 10/11",
+    "desc": "Disable Windows telemetry, tracking, Cortana data collection. Anti-spy tool for Windows.",
+    "why": {
+      "hi": "Windows ki tracking/telemetry band karo, one-click",
+      "en": "Disable Windows tracking and telemetry with one click"
+    }
+  },
+  {
+    "url": "https://wpd.app",
+    "cat": "clean",
+    "icon": "🛑",
+    "name": "WPD (Windows Privacy Dashboard)",
+    "tag": "wpd.app · Free · Windows",
+    "desc": "Block Windows telemetry, disable tracking features, manage privacy settings. Lightweight.",
+    "why": {
+      "hi": "Windows privacy settings ek dashboard se control karo",
+      "en": "Control all Windows privacy settings from one dashboard"
+    }
+  },
+  {
+    "url": "https://www.safer-networking.org/products/spybot-free-edition",
+    "cat": "clean",
+    "icon": "🤖",
+    "name": "Spybot Free",
+    "tag": "safer-networking.org · Free · Windows",
+    "desc": "Anti-spyware + immunization — blocks known tracking & spyware. Classic trusted tool since 2000.",
+    "why": {
+      "hi": "2000 se trusted anti-spyware, immunization feature",
+      "en": "Trusted anti-spyware since 2000 with immunization feature"
+    }
+  },
+  {
+    "url": "https://adwcleaner.malwarebytes.com",
+    "cat": "clean",
+    "icon": "🚫",
+    "name": "AdwCleaner",
+    "tag": "malwarebytes.com · Free · Windows",
+    "desc": "Remove adware, PUPs, browser hijackers, unwanted toolbars. No install needed, portable.",
+    "why": {
+      "hi": "Adware/browser hijacker instantly remove karo, portable",
+      "en": "Instantly remove adware and browser hijackers, portable"
+    }
+  },
+  {
+    "url": "https://www.glasswire.com",
+    "cat": "clean",
+    "icon": "📊",
+    "name": "GlassWire Free",
+    "tag": "glasswire.com · Free tier · Windows/Android",
+    "desc": "Network monitor — see which apps are connecting to internet. Detect suspicious network activity.",
+    "why": {
+      "hi": "Kaun sa app internet use kar raha hai — monitor karo",
+      "en": "Monitor which apps are using internet and detect suspicious activity"
+    }
+  },
+  {
+    "url": "https://www.netguard.me",
+    "cat": "mobile",
+    "icon": "🛡️",
+    "name": "NetGuard",
+    "tag": "netguard.me · Open Source · Android",
+    "desc": "No-root Android firewall — block internet per app. No tracking, open-source, lightweight.",
+    "why": {
+      "hi": "Bina root ke apps ka internet block karo",
+      "en": "Block internet per app without root on Android"
+    }
+  },
+  {
+    "url": "https://blokada.org",
+    "cat": "mobile",
+    "icon": "🚫",
+    "name": "Blokada",
+    "tag": "blokada.org · Open Source · Android/iOS",
+    "desc": "Free ad blocker for entire phone — DNS-based, blocks ads in all apps, not just browser.",
+    "why": {
+      "hi": "Poore phone ke ads block karo, saari apps me",
+      "en": "Block ads in all apps on entire phone, DNS-based"
+    }
+  },
+  {
+    "url": "https://f-droid.org",
+    "cat": "mobile",
+    "icon": "🤖",
+    "name": "F-Droid",
+    "tag": "f-droid.org · Open Source · Android",
+    "desc": "Open-source app store for Android — all apps are free, no tracking, no proprietary code.",
+    "why": {
+      "hi": "Privacy-focused app store, sab apps open-source",
+      "en": "Privacy-focused app store with all open-source apps"
+    }
+  },
+  {
+    "url": "https://www.lookout.com",
+    "cat": "mobile",
+    "icon": "👀",
+    "name": "Lookout Security",
+    "tag": "lookout.com · Free tier · Android/iOS",
+    "desc": "Mobile antivirus + theft protection — locate lost phone, safe browsing, breach alerts.",
+    "why": {
+      "hi": "Mobile antivirus + phone locate + breach alerts",
+      "en": "Mobile antivirus with phone location and breach alerts"
+    }
+  },
+  {
+    "url": "https://www.malwarebytes.com/android",
+    "cat": "mobile",
+    "icon": "🧹",
+    "name": "Malwarebytes Mobile",
+    "tag": "malwarebytes.com · Free · Android",
+    "desc": "Mobile malware scanner — detect ransomware, adware, PUPs on Android. Privacy audit included.",
+    "why": {
+      "hi": "Android pe malware scan karo + privacy audit",
+      "en": "Scan Android for malware plus privacy audit feature"
+    }
+  },
+  {
+    "url": "https://www.shelter.app",
+    "cat": "mobile",
+    "icon": "🏠",
+    "name": "Shelter",
+    "tag": "GitHub · Open Source · Android",
+    "desc": "Isolate apps in work profile — sandbox untrusted apps. Clone apps, freeze when not in use.",
+    "why": {
+      "hi": "Untrusted apps ko sandbox me isolate karo",
+      "en": "Isolate untrusted apps in sandbox work profile"
+    }
+  },
+  {
+    "url": "https://trackercontrol.org",
+    "cat": "mobile",
+    "icon": "🔍",
+    "name": "TrackerControl",
+    "tag": "trackercontrol.org · Open Source · Android",
+    "desc": "Monitor and block hidden trackers in Android apps. See which company tracks you from each app.",
+    "why": {
+      "hi": "Har app me hidden trackers dekho aur block karo",
+      "en": "See and block hidden trackers in every Android app"
+    }
+  },
+  {
+    "url": "https://grapheneos.org",
+    "cat": "mobile",
+    "icon": "📱",
+    "name": "GrapheneOS",
+    "tag": "grapheneos.org · Open Source · Pixel phones",
+    "desc": "Most secure Android OS — hardened, privacy-focused, no Google services. For Pixel phones only.",
+    "why": {
+      "hi": "Most secure Android OS, Google-free, Pixel phones ke liye",
+      "en": "Most secure Android OS, Google-free, for Pixel phones"
+    }
+  },
+  {
+    "url": "https://calyxos.org",
+    "cat": "mobile",
+    "icon": "🌸",
+    "name": "CalyxOS",
+    "tag": "calyxos.org · Open Source · Pixel phones",
+    "desc": "Privacy-focused Android — microG support, built-in VPN, ad blocking. Easier than GrapheneOS.",
+    "why": {
+      "hi": "GrapheneOS se easy, microG support, built-in privacy features",
+      "en": "Easier than GrapheneOS with microG and built-in privacy tools"
+    }
+  },
+  {
+    "url": "https://www.lineageos.org",
+    "cat": "mobile",
+    "icon": "🔄",
+    "name": "LineageOS",
+    "tag": "lineageos.org · Open Source · Android",
+    "desc": "Custom Android ROM — privacy-focused, supports 200+ devices, no bloatware, no Google required.",
+    "why": {
+      "hi": "200+ phones support, Google-free Android ROM",
+      "en": "Google-free Android ROM supporting 200+ devices"
+    }
+  },
+  {
+    "url": "https://exodus-privacy.eu.org",
+    "cat": "mobile",
+    "icon": "📊",
+    "name": "Exodus Privacy",
+    "tag": "exodus-privacy.eu.org · Free · Online",
+    "desc": "Check any Android app for embedded trackers and permissions — scan before installing.",
+    "why": {
+      "hi": "App install se pehle trackers check karo",
+      "en": "Check for trackers in Android apps before installing"
+    }
+  },
+  {
+    "url": "https://www.wireguard.com/install",
+    "cat": "mobile",
+    "icon": "🔗",
+    "name": "WireGuard Mobile",
+    "tag": "wireguard.com · Open Source · Android/iOS",
+    "desc": "Fastest VPN protocol on mobile — lightweight, battery-friendly, secure. Use with any VPN server.",
+    "why": {
+      "hi": "Mobile pe fastest VPN, battery friendly, lightweight",
+      "en": "Fastest mobile VPN protocol, battery-friendly and lightweight"
+    }
+  },
+  {
+    "url": "https://ublockorigin.com",
+    "cat": "ext",
+    "icon": "🛡️",
+    "name": "uBlock Origin",
+    "tag": "ublockorigin.com · Open Source · Free",
+    "desc": "Best ad/tracker blocker — lightweight, efficient, blocks malware domains too. #1 privacy extension.",
+    "why": {
+      "hi": "Sabse best ad blocker, lightweight, malware bhi block kare",
+      "en": "Best ad blocker, lightweight, also blocks malware domains"
+    }
+  },
+  {
+    "url": "https://www.eff.org/https-everywhere",
+    "cat": "ext",
+    "icon": "🔒",
+    "name": "HTTPS Everywhere",
+    "tag": "eff.org · EFF · Free",
+    "desc": "Force HTTPS on all websites. Now built into most browsers but still useful on older ones.",
+    "why": {
+      "hi": "Har website pe HTTPS force karo, EFF backed",
+      "en": "Force HTTPS on all websites, backed by EFF"
+    }
+  },
+  {
+    "url": "https://privacybadger.org",
+    "cat": "ext",
+    "icon": "🦡",
+    "name": "Privacy Badger",
+    "tag": "privacybadger.org · EFF · Free",
+    "desc": "Automatically blocks invisible trackers. Learns as you browse — no configuration needed.",
+    "why": {
+      "hi": "Automatically trackers block kare, kuch set nahi karna",
+      "en": "Automatically blocks trackers, no configuration needed"
+    }
+  },
+  {
+    "url": "https://noscript.net",
+    "cat": "ext",
+    "icon": "🚫",
+    "name": "NoScript",
+    "tag": "noscript.net · Open Source · Free",
+    "desc": "Block JavaScript, Flash, Java by default — allow only trusted sites. Prevents XSS & clickjacking.",
+    "why": {
+      "hi": "JavaScript block karo by default, XSS se protection",
+      "en": "Block JavaScript by default, prevents XSS and clickjacking"
+    }
+  },
+  {
+    "url": "https://decentraleyes.org",
+    "cat": "ext",
+    "icon": "👁️",
+    "name": "Decentraleyes",
+    "tag": "decentraleyes.org · Open Source · Free",
+    "desc": "Serve CDN resources locally — prevents tracking by Google/Cloudflare CDNs. Faster page loads.",
+    "why": {
+      "hi": "CDN tracking band karo, pages faster load hon",
+      "en": "Stop CDN tracking, pages load faster from local cache"
+    }
+  },
+  {
+    "url": "https://clearurls.xyz",
+    "cat": "ext",
+    "icon": "🔗",
+    "name": "ClearURLs",
+    "tag": "clearurls.xyz · Open Source · Free",
+    "desc": "Remove tracking parameters from URLs automatically — utm_source, fbclid, gclid all stripped.",
+    "why": {
+      "hi": "URLs se tracking parameters auto remove karo",
+      "en": "Automatically remove tracking parameters from all URLs"
+    }
+  },
+  {
+    "url": "https://www.bitwarden.com/browser-extension",
+    "cat": "ext",
+    "icon": "🔐",
+    "name": "Bitwarden Extension",
+    "tag": "bitwarden.com · Open Source · Free",
+    "desc": "Auto-fill passwords securely in browser. Generate strong passwords on signup pages.",
+    "why": {
+      "hi": "Browser me passwords auto-fill, strong passwords generate",
+      "en": "Auto-fill passwords and generate strong ones in browser"
+    }
+  },
+  {
+    "url": "https://addons.mozilla.org/en-US/firefox/addon/multi-account-containers",
+    "cat": "ext",
+    "icon": "📦",
+    "name": "Firefox Multi-Account Containers",
+    "tag": "Mozilla · Free · Firefox",
+    "desc": "Isolate websites in separate containers — Facebook can't track you across other tabs.",
+    "why": {
+      "hi": "Facebook/Google ko isolate karo, cross-site tracking band",
+      "en": "Isolate Facebook/Google, prevent cross-site tracking"
+    }
+  },
+  {
+    "url": "https://www.nicecurt.com",
+    "cat": "ext",
+    "icon": "🍪",
+    "name": "Cookie AutoDelete",
+    "tag": "Open Source · Free · All browsers",
+    "desc": "Auto-delete cookies when tab closes — keep only whitelisted sites. Prevent cookie tracking.",
+    "why": {
+      "hi": "Tab band hote hi cookies auto delete, tracking band",
+      "en": "Auto-delete cookies on tab close, prevent cookie tracking"
+    }
+  },
+  {
+    "url": "https://jshelter.org",
+    "cat": "ext",
+    "icon": "🛡️",
+    "name": "JShelter",
+    "tag": "jshelter.org · Open Source · Free",
+    "desc": "Anti-fingerprinting extension — spoofs canvas, WebGL, audio fingerprint. Reduce browser uniqueness.",
+    "why": {
+      "hi": "Browser fingerprinting se protection, canvas/WebGL spoof",
+      "en": "Protection from browser fingerprinting, spoofs canvas/WebGL"
+    }
+  },
+  {
+    "url": "https://www.nicecurt.com",
+    "cat": "ext",
+    "icon": "📧",
+    "name": "SimpleLogin Extension",
+    "tag": "simplelogin.io · Proton · Free",
+    "desc": "Create email aliases directly from browser — right-click on any email field to generate alias.",
+    "why": {
+      "hi": "Browser se direct email alias banao, real email hide",
+      "en": "Create email aliases directly from browser, hide real email"
+    }
+  },
+  {
+    "url": "https://tails.net",
+    "cat": "os",
+    "icon": "🐧",
+    "name": "Tails OS",
+    "tag": "tails.net · Open Source · Free",
+    "desc": "Live USB OS — routes ALL traffic through Tor. Leaves no trace on computer. Snowden recommended.",
+    "why": {
+      "hi": "USB se boot karo, koi trace nahi chhodta, Tor built-in",
+      "en": "Boot from USB, leaves no trace, all traffic via Tor"
+    }
+  },
+  {
+    "url": "https://www.whonix.org",
+    "cat": "os",
+    "icon": "🔒",
+    "name": "Whonix",
+    "tag": "whonix.org · Open Source · Free",
+    "desc": "Security-focused OS using two VMs — one for Tor gateway, one for work. IP leak impossible.",
+    "why": {
+      "hi": "Double VM architecture, IP leak impossible, Tor-based",
+      "en": "Double VM architecture makes IP leaks impossible, Tor-based"
+    }
+  },
+  {
+    "url": "https://www.qubes-os.org",
+    "cat": "os",
+    "icon": "🔳",
+    "name": "Qubes OS",
+    "tag": "qubes-os.org · Open Source · Free",
+    "desc": "Security by compartmentalization — each app runs in separate VM. Snowden says 'best OS for security'.",
+    "why": {
+      "hi": "Har app alag VM me chale, Snowden recommended",
+      "en": "Each app in separate VM, recommended by Edward Snowden"
+    }
+  },
+  {
+    "url": "https://www.kali.org",
+    "cat": "os",
+    "icon": "🐉",
+    "name": "Kali Linux",
+    "tag": "kali.org · Offensive Security · Free",
+    "desc": "Penetration testing OS — 600+ security tools pre-installed. Industry standard for ethical hacking.",
+    "why": {
+      "hi": "Ethical hacking ka standard OS, 600+ tools",
+      "en": "Industry standard ethical hacking OS with 600+ tools"
+    }
+  },
+  {
+    "url": "https://www.parrotsec.org",
+    "cat": "os",
+    "icon": "🦜",
+    "name": "Parrot Security OS",
+    "tag": "parrotsec.org · Open Source · Free",
+    "desc": "Lightweight security OS — pentesting + privacy + development. Less resource-heavy than Kali.",
+    "why": {
+      "hi": "Kali se lightweight, privacy + pentesting dono",
+      "en": "Lighter than Kali with both privacy and pentesting tools"
+    }
+  },
+  {
+    "url": "https://www.kicksecure.com",
+    "cat": "os",
+    "icon": "🔐",
+    "name": "Kicksecure",
+    "tag": "kicksecure.com · Open Source · Free",
+    "desc": "Hardened Debian — kernel hardening, strong MAC, entropy improvement. Security-focused daily driver.",
+    "why": {
+      "hi": "Daily use ke liye hardened Linux, security by default",
+      "en": "Hardened Linux for daily use with security by default"
+    }
+  },
+  {
+    "url": "https://www.openbsd.org",
+    "cat": "os",
+    "icon": "🐡",
+    "name": "OpenBSD",
+    "tag": "openbsd.org · Open Source · Free",
+    "desc": "Most secure Unix-like OS — only 2 remote holes in default install in 25+ years. Proactive security.",
+    "why": {
+      "hi": "25+ years me sirf 2 remote vulnerabilities, most secure Unix",
+      "en": "Only 2 remote vulnerabilities in 25+ years, most secure Unix"
+    }
+  },
+  {
+    "url": "https://subgraph.com",
+    "cat": "os",
+    "icon": "🔒",
+    "name": "Subgraph OS",
+    "tag": "subgraph.com · Open Source · Free",
+    "desc": "Adversary resistant computing — sandboxed apps, Tor integration, hardened kernel, grsecurity.",
+    "why": {
+      "hi": "Advanced threat protection built into OS level",
+      "en": "Advanced threat protection built into the OS level"
+    }
+  },
+  {
+    "url": "https://getgophish.com",
+    "cat": "phish",
+    "icon": "🎣",
+    "name": "GoPhish",
+    "tag": "getgophish.com · Open Source · Free",
+    "desc": "Open-source phishing simulation — test employees with realistic phishing campaigns. Track results.",
+    "why": {
+      "hi": "Employees ko phishing test karo, free, open-source",
+      "en": "Test employees with phishing simulations, free open-source"
+    }
+  },
+  {
+    "url": "https://www.knowbe4.com/free-phishing-security-test",
+    "cat": "phish",
+    "icon": "🧠",
+    "name": "KnowBe4 Free Test",
+    "tag": "knowbe4.com · Free test · Enterprise",
+    "desc": "Free phishing security test — see what percentage of employees would click phishing links.",
+    "why": {
+      "hi": "Kitne employees phishing me fase — free test karo",
+      "en": "See what percentage of employees fall for phishing, free"
+    }
+  },
+  {
+    "url": "https://phishingquiz.withgoogle.com",
+    "cat": "phish",
+    "icon": "🎮",
+    "name": "Google Phishing Quiz",
+    "tag": "Google/Jigsaw · Free · Online",
+    "desc": "Interactive quiz — can you spot phishing emails? Google's training tool for everyone.",
+    "why": {
+      "hi": "Phishing emails pehchanna sikho, Google ka quiz",
+      "en": "Learn to spot phishing emails with Google's interactive quiz"
+    }
+  },
+  {
+    "url": "https://github.com/kgretzky/evilginx2",
+    "cat": "phish",
+    "icon": "😈",
+    "name": "Evilginx2",
+    "tag": "GitHub · Open Source · Research",
+    "desc": "Advanced phishing framework — bypasses 2FA by acting as MITM proxy. For security research only.",
+    "why": {
+      "hi": "2FA bypass phishing research, security testing ke liye",
+      "en": "2FA bypass phishing research, for security testing only"
+    }
+  },
+  {
+    "url": "https://github.com/drk1wi/Modlishka",
+    "cat": "phish",
+    "icon": "🦎",
+    "name": "Modlishka",
+    "tag": "GitHub · Open Source · Research",
+    "desc": "Reverse proxy phishing tool — automatic SSL, real-time credential harvesting. Research only.",
+    "why": {
+      "hi": "Reverse proxy phishing test, 2FA bypass research",
+      "en": "Reverse proxy phishing test for 2FA bypass research"
+    }
+  },
+  {
+    "url": "https://king-phisher.readthedocs.io",
+    "cat": "phish",
+    "icon": "👑",
+    "name": "King Phisher",
+    "tag": "GitHub · Open Source · Free",
+    "desc": "Phishing campaign toolkit — email templates, tracking, website cloning. Security awareness testing.",
+    "why": {
+      "hi": "Phishing campaign run karo for security awareness",
+      "en": "Run phishing campaigns for security awareness testing"
+    }
+  },
+  {
+    "url": "https://caniphish.com",
+    "cat": "phish",
+    "icon": "🐟",
+    "name": "CanIPhish",
+    "tag": "caniphish.com · Free tier · SaaS",
+    "desc": "Free phishing simulation platform — test email security, employee awareness, auto reports.",
+    "why": {
+      "hi": "Free cloud-based phishing simulation, reports included",
+      "en": "Free cloud-based phishing simulation with auto reports"
+    }
+  },
+  {
+    "url": "https://www.fail2ban.org",
+    "cat": "server",
+    "icon": "🚫",
+    "name": "Fail2Ban",
+    "tag": "fail2ban.org · Open Source · Free",
+    "desc": "Ban IPs after failed login attempts — SSH brute force protection. Auto-blocks attackers.",
+    "why": {
+      "hi": "SSH brute force attack se server bachao, auto IP ban",
+      "en": "Protect server from SSH brute force, auto-bans attacker IPs"
+    }
+  },
+  {
+    "url": "https://crowdsec.net",
+    "cat": "server",
+    "icon": "👥",
+    "name": "CrowdSec",
+    "tag": "crowdsec.net · Open Source · Free",
+    "desc": "Collaborative security engine — community-powered IP blocklist. Modern Fail2Ban alternative.",
+    "why": {
+      "hi": "Community-powered security, modern Fail2Ban alternative",
+      "en": "Community-powered collaborative security, modern Fail2Ban replacement"
+    }
+  },
+  {
+    "url": "https://www.wireguard.com",
+    "cat": "server",
+    "icon": "🔗",
+    "name": "WireGuard",
+    "tag": "wireguard.com · Open Source · Free",
+    "desc": "Modern VPN protocol for servers — 4000 lines of code vs OpenVPN's 600,000. Blazing fast.",
+    "why": {
+      "hi": "Server VPN ka best protocol, extremely simple & fast",
+      "en": "Best server VPN protocol, extremely simple and fast"
+    }
+  },
+  {
+    "url": "https://www.openssl.org",
+    "cat": "server",
+    "icon": "🔐",
+    "name": "OpenSSL",
+    "tag": "openssl.org · Open Source · Free",
+    "desc": "SSL/TLS toolkit — generate certificates, test SSL connections, encrypt data. Industry backbone.",
+    "why": {
+      "hi": "Internet encryption ka backbone, certificates generate karo",
+      "en": "Backbone of internet encryption, generate SSL certificates"
+    }
+  },
+  {
+    "url": "https://letsencrypt.org",
+    "cat": "server",
+    "icon": "🔒",
+    "name": "Let's Encrypt",
+    "tag": "letsencrypt.org · Non-profit · Free",
+    "desc": "Free SSL/TLS certificates — automated, open, trusted by all browsers. HTTPS for everyone.",
+    "why": {
+      "hi": "Free SSL certificate, automated renewal, trusted",
+      "en": "Free SSL certificates with automated renewal, universally trusted"
+    }
+  },
+  {
+    "url": "https://github.com/imthenachoman/How-To-Secure-A-Linux-Server",
+    "cat": "server",
+    "icon": "📖",
+    "name": "Secure Linux Server Guide",
+    "tag": "GitHub · Community · Free",
+    "desc": "Comprehensive guide — SSH hardening, firewall, intrusion detection, kernel security, 2FA for SSH.",
+    "why": {
+      "hi": "Linux server security ka complete guide, GitHub pe",
+      "en": "Complete Linux server security hardening guide on GitHub"
+    }
+  },
+  {
+    "url": "https://cisofy.com/lynis",
+    "cat": "server",
+    "icon": "🔍",
+    "name": "Lynis",
+    "tag": "cisofy.com · Open Source · Free",
+    "desc": "Security auditing tool for Linux/Unix — scans system, suggests hardening steps, compliance check.",
+    "why": {
+      "hi": "Linux server ka security audit karo, hardening suggestions",
+      "en": "Audit Linux server security with hardening suggestions"
+    }
+  },
+  {
+    "url": "https://www.portknocking.org",
+    "cat": "server",
+    "icon": "🚪",
+    "name": "Port Knocking",
+    "tag": "portknocking.org · Open Source · Free",
+    "desc": "Hide SSH port — open only after correct sequence of connection attempts. Invisible to scanners.",
+    "why": {
+      "hi": "SSH port hide karo, port scanners ko nahi dikhega",
+      "en": "Hide SSH port from scanners, open only with correct knock sequence"
+    }
+  },
+  {
+    "url": "https://www.aide.github.io",
+    "cat": "server",
+    "icon": "📋",
+    "name": "AIDE",
+    "tag": "aide.github.io · Open Source · Free",
+    "desc": "Advanced Intrusion Detection Environment — file integrity monitoring. Detect unauthorized changes.",
+    "why": {
+      "hi": "Server files me unauthorized changes detect karo",
+      "en": "Detect unauthorized file changes on servers"
+    }
+  },
+  {
+    "url": "https://www.iptables.org",
+    "cat": "server",
+    "icon": "🧱",
+    "name": "iptables/nftables",
+    "tag": "Linux built-in · Free",
+    "desc": "Linux kernel firewall — control all network traffic. Foundation of Linux network security.",
+    "why": {
+      "hi": "Linux ka built-in firewall, network security ka base",
+      "en": "Linux built-in firewall, foundation of network security"
+    }
+  },
+  {
+    "url": "https://www.sleuthkit.org/autopsy",
+    "cat": "forensic",
+    "icon": "🏥",
+    "name": "Autopsy",
+    "tag": "sleuthkit.org · Open Source · Free",
+    "desc": "Complete digital forensics platform — analyze hard drives, phones, recover deleted data, timeline.",
+    "why": {
+      "hi": "Free forensic platform, law enforcement bhi use karte hain",
+      "en": "Free forensic platform used even by law enforcement"
+    }
+  },
+  {
+    "url": "https://www.volatilityfoundation.org",
+    "cat": "forensic",
+    "icon": "🧠",
+    "name": "Volatility Framework",
+    "tag": "volatilityfoundation.org · Open Source · Free",
+    "desc": "Memory forensics — analyze RAM dumps for malware, rootkits, encryption keys, hidden processes.",
+    "why": {
+      "hi": "RAM dump analyze karo, malware/rootkit detect",
+      "en": "Analyze RAM dumps to detect malware, rootkits, hidden processes"
+    }
+  },
+  {
+    "url": "https://www.sans.org/tools/sift-workstation",
+    "cat": "forensic",
+    "icon": "🔬",
+    "name": "SIFT Workstation",
+    "tag": "sans.org · Free · Ubuntu-based",
+    "desc": "SANS forensic toolkit — complete forensic analysis OS with 200+ tools pre-installed.",
+    "why": {
+      "hi": "SANS ka forensic OS, 200+ tools, free download",
+      "en": "SANS forensic OS with 200+ tools, free download"
+    }
+  },
+  {
+    "url": "https://www.nirsoft.net",
+    "cat": "forensic",
+    "icon": "🛠️",
+    "name": "NirSoft Tools",
+    "tag": "nirsoft.net · Free · Windows",
+    "desc": "200+ free Windows forensic utilities — browser history, WiFi passwords, network tools, system info.",
+    "why": {
+      "hi": "200+ free Windows forensic tools, lightweight",
+      "en": "200+ free Windows forensic and system utilities"
+    }
+  },
+  {
+    "url": "https://ericzimmerman.github.io",
+    "cat": "forensic",
+    "icon": "🔎",
+    "name": "Eric Zimmerman Tools",
+    "tag": "GitHub · Free · Windows",
+    "desc": "Windows forensic tools — registry explorer, timeline explorer, MFT parser, shellbag analyzer.",
+    "why": {
+      "hi": "Windows forensics ke liye best free tools collection",
+      "en": "Best free tools collection for Windows forensics"
+    }
+  },
+  {
+    "url": "https://www.wireshark.org",
+    "cat": "forensic",
+    "icon": "🦈",
+    "name": "Wireshark",
+    "tag": "wireshark.org · Open Source · Free",
+    "desc": "Network forensics — capture and analyze network traffic. Reconstruct sessions, find malware C2.",
+    "why": {
+      "hi": "Network forensics ka #1 tool, traffic analysis",
+      "en": "#1 network forensics tool for traffic analysis"
+    }
+  },
+  {
+    "url": "https://github.com/google/timesketch",
+    "cat": "forensic",
+    "icon": "⏰",
+    "name": "Timesketch",
+    "tag": "GitHub · Google · Free",
+    "desc": "Collaborative timeline analysis — Google's forensic timeline tool. Shared investigation platform.",
+    "why": {
+      "hi": "Google ka timeline forensics tool, team collaboration",
+      "en": "Google's timeline forensics tool with team collaboration"
+    }
+  },
+  {
+    "url": "https://www.exiftool.org",
+    "cat": "forensic",
+    "icon": "📷",
+    "name": "ExifTool",
+    "tag": "exiftool.org · Open Source · Free",
+    "desc": "Read/write metadata in files — GPS location in photos, camera info, hidden document metadata.",
+    "why": {
+      "hi": "Photos me hidden GPS/metadata nikalo, forensic essential",
+      "en": "Extract hidden GPS/metadata from photos, forensic essential"
+    }
+  },
+  {
+    "url": "https://github.com/decalage2/oletools",
+    "cat": "forensic",
+    "icon": "📄",
+    "name": "oletools",
+    "tag": "GitHub · Open Source · Free",
+    "desc": "Analyze Microsoft Office files for malware — detect VBA macros, embedded objects, exploits.",
+    "why": {
+      "hi": "Office files me malware detect karo, macro analysis",
+      "en": "Detect malware in Office files, VBA macro analysis"
+    }
+  },
+  {
+    "url": "https://github.com/hasherezade/pe-sieve",
+    "cat": "forensic",
+    "icon": "🔍",
+    "name": "PE-sieve",
+    "tag": "GitHub · Open Source · Free",
+    "desc": "Detect malware running in memory — scans processes for injected code, hollowed modules.",
+    "why": {
+      "hi": "Memory me running malware detect karo, live analysis",
+      "en": "Detect malware running in memory with live process analysis"
+    }
+  },
+  {
+    "url": "https://grafana.com",
+    "cat": "monitor",
+    "icon": "📊",
+    "name": "Grafana",
+    "tag": "grafana.com · Open Source · Free",
+    "desc": "Beautiful dashboards for security monitoring — visualize logs, alerts, metrics. SIEM visualization.",
+    "why": {
+      "hi": "Security monitoring ke dashboards banao, beautiful UI",
+      "en": "Build beautiful security monitoring dashboards"
+    }
+  },
+  {
+    "url": "https://graylog.org",
+    "cat": "monitor",
+    "icon": "📋",
+    "name": "Graylog",
+    "tag": "graylog.org · Open Source · Free",
+    "desc": "Log management platform — collect, index, analyze security logs. Free open-source SIEM.",
+    "why": {
+      "hi": "Security logs collect aur analyze karo, free SIEM",
+      "en": "Collect and analyze security logs, free open-source SIEM"
+    }
+  },
+  {
+    "url": "https://www.elastic.co/security",
+    "cat": "monitor",
+    "icon": "🔎",
+    "name": "Elastic Security (ELK)",
+    "tag": "elastic.co · Open Source · Free",
+    "desc": "SIEM + endpoint security — Elasticsearch, Logstash, Kibana. Enterprise security monitoring.",
+    "why": {
+      "hi": "Enterprise SIEM, ELK stack based, free tier available",
+      "en": "Enterprise SIEM based on ELK stack, free tier available"
+    }
+  },
+  {
+    "url": "https://wazuh.com",
+    "cat": "monitor",
+    "icon": "🛡️",
+    "name": "Wazuh",
+    "tag": "wazuh.com · Open Source · Free",
+    "desc": "Unified XDR and SIEM — intrusion detection, log analysis, vulnerability detection, compliance.",
+    "why": {
+      "hi": "All-in-one security monitoring, OSSEC successor",
+      "en": "All-in-one security monitoring platform, OSSEC successor"
+    }
+  },
+  {
+    "url": "https://github.com/louislam/uptime-kuma",
+    "cat": "monitor",
+    "icon": "📈",
+    "name": "Uptime Kuma",
+    "tag": "GitHub · Open Source · Free",
+    "desc": "Self-hosted uptime monitoring — HTTP, TCP, DNS, ping monitoring. Beautiful status pages.",
+    "why": {
+      "hi": "Website uptime monitor karo, self-hosted, beautiful UI",
+      "en": "Self-hosted website uptime monitoring with beautiful UI"
+    }
+  },
+  {
+    "url": "https://www.zabbix.com",
+    "cat": "monitor",
+    "icon": "⚙️",
+    "name": "Zabbix",
+    "tag": "zabbix.com · Open Source · Free",
+    "desc": "Enterprise monitoring — servers, networks, cloud, VMs, applications. Auto-discovery, alerting.",
+    "why": {
+      "hi": "Enterprise-grade monitoring, auto-discovery, free",
+      "en": "Enterprise-grade monitoring with auto-discovery, free"
+    }
+  },
+  {
+    "url": "https://prometheus.io",
+    "cat": "monitor",
+    "icon": "🔥",
+    "name": "Prometheus",
+    "tag": "prometheus.io · CNCF · Free",
+    "desc": "Metrics monitoring — time series database, alerting. Foundation for cloud security monitoring.",
+    "why": {
+      "hi": "Cloud security metrics monitor karo, Grafana ke saath use karo",
+      "en": "Cloud security metrics monitoring, use with Grafana"
+    }
+  },
+  {
+    "url": "https://thehive-project.org",
+    "cat": "monitor",
+    "icon": "🐝",
+    "name": "TheHive",
+    "tag": "thehive-project.org · Open Source · Free",
+    "desc": "Security incident response platform — case management, alert triage, team collaboration.",
+    "why": {
+      "hi": "Security incident manage karo, team collaboration",
+      "en": "Manage security incidents with team collaboration"
+    }
+  },
+  {
+    "url": "https://www.yubico.com",
+    "cat": "hw",
+    "icon": "🔑",
+    "name": "YubiKey",
+    "tag": "yubico.com · Sweden · Hardware",
+    "desc": "Hardware security key — FIDO2, U2F, OTP, PGP smartcard. Most popular hardware 2FA in world.",
+    "why": {
+      "hi": "Hardware 2FA ka gold standard, phishing-proof",
+      "en": "Gold standard hardware 2FA, completely phishing-proof"
+    }
+  },
+  {
+    "url": "https://nitrokey.com",
+    "cat": "hw",
+    "icon": "🔩",
+    "name": "Nitrokey",
+    "tag": "nitrokey.com · Germany · Open Source Hardware",
+    "desc": "Open-source hardware security key — FIDO2, PGP, OTP, encrypted storage. German made.",
+    "why": {
+      "hi": "Open-source hardware key, German quality, YubiKey alternative",
+      "en": "Open-source hardware key, German quality, YubiKey alternative"
+    }
+  },
+  {
+    "url": "https://onlykey.io",
+    "cat": "hw",
+    "icon": "🗝️",
+    "name": "OnlyKey",
+    "tag": "onlykey.io · USA · Open Source",
+    "desc": "Hardware password manager + 2FA key — stores passwords ON the key itself. PIN protected.",
+    "why": {
+      "hi": "Password manager + 2FA key ek device me, PIN protected",
+      "en": "Password manager plus 2FA key in one device, PIN protected"
+    }
+  },
+  {
+    "url": "https://solokeys.com",
+    "cat": "hw",
+    "icon": "🔐",
+    "name": "SoloKey",
+    "tag": "solokeys.com · Open Source · Hardware",
+    "desc": "Open-source FIDO2 security key — affordable, simple, USB-A/USB-C/NFC. Community-funded.",
+    "why": {
+      "hi": "Affordable open-source hardware key, NFC support",
+      "en": "Affordable open-source FIDO2 key with NFC support"
+    }
+  },
+  {
+    "url": "https://www.trezor.io",
+    "cat": "hw",
+    "icon": "💎",
+    "name": "Trezor",
+    "tag": "trezor.io · Czech Republic · Open Source",
+    "desc": "Hardware crypto wallet — also works as FIDO2 key and password manager. Open-source firmware.",
+    "why": {
+      "hi": "Crypto wallet + FIDO2 key + password manager hardware",
+      "en": "Crypto wallet plus FIDO2 key plus password manager in hardware"
+    }
+  },
+  {
+    "url": "https://shop.hak5.org",
+    "cat": "hw",
+    "icon": "🐿️",
+    "name": "Hak5 Tools",
+    "tag": "hak5.org · USA · Security Hardware",
+    "desc": "WiFi Pineapple, Rubber Ducky, Shark Jack — physical penetration testing hardware tools.",
+    "why": {
+      "hi": "Physical pentesting hardware, ethical hacking tools",
+      "en": "Physical pentesting hardware for ethical hacking"
+    }
+  },
+  {
+    "url": "https://greatscottgadgets.com/hackrf",
+    "cat": "hw",
+    "icon": "📻",
+    "name": "HackRF One",
+    "tag": "greatscottgadgets.com · Open Source · SDR",
+    "desc": "Software Defined Radio — transmit & receive 1 MHz to 6 GHz. Analyze wireless protocols, signals.",
+    "why": {
+      "hi": "Radio signals analyze karo, wireless security testing",
+      "en": "Analyze radio signals for wireless security testing"
+    }
+  },
+  {
+    "url": "https://www.proxmark.com",
+    "cat": "hw",
+    "icon": "💳",
+    "name": "Proxmark3",
+    "tag": "proxmark.com · Open Source · Hardware",
+    "desc": "RFID/NFC research tool — read, clone, emulate access cards. Physical security testing.",
+    "why": {
+      "hi": "RFID/NFC cards read/clone/emulate, physical security test",
+      "en": "Read, clone, emulate RFID/NFC cards for physical security testing"
+    }
+  },
+  {
+    "url": "https://shop.flipperzero.one",
+    "cat": "hw",
+    "icon": "🐬",
+    "name": "Flipper Zero",
+    "tag": "flipperzero.one · Open Source · Hardware",
+    "desc": "Multi-tool for pentesters — RFID, NFC, sub-GHz, infrared, GPIO, iButton, Bluetooth all in one.",
+    "why": {
+      "hi": "All-in-one hacking gadget, RFID/NFC/IR/sub-GHz sab ek me",
+      "en": "All-in-one hacking gadget with RFID, NFC, IR, sub-GHz"
+    }
+  },
+  {
+    "url": "https://www.postman.com",
+    "cat": "api",
+    "icon": "📮",
+    "name": "Postman",
+    "tag": "postman.com · Free tier",
+    "desc": "API testing platform — test authentication, injection flaws, rate limiting, authorization bypass.",
+    "why": {
+      "hi": "API security testing ke liye essential tool",
+      "en": "Essential tool for API security testing"
+    }
+  },
+  {
+    "url": "https://github.com/OWASP/Amass",
+    "cat": "api",
+    "icon": "🕸️",
+    "name": "OWASP Amass",
+    "tag": "GitHub · OWASP · Free",
+    "desc": "Attack surface mapping — discover subdomains, APIs, exposed endpoints. Passive & active recon.",
+    "why": {
+      "hi": "Attack surface discover karo, subdomains, APIs find karo",
+      "en": "Discover attack surface, subdomains, and exposed APIs"
+    }
+  },
+  {
+    "url": "https://github.com/assetnote/kiterunner",
+    "cat": "api",
+    "icon": "🪁",
+    "name": "Kiterunner",
+    "tag": "GitHub · Assetnote · Free",
+    "desc": "API endpoint discovery — find hidden API routes and endpoints. Context-aware brute forcing.",
+    "why": {
+      "hi": "Hidden API endpoints discover karo, context-aware",
+      "en": "Discover hidden API endpoints with context-aware brute forcing"
+    }
+  },
+  {
+    "url": "https://apisecurity.io",
+    "cat": "api",
+    "icon": "📰",
+    "name": "APISecurity.io",
+    "tag": "apisecurity.io · Newsletter · Free",
+    "desc": "Weekly API security newsletter — latest breaches, vulnerabilities, best practices, tools.",
+    "why": {
+      "hi": "Weekly API security news aur best practices",
+      "en": "Weekly API security news and best practices newsletter"
+    }
+  },
+  {
+    "url": "https://github.com/shieldfy/API-Security-Checklist",
+    "cat": "api",
+    "icon": "✅",
+    "name": "API Security Checklist",
+    "tag": "GitHub · Community · Free",
+    "desc": "Complete API security checklist — authentication, JWT, OAuth, rate limiting, input validation.",
+    "why": {
+      "hi": "API secure karne ka complete checklist",
+      "en": "Complete checklist to secure your APIs properly"
+    }
+  },
+  {
+    "url": "https://prowler.com",
+    "cat": "cloud",
+    "icon": "🦅",
+    "name": "Prowler",
+    "tag": "prowler.com · Open Source · Free",
+    "desc": "AWS/Azure/GCP security assessment — checks 300+ security best practices. CIS benchmark compliant.",
+    "why": {
+      "hi": "Cloud security audit karo, 300+ checks, CIS benchmark",
+      "en": "Cloud security audit with 300+ checks, CIS benchmark compliant"
+    }
+  },
+  {
+    "url": "https://www.scoutsuite.com",
+    "cat": "cloud",
+    "icon": "🏕️",
+    "name": "ScoutSuite",
+    "tag": "GitHub · NCC Group · Free",
+    "desc": "Multi-cloud security auditing — AWS, Azure, GCP, Oracle, Alibaba. HTML report generation.",
+    "why": {
+      "hi": "Multi-cloud security audit, beautiful HTML reports",
+      "en": "Multi-cloud security auditing with beautiful HTML reports"
+    }
+  },
+  {
+    "url": "https://github.com/aquasecurity/cloudsploit",
+    "cat": "cloud",
+    "icon": "💧",
+    "name": "CloudSploit",
+    "tag": "GitHub · Aqua Security · Free",
+    "desc": "Cloud security scanner — detect misconfigurations in AWS, Azure, GCP, Oracle Cloud.",
+    "why": {
+      "hi": "Cloud misconfiguration detect karo, multi-cloud support",
+      "en": "Detect cloud misconfigurations across multiple cloud providers"
+    }
+  },
+  {
+    "url": "https://github.com/bridgecrewio/checkov",
+    "cat": "cloud",
+    "icon": "✅",
+    "name": "Checkov",
+    "tag": "GitHub · Bridgecrew · Free",
+    "desc": "Infrastructure-as-Code security scanner — Terraform, CloudFormation, Kubernetes, ARM, Helm.",
+    "why": {
+      "hi": "IaC code me security issues find karo before deploy",
+      "en": "Find security issues in IaC code before deploying"
+    }
+  },
+  {
+    "url": "https://github.com/toniblyx/my-arsenal-of-aws-security-tools",
+    "cat": "cloud",
+    "icon": "🏹",
+    "name": "AWS Security Tools Arsenal",
+    "tag": "GitHub · Community · Free",
+    "desc": "Curated list of 200+ AWS security tools — offensive, defensive, auditing, monitoring.",
+    "why": {
+      "hi": "200+ AWS security tools ki curated list",
+      "en": "Curated list of 200+ AWS security tools"
+    }
+  },
+  {
+    "url": "https://github.com/aquasecurity/trivy",
+    "cat": "cloud",
+    "icon": "🔍",
+    "name": "Trivy",
+    "tag": "GitHub · Aqua Security · Free",
+    "desc": "Container & cloud security scanner — scan Docker images, Kubernetes, IaC for vulnerabilities.",
+    "why": {
+      "hi": "Docker/Kubernetes vulnerabilities scan karo, fastest scanner",
+      "en": "Scan Docker and Kubernetes for vulnerabilities, fastest scanner"
+    }
+  },
+  {
+    "url": "https://falco.org",
+    "cat": "cloud",
+    "icon": "🦅",
+    "name": "Falco",
+    "tag": "falco.org · CNCF · Free",
+    "desc": "Cloud-native runtime security — detect unexpected behavior in containers and Kubernetes.",
+    "why": {
+      "hi": "Container runtime pe suspicious activity detect karo",
+      "en": "Detect suspicious activity in container runtime"
+    }
+  },
+  {
+    "url": "https://nvd.nist.gov",
+    "cat": "vuln",
+    "icon": "🏛️",
+    "name": "NVD (NIST)",
+    "tag": "nvd.nist.gov · US Government · Free",
+    "desc": "National Vulnerability Database — official US CVE database. Severity scores, affected software.",
+    "why": {
+      "hi": "Official CVE database, vulnerability research ka primary source",
+      "en": "Official CVE database, primary source for vulnerability research"
+    }
+  },
+  {
+    "url": "https://cve.mitre.org",
+    "cat": "vuln",
+    "icon": "📋",
+    "name": "CVE (MITRE)",
+    "tag": "cve.mitre.org · MITRE · Free",
+    "desc": "Common Vulnerabilities and Exposures — standardized vulnerability naming system. The CVE authority.",
+    "why": {
+      "hi": "CVE numbering authority, vulnerability ka official naming",
+      "en": "Official CVE numbering authority for vulnerability naming"
+    }
+  },
+  {
+    "url": "https://www.exploit-db.com",
+    "cat": "vuln",
+    "icon": "💣",
+    "name": "Exploit Database",
+    "tag": "exploit-db.com · Offensive Security · Free",
+    "desc": "Public exploit archive — searchable PoC exploits, shellcodes, papers. CVE-linked.",
+    "why": {
+      "hi": "Public exploit database, PoC code find karo",
+      "en": "Public exploit database to find Proof of Concept code"
+    }
+  },
+  {
+    "url": "https://vulners.com",
+    "cat": "vuln",
+    "icon": "🔍",
+    "name": "Vulners",
+    "tag": "vulners.com · Free tier",
+    "desc": "Vulnerability intelligence — aggregates CVEs from 150+ sources. Search, API, integration.",
+    "why": {
+      "hi": "150+ sources se CVE aggregate karta hai, powerful search",
+      "en": "Aggregates CVEs from 150+ sources with powerful search"
+    }
+  },
+  {
+    "url": "https://www.cvedetails.com",
+    "cat": "vuln",
+    "icon": "📊",
+    "name": "CVE Details",
+    "tag": "cvedetails.com · Free",
+    "desc": "CVE browsing — search by vendor, product, type, score. Statistics and trends visualization.",
+    "why": {
+      "hi": "Vendor/product wise CVE search, statistics dekho",
+      "en": "Search CVEs by vendor, product, type with statistics"
+    }
+  },
+  {
+    "url": "https://attack.mitre.org",
+    "cat": "vuln",
+    "icon": "⚔️",
+    "name": "MITRE ATT&CK",
+    "tag": "attack.mitre.org · MITRE · Free",
+    "desc": "Adversary tactics & techniques knowledge base — how attackers operate, mapped to real incidents.",
+    "why": {
+      "hi": "Attackers kaise attack karte hain — complete knowledge base",
+      "en": "Complete knowledge base of how attackers operate"
+    }
+  },
+  {
+    "url": "https://osv.dev",
+    "cat": "vuln",
+    "icon": "📦",
+    "name": "OSV (Open Source Vulnerabilities)",
+    "tag": "osv.dev · Google · Free",
+    "desc": "Open-source vulnerability database — search vulnerabilities in npm, PyPI, Go, Rust, Maven packages.",
+    "why": {
+      "hi": "Open-source packages me vulnerabilities check karo",
+      "en": "Check vulnerabilities in open-source packages"
+    }
+  },
+  {
+    "url": "https://snyk.io/vuln",
+    "cat": "vuln",
+    "icon": "🐛",
+    "name": "Snyk Vulnerability DB",
+    "tag": "snyk.io · Free",
+    "desc": "Search open-source vulnerabilities — npm, Maven, PyPI, Go, Ruby gems. Fix advice included.",
+    "why": {
+      "hi": "Open-source dependencies ke vulnerabilities + fix advice",
+      "en": "Open-source dependency vulnerabilities with fix advice"
+    }
+  },
+  {
+    "url": "https://www.comptia.org/certifications/security",
+    "cat": "career",
+    "icon": "🏅",
+    "name": "CompTIA Security+",
+    "tag": "comptia.org · Certification",
+    "desc": "Entry-level cybersecurity certification — globally recognized, DoD approved, career starter.",
+    "why": {
+      "hi": "Cybersecurity career start karne ki #1 certification",
+      "en": "#1 certification to start a cybersecurity career"
+    }
+  },
+  {
+    "url": "https://www.offensive-security.com/pwk-oscp",
+    "cat": "career",
+    "icon": "💀",
+    "name": "OSCP (OffSec)",
+    "tag": "offsec.com · Certification",
+    "desc": "Most respected hands-on pentesting certification — 24-hour practical exam. Industry gold standard.",
+    "why": {
+      "hi": "Pentesting ki most respected certification, practical exam",
+      "en": "Most respected pentesting certification with practical exam"
+    }
+  },
+  {
+    "url": "https://www.isc2.org/certifications/cissp",
+    "cat": "career",
+    "icon": "🎖️",
+    "name": "CISSP (ISC²)",
+    "tag": "isc2.org · Certification",
+    "desc": "Gold standard for security management — required for CISO/senior roles. 5 years experience needed.",
+    "why": {
+      "hi": "Senior security roles ke liye gold standard certification",
+      "en": "Gold standard certification for senior security roles"
+    }
+  },
+  {
+    "url": "https://www.eccouncil.org/programs/certified-ethical-hacker-ceh",
+    "cat": "career",
+    "icon": "🎩",
+    "name": "CEH (EC-Council)",
+    "tag": "eccouncil.org · Certification",
+    "desc": "Certified Ethical Hacker — popular certification covering hacking tools, techniques, methodologies.",
+    "why": {
+      "hi": "Popular ethical hacking certification, widely recognized",
+      "en": "Popular ethical hacking certification, widely recognized globally"
+    }
+  },
+  {
+    "url": "https://grow.google/certificates/cybersecurity",
+    "cat": "career",
+    "icon": "🔵",
+    "name": "Google Cybersecurity Certificate",
+    "tag": "grow.google · Coursera · Affordable",
+    "desc": "Google's cybersecurity professional certificate — beginner-friendly, job-ready in 6 months.",
+    "why": {
+      "hi": "Google backed, beginner-friendly, 6 months me job-ready",
+      "en": "Google-backed beginner certificate, job-ready in 6 months"
+    }
+  },
+  {
+    "url": "https://www.cybrary.it/career-path",
+    "cat": "career",
+    "icon": "🛤️",
+    "name": "Cybrary Career Paths",
+    "tag": "cybrary.it · Free tier",
+    "desc": "Structured learning paths — SOC Analyst, Penetration Tester, Security Engineer career guides.",
+    "why": {
+      "hi": "Career path wise structured learning, free courses",
+      "en": "Career path structured learning with free courses"
+    }
+  },
+  {
+    "url": "https://www.bugcrowd.com/hackers",
+    "cat": "career",
+    "icon": "🐛",
+    "name": "Bugcrowd",
+    "tag": "bugcrowd.com · Free · Bug Bounty",
+    "desc": "Bug bounty platform — find vulnerabilities in real companies, earn money legally.",
+    "why": {
+      "hi": "Legal hacking karke paisa kamao, real companies test karo",
+      "en": "Earn money by finding bugs in real companies legally"
+    }
+  },
+  {
+    "url": "https://www.hackerone.com",
+    "cat": "career",
+    "icon": "🦠",
+    "name": "HackerOne",
+    "tag": "hackerone.com · Free · Bug Bounty",
+    "desc": "World's largest bug bounty platform — Apple, Google, Microsoft, DoD programs. Top hackers earn $1M+.",
+    "why": {
+      "hi": "World's largest bug bounty, top hackers $1M+ kamate hain",
+      "en": "World's largest bug bounty, top hackers earn $1M+ annually"
+    }
+  },
+  {
+    "url": "https://www.intigriti.com",
+    "cat": "career",
+    "icon": "🇪🇺",
+    "name": "Intigriti",
+    "tag": "intigriti.com · Europe · Bug Bounty",
+    "desc": "European bug bounty platform — GDPR compliant, European companies, competitive bounties.",
+    "why": {
+      "hi": "European bug bounty platform, GDPR compliant",
+      "en": "European bug bounty platform with GDPR compliance"
+    }
+  },
+  {
+    "url": "https://www.shodan.io",
+    "cat": "iot",
+    "icon": "👁️",
+    "name": "Shodan",
+    "tag": "shodan.io · Free tier",
+    "desc": "Search exposed IoT devices — webcams, routers, industrial systems, smart home devices globally.",
+    "why": {
+      "hi": "Exposed IoT devices dhundho worldwide, security audit",
+      "en": "Find exposed IoT devices worldwide for security auditing"
+    }
+  },
+  {
+    "url": "https://www.firmwalker.com",
+    "cat": "iot",
+    "icon": "🔍",
+    "name": "Firmwalker",
+    "tag": "GitHub · Open Source · Free",
+    "desc": "Analyze IoT firmware — find hardcoded passwords, private keys, sensitive URLs in firmware.",
+    "why": {
+      "hi": "IoT firmware me hardcoded passwords find karo",
+      "en": "Find hardcoded passwords and keys in IoT firmware"
+    }
+  },
+  {
+    "url": "https://github.com/ReFirmLabs/binwalk",
+    "cat": "iot",
+    "icon": "📦",
+    "name": "Binwalk",
+    "tag": "GitHub · Open Source · Free",
+    "desc": "Firmware analysis tool — extract filesystems, find hidden data in IoT device firmware images.",
+    "why": {
+      "hi": "IoT firmware extract aur analyze karo",
+      "en": "Extract and analyze IoT firmware images"
+    }
+  },
+  {
+    "url": "https://www.attify.com/attifyos",
+    "cat": "iot",
+    "icon": "🔧",
+    "name": "AttifyOS",
+    "tag": "attify.com · Free · VM",
+    "desc": "Pre-built VM for IoT pentesting — all IoT security tools pre-installed. Ready to use.",
+    "why": {
+      "hi": "IoT pentesting ka ready-made VM, sab tools pre-installed",
+      "en": "Ready-made IoT pentesting VM with all tools pre-installed"
+    }
+  },
+  {
+    "url": "https://owasp.org/www-project-internet-of-things",
+    "cat": "iot",
+    "icon": "🐝",
+    "name": "OWASP IoT Top 10",
+    "tag": "owasp.org · Free",
+    "desc": "Top 10 IoT vulnerabilities — weak passwords, insecure interfaces, lack of encryption, poor updates.",
+    "why": {
+      "hi": "IoT security vulnerabilities ka complete list",
+      "en": "Complete list of top IoT security vulnerabilities"
+    }
+  },
+  {
+    "url": "https://eraser.heidi.ie",
+    "cat": "shred",
+    "icon": "🗑️",
+    "name": "Eraser",
+    "tag": "eraser.heidi.ie · Open Source · Free",
+    "desc": "Securely erase files — overwrite with random data. DoD 5220.22-M, Gutmann, random pass methods.",
+    "why": {
+      "hi": "Files permanently delete karo, koi recover nahi kar sakta",
+      "en": "Permanently delete files so nobody can ever recover them"
+    }
+  },
+  {
+    "url": "https://www.bleachbit.org",
+    "cat": "shred",
+    "icon": "🧹",
+    "name": "BleachBit Shredder",
+    "tag": "bleachbit.org · Open Source · Free",
+    "desc": "Shred files & wipe free space — prevent recovery of previously deleted files on drive.",
+    "why": {
+      "hi": "Deleted files ka bhi trace hata do, free space wipe",
+      "en": "Remove traces of previously deleted files by wiping free space"
+    }
+  },
+  {
+    "url": "https://schiffer.tech/cleanmgr-plus.html",
+    "cat": "shred",
+    "icon": "🧽",
+    "name": "Cleanmgr+",
+    "tag": "schiffer.tech · Free · Windows",
+    "desc": "Enhanced Windows Disk Cleanup — deeper cleaning options, remove more temp/cache/log files.",
+    "why": {
+      "hi": "Windows Disk Cleanup ka better version, deeper cleaning",
+      "en": "Better Windows Disk Cleanup with deeper cleaning options"
+    }
+  },
+  {
+    "url": "https://www.dban.org",
+    "cat": "shred",
+    "icon": "💣",
+    "name": "DBAN",
+    "tag": "dban.org · Free · Bootable",
+    "desc": "Boot and wipe entire drives — before selling/donating computer. Military-grade drive erasure.",
+    "why": {
+      "hi": "Poori drive wipe karo before selling computer",
+      "en": "Wipe entire drives before selling or donating computer"
+    }
+  },
+  {
+    "url": "https://github.com/martijnversluis/ShredOS",
+    "cat": "shred",
+    "icon": "🔥",
+    "name": "ShredOS",
+    "tag": "GitHub · Open Source · Bootable",
+    "desc": "Modern DBAN alternative — bootable USB drive wiper based on nwipe. UEFI support.",
+    "why": {
+      "hi": "Modern DBAN alternative, UEFI support, USB bootable",
+      "en": "Modern DBAN alternative with UEFI support, USB bootable"
+    }
+  },
+  {
+    "url": "https://www.yourkit.com/winutils/secure-delete",
+    "cat": "shred",
+    "icon": "🔒",
+    "name": "SDelete (Sysinternals)",
+    "tag": "Microsoft · Free · Windows",
+    "desc": "Microsoft's secure deletion tool — DoD standard file/directory shredding. Command-line.",
+    "why": {
+      "hi": "Microsoft ka official secure delete tool, CLI",
+      "en": "Microsoft's official secure deletion tool, command-line"
+    }
   }
-
-
-
 ]
